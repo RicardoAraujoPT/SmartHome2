@@ -1,0 +1,40 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+
+left to right direction
+
+
+
+Actor Administrator as admin
+Actor PowerUser as pw
+Actor RoomOwner as ro
+
+usecase "US03: access list of rooms" as UC3
+usecase "US05: add device to room" as UC5
+usecase "US06: access list of devices" as UC6
+usecase "US07: add sensor to device" as UC7
+usecase "US08: deactivate device" as UC8
+usecase "US09: list of devices by functionality" as UC9
+
+
+UC7 --> UC6 #line.dashed : <<includes>>
+UC8 --> UC6 #line.dashed : <<includes>>
+UC9 --> UC3 #line.dashed : <<includes>>
+UC5 --> UC3 #line.dashed : <<includes>>
+
+ro --> UC6
+ro --> UC8
+
+admin --> UC5
+admin --> UC6
+admin --> UC7
+admin --> UC8
+admin --> UC9
+
+pw --> UC5
+pw --> UC6
+pw --> UC7
+pw --> UC8
+
+
+@enduml
