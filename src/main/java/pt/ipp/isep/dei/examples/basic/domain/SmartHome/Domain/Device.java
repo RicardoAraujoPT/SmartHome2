@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Device {
 
@@ -44,7 +45,7 @@ public class Device {
         }
 
         _deviceName = deviceName;
-        _deviceID = null;
+        _deviceID = UUID.randomUUID().toString();;
         _sensors = new ArrayList<>();
         _actuators = new ArrayList<>();
         _isActive = false;
