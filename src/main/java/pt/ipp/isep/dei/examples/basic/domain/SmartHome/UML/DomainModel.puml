@@ -42,7 +42,7 @@ longitude
 }
 
  object Room {
- name
+ roomName
  roomID
  floorNumber
  area
