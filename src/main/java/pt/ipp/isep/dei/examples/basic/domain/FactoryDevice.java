@@ -1,10 +1,8 @@
 package pt.ipp.isep.dei.examples.basic.domain;
 
-public class FactoryDevice {
-    public Device createDevice(String deviceName) {
+public interface FactoryDevice {
 
-        return new Device(deviceName);
-    }
-
+        public Device createDevice( String deviceName);
 }
+
 
