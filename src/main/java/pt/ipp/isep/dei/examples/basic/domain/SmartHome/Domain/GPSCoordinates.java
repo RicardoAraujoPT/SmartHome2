@@ -79,7 +79,7 @@ public class GPSCoordinates {
      * @param latitude The latitude to check.
      * @return True if the latitude is valid, false otherwise.
      */
-    private boolean isLatitudeValid(double latitude) {
+    public static boolean isLatitudeValid(double latitude) {
         return latitude >= -90.0 && latitude <= 90.0;
     }
 
@@ -89,7 +89,7 @@ public class GPSCoordinates {
      * @param longitude The longitude to check.
      * @return True if the longitude is valid, false otherwise.
      */
-    private boolean isLongitudeValid(double longitude) {
+    public static boolean isLongitudeValid(double longitude) {
         return longitude >= -180.0 && longitude <= 180.0;
     }
 
