@@ -10,7 +10,7 @@ import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.RoomDTOMapper;
 public class ListOfRoomsController {
 
 
-    private House _myHouse;
+    private static House _myHouse;
 
     public ListOfRoomsController(House myHouse){
         if(myHouse == null){
@@ -24,11 +24,11 @@ public class ListOfRoomsController {
      * This method accesses the list of rooms in the House object.
      * @return ArrayList<Room>.
      */
-    public ArrayList<Room> getRoomList(){
+    public static ArrayList<Room> getRoomList(){
 
-        ArrayList<Room> listOfRooms = this._myHouse.getRoomList();
+        ArrayList<Room> listOfRooms = _myHouse.getRoomList();
 
-        return listOfRooms;
+        return new ArrayList<>(listOfRooms);
 
     }
 
@@ -40,7 +40,7 @@ public class ListOfRoomsController {
 
         ArrayList<RoomDTO> listOfRoomsInHouseDTO = RoomDTOMapper.convertDomainToDTO(listOfRoomsInHouse);
 
-        return listOfRoomsInHouseDTO;
+        return new ArrayList<>(listOfRoomsInHouseDTO);
 
     }
 

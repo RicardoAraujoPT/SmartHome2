@@ -64,4 +64,24 @@ public class House {
         this._location= new Location(address, zipCode, latitude, longitude);
         return true;
     }
+
+    /**
+     * Method that allows getting a room that exists in the House's roomList.
+     *
+     * @param name The name of the Room object to retrieve.
+     * @return Room object with the specified name.
+     * @throws IllegalArgumentException if attempting to get a room that doesn't exist in the House's roomList,
+     *                                  or if the name is empty or null.
+     */
+    public Room getRoomByName(String name) {
+        for (int i = 0; i < this._rooms.size(); i++) {
+            Room currentRoom = this._rooms.get(i);
+            String currentRoomName = currentRoom.getRoomName();
+            if (currentRoomName.equals(name)) {
+                return currentRoom;
+            }
+        }
+        throw new IllegalArgumentException("Room name doesn't exist in the list");
+    }
+
 }
