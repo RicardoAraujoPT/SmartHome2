@@ -1,4 +1,4 @@
-package pt.ipp.isep.dei.examples.basic.domain;
+package pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain;
 
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Room;
 
