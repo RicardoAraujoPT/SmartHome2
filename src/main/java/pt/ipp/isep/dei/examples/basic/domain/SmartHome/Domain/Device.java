@@ -21,7 +21,7 @@ public class Device {
      * Indicates whether the device is currently active or not.
      * By default, the device is not active.
      */
-    private final boolean _isActive;
+    private boolean _isActive;
 
     /**
      * List of available sensors for the device.
@@ -104,6 +104,23 @@ public class Device {
         this._deviceName = name;
     }
 
+    /**
+     * Activates a Device Object.
+     * @return After activating a device, it returns true
+     */
+    public boolean activateDevice () {
+        _isActive = true;
+        return true;
+    }
+
+    /**
+     * Deactivates a Device Object.
+     * @return After deactivating a device, it returns true
+     */
+    public boolean deactivateDevice() {
+        _isActive = false;
+        return true;
+    }
 
 
 }
