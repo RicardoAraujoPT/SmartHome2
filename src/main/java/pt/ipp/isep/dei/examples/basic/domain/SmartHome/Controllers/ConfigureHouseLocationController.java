@@ -4,6 +4,10 @@ import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.LocationDTO;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.House;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.LocationDTOMapper;
 
+/**
+ * The ConfigureHouseLocationController class represents a controller for the use case "Configure House Location".
+ * It provides a method to configure the location of a house.
+ */
 public class ConfigureHouseLocationController {
     /**
      * The house being configured.

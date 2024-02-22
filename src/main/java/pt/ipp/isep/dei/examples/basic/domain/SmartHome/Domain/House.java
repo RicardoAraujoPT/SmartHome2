@@ -1,7 +1,6 @@
 package pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 
 public class House {
@@ -23,7 +22,6 @@ public class House {
 
         return this._location;
     }
-
 
     public Room createRoom(String roomName, int floorNumber, double area, double height) throws InstantiationException {
 
@@ -79,5 +77,4 @@ public class House {
         }
         throw new IllegalArgumentException("Room name doesn't exist in the list");
     }
-
 }
