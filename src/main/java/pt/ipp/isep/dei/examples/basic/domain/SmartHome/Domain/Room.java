@@ -24,7 +24,7 @@ public class Room {
         this._height = height;
     }
     private boolean isValidConstructorArguments( String roomName, Integer floorNumber, double area, Double height) {
-        if (roomName == null || roomName.isEmpty()) {
+        if (roomName == null || roomName.trim().isEmpty()) {
             return false;
         }
         if (floorNumber == null) {
