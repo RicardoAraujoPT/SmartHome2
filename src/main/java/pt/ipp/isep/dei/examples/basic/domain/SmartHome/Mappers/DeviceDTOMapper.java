@@ -5,6 +5,10 @@ import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.RoomDTO;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Device;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Room;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class DeviceDTOMapper {
 
     // Converts a DeviceDTO to a Device
@@ -17,4 +21,15 @@ public class DeviceDTOMapper {
         return new DeviceDTO(device.getDeviceName(), device.getDeviceID());
     }
 
+    public Map<DeviceDTO, Device> DeviceMap_DTOAndDomain(List<Device> devices) {
+
+        Map<DeviceDTO, Device> devicesDTOAndDevices = new HashMap<>();
+
+        devices.forEach(device -> {
+            DeviceDTO deviceDTO = DeviceDTOMapper.DeviceToDTO(device);
+            devicesDTOAndDevices.put(deviceDTO, device);
+        });
+
+        return devicesDTOAndDevices;
+    }
 }
