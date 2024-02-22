@@ -1,6 +1,8 @@
 package pt.ipp.isep.dei.examples.basic.domain.SmartHome.Controllers;
 
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.LocationDTO;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.House;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.LocationDTOMapper;
 
 public class ConfigureHouseLocationController {
     /**
@@ -26,8 +28,10 @@ public class ConfigureHouseLocationController {
      * @param longitude The longitude of the house.
      * @return True if the house location and GPS coordinates were successfully configured, false otherwise.
      */
-    public boolean configureHouseLocation(String address, String zipCode, double latitude, double longitude) {
+    public LocationDTO configureHouseLocation(String address, String zipCode, double latitude, double longitude) {
 
-        return this._myHouse.configureLocation(address, zipCode, latitude, longitude);
+        this._myHouse.configureLocation(address, zipCode, latitude, longitude);
+
+        return LocationDTOMapper.domain2DTO(_myHouse.getLocation());
     }
 }

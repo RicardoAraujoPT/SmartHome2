@@ -35,9 +35,13 @@ activate "myGPSCoordinates :GPSCoordinates"
 deactivate "myGPSCoordinates :GPSCoordinates"
 "myLocation :Location"-->"myHouse :House" : myLocation
 deactivate "myLocation :Location"
-"myHouse :House"-->":ConfigureHouseLocationController": true
+"myHouse :House"-->":ConfigureHouseLocationController": myLocation
+":ConfigureHouseLocationController"->"LocationDTOMapper": Domain2DTO(myLocation)
+activate "LocationDTOMapper"
+"LocationDTOMapper"-->":ConfigureHouseLocationController": locationDTO
+deactivate "LocationDTOMapper"
 deactivate "myHouse :House"
-[o<--":ConfigureHouseLocationController": true
+[o<--":ConfigureHouseLocationController": locationDTO
 deactivate ":ConfigureHouseLocationController"
 
 @enduml

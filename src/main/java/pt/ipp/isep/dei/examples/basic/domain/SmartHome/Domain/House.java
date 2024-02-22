@@ -45,20 +45,20 @@ public class House {
     }
 
     /**
-     * Method to configure the location (ZIP code and address) of the House.
+     * Method to configure the location of the House.
      *
      * @param address The new address.
      * @param zipCode The new ZIP code.
      * @param latitude The new latitude.
      * @param longitude The new longitude.
-     * @return Boolean indicating if the configuration was successful.
+     * @return the new Location object of the House or null if any of the parameters is null.
      */
-    public boolean configureLocation(String address, String zipCode, Double latitude, Double longitude) {
+    public Location configureLocation(String address, String zipCode, Double latitude, Double longitude) {
         if (address == null || zipCode == null || latitude == null || longitude == null) {
-            return false;
+            return null;
         }
         this._location= new Location(address, zipCode, latitude, longitude);
-        return true;
+        return this._location;
     }
 
     /**
