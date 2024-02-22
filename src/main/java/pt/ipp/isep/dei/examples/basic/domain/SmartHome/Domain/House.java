@@ -61,7 +61,7 @@ public class House {
         if (address == null || zipCode == null || latitude == null || longitude == null) {
             return false;
         }
-        this._location= new Location(zipCode, address, latitude, longitude);
+        this._location= new Location(address, zipCode, latitude, longitude);
         return true;
     }
 }
