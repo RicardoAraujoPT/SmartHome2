@@ -15,23 +15,23 @@ public class Device {
     /**
      * The device ID.
      */
-    private String _deviceID;
+    private final String _deviceID;
 
     /**
      * Indicates whether the device is currently active or not.
      * By default, the device is not active.
      */
-    private boolean _isActive;
+    private final boolean _isActive;
 
     /**
      * List of available sensors for the device.
      */
-    private ArrayList<Sensor> _sensors;
+    private final ArrayList<Sensor> _sensors;
 
     /**
      * List of available actuators for the device.
      */
-    private ArrayList<Actuator> _actuators;
+    private final ArrayList<Actuator> _actuators;
 
     /**
      * Constructs a new Device with the specified name, sensor name, and sensor type.
@@ -45,7 +45,7 @@ public class Device {
         }
 
         _deviceName = deviceName;
-        _deviceID = UUID.randomUUID().toString();;
+        _deviceID = UUID.randomUUID().toString();
         _sensors = new ArrayList<>();
         _actuators = new ArrayList<>();
         _isActive = false;

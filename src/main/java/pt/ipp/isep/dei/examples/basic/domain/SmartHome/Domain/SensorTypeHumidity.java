@@ -2,13 +2,13 @@ package pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain;
 
 
 /**
- * The SensorTypeHumidityBosch class represents a humidity sensor from the model Bosch.
+ * The SensorTypeHumidity class represents a humidity sensor.
  * It implements the Sensor interface and provides methods to get and set sensor attributes such as name, unit of measurement, and value.
  *Usage:
  *Creating a sensor:
- *SensorTypeHumidityBosch sensor = new SensorTypeHumidityBosch(name, unitMeasurement, value)
- * The SensorTypeHumidityBosch class interacts with the following classes:
- * - Sensor: SensorTypeHumidityBosch implements the Sensor interface.
+ *SensorTypeHumidity sensor = new SensorTypeHumidity(name, unitMeasurement, value)
+ * The SensorTypeHumidity class interacts with the following classes:
+ * - Sensor: SensorTypeHumidity implements the Sensor interface.
 
  */
 public class SensorTypeHumidity implements Sensor {
