@@ -25,7 +25,7 @@ activate ":r1: Room"
 ":r1: Room" --> ":getRoomDevicesController" : devices
 deactivate ":r1: Room"
 
-":getRoomDevicesController" -> ":devicesMapper" ** : deviceDomain2DTO(Device)
+":getRoomDevicesController" -> ":devicesMapper" : deviceDomain2DTO(Device)
 activate ":devicesMapper"
 
 ":devicesMapper" --> ":getRoomDevicesController" : devicesDTO
