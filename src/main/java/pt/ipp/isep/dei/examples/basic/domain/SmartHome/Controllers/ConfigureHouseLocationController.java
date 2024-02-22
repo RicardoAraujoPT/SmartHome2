@@ -26,7 +26,7 @@ public class ConfigureHouseLocationController {
      * @param zipCode   The zip code of the house.
      * @param latitude  The latitude of the house.
      * @param longitude The longitude of the house.
-     * @return True if the house location and GPS coordinates were successfully configured, false otherwise.
+     * @return LocationDTO The location of the house.
      */
     public LocationDTO configureHouseLocation(String address, String zipCode, double latitude, double longitude) {
 
