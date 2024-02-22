@@ -1,11 +1,36 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
+!theme mars
+skinparam sequenceMessageAlign direction
+title <font color=#800020> US06:  I want to get a list of all devices in a room </font>
+
 autonumber
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+participant ":getRoomDevicesController"
+participant ":roomsMapper"
+participant ":r1: Room"
+participant ":devicesMapper"
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+[o-> ":getRoomDevicesController" :getDevicesinRoom (roomDTO)
+activate ":getRoomDevicesController"
+
+":getRoomDevicesController" -> ":roomsMapper" : getDevicesinRoom(roomDTO)
+activate ":roomsMapper"
+":roomsMapper" --> ":getRoomDevicesController" : r1
+
+
+":getRoomDevicesController" -> ":r1: Room" : getDevices (r1)
+activate ":r1: Room"
+":r1: Room" --> ":getRoomDevicesController" : devices
+deactivate ":r1: Room"
+
+":getRoomDevicesController" -> ":devicesMapper" ** : deviceDomain2DTO(Device)
+activate ":devicesMapper"
+
+":devicesMapper" --> ":getRoomDevicesController" : devicesDTO
+deactivate ":devicesMapper"
+
+[o<-- ":getRoomDevicesController" : devicesDTO
+
 @enduml
