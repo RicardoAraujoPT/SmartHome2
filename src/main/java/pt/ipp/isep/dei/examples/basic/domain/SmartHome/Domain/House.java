@@ -28,7 +28,7 @@ public class House {
         return new ArrayList<>(_rooms);
     }
 
-    public boolean createRoom(String roomName, int floorNumber, double area, double height) {
+    public boolean createRoom(String roomName, int floorNumber, double area, double height) throws InstantiationException {
 
         Room myRoom = new Room(roomName, floorNumber, area, height);
 
@@ -38,5 +38,14 @@ public class House {
 
     }
 
+    /**
+     * Method to get the House's RoomList.
+     *
+     * @return List<Room> (copy) representing the room list of the house.
+     */
+    public ArrayList<Room> getRoomList() {
+
+        return new ArrayList<>(_rooms);
+    }
 
 }
