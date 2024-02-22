@@ -142,7 +142,7 @@ public class SensorTypeHumidity implements Sensor {
      * Method that returns the name of the sensor.
      * @return name of the sensor
      */
-    @Override
+
     public boolean getState() {
         return (true);
     }
@@ -151,7 +151,7 @@ public class SensorTypeHumidity implements Sensor {
      * Method that returns the measurement of the sensor.
      * @return measurement of the sensor
      */
-    @Override
+
     public double getMeasurement() {
         return _value;
     }
