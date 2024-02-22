@@ -28,14 +28,13 @@ public class House {
         return new ArrayList<>(_rooms);
     }
 
-    public boolean createRoom(String roomName, int floorNumber, double area, double height) throws InstantiationException {
+    public Room createRoom(String roomName, int floorNumber, double area, double height) throws InstantiationException {
 
         Room myRoom = new Room(roomName, floorNumber, area, height);
 
         this._rooms.add(myRoom);
 
-        return this._rooms.contains(myRoom);
-
+        return myRoom;
     }
 
     /**
