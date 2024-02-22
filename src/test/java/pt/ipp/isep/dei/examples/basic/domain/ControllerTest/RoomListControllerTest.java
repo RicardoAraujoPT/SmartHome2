@@ -1,4 +1,4 @@
-package pt.ipp.isep.dei.examples.basic.domain;
+package pt.ipp.isep.dei.examples.basic.domain.ControllerTest;
 
 import org.junit.jupiter.api.Test;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Controllers.RoomListController;
