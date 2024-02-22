@@ -30,11 +30,11 @@ public class SensorTypeTemperature implements Sensor {
     /**
      * The type of the sensor. This represents the type of the sensor. This is set to "Temperature" by default.
      */
-    private String _type = "Temperature";
+    private final String _type = "Temperature";
     /**
      * The model of the sensor. This represents the model of the sensor. This is set to "Temperature Bosch" by default.
      */
-    private String _model = "Temperature Bosch";
+    private final String _model = "Temperature Bosch";
 
     /**
      * SensorTypeTemperatureBosch constructor with parameters name, unitMeasurement, value and type.

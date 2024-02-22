@@ -5,9 +5,9 @@ import java.util.ArrayList;
 
 public class House {
 
-    private Location _location;
+    private final Location _location;
 
-    private ArrayList <Room> _rooms;
+    private final ArrayList <Room> _rooms;
 
     public House (String address, String zipCode, double latitude, double longitude){
         //if (!isAddressValid(address) || !isZipCodeValid(zipCode) || !isLatitudeValid(latitude) || !isLongitudeValid(longitude)){
