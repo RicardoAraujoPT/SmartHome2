@@ -1,15 +1,15 @@
 package pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain;
 
 /**
- * The SensorTypeTemperatureBosch class represents a temperature sensor from the brand Bosch.
+ * The SensorTypeTemperature class represents a temperature sensor.
  * It implements the Sensor interface and provides methods to get and set sensor attributes such as name, unit of measurement, and value.
  * The sensor value must not be lower than absolute zero (-273.15 degrees Celsius).
  * The class also provides a method to validate the sensor attributes.
  * Usage:
  * Creating a sensor:
- * SensorTypeTemperatureBosch sensor = new SensorTypeTemperatureBosch(name, unitMeasurement, value)
- * The SensorTypeTemperatureBosch class interacts with the following classes:
- * - Sensor: SensorTypeTemperatureBosch implements the Sensor interface.
+ * SensorTypeTemperature sensor = new SensorTypeTemperature(name, unitMeasurement, value)
+ * The SensorTypeTemperature class interacts with the following classes:
+ * - Sensor: SensorTypeTemperatureimplements the Sensor interface.
  */
 public class SensorTypeTemperature implements Sensor {
     /**
@@ -37,7 +37,7 @@ public class SensorTypeTemperature implements Sensor {
     private final String _model = "Temperature Bosch";
 
     /**
-     * SensorTypeTemperatureBosch constructor with parameters name, unitMeasurement, value and type.
+     * SensorTypeTemperature constructor with parameters name, unitMeasurement, value and type.
      * Throws IllegalArgumentException if name or unitMeasurement are null or empty.
      * Throws IllegalArgumentException if value is lower than absolute zero.
      * @param name            name of the sensor

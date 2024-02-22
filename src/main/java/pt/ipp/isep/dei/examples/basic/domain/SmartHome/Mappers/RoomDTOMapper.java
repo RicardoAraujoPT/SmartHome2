@@ -1,17 +1,20 @@
 package pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers;
 
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.RoomDTO;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Room;
+
 import java.util.ArrayList;
 
 public class RoomDTOMapper {
 
         // Converts a RoomDTO to a Room
-        public static Room DTOToRoom(RoomDTO roomDTO) {
+        public static Room DTOToRoom(RoomDTO roomDTO) throws InstantiationException {
             return new Room(roomDTO.getName(), roomDTO.getHouseFloor(), roomDTO.getArea(), roomDTO.getHeight());
         }
 
         // Converts a RoomDTO to a Room
         public static RoomDTO RoomToDTO(Room room) {
-            return new RoomDTO(room.getName(), room.getHouseFloor(), room.getArea(), room.getHeight());
+            return new RoomDTO(room.getRoomName(), room.getFloorNumber(), room.getArea(), room.getHeight());
         }
 
 
@@ -36,4 +39,4 @@ public class RoomDTOMapper {
 
     }
 
-}
+
