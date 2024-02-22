@@ -24,7 +24,7 @@ public class Room {
         this._height = height;
     }
     private boolean isValidConstructorArguments( String roomName, Integer floorNumber, double area, Double height) {
-        if (roomName == null || roomName.isEmpty()) {
+        if (roomName == null || roomName.trim().isEmpty()) {
             return false;
         }
         if (floorNumber == null) {
@@ -58,5 +58,18 @@ public class Room {
 
     public List<Device> getDevices() {
         return new ArrayList<>(_devices);
+    }
+
+    /**
+     * Creates a new device and adds it to the list of devices in the room.
+     *
+     * @param deviceName The name of the device to be created and added.
+     */
+    public Device createDevice(String deviceName) {
+        // instanciate device
+        Device myDevice = new Device(deviceName);
+        // add device to list
+        _devices.add(myDevice);
+        return myDevice;
     }
 }

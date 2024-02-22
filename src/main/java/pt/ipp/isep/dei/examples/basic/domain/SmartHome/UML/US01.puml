@@ -1,0 +1,43 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title <font color=#800020>US01: Configure the location of the house</font>
+
+skinparam sequence {
+ArrowColor #800020
+LifeLineBorderColor #800020
+LifeLineBackgroundColor #E6E6FA
+ParticipantBorderColor #800020
+ParticipantBackgroundColor #E6E6FA
+}
+
+autonumber
+
+participant ":ConfigureHouseLocationController"
+participant "myHouse :House"
+participant "myLocation :Location"
+participant "myGPSCoordinates :GPSCoordinates"
+
+
+[o->":ConfigureHouseLocationController": configureHouseLocation(adress, zipCode, latitude, longitude)
+activate ":ConfigureHouseLocationController"
+
+
+":ConfigureHouseLocationController"->"myHouse :House": configureLocation(address, zipCode, latitude, longitude)
+
+"myHouse :House"->"myLocation :Location" ** : Location(address, zipCode, latitude, longitude)
+activate "myLocation :Location"
+
+
+"myLocation :Location"->"myGPSCoordinates :GPSCoordinates" ** : GPSCoordinates(latitude, longitude)
+activate "myGPSCoordinates :GPSCoordinates"
+"myGPSCoordinates :GPSCoordinates"-->"myLocation :Location" : myGPSCoordinates
+deactivate "myGPSCoordinates :GPSCoordinates"
+"myLocation :Location"-->"myHouse :House" : myLocation
+deactivate "myLocation :Location"
+"myHouse :House"-->":ConfigureHouseLocationController": true
+deactivate "myHouse :House"
+[o<--":ConfigureHouseLocationController": true
+deactivate ":ConfigureHouseLocationController"
+
+@enduml

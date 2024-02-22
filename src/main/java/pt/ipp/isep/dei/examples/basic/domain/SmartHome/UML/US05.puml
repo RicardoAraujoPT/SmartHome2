@@ -1,0 +1,38 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title <font color=#800020>US05: Add a new device to a room</font>
+
+
+autonumber
+
+participant ":AddDeviceToRoomController"
+participant ":House"
+participant "myRoom :Room"
+participant "myDevice :Device"
+participant ":DeviceDTOMapper"
+
+[o-> ":AddDeviceToRoomController" : addDeviceToRoom(roomName,deviceName)
+":AddDeviceToRoomController" -> ":House" :getRoomByName(roomName)
+activate ":House"
+":AddDeviceToRoomController" <-- ":House" : myRoom
+deactivate ":House"
+":AddDeviceToRoomController" -> "myRoom :Room" : createDevice(deviceName)
+activate "myRoom :Room"
+"myRoom :Room" -> "myDevice :Device" : Device(deviceName)
+activate "myDevice :Device"
+"myDevice :Device" --> "myRoom :Room" : myDevice
+deactivate "myDevice :Device"
+":AddDeviceToRoomController" <-- "myRoom :Room" : myDevice
+deactivate "myRoom :Room"
+":AddDeviceToRoomController" -> ":DeviceDTOMapper" : myDevice
+activate ":DeviceDTOMapper"
+":AddDeviceToRoomController" <-- ":DeviceDTOMapper" : myDeviceDTO
+deactivate ":DeviceDTOMapper"
+[o<-- ":AddDeviceToRoomController" : myDeviceDTO
+deactivate ":AddDeviceToRoomController"
+
+
+
+
+@enduml

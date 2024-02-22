@@ -1,0 +1,31 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+title US02: add and configure new Room
+
+
+autonumber
+participant ":AddRoomController"
+participant ":RoomDTOMapper"
+participant ":House"
+
+[o-> ":AddRoomController" : createRoom(roomDTO)
+activate ":AddRoomController"
+":AddRoomController" -> ":House" : createRoom(name, floorNumber, area, height)
+activate ":House"
+":House" -> "myRoom : Room" ** : Room(name, floorNumber, area, height)
+activate "myRoom : Room"
+"myRoom : Room" --> ":House" : myRoom
+deactivate "myRoom : Room"
+":House" -> ":House" : addRoomToList
+":House" --> ":RoomDTOMapper" : myRoom
+deactivate ":House"
+activate ":RoomDTOMapper"
+":RoomDTOMapper" -> ":RoomDTOMapper" : DomainToDTO(myRoom)
+":RoomDTOMapper" --> ":AddRoomController" : myRoomDTO
+deactivate ":RoomDTOMapper"
+[o<-- ":AddRoomController" : myRoomDTO
+deactivate ":AddRoomController"
+
+@enduml
