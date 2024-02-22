@@ -25,7 +25,7 @@ public class RoomListController {
     public ArrayList<RoomDTO> getHouseRoomList(){
 
 
-        ArrayList<Room> listOfRoomsInHouse = this._myHouse.getRoomList();
+        ArrayList<Room> listOfRoomsInHouse = this._myHouse.getRooms();
 
         ArrayList<RoomDTO> listOfRoomsInHouseDTO = RoomDTOMapper.convertDomainToDTO(listOfRoomsInHouse);
 
