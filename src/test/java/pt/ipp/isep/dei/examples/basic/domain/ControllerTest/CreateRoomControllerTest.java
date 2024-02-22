@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.examples.basic.domain.ControllerTest;
 
 import org.junit.jupiter.api.Test;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Controllers.AddDeviceToRoomController;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Controllers.CreateRoomController;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.RoomDTO;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.House;
@@ -55,4 +56,15 @@ public class CreateRoomControllerTest {
         //Assert
         assertNull(result);
     }
+    @Test
+    public void testNullHouse() {
+        //Arrange
+        String expectedMessage = "Invalid house";
+        //Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> new CreateRoomController(null));
+        String actualMessage = exception.getMessage();
+        //Assert
+        assertEquals(expectedMessage, actualMessage);
+    }
+
 }
