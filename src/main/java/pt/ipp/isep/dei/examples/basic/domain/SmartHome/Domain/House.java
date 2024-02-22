@@ -12,7 +12,7 @@ public class House {
     public House (String address, String zipCode, double latitude, double longitude){
         //if (!isAddressValid(address) || !isZipCodeValid(zipCode) || !isLatitudeValid(latitude) || !isLongitudeValid(longitude)){
             //throw new IllegalArgumentException("Invalid arguments");
-        //}
+
 
         this._location = new Location(address, zipCode, latitude, longitude);
         this._rooms = new ArrayList<>();
@@ -26,6 +26,16 @@ public class House {
     public ArrayList<Room> getRooms(){
 
         return new ArrayList<>(_rooms);
+    }
+
+    public boolean createRoom(String roomName, int floorNumber, double area, double height) {
+
+        Room myRoom = new Room(roomName, floorNumber, area, height);
+
+        this._rooms.add(myRoom);
+
+        return this._rooms.contains(myRoom);
+
     }
 
 

@@ -1,5 +1,8 @@
 package pt.ipp.isep.dei.examples.basic.domain.SmartHome.Controllers;
 
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.House;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Room;
+
 import java.util.ArrayList;
 
 public class RoomListController {
