@@ -1,13 +1,14 @@
 package pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class House {
 
-    private final Location _location;
+    private Location _location;
 
-    private final ArrayList <Room> _rooms;
+    private ArrayList <Room> _rooms;
 
     public House (String address, String zipCode, double latitude, double longitude){
         //if (!isAddressValid(address) || !isZipCodeValid(zipCode) || !isLatitudeValid(latitude) || !isLongitudeValid(longitude)){
@@ -48,4 +49,20 @@ public class House {
         return new ArrayList<>(_rooms);
     }
 
+    /**
+     * Method to configure the location (ZIP code and address) of the House.
+     *
+     * @param address The new address.
+     * @param zipCode The new ZIP code.
+     * @param latitude The new latitude.
+     * @param longitude The new longitude.
+     * @return Boolean indicating if the configuration was successful.
+     */
+    public boolean configureLocation(String address, String zipCode, Double latitude, Double longitude) {
+        if (address == null || zipCode == null || latitude == null || longitude == null) {
+            return false;
+        }
+        this._location= new Location(zipCode, address, latitude, longitude);
+        return true;
+    }
 }
