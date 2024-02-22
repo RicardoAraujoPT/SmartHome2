@@ -24,10 +24,6 @@ public class House {
         return this._location;
     }
 
-    public ArrayList<Room> getRooms(){
-
-        return new ArrayList<>(_rooms);
-    }
 
     public Room createRoom(String roomName, int floorNumber, double area, double height) throws InstantiationException {
 
