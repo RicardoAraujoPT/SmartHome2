@@ -13,22 +13,12 @@ ParticipantBackgroundColor #E6E6FA
 
 autonumber
 
-participant ":ConfigureHouseLocationController"
-participant "myHouse :House"
-participant "myLocation :Location"
-participant "myGPSCoordinates :GPSCoordinates"
-
-
 [o->":ConfigureHouseLocationController": configureHouseLocation(adress, zipCode, latitude, longitude)
 activate ":ConfigureHouseLocationController"
-
-
 ":ConfigureHouseLocationController"->"myHouse :House": configureLocation(address, zipCode, latitude, longitude)
-
+activate "myHouse :House"
 "myHouse :House"->"myLocation :Location" ** : Location(address, zipCode, latitude, longitude)
 activate "myLocation :Location"
-
-
 "myLocation :Location"->"myGPSCoordinates :GPSCoordinates" ** : GPSCoordinates(latitude, longitude)
 activate "myGPSCoordinates :GPSCoordinates"
 "myGPSCoordinates :GPSCoordinates"-->"myLocation :Location" : myGPSCoordinates
@@ -36,11 +26,11 @@ deactivate "myGPSCoordinates :GPSCoordinates"
 "myLocation :Location"-->"myHouse :House" : myLocation
 deactivate "myLocation :Location"
 "myHouse :House"-->":ConfigureHouseLocationController": myLocation
+deactivate "myHouse :House"
 ":ConfigureHouseLocationController"->"LocationDTOMapper": Domain2DTO(myLocation)
 activate "LocationDTOMapper"
 "LocationDTOMapper"-->":ConfigureHouseLocationController": locationDTO
 deactivate "LocationDTOMapper"
-deactivate "myHouse :House"
 [o<--":ConfigureHouseLocationController": locationDTO
 deactivate ":ConfigureHouseLocationController"
 
