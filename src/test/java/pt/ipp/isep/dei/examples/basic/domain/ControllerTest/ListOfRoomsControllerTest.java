@@ -20,7 +20,7 @@ public class ListOfRoomsControllerTest {
         myHouse.createRoom("Test Room4", 0, 35, 2.5);
         ListOfRoomsController myController = new ListOfRoomsController(myHouse);
         //Act
-        int expected = myHouse.getRooms().size();
+        int expected = myHouse.getRoomList().size();
         int found = myController.getRoomDTOList().size();
         //Assert
         assertEquals(expected, found);
@@ -41,7 +41,7 @@ public class ListOfRoomsControllerTest {
         //Arrange
         House myHouse = new House("zipCode","street",90.0,30.0);
         //Act + Assert
-        assertEquals(new ArrayList<>(), myHouse.getRooms());
+        assertEquals(new ArrayList<>(), myHouse.getRoomList());
     }
 
     @Test
@@ -54,7 +54,7 @@ public class ListOfRoomsControllerTest {
         myHouse.createRoom("Bathroom", 0, 35, 2.5);
         ListOfRoomsController myController = new ListOfRoomsController(myHouse);
         //Act
-        int expected = myHouse.getRooms().size();
+        int expected = myHouse.getRoomList().size();
         int found = myController.getRoomList().size();
         //Assert
         assertEquals(found, expected);
