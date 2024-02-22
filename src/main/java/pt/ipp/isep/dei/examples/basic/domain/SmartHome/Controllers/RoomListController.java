@@ -1,4 +1,4 @@
-package pt.ipp.isep.dei.examples.basic.domain.Controllers;
+package pt.ipp.isep.dei.examples.basic.domain.SmartHome.Controllers;
 
 import java.util.ArrayList;
 
