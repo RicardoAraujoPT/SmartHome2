@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.examples.basic.domain;
 
 import org.junit.jupiter.api.Test;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.House;
 
 import java.util.ArrayList;
 
