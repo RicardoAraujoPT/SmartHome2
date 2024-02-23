@@ -6,7 +6,8 @@ public class LocationDTO {
 
     private String _address;
     private String _zipCode;
-    private GPSCoordinates _gpsCoordinates;
+    private double _latitude;
+    private double _longitude;
 
     /**
      * Constructor for creating a LocationDTO.
@@ -17,36 +18,18 @@ public class LocationDTO {
      * @param longitude
      */
     public LocationDTO(String address, String zipCode, Double latitude, Double longitude) {
-        if (!isAddressValid(address) || !isZipCodeValid(zipCode) || latitude == null || longitude == null) {
-            throw new IllegalArgumentException("Invalid address, ZIP code, latitude or longitude");
-        }
+
         this._address = address;
         this._zipCode = zipCode;
-        this._gpsCoordinates = new GPSCoordinates(latitude, longitude);
-    }
-
-    /**
-     * Method that verifies if street name is null or empty.
-     * @param address
-     * @return boolean
-     */
-    private boolean isAddressValid(String address) {
-        return address != null && !address.trim().isEmpty();
-    }
-
-    /**
-     * Method that verifies if ZIP code is null or empty.
-     * @param zipCode
-     * @return boolean
-     */
-    private boolean isZipCodeValid(String zipCode) {
-        return zipCode != null && !zipCode.trim().isEmpty();
+        this._latitude = latitude;
+        this._longitude = longitude;
     }
 
     /**
      * Gets the zip code.
      */
     public String getZipCode() {
+
         return _zipCode;
     }
 
@@ -54,13 +37,23 @@ public class LocationDTO {
      * Gets the address.
      */
     public String getAddress() {
+
         return _address;
     }
 
     /**
-     * Gets the GPScoordinates objects in Location objects.
+     * Gets the latitude.
      */
-    public GPSCoordinates getGpsCoordinates() {
-        return _gpsCoordinates;
+    public double getLatitude() {
+
+        return _latitude;
+    }
+
+    /**
+     * Gets the longitude.
+     */
+    public double getLongitude() {
+
+        return _longitude;
     }
 }
