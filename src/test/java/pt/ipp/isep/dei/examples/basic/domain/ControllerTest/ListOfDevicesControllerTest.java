@@ -78,7 +78,7 @@ public class ListOfDevicesControllerTest {
         Room myRoom = new Room("Living Room", 1, 35, 2.5);
         ListOfDevicesController controller = new ListOfDevicesController(myRoom);
         int expected = 0;
-        int actual = controller.getDeviceList().size();
+        int actual = controller.getDeviceDTOList().size();
         assertEquals(expected, actual);
     }
 
@@ -92,7 +92,7 @@ public class ListOfDevicesControllerTest {
         myRoom.createDevice("Device1");
         ListOfDevicesController controller = new ListOfDevicesController(myRoom);
         int expected = 1;
-        int actual = controller.getDeviceList().size();
+        int actual = controller.getDeviceDTOList().size();
         assertEquals(expected, actual);
     }
 
@@ -107,7 +107,7 @@ public class ListOfDevicesControllerTest {
         myRoom.createDevice("Device2");
         ListOfDevicesController controller = new ListOfDevicesController(myRoom);
         int expected = 2;
-        int actual = controller.getDeviceList().size();
+        int actual = controller.getDeviceDTOList().size();
         assertEquals(expected, actual);
     }
 }
