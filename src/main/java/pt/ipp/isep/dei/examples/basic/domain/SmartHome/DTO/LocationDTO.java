@@ -17,10 +17,30 @@ public class LocationDTO {
      * @param longitude
      */
     public LocationDTO(String address, String zipCode, Double latitude, Double longitude) {
-        //validação?
+        if (!isAddressValid(address) || !isZipCodeValid(zipCode) || latitude == null || longitude == null) {
+            throw new IllegalArgumentException("Invalid address, ZIP code, latitude or longitude");
+        }
         this._address = address;
         this._zipCode = zipCode;
         this._gpsCoordinates = new GPSCoordinates(latitude, longitude);
+    }
+
+    /**
+     * Method that verifies if street name is null or empty.
+     * @param address
+     * @return boolean
+     */
+    private boolean isAddressValid(String address) {
+        return address != null && !address.trim().isEmpty();
+    }
+
+    /**
+     * Method that verifies if ZIP code is null or empty.
+     * @param zipCode
+     * @return boolean
+     */
+    private boolean isZipCodeValid(String zipCode) {
+        return zipCode != null && !zipCode.trim().isEmpty();
     }
 
     /**

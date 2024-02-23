@@ -30,15 +30,12 @@ public class ConfigureHouseLocationController {
     /**
      * Configures the location and GPS coordinates of the house.
      *
-     * @param address   The address of the house.
-     * @param zipCode   The zip code of the house.
-     * @param latitude  The latitude of the house.
-     * @param longitude The longitude of the house.
-     * @return LocationDTO The location of the house.
+     * @param locationDTO The LocationDTO containing information for configuring the house.
+     * @return LocationDTO The LocationDTO of the house after configuration.
      */
-    public LocationDTO configureHouseLocation(String address, String zipCode, double latitude, double longitude) throws IllegalArgumentException {
+    public LocationDTO configureHouseLocation(LocationDTO locationDTO) throws IllegalArgumentException {
 
-        this._myHouse.configureLocation(address, zipCode, latitude, longitude);
+        this._myHouse.configureLocation(locationDTO.getAddress(), locationDTO.getZipCode(), locationDTO.getGpsCoordinates().getLatitude(), locationDTO.getGpsCoordinates().getLongitude());
 
         return LocationDTOMapper.domain2DTO(_myHouse.getLocation());
     }
