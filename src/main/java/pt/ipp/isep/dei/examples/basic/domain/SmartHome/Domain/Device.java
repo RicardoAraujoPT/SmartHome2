@@ -78,7 +78,7 @@ public class Device {
      * Gets a copy of the list of available sensors.
      * @return A list of available sensors.
      */
-    public List<Sensor> getAvailableSensors() {
+    public ArrayList<Sensor> getAvailableSensors() {
         return new ArrayList<>(_sensors);
     }
 
@@ -86,7 +86,7 @@ public class Device {
      * Gets a copy of the list of available actuators.
      * @return A list of available actuators.
      */
-    public List<Actuator> getAvailableActuators() {
+    public ArrayList<Actuator> getAvailableActuators() {
         return new ArrayList<>(_actuators);
     }
 
