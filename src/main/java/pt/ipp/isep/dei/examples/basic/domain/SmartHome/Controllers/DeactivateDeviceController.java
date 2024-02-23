@@ -1,6 +1,9 @@
 package pt.ipp.isep.dei.examples.basic.domain.SmartHome.Controllers;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.DeviceDTO;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.*;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.DeviceDTOMapper;
+
+import java.util.HashMap;
 
 
 /**
@@ -11,7 +14,7 @@ import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.*;
 public class DeactivateDeviceController {
 
     /**
-     * The house from which the devices will be retrieved.
+     * The house where the device is located
      */
     private House _house;
 
@@ -20,12 +23,24 @@ public class DeactivateDeviceController {
      * @param house the house from which the devices will be retrieved.
      */
     public DeactivateDeviceController(House house) {
-        _house = house;
+        this._house = house;
     }
 
-    public boolean deactivateDevice(DeviceDTO myDeviceDTO) {
-        //Device myDevice = DTOtoDomain(myDeviceDTO)
-        //myDevice.deactivateDevice;
-        return true;
+    /**
+     * Deactivates an object Device present in a House.
+     *
+     * @param myDeviceDTO a deviceDTO
+     * @return DeviceDTO (deactivated device)
+     */
+    public DeviceDTO deactivateDevice(DeviceDTO myDeviceDTO) {
+        Device myDevice = getDeviceFromDomain(myDeviceDTO);
+        myDevice.deactivateDevice();
+        return DeviceDTOMapper.DeviceToDTOWithStatus(myDevice);
+    }
+
+    public Device getDeviceFromDomain(DeviceDTO deviceDTO) {
+        DeviceDTOMapper deviceDTOMapper = new DeviceDTOMapper(_house);
+        HashMap<DeviceDTO,Device> deviceDTODeviceHashMap = deviceDTOMapper.getMapDevicesDTO();
+        return deviceDTODeviceHashMap.get(deviceDTO);
     }
 }

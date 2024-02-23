@@ -48,7 +48,7 @@ public class Device {
         _deviceID = UUID.randomUUID().toString();
         _sensors = new ArrayList<>();
         _actuators = new ArrayList<>();
-        _isActive = false;
+        _isActive = true;
     }
 
     /**

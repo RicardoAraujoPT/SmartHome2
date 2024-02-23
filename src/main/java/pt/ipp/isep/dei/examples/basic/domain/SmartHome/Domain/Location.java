@@ -20,9 +20,9 @@ public class Location {
      * @param latitude
      * @param longitude
      */
-    public Location(String address, String zipCode, Double latitude, Double longitude) {
+    public Location(String address, String zipCode, Double latitude, Double longitude) throws IllegalArgumentException {
         if (!isAddressValid(address) || !isZipCodeValid(zipCode) || latitude == null || longitude == null) {
-            throw new IllegalArgumentException("Invalid ZIP code or address");
+            throw new IllegalArgumentException("Invalid address, ZIP code, latitude or longitude");
         }
         this._address = address;
         this._zipCode = zipCode;

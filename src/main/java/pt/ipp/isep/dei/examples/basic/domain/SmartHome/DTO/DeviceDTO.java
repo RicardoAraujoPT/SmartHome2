@@ -1,10 +1,7 @@
 package pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO;
-
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Actuator;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Sensor;
-
 import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 
@@ -46,7 +43,7 @@ public class DeviceDTO {
      * It is generated using the UUID class.
      * It is a string and cannot be null or empty. It is immutable and cannot be changed after it is set.
      */
-    private final String _deviceID;
+    private String _deviceID;
 
     /**
      * Indicates whether the device is currently active or not.
@@ -58,14 +55,14 @@ public class DeviceDTO {
      * List of available sensors for the device.
      * It is a list of strings.
      */
-    private final ArrayList<Sensor> _sensors;
+    private final ArrayList<Sensor> _sensors = new ArrayList<>();
 
     /**
      * List of available actuators for the device.
      * It is a list of strings.
      */
 
-    private final ArrayList<Actuator> _actuators;
+    private final ArrayList<Actuator> _actuators = new ArrayList<>();
 
     /**
      * Constructs a new DeviceDTO with the specified device name and device ID.
@@ -77,10 +74,13 @@ public class DeviceDTO {
 
     public DeviceDTO(String deviceName, String deviceID) {
         _deviceName = deviceName;
-        _deviceID = UUID.randomUUID().toString();
-        _sensors = new ArrayList<>();
-        _actuators = new ArrayList<>();
-        _isActive = false;
+        _deviceID = deviceID;
+        _isActive = true;
+    }
+
+    public DeviceDTO(String deviceName, boolean isActive) {
+        this._deviceName = deviceName;
+        this._isActive = isActive;
     }
 
     /**
