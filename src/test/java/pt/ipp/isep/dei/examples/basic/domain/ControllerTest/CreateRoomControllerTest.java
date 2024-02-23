@@ -1,9 +1,7 @@
 package pt.ipp.isep.dei.examples.basic.domain.ControllerTest;
 
 import org.junit.jupiter.api.Test;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Controllers.ConfigureHouseLocationController;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Controllers.CreateRoomController;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.LocationDTO;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.RoomDTO;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.House;
 
@@ -11,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CreateRoomControllerTest {
     @Test
-    public void validArguments_shouldCreateValidRoom() throws InstantiationException {
+    void validArguments_shouldCreateValidRoom() throws InstantiationException {
         //Arrange
         House myHouse = new House("address", "zipCode", 55.2, -2.25);
         CreateRoomController myController = new CreateRoomController(myHouse);
@@ -23,7 +21,7 @@ public class CreateRoomControllerTest {
     }
 
     @Test
-    public void nullRoomName_shouldThrowInstantiationException() throws InstantiationException {
+    void nullRoomName_shouldThrowInstantiationException() throws InstantiationException {
         // Arrange
         House myHouse = new House("address", "zipCode", 55.2, -2.25);
         CreateRoomController myController = new CreateRoomController(myHouse);
@@ -38,7 +36,7 @@ public class CreateRoomControllerTest {
     }
 
     @Test
-    public void negativeArea_shouldThrowInstantiationException() throws InstantiationException {
+    void negativeArea_shouldThrowInstantiationException() throws InstantiationException {
         // Arrange
         House myHouse = new House("address", "zipCode", 55.2, -2.25);
         CreateRoomController myController = new CreateRoomController(myHouse);
@@ -53,7 +51,7 @@ public class CreateRoomControllerTest {
     }
 
     @Test
-    public void negativeHeight_shouldThrowInstantiationException() throws InstantiationException {
+    void negativeHeight_shouldThrowInstantiationException() throws InstantiationException {
         // Arrange
         House myHouse = new House("address", "zipCode", 55.2, -2.25);
         CreateRoomController myController = new CreateRoomController(myHouse);
@@ -67,7 +65,7 @@ public class CreateRoomControllerTest {
         assertEquals(expectedMessage, exception.getMessage());
     }
     @Test
-    public void nullHouse_shouldThrowInstantiationException() {
+    void nullHouse_shouldThrowInstantiationException() {
         //Arrange
         String expectedMessage = "Invalid house";
         //Act
