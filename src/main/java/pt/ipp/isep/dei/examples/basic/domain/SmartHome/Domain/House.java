@@ -74,10 +74,7 @@ public class House {
      * @param longitude The new longitude.
      * @return the new Location object of the House or null if any of the parameters is null.
      */
-    public Location configureLocation(String address, String zipCode, Double latitude, Double longitude) {
-        if (address == null || zipCode == null || latitude == null || longitude == null) {
-            return null;
-        }
+    public Location configureLocation(String address, String zipCode, Double latitude, Double longitude) throws IllegalArgumentException {
         this._location= new Location(address, zipCode, latitude, longitude);
         return this._location;
     }
