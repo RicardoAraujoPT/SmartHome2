@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.UUID;
 
 public class Room {
-    private final String _roomName;
-    private final String _roomID;
-    private final Integer _floorNumber;
-    private final double _area;
+    private String _roomName;
+    private String _roomID;
+    private Integer _floorNumber;
+    private double _area;
 
-    private final Double _height;
-    private final List<Device> _devices = new ArrayList<>();
+    private Double _height;
+    private List<Device> _devices = new ArrayList<>();
 
     public Room(String roomName, Integer floorNumber, double area, Double height) throws InstantiationException{
         if( !isValidConstructorArguments(roomName, floorNumber, area, height) ) {
@@ -56,7 +56,7 @@ public class Room {
         return _height;
     }
 
-    public List<Device> getDevices() {
+    public ArrayList<Device> getDevices() {
         return new ArrayList<>(_devices);
     }
 

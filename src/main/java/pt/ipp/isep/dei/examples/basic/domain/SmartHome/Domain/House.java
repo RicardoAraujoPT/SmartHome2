@@ -2,13 +2,22 @@ package pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain;
 
 import java.util.ArrayList;
 
-
+/** Class that represents a House in a smart home system.
+ * House objects are constructed by configuring its location.
+ * House objects have a list of rooms that is initialized as empty, so that Room objects can be added to the list.
+ */
 public class House {
 
     private Location _location;
-
     private ArrayList <Room> _rooms;
 
+    /**
+     * Constructor method that allows the instantiation of House objects, with the following inputs:
+     * @param address
+     * @param zipCode
+     * @param latitude
+     * @param longitude
+     */
     public House (String address, String zipCode, double latitude, double longitude){
         //if (!isAddressValid(address) || !isZipCodeValid(zipCode) || !isLatitudeValid(latitude) || !isLongitudeValid(longitude)){
             //throw new IllegalArgumentException("Invalid arguments");
@@ -18,11 +27,25 @@ public class House {
         this._rooms = new ArrayList<>();
     }
 
+    /** Getter for the House's location.
+     *
+     * @return Location object representing the location of the house.
+     */
     public Location getLocation(){
 
         return this._location;
     }
 
+    /**
+     * Method to create a Room object and add it to the House's roomList.
+     *
+     * @param roomName The name of the room.
+     * @param floorNumber The floor number where the room is located.
+     * @param area The area of the room in square meters.
+     * @param height The height of the room in meters.
+     * @return Room object created and added to the House's roomList.
+     * @throws InstantiationException if any given attribute for Room is empty or null.
+     */
     public Room createRoom(String roomName, int floorNumber, double area, double height) throws InstantiationException {
 
         Room myRoom = new Room(roomName, floorNumber, area, height);

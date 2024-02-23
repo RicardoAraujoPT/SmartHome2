@@ -6,26 +6,26 @@ title US02: add and configure new Room
 
 
 autonumber
-participant ":AddRoomController"
-participant ":RoomDTOMapper"
+participant ":CreateRoomController"
 participant ":House"
+participant ":RoomDTOMapper"
 
-[o-> ":AddRoomController" : createRoom(roomDTO)
-activate ":AddRoomController"
-":AddRoomController" -> ":House" : createRoom(name, floorNumber, area, height)
+[o-> ":CreateRoomController" : createRoom(roomDTO)
+activate ":CreateRoomController"
+":CreateRoomController" -> ":House" : createRoom(name, floorNumber, area, height)
 activate ":House"
 ":House" -> "myRoom : Room" ** : Room(name, floorNumber, area, height)
 activate "myRoom : Room"
 "myRoom : Room" --> ":House" : myRoom
 deactivate "myRoom : Room"
 ":House" -> ":House" : addRoomToList
-":House" --> ":RoomDTOMapper" : myRoom
+":House" --> ":CreateRoomController" : myRoom
 deactivate ":House"
+":CreateRoomController" -> ":RoomDTOMapper" : DomainToDTO(myRoom)
 activate ":RoomDTOMapper"
-":RoomDTOMapper" -> ":RoomDTOMapper" : DomainToDTO(myRoom)
-":RoomDTOMapper" --> ":AddRoomController" : myRoomDTO
+":RoomDTOMapper" --> ":CreateRoomController" : myRoomDTO
 deactivate ":RoomDTOMapper"
-[o<-- ":AddRoomController" : myRoomDTO
-deactivate ":AddRoomController"
+[o<-- ":CreateRoomController" : myRoomDTO
+deactivate ":CreateRoomController"
 
 @enduml
