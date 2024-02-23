@@ -15,7 +15,7 @@ participant ":devicesMapper"
 [o-> ":getRoomDevicesController" :getListOfDevicesinRoom (roomDTO)
 activate ":getRoomDevicesController"
 
-":getRoomDevicesController" -> ":roomsMapper" : getRoom(roomDTO)
+":getRoomDevicesController" -> ":roomsMapper" : getRoomFromDomain(roomDTO)
 activate ":roomsMapper"
 ":roomsMapper" --> ":getRoomDevicesController" : myRoom
 
