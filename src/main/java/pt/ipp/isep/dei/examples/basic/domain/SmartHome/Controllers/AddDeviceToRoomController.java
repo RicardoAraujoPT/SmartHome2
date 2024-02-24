@@ -31,7 +31,7 @@ public class AddDeviceToRoomController {
      *
      * @param roomName   The name of the room to which the device will be added.
      * @param deviceName The name of the device to be added.
-     * @return true if the device is successfully added, false if an IllegalArgumentException occurs.
+     * @return deviceDTO if the device is successfully added, otherwise an IllegalArgumentException is thrown
      */
     public DeviceDTO addDeviceToRoom(String roomName, String deviceName) {
         try {
