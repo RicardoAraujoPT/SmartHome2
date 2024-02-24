@@ -35,7 +35,7 @@ public class DeactivateDeviceControllerTest {
     @Test
     void deactivateDeviceSuccessfully() throws InstantiationException {
         DeactivateDeviceController myController = new DeactivateDeviceController(myHouse);
-        DeviceDTO deviceToDeactivate = new DeviceDTO("device1",UUID.randomUUID().toString());
+        DeviceDTO deviceToDeactivate = new DeviceDTO("device1",UUID.randomUUID().toString(),null);
         //myController.deactivateDevice(deviceToDeactivate);
         assertFalse(deviceToDeactivate.getIsActive());
     }
@@ -49,7 +49,7 @@ public class DeactivateDeviceControllerTest {
     @Test
     void deactivateDeviceNonExistingDevice() {
         DeactivateDeviceController myController = new DeactivateDeviceController(myHouse);
-        DeviceDTO deviceToDeactivate = new DeviceDTO("device2",UUID.randomUUID().toString());
+        DeviceDTO deviceToDeactivate = new DeviceDTO("device2",UUID.randomUUID().toString(),null);
         //myController.deactivateDevice(deviceToDeactivate);
         assertNull(deviceToDeactivate);
     }
@@ -63,7 +63,7 @@ public class DeactivateDeviceControllerTest {
     @Test
     void deactivateDeviceWhenDeviceIsAlreadyInactive() {
         DeactivateDeviceController myController = new DeactivateDeviceController(myHouse);
-        DeviceDTO alreadyInactiveDevice = new DeviceDTO("inactiveDevice",UUID.randomUUID().toString());
+        DeviceDTO alreadyInactiveDevice = new DeviceDTO("inactiveDevice",UUID.randomUUID().toString(),null);
         //myController.deactivateDevice(alreadyInactiveDevice);
         assertFalse(alreadyInactiveDevice.getIsActive());
     }

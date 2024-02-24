@@ -72,4 +72,15 @@ public class Room {
         _devices.add(myDevice);
         return myDevice;
     }
+
+    public Device getDeviceByName(String name) {
+        for (int i = 0; i < this._devices.size(); i++) {
+            Device currentDevice = this._devices.get(i);
+            String currentDeviceName = currentDevice.getDeviceName();
+            if (currentDeviceName.equals(name)) {
+                return currentDevice;
+            }
+        }
+        throw new IllegalArgumentException("Device name doesn't exist in the list");
+    }
 }

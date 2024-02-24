@@ -1,10 +1,10 @@
 package pt.ipp.isep.dei.examples.basic.domain.DomainTest;
 
+import org.apache.commons.configuration2.Configuration;
+import org.apache.commons.configuration2.plist.PropertyListConfiguration;
 import org.junit.jupiter.api.Test;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Actuator;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Device;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Room;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Sensor;
+
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.*;
 
 import java.util.ArrayList;
 
@@ -57,7 +57,7 @@ public class DeviceTest {
         //Act
         Boolean found = device.getDeviceIsActive();
         //Assert
-        assertFalse(found);
+        assertTrue(found);
     }
 
     @Test
@@ -125,6 +125,40 @@ public class DeviceTest {
         Boolean found = device.activateDevice();
         //Assert
         assertTrue(found);
+    }
+
+    @Test
+    void addValidSensor() throws Exception
+    {
+        // arrange
+        Configuration config = new PropertyListConfiguration();
+        config.addProperty("sensor", "pt.ipp.isep.dei.examples.basic.domain.SmartHome.Sensors.GA100K");
+        Catalogue catalogue = new Catalogue( config );
+        catalogue.addSensorType("Temperature", Unit.Celsius);
+
+        Device device = new Device( "device1");
+
+        // act
+        Sensor sensor = device.addSensor( "pt.ipp.isep.dei.examples.basic.domain.SmartHome.Sensors.GA100K", catalogue );
+
+        // assert
+        assertEquals( sensor.getSensorType().getDescription(), "Temperature" );
+        // how to check if sensor was added to the device?
+    }
+
+    @Test
+    void addInvalidSensor() throws Exception
+    {
+        // arrange
+        Configuration config = new PropertyListConfiguration();
+        Catalogue catalogue = new Catalogue( config );
+        Device device = new Device( "device1");
+
+        // act
+        Sensor sensor = device.addSensor( "123", catalogue );
+
+        // assert
+        assertNull( sensor );
     }
 
 

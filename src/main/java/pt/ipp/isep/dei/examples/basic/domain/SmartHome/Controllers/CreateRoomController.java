@@ -9,27 +9,21 @@ public class CreateRoomController {
 
     private House _myHouse;
 
-    public CreateRoomController (House house){
+    public CreateRoomController (House house) throws InstantiationException {
         if(house == null){
-            throw new IllegalArgumentException("Invalid house");
+            throw new InstantiationException ("Invalid house");
         }
 
         this._myHouse = house;
     }
 
-    public RoomDTO createRoom (RoomDTO roomDTO) {
+    public RoomDTO createRoom (RoomDTO roomDTO) throws InstantiationException {
 
-        try {
 
             Room myRoom = _myHouse.createRoom(roomDTO.getName(), roomDTO.getHouseFloor(), roomDTO.getArea(), roomDTO.getHeight());
 
             RoomDTO myRoomDTO = RoomDTOMapper.room_DomainToDTO(myRoom);
 
             return myRoomDTO;
-        }
-
-        catch (InstantiationException e){
-            return null;
-        }
     }
 }

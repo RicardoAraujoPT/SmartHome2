@@ -35,7 +35,7 @@ public class ConfigureHouseLocationController {
      */
     public LocationDTO configureHouseLocation(LocationDTO locationDTO) throws IllegalArgumentException {
 
-        this._myHouse.configureLocation(locationDTO.getAddress(), locationDTO.getZipCode(), locationDTO.getGpsCoordinates().getLatitude(), locationDTO.getGpsCoordinates().getLongitude());
+        this._myHouse.configureLocation(locationDTO.getAddress(), locationDTO.getZipCode(), locationDTO.getLatitude(), locationDTO.getLongitude());
 
         return LocationDTOMapper.domain2DTO(_myHouse.getLocation());
     }

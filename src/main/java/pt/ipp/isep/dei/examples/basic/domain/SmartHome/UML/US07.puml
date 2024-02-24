@@ -1,0 +1,16 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!theme mars
+skinparam sequenceMessageAlign direction
+
+title US07 : I want to add a sensor to an existing device in a room. The sensor must be of a model of an existing type of sensor.
+[o-> ":US07addSensorToDeviceController" ++ : 1 : addSensorToDevice(deviceDTO,sensorModel)
+
+":US07addSensorToDeviceController"-> ":House" ++ : 1.2 : getDevice(deviceDTO.getDeviceID(),deviceDTO.getRoomID())
+    ":House" --> ":US07addSensorToDeviceController" -- : "d1: Device"
+":US07addSensorToDeviceController" -> "d1: Device" ++ : 1.3 : addSensorToDevice(device,sensorModel)
+"d1: Device" -> "d1: Device"  : 1.4 : addSensorToDevice(sensorModel)
+    "d1: Device" --> ":US07addSensorToDeviceController"-- : true;
+[o<-- ":US07addSensorToDeviceController" --: true;
+@enduml
