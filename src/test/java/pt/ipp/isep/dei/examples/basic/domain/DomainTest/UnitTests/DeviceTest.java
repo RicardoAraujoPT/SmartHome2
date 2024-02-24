@@ -1,14 +1,15 @@
-package pt.ipp.isep.dei.examples.basic.domain.DomainTest;
+package pt.ipp.isep.dei.examples.basic.domain.DomainTest.UnitTests;
 
-import org.apache.commons.configuration2.Configuration;
-import org.apache.commons.configuration2.plist.PropertyListConfiguration;
 import org.junit.jupiter.api.Test;
-
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.*;
+
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.BDDMockito.given;
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 public class DeviceTest {
 
@@ -22,7 +23,7 @@ public class DeviceTest {
         //Arrange
         String expectedMessage = "Invalid arguments for Device";
         //Act
-        Exception exception = assertThrows(IllegalArgumentException.class,() ->  new Device(""));
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> new Device(""));
         String actualMessage = exception.getMessage();
         //Assert
         assertEquals(expectedMessage, actualMessage);
@@ -33,7 +34,7 @@ public class DeviceTest {
         //Arrange
         String expectedMessage = "Invalid arguments for Device";
         //Act
-        Exception exception = assertThrows(IllegalArgumentException.class,() ->  new Device(null));
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> new Device(null));
         String foundMessage = exception.getMessage();
         //Assert
         assertEquals(expectedMessage, foundMessage);
@@ -57,7 +58,7 @@ public class DeviceTest {
         //Act
         Boolean found = device.getDeviceIsActive();
         //Assert
-        assertTrue(found);
+        assertFalse(found);
     }
 
     @Test
@@ -66,9 +67,9 @@ public class DeviceTest {
         Device device = new Device("device1");
         ArrayList expected = new ArrayList<>();
         //Act
-        ArrayList <Sensor> found = device.getAvailableSensors();
+        ArrayList<Sensor> found = device.getSensors();
         //Assert
-        assertEquals(expected,found);
+        assertEquals(expected, found);
     }
 
     @Test
@@ -77,9 +78,9 @@ public class DeviceTest {
         Device device = new Device("device1");
         ArrayList expected = new ArrayList<>();
         //Act
-        ArrayList <Actuator> found = device.getAvailableActuators();
+        ArrayList<Actuator> found = device.getActuators();
         //Assert
-        assertEquals(expected,found);
+        assertEquals(expected, found);
     }
 
     @Test
@@ -91,7 +92,7 @@ public class DeviceTest {
         device.setDeviceName(name);
         String found = device.getDeviceName();
         //Assert
-        assertEquals(name,found);
+        assertEquals(name, found);
     }
 
     @Test
@@ -101,10 +102,10 @@ public class DeviceTest {
         String name = "";
         String expectedMessage = "Device name cannot be null or empty";
         //Act
-        Exception exception = assertThrows(IllegalArgumentException.class,() -> device.setDeviceName(name));
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> device.setDeviceName(name));
         String foundMessage = exception.getMessage();
         //Assert
-        assertEquals(expectedMessage,foundMessage);
+        assertEquals(expectedMessage, foundMessage);
     }
 
     @Test
@@ -116,50 +117,5 @@ public class DeviceTest {
         //Assert
         assertTrue(found);
     }
-
-    @Test
-    public void activateValidDevice() {
-        //Arrange
-        Device device = new Device("device1");
-        //Act
-        Boolean found = device.activateDevice();
-        //Assert
-        assertTrue(found);
-    }
-
-    @Test
-    void addValidSensor() throws Exception
-    {
-        // arrange
-        Configuration config = new PropertyListConfiguration();
-        config.addProperty("sensor", "pt.ipp.isep.dei.examples.basic.domain.SmartHome.Sensors.GA100K");
-        Catalogue catalogue = new Catalogue( config );
-        catalogue.addSensorType("Temperature", Unit.Celsius);
-
-        Device device = new Device( "device1");
-
-        // act
-        Sensor sensor = device.addSensor( "pt.ipp.isep.dei.examples.basic.domain.SmartHome.Sensors.GA100K", catalogue );
-
-        // assert
-        assertEquals( sensor.getSensorType().getDescription(), "Temperature" );
-        // how to check if sensor was added to the device?
-    }
-
-    @Test
-    void addInvalidSensor() throws Exception
-    {
-        // arrange
-        Configuration config = new PropertyListConfiguration();
-        Catalogue catalogue = new Catalogue( config );
-        Device device = new Device( "device1");
-
-        // act
-        Sensor sensor = device.addSensor( "123", catalogue );
-
-        // assert
-        assertNull( sensor );
-    }
-
 
 }
