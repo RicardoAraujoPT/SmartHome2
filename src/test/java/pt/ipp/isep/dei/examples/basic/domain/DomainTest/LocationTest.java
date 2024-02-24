@@ -305,16 +305,30 @@ public class LocationTest {
     @Test
     void shouldSetGpsCoordinates() {
         // Arrange
-        Double expectedLatitude = 90.0000;
-        Double expectedLongitude = 180.0000;
         Location location = new Location("Address", "ZipCode", 0.0000, 0.0000);
+        GPSCoordinates newCoordinates = new GPSCoordinates(90.0000, 180.0000);
 
         // Act
-        boolean result = location.setGpsCoordinates(expectedLatitude, expectedLongitude);
+        location.setGpsCoordinates(newCoordinates);
 
         // Assert
-        assertTrue(result);
-        assertEquals(expectedLatitude, location.getGpsCoordinates().getLatitude());
-        assertEquals(expectedLongitude, location.getGpsCoordinates().getLongitude());
+        assertEquals(newCoordinates, location.getGpsCoordinates());
+    }
+
+    /**
+     * This test verifies that the setGpsCoordinates method in the Location class correctly returns false when given an invalid latitude.
+     * It does this by creating a new Location instance and then attempting to set invalid latitude coordinates, and then checking that the setGpsCoordinates method returns false.
+     */
+    @Test
+    void setGpsCoordinates_NullGpsCoordinates_ShouldReturnFalse() {
+        // Arrange
+        Location location = new Location("Address", "ZipCode", 0.0000, 0.0000);
+        GPSCoordinates invalidCoordinates = null;
+
+        // Act
+        boolean result = location.setGpsCoordinates(invalidCoordinates);
+
+        // Assert
+        assertFalse(result);
     }
 }
