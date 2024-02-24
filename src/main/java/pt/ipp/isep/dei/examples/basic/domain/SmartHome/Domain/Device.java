@@ -122,5 +122,14 @@ public class Device {
         return true;
     }
 
+    public Sensor addSensor( String strModel, Catalogue catalogue ) {
+        Sensor sensor = catalogue.getSensor( strModel );
+        if( sensor == null )
+            return null;
+
+        this._sensors.add( sensor );
+        return sensor;
+    }
+
 
 }
