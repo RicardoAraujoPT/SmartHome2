@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 /**
  * Test class for ConfigureHouseLocationController.
  */
-public class ConfigureHouseLocationTest {
+public class ConfigureHouseLocationControllerTest {
 
     /**
      * Verifies that configureHouseLocation method returns a properly configured LocationDTO.
@@ -33,8 +33,8 @@ public class ConfigureHouseLocationTest {
         // Assert
         assertEquals(expectedAddress, resultDTO.getAddress());
         assertEquals(expectedZipCode, resultDTO.getZipCode());
-        assertEquals(expectedLatitude, resultDTO.getGpsCoordinates().getLatitude());
-        assertEquals(expectedLongitude, resultDTO.getGpsCoordinates().getLongitude());
+        assertEquals(expectedLatitude, resultDTO.getLatitude());
+        assertEquals(expectedLongitude, resultDTO.getLongitude());
     }
 
     /**
@@ -43,10 +43,11 @@ public class ConfigureHouseLocationTest {
     @Test
     public void nullHouse_shouldThrowIllegalArgumentException() {
         // Arrange
+        House myHouse = null;
         String expectedMessage = "Invalid house";
 
         // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> { new ConfigureHouseLocationController(null); });
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> { new ConfigureHouseLocationController(myHouse); });
 
         // Assert
         assertEquals(expectedMessage, exception.getMessage());
@@ -60,10 +61,11 @@ public class ConfigureHouseLocationTest {
         // Arrange
         House myHouse = new House("Address", "ZipCode", 55.000000, 105.000000);
         ConfigureHouseLocationController myController = new ConfigureHouseLocationController(myHouse);
+        LocationDTO inputDTO = new LocationDTO(null, "NewZipCode", 65.000000, 115.000000);
         String expectedMessage = "Invalid address, ZIP code, latitude or longitude";
 
         // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> { myController.configureHouseLocation(new LocationDTO(null, "NewZipCode", 65.000000, 115.000000)); });
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> { myController.configureHouseLocation(inputDTO); });
 
         // Assert
         assertEquals(expectedMessage, exception.getMessage());
@@ -77,10 +79,11 @@ public class ConfigureHouseLocationTest {
         // Arrange
         House myHouse = new House("Address", "ZipCode", 55.000000, 105.000000);
         ConfigureHouseLocationController myController = new ConfigureHouseLocationController(myHouse);
+        LocationDTO inputDTO = new LocationDTO("NewAddress", null, 65.000000, 115.000000);
         String expectedMessage = "Invalid address, ZIP code, latitude or longitude";
 
         // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> { myController.configureHouseLocation(new LocationDTO("NewAddress", null, 65.000000, 115.000000)); });
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> { myController.configureHouseLocation(inputDTO); });
 
         // Assert
         assertEquals(expectedMessage, exception.getMessage());
@@ -94,10 +97,11 @@ public class ConfigureHouseLocationTest {
         // Arrange
         House myHouse = new House("Address", "ZipCode", 55.000000, 105.000000);
         ConfigureHouseLocationController myController = new ConfigureHouseLocationController(myHouse);
+        LocationDTO inputDTO = new LocationDTO("NewAddress", "NewZipCode", 95.000000, 115.000000);
         String expectedMessage = "Invalid GPS coordinates";
 
         // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> { myController.configureHouseLocation(new LocationDTO("NewAddress", "NewZipCode", 95.000000, 115.000000)); });
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> { myController.configureHouseLocation(inputDTO); });
 
         // Assert
         assertEquals(expectedMessage, exception.getMessage());
@@ -111,10 +115,11 @@ public class ConfigureHouseLocationTest {
         // Arrange
         House myHouse = new House("Address", "ZipCode", 55.000000, 105.000000);
         ConfigureHouseLocationController myController = new ConfigureHouseLocationController(myHouse);
+        LocationDTO inputDTO = new LocationDTO("NewAddress", "NewZipCode", 65.000000, 195.000000);
         String expectedMessage = "Invalid GPS coordinates";
 
         // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> { myController.configureHouseLocation(new LocationDTO("NewAddress", "NewZipCode", 65.000000, 195.000000)); });
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> { myController.configureHouseLocation(inputDTO); });
 
         // Assert
         assertEquals(expectedMessage, exception.getMessage());
