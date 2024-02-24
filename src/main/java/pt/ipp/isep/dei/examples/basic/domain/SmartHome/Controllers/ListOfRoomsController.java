@@ -1,6 +1,9 @@
 package pt.ipp.isep.dei.examples.basic.domain.SmartHome.Controllers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.RoomDTO;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.House;
@@ -11,6 +14,7 @@ public class ListOfRoomsController {
 
 
     private static House _myHouse;
+    private Map<RoomDTO, Room> _rooms_DTOAndRooms = new HashMap<>();
 
     public ListOfRoomsController(House myHouse){
         if(myHouse == null){
@@ -42,6 +46,14 @@ public class ListOfRoomsController {
 
         return new ArrayList<>(listOfRoomsInHouseDTO);
 
+    }
+
+    public List<RoomDTO> getRooms() {
+        List<Room> rooms = _myHouse.getRoomList();
+
+        this._rooms_DTOAndRooms = RoomDTOMapper.roomMap_DTOAndDomain(rooms);
+
+        return _rooms_DTOAndRooms.keySet().stream().toList();
     }
 
 
