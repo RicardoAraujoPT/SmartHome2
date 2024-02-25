@@ -303,7 +303,7 @@ public class LocationTest {
      * It does this by creating a new Location instance, setting new GPS coordinates, and then checking that the getGpsCoordinates method returns the new GPS coordinates.
      */
     @Test
-    void shouldSetGpsCoordinates() {
+    void shouldSetGpsCoordinatesAndReturnTrue() {
         // Arrange
         Location location = new Location("Address", "ZipCode", 0.0000, 0.0000);
         GPSCoordinates newCoordinates = new GPSCoordinates(90.0000, 180.0000);
@@ -313,6 +313,7 @@ public class LocationTest {
 
         // Assert
         assertEquals(newCoordinates, location.getGpsCoordinates());
+        assertTrue(location.setGpsCoordinates(newCoordinates));
     }
 
     /**
