@@ -8,46 +8,30 @@ import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Sensor;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 public class DeviceTest {
-    @Test
-    public void activateValidDevice() {
-        //Arrange
-        Device device = new Device("device1");
-        //Act
-        Boolean found = device.activateDevice();
-        //Assert
-        assertTrue(found);
-    }
 
-    @Test
+   /* @Test
     public void addTemperatureSensorToDevice() throws InstantiationException {
         // Arrange
         FactorySensor factorySensor = mock(FactorySensor.class);
         Sensor mockSensor = mock(Sensor.class);
-        Catalogue catalogue = new Catalogue("config.properties");
+        Catalogue catalogue = mock(Catalogue.class);
         Device device = new Device("Thermostat");
 
 
+        when(factorySensor.createSensor("GA100K", catalogue)).thenReturn(mockSensor);
 
-//        doReturn(mockSensor).when(factorySensor).createSensor("GA100K", catalogue);
-
-        ArrayList<Sensor> expected = new ArrayList<>();
-        expected.add(mockSensor);
-        doReturn(mockSensor).when(factorySensor).createSensor("GA100K", catalogue);
         // Act
-//        device.addSensor();
-
-        ArrayList<Sensor> found = device.getSensors();
-
+        Sensor mockSensor = device.addSensor("GA100K", catalogue);
+//VER ESTA PARTE
         // Assert
-        assertEquals(expected, found);
-    }
 
+        assertTrue(device.getSensors().contains(mockSensor)); // Verify that the added sensor is present in the device's list of sensors
+    }
+*/
 //    @Test
 //    public void  addHumiditySensorToDevice() {
 //

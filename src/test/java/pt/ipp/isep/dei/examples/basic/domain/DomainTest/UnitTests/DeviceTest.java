@@ -120,4 +120,15 @@ public class DeviceTest {
         assertTrue(found);
     }
 
+    @Test
+    public void activateValidDevice() {
+        //Arrange
+        Device device = new Device("device1");
+        //Act
+        Boolean found = device.activateDevice();
+        //Assert
+        assertTrue(found);
+    }
+
+
 }
