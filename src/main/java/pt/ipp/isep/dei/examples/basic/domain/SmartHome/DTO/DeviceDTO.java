@@ -93,6 +93,12 @@ public class DeviceDTO {
         this._isActive = isActive;
     }
 
+    public DeviceDTO(String deviceName, String roomName) {
+        this._deviceName = deviceName;
+        this._roomName = roomName;
+    }
+
+
     /**
      * Method that returns the name of the device.
      *
