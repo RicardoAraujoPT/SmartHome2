@@ -102,16 +102,14 @@ public class Location {
 
     /**
      * Method to set the GPS coordinates of the Location objects.
-     * @param latitude
-     * @param longitude
+     * @param gpsCoordinates
      * @return boolean
      */
-    public boolean setGpsCoordinates(Double latitude, Double longitude) {
-        if (latitude == null || longitude == null) {
+    public boolean setGpsCoordinates(GPSCoordinates gpsCoordinates) {
+        if (gpsCoordinates == null) {
             return false;
         }
-        this._gpsCoordinates.setLatitude(latitude);
-        this._gpsCoordinates.setLongitude(longitude);
-        return this._gpsCoordinates.getLatitude() == latitude && this._gpsCoordinates.getLongitude() == longitude;
+        this._gpsCoordinates = gpsCoordinates;
+        return true;
     }
 }

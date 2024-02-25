@@ -1,4 +1,4 @@
-package pt.ipp.isep.dei.examples.basic.domain.DomainTest;
+package pt.ipp.isep.dei.examples.basic.domain.DomainTest.UnitTests;
 
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.*;
 import org.apache.commons.configuration2.Configuration;
