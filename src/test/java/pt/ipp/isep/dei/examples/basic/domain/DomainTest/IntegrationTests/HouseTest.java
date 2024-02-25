@@ -156,11 +156,15 @@ public class HouseTest {
 
             //arrange
             String expected = "Invalid arguments";
-            House myHouse = new House("address","zipcode",55,105);
+            String address = "address";
+            String zipCode = "zipcode";
+            double latitude = 55;
+            double longitude = 105;
             int floorNumber = 1;
             double roomArea = 25;
             double roomHeight = 2.5;
             //act
+            House myHouse = new House(address,zipCode,latitude,longitude);
             Exception exception = assertThrows(InstantiationException.class, ()
                             -> { myHouse.createRoom(null,floorNumber,roomArea,roomHeight);
             });
@@ -232,7 +236,6 @@ public class HouseTest {
             //assert
             String actualMessage = exception.getMessage();
             assertTrue(actualMessage.contains(expected));
-
 
         }
 
