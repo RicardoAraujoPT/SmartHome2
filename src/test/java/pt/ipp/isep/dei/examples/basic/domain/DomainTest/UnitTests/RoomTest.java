@@ -1,4 +1,4 @@
-package pt.ipp.isep.dei.examples.basic.domain.DomainTest;
+package pt.ipp.isep.dei.examples.basic.domain.DomainTest.UnitTests;
 
 import org.junit.jupiter.api.Test;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Device;
