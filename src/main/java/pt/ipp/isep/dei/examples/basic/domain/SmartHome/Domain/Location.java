@@ -20,13 +20,31 @@ public class Location {
      * @param latitude
      * @param longitude
      */
-    public Location(String address, String zipCode, Double latitude, Double longitude) throws IllegalArgumentException {
-        if (!isAddressValid(address) || !isZipCodeValid(zipCode) || latitude == null || longitude == null) {
-            throw new IllegalArgumentException("Invalid address, ZIP code, latitude or longitude");
+    public Location(String address, String zipCode, double latitude, double longitude) throws IllegalArgumentException {
+        if (!isAddressValid(address) || !isZipCodeValid(zipCode)) {
+            throw new IllegalArgumentException("Invalid address or ZIP code");
         }
         this._address = address;
         this._zipCode = zipCode;
         this._gpsCoordinates = new GPSCoordinates(latitude, longitude);
+    }
+
+    /**
+     * Constructor with an added factoryGPSCoordinates parameter.
+     *
+     * @param address
+     * @param zipCode
+     * @param factoryGPSCoordinates
+     * @param latitude
+     * @param longitude
+     */
+    public Location(String address, String zipCode, FactoryGPSCoordinates factoryGPSCoordinates, double latitude, double longitude) {
+        if (!isAddressValid(address) || !isZipCodeValid(zipCode)) {
+            throw new IllegalArgumentException("Invalid address or ZIP code");
+        }
+        this._address = address;
+        this._zipCode = zipCode;
+        this._gpsCoordinates = factoryGPSCoordinates.createGPSCoordinates(latitude, longitude);
     }
 
     /**
