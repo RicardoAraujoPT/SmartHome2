@@ -6,4 +6,5 @@ public class FactoryLocation {
     {
         return new Location(address, zipCode, latitude, longitude);
     }
+
 }

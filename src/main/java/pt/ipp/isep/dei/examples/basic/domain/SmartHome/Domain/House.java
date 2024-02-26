@@ -8,6 +8,7 @@ import java.util.ArrayList;
  */
 public class House {
 
+    private FactoryLocation _factoryLocation;
     private Location _location;
     private ArrayList <Room> _rooms;
 
@@ -27,9 +28,9 @@ public class House {
         this._rooms = new ArrayList<>();
     }
 
-    //only for isolation tests
-    public House(Location location){
-        this._location = location;
+    //only for isolation tests por agora
+    public House(FactoryLocation factoryLocation){
+        this._factoryLocation = factoryLocation;
         this._rooms = new ArrayList<>();
     }
 
