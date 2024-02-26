@@ -27,6 +27,13 @@ public class House {
         this._rooms = new ArrayList<>();
     }
 
+    //only for isolation tests
+    public House(Location location){
+        this._location = location;
+        this._rooms = new ArrayList<>();
+    }
+
+
     /** Getter for the House's location.
      *
      * @return Location object representing the location of the house.

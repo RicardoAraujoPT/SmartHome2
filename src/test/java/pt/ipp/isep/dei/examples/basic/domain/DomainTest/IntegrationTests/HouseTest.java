@@ -33,7 +33,7 @@ public class HouseTest {
 
         @Test
         @Disabled
-        public void createHouseWithInvalidAddress() {
+        public void createHouseInvalidAddressShouldThrowException() {
 
             //arrange
             String expected = "Invalid address or ZIP code";
@@ -51,7 +51,7 @@ public class HouseTest {
 
         @Test
         @Disabled
-        public void createHouseWithInvalidZipCode() {
+        public void createHouseInvalidZipCodeShouldThrowException() {
 
             //arrange
             String expected = "Invalid address or ZIP code";
@@ -69,7 +69,7 @@ public class HouseTest {
 
 
         @Test
-        public void createHouseWithInvalidLatitude() {
+        public void createHouseInvalidLatitudeShouldThrowException() {
 
             //arrange
             String expected = "Invalid GPS coordinates";
@@ -87,7 +87,7 @@ public class HouseTest {
 
 
         @Test
-        public void createHouseWithInvalidLongitude() {
+        public void createHouseInvalidLongitudeShouldThrowException() {
 
             //arrange
             String expected = "Invalid GPS coordinates";
@@ -152,7 +152,7 @@ public class HouseTest {
         }
 
         @Test
-        public void createInvalidRoom() {
+        public void createInvalidRoomShouldThrowException() {
 
             //arrange
             String expected = "Invalid arguments";
@@ -194,7 +194,7 @@ public class HouseTest {
         }
 
         @Test
-        public void getInexistentRoom() throws InstantiationException {
+        public void getInexistentRoomShouldThrowException() throws InstantiationException {
 
             //arrange
             String expected = "Room name doesn't exist in the list";
@@ -217,7 +217,7 @@ public class HouseTest {
         }
 
         @Test
-        public void getInvalidRoom() throws InstantiationException {
+        public void getInvalidRoomShouldThrowException() throws InstantiationException {
 
             //arrange
             String expected = "Room name doesn't exist in the list";
@@ -238,5 +238,7 @@ public class HouseTest {
             assertTrue(actualMessage.contains(expected));
 
         }
+
+
 
 }
