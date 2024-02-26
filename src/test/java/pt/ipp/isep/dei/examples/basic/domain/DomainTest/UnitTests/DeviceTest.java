@@ -131,4 +131,26 @@ public class DeviceTest {
         assertTrue(found);
     }
 
+    @Test
+    public void testAddSensor() throws InstantiationException {
+        // Initialize mock objects
+        FactorySensor factorySensor = mock(FactorySensor.class);
+        Catalogue catalogue = new Catalogue("config.properties");
+        //Catalogue catalogue = mock(Catalogue.class);
+
+        // Create a GA100K sensor
+        catalogue.addSensorType("Temperature", Unit.Percentage);
+        Sensor sensor = new GA100K(catalogue);
+
+        // Mock behavior of FactorySensor
+        when(factorySensor.createSensor(anyString(), any(Catalogue.class))).thenReturn(sensor);
+
+        // Create the device and add a sensor using the mocked FactorySensor
+        Device device = new Device("Test Device");
+        Sensor sensor1 = device.addSensor("Sensors.GA100K", catalogue);
+
+        // Verify that the sensor was added to the device
+        assertTrue(device.getSensors().contains(sensor1));
+    }
+
 }

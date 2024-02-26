@@ -58,7 +58,8 @@ public class Catalogue {
 
         if (optSensorType.isPresent()) {
             try {
-                Sensor sensor = (Sensor) Class.forName(strModel).getConstructor(Catalogue.class).newInstance(this);
+                String strModelPath = "pt.ipp.isep.dei.examples.basic.domain.SmartHome." + strModel;
+                Sensor sensor = (Sensor) Class.forName(strModelPath).getConstructor(Catalogue.class).newInstance(this);
                 return sensor;
             }
             // due to the previous conditions, exception will not throw, but Class.forName... requires the catch

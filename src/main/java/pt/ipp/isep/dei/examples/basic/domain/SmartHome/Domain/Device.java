@@ -127,7 +127,7 @@ public class Device {
         if( sensor == null )
             return null;
 
-        this._sensors.add( sensor );
+        _sensors.add( sensor );
         return sensor;
     }
 
