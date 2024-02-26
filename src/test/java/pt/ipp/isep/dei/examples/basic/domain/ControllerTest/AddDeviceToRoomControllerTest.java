@@ -18,7 +18,7 @@ public class AddDeviceToRoomControllerTest {
      * Sets up a house and room before each test case.
      */
     @BeforeEach
-    public void instantiateHouseAndRoom() throws InstantiationException {
+    public void shouldInstantiateHouseAndRoom() throws InstantiationException {
         myHouse = new House("zipCode", "Street", 55, 105);
         myHouse.createRoom("roomName1", 0, 25, 2.5);
     }
@@ -27,7 +27,7 @@ public class AddDeviceToRoomControllerTest {
      * Tests the successful addition of a device to a room.
      */
     @Test
-    public void addDeviceToRoom(){
+    public void shouldAddDeviceToRoom(){
         //Arrange
         AddDeviceToRoomController myController = new AddDeviceToRoomController(myHouse);
         String roomName = "roomName1";
@@ -42,7 +42,7 @@ public class AddDeviceToRoomControllerTest {
      * Tests adding a device with an empty name to a room.
      */
     @Test
-    public void addDeviceNameEmpty(){
+    public void deviceNameEmpty_shouldGetNullDeviceDTO(){
         //Act
         AddDeviceToRoomController myController = new AddDeviceToRoomController(myHouse);
         String deviceName = " ";
@@ -57,7 +57,7 @@ public class AddDeviceToRoomControllerTest {
      * Tests the behavior when attempting to create an AddDeviceToRoomController with a null house.
      */
     @Test
-    public void testNullHouse() {
+    public void testNullHouse_shouldThrowIllegalArgumentException() {
         //Arrange
         String expectedMessage = "Provided house cannot be null";
         //Act
