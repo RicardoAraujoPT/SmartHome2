@@ -8,7 +8,6 @@ import java.util.ArrayList;
  */
 public class House {
 
-    private FactoryLocation _factoryLocation;
     private Location _location;
     private ArrayList <Room> _rooms;
 
@@ -29,11 +28,15 @@ public class House {
     }
 
     //only for isolation tests por agora
-    public House(FactoryLocation factoryLocation){
-        this._factoryLocation = factoryLocation;
+    public House(Location location) throws IllegalArgumentException{
+        if(location.getZipCode()==null || location.getAddress()==null || location.getGpsCoordinates()==null
+        || location.getAddress().isEmpty() || location.getZipCode().isEmpty()){
+            throw new IllegalArgumentException("Invalid location");
+
+        }
+        this._location = location;
         this._rooms = new ArrayList<>();
     }
-
 
     /** Getter for the House's location.
      *

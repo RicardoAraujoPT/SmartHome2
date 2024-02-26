@@ -32,7 +32,7 @@ public class HouseTest {
         }
 
         @Test
-        @Disabled
+
         public void createHouseInvalidAddressShouldThrowException() {
 
             //arrange
@@ -50,7 +50,7 @@ public class HouseTest {
         }
 
         @Test
-        @Disabled
+
         public void createHouseInvalidZipCodeShouldThrowException() {
 
             //arrange
