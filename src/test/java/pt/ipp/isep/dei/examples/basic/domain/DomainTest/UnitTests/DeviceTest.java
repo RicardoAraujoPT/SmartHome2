@@ -54,6 +54,17 @@ public class DeviceTest {
     }
 
     @Test
+    void getValidIsActive() {
+        //Arrange
+        Device device = new Device("device1");
+        String expected = "device1";
+        //Act
+        Boolean found = device.getDeviceIsActive();
+        //Assert
+        assertTrue(found);
+    }
+
+    @Test
     @Disabled
     void getValidDeviceIsActive() {
         //Arrange
