@@ -8,6 +8,9 @@ import java.util.ArrayList;
  */
 public class House {
 
+    private FactoryLocation _factoryLocation;
+    private FactoryRoom _factoryRoom;
+
     private Location _location;
     private ArrayList <Room> _rooms;
 
@@ -19,24 +22,20 @@ public class House {
      * @param longitude
      */
     public House (String address, String zipCode, double latitude, double longitude){
-        //if (!isAddressValid(address) || !isZipCodeValid(zipCode) || !isLatitudeValid(latitude) || !isLongitudeValid(longitude)){
-            //throw new IllegalArgumentException("Invalid arguments");
-
-
         this._location = new Location(address, zipCode, latitude, longitude);
         this._rooms = new ArrayList<>();
     }
 
     //only for isolation tests por agora
-    public House(Location location) throws IllegalArgumentException{
-        if(location.getZipCode()==null || location.getAddress()==null || location.getGpsCoordinates()==null
-        || location.getAddress().isEmpty() || location.getZipCode().isEmpty()){
-            throw new IllegalArgumentException("Invalid location");
+    public House(FactoryLocation factoryLocation, FactoryRoom factoryRoom,String address, String zipCode, double latitude, double longitude) throws InstantiationException{
 
-        }
-        this._location = location;
-        this._rooms = new ArrayList<>();
+        this._location = factoryLocation.createLocation(address, zipCode, latitude, longitude);
+
+        this._factoryRoom = factoryRoom;
+
+        this._rooms = factoryRoom.initRooms();
     }
+
 
     /** Getter for the House's location.
      *
@@ -59,7 +58,7 @@ public class House {
      */
     public Room createRoom(String roomName, int floorNumber, double area, double height) throws InstantiationException {
 
-        Room myRoom = new Room(roomName, floorNumber, area, height);
+        Room myRoom = this._factoryRoom.createRoom(roomName, floorNumber, area, height);
 
         this._rooms.add(myRoom);
 

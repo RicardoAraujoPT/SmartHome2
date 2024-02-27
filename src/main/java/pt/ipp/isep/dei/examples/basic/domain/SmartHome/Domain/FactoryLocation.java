@@ -7,5 +7,7 @@ package pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain;
             return new Location(address, zipCode, latitude, longitude);
         }
 
+
+
     }
 

@@ -33,7 +33,7 @@ public class HouseTest {
 
         @Test
 
-        public void createHouseInvalidAddressShouldThrowException() {
+        public void createHouseInvalidAddress_ShouldThrowException() {
 
             //arrange
             String expected = "Invalid address or ZIP code";
@@ -51,7 +51,7 @@ public class HouseTest {
 
         @Test
 
-        public void createHouseInvalidZipCodeShouldThrowException() {
+        public void createHouseInvalidZipCode_ShouldThrowException() {
 
             //arrange
             String expected = "Invalid address or ZIP code";
@@ -69,7 +69,7 @@ public class HouseTest {
 
 
         @Test
-        public void createHouseInvalidLatitudeShouldThrowException() {
+        public void createHouseInvalidLatitude_ShouldThrowException() {
 
             //arrange
             String expected = "Invalid GPS coordinates";
@@ -87,7 +87,7 @@ public class HouseTest {
 
 
         @Test
-        public void createHouseInvalidLongitudeShouldThrowException() {
+        public void createHouseInvalidLongitude_ShouldThrowException() {
 
             //arrange
             String expected = "Invalid GPS coordinates";
@@ -152,7 +152,7 @@ public class HouseTest {
         }
 
         @Test
-        public void createInvalidRoomShouldThrowException() {
+        public void createInvalidRoom_ShouldThrowException() {
 
             //arrange
             String expected = "Invalid arguments";
@@ -194,7 +194,7 @@ public class HouseTest {
         }
 
         @Test
-        public void getInexistentRoomShouldThrowException() throws InstantiationException {
+        public void getInexistentRoom_ShouldThrowException() throws InstantiationException {
 
             //arrange
             String expected = "Room name doesn't exist in the list";
@@ -217,7 +217,7 @@ public class HouseTest {
         }
 
         @Test
-        public void getInvalidRoomShouldThrowException() throws InstantiationException {
+        public void getInvalidRoom_ShouldThrowException() throws InstantiationException {
 
             //arrange
             String expected = "Room name doesn't exist in the list";
