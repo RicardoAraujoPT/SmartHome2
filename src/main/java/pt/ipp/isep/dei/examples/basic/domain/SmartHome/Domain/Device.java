@@ -2,7 +2,7 @@ package pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
+
 
 public class Device {
 
@@ -11,11 +11,6 @@ public class Device {
      * The name of the device.
      */
     private String _deviceName;
-
-    /**
-     * The device ID.
-     */
-    private final String _deviceID;
 
     /**
      * Indicates whether the device is currently active or not.
@@ -45,7 +40,6 @@ public class Device {
         }
 
         _deviceName = deviceName;
-        _deviceID = UUID.randomUUID().toString();
         _sensors = new ArrayList<>();
         _actuators = new ArrayList<>();
         _isActive = true;
@@ -60,13 +54,6 @@ public class Device {
         return _deviceName;
     }
 
-    /**
-     * Gets the device ID.
-     * @return The name of the device ID.
-     */
-    public String getDeviceID() {
-        return _deviceID;
-    }
 
     /**
      * Retrieves the current activation status of the device.
@@ -130,6 +117,5 @@ public class Device {
         _sensors.add( sensor );
         return sensor;
     }
-
 
 }
