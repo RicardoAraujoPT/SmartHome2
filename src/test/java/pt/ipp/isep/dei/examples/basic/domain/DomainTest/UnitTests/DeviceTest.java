@@ -131,26 +131,48 @@ public class DeviceTest {
         assertTrue(found);
     }
 
+
     @Test
-    public void testAddSensor() throws InstantiationException {
-        // Initialize mock objects
-        FactorySensor factorySensor = mock(FactorySensor.class);
-        Catalogue catalogue = new Catalogue("config.properties");
-        //Catalogue catalogue = mock(Catalogue.class);
+    void whenAddingValidSensorModel_thenNewSensorIsInstantiated() throws Exception{
+        // arrange
+        String strSensorModel = "Sensors.GA100K";
+        String strSensorTypeDescription = "Temperature";
 
-        // Create a GA100K sensor
-        catalogue.addSensorType("Temperature", Unit.Percentage);
-        Sensor sensor = new GA100K(catalogue);
+        SensorType sensorTypeDouble = mock(SensorType.class);
+        when(sensorTypeDouble.getDescription()).thenReturn(strSensorTypeDescription);
 
-        // Mock behavior of FactorySensor
-        when(factorySensor.createSensor(anyString(), any(Catalogue.class))).thenReturn(sensor);
+        Sensor sensorDouble = mock(Sensor.class);
+        when(sensorDouble.getSensorType()).thenReturn(sensorTypeDouble);
 
-        // Create the device and add a sensor using the mocked FactorySensor
-        Device device = new Device("Test Device");
-        Sensor sensor1 = device.addSensor("Sensors.GA100K", catalogue);
+        Catalogue catalogueDouble = mock(Catalogue.class);
+        when(catalogueDouble.getSensor(strSensorModel)).thenReturn(sensorDouble);
 
+        Device device = new Device("device1");
+
+        // act
+        Sensor sensor = device.addSensor(strSensorModel, catalogueDouble);
+
+        // assert
+        assertEquals(sensor.getSensorType().getDescription(), strSensorTypeDescription);
         // Verify that the sensor was added to the device
-        assertTrue(device.getSensors().contains(sensor1));
+        assertTrue(device.getSensors().contains(sensor));
+    }
+
+    @Test
+    void whenAddingInvalidSensorModel_thenNullIsReturned() throws Exception{
+        // arrange
+        String strSensorModel = "Sensors.GA100K";
+
+        Catalogue catalogueDouble = mock(Catalogue.class);
+        when(catalogueDouble.getSensor(strSensorModel)).thenReturn(null);
+
+        Device device = new Device("device1");
+
+        // act
+        Sensor sensor = device.addSensor(strSensorModel, catalogueDouble);
+
+        // assert
+        assertNull(sensor);
     }
 
 }
