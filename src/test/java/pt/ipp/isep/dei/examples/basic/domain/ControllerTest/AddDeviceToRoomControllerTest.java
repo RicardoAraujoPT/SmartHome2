@@ -29,10 +29,6 @@ public class AddDeviceToRoomControllerTest {
         Room myRoom = myHouse.createRoom("roomName1", 0, 25, 2.5);
         AddDeviceToRoomController myController = new AddDeviceToRoomController(myHouse);
 
-        String roomName = "roomName1";
-        int houseFloor = 0;
-        double area = 25.0;
-        double height = 2.5;
         RoomDTO myRoomDTO = new RoomDTO(myRoom.getRoomName(), myRoom.getFloorNumber(), myRoom.getArea(), myRoom.getHeight());
 
         String deviceName = "device1";
@@ -43,7 +39,6 @@ public class AddDeviceToRoomControllerTest {
         int found = foundDeviceListDTO.size();
         //Assert
         assertEquals(expected, found);
-        //assertEquals(deviceName, foundDeviceDTO.getDeviceName());
     }
 
     /**
@@ -51,15 +46,18 @@ public class AddDeviceToRoomControllerTest {
      */
     @Test
     public void deviceNameEmpty_shouldThrowIllegalArgumentException() throws InstantiationException {
-        //Act
+        //Arrange
         myHouse = new House("zipCode", "Street", 55, 105);
-        myHouse.createRoom("roomName1", 0, 25, 2.5);
+        Room myRoom = myHouse.createRoom("roomName1", 0, 25, 2.5);
         AddDeviceToRoomController myController = new AddDeviceToRoomController(myHouse);
-        String deviceName = " ";
-        String roomName = "roomName1";
+
+        RoomDTO myRoomDTO = new RoomDTO(myRoom.getRoomName(), myRoom.getFloorNumber(), myRoom.getArea(), myRoom.getHeight());
+
+        String deviceName = "";
+
         String expectedMessage = "Invalid arguments for Device";
         //Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> myController.addDeviceToRoom(roomName, deviceName));
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> myController.addDeviceToRoom(myRoomDTO, deviceName));
         String actualMessage = exception.getMessage();
         //Assert
         assertEquals(expectedMessage, actualMessage);
@@ -72,8 +70,6 @@ public class AddDeviceToRoomControllerTest {
     @Test
     public void testNullHouse_shouldThrowIllegalArgumentException() throws InstantiationException {
         //Arrange
-        myHouse = new House("zipCode", "Street", 55, 105);
-        myHouse.createRoom("roomName1", 0, 25, 2.5);
         String expectedMessage = "Provided house cannot be null";
         //Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> new AddDeviceToRoomController(null));
