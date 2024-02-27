@@ -65,7 +65,7 @@ class SensorTypeTest
         SensorType sensorType = new SensorType( "Solar Irradiation", Unit.Watt_m2 );
 
         // assert
-        assertEquals("Solar Radiation", sensorType.getDescription());
+        assertEquals("Solar Irradiation", sensorType.getDescription());
         assertEquals( sensorType.getUnit(), Unit.Watt_m2);
     }
 
