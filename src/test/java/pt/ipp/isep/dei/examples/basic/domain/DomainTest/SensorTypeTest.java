@@ -10,7 +10,7 @@ class SensorTypeTest
 {
 
     @Test
-    void NewValidSensorType() throws InstantiationException
+    void testConstructor_ValidParameters_ShouldNotThrowException() throws InstantiationException
     {
         // arrange
 
@@ -23,7 +23,7 @@ class SensorTypeTest
     }
 
     @Test
-    void NewEmptyDescriptionSensorType()
+    void testConstructor_EmptyDescription_ShouldThrowException()
     {
         // arrange
         String expectedMessage = "Invalid arguments";
@@ -40,7 +40,7 @@ class SensorTypeTest
     }
 
     @Test
-    void NewNullDescriptionSensorType()
+    void testConstructor_NullDescription_ShouldThrowException()
     {
         // arrange
         String expectedMessage = "Invalid arguments";
