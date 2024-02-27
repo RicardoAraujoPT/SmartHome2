@@ -133,8 +133,6 @@ public class HouseTest {
 
         FactoryRoom factoryRoomDouble = mock(FactoryRoom.class);
 
-        Room roomDouble = mock(Room.class);
-
         when(factoryRoomDouble.createRoom(null,floorNumber,area,height)).thenThrow(new InstantiationException(expected));
 
         //act
@@ -169,8 +167,36 @@ public class HouseTest {
         // assert
         assertEquals(listRooms.size(), 0);
     }
+/*
+    @Test
+    void shouldGetHouseRoomByName() throws InstantiationException {
 
+        // arrange
+        double latitude = 53;
+        double longitude = 100;
+        String address = "address";
+        String zipCode = "zipCode";
 
+        String roomName = "name";
+        int floorNumber = 1;
+        double area = 2.4;
+        double height = 1.5;
+
+        FactoryRoom factoryRoomDouble = mock(FactoryRoom.class);
+        Room roomDouble = mock(Room.class);
+        when(factoryRoomDouble.createRoom(roomName,floorNumber,area,height)).thenReturn(roomDouble);
+        when(roomDouble.getRoomName()).thenReturn("name");
+
+        FactoryLocation factoryLocationDouble = mock(FactoryLocation.class);
+
+        //act
+        House house = new House(factoryLocationDouble, factoryRoomDouble,address,zipCode,latitude,longitude);
+        Room room = house.getRoomByName("name");
+        // assert
+        assertEquals("name",room.getRoomName());
+    }
+
+ */
 
 
 }
