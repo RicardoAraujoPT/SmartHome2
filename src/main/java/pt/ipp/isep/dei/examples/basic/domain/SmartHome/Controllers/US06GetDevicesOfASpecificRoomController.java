@@ -28,7 +28,7 @@ public class US06GetDevicesOfASpecificRoomController {
     /**
      * Map that stores the rooms and their corresponding RoomDTOs.
      */
-    private Map<String, Room> rooms_DTOAndRooms = new HashMap<String, Room>();
+    private Map<String, Room> rooms_DTOAndRooms;
 
     /**
      * Constructor for GetDevicesOfASpecificRoomController.
