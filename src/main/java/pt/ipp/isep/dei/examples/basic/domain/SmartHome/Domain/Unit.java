@@ -18,9 +18,8 @@ public enum Unit {
     Percentage,
 
     Watt_m2,
-    /**
-     * Represents the Wind Speed unit of measurement.
-     */
-    Kmh,
+
+    WindSpeed,
+    OnOff
 
 }
