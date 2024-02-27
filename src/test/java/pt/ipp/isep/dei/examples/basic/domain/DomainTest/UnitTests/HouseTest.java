@@ -44,6 +44,40 @@ public class HouseTest {
         assertEquals(house.getLocation().getGpsCoordinates().getLatitude(),expectedLatitude);
     }
 
+    @Test
+    void createInvalidHouse() throws InstantiationException {
+
+        //arrange
+        double expectedLatitude = 53;
+        double expectedLongitude = 100;
+        String expectedAddress = null;
+        String expectedZipCode = "zipCode";
+
+        Location locationDouble = mock(Location.class);
+        GPSCoordinates gpsCoordinatesDouble = mock(GPSCoordinates.class);
+
+        FactoryLocation factoryLocationsDouble = mock(FactoryLocation.class);
+        when(factoryLocationsDouble.createLocation(expectedAddress,expectedZipCode,expectedLatitude,expectedLongitude)).thenReturn(locationDouble);
+
+        when(locationDouble.getGpsCoordinates()).thenReturn(gpsCoordinatesDouble);
+        when(locationDouble.getGpsCoordinates().getLatitude()).thenReturn(expectedLatitude);
+        when(locationDouble.getGpsCoordinates().getLongitude()).thenReturn(expectedLongitude);
+        when(locationDouble.getAddress()).thenReturn(expectedAddress);
+        when(locationDouble.getZipCode()).thenReturn(expectedZipCode);
+
+        FactoryRoom factoryRoomDouble = mock(FactoryRoom.class);
+
+        //act
+        House house = new House(factoryLocationsDouble,factoryRoomDouble,expectedAddress,expectedZipCode,expectedLatitude,expectedLongitude);
+
+        //assert
+        assertEquals(house.getLocation().getAddress(),expectedAddress);
+        assertEquals(house.getLocation().getZipCode(),expectedZipCode);
+        assertEquals(house.getLocation().getGpsCoordinates().getLatitude(),expectedLatitude);
+        assertEquals(house.getLocation().getGpsCoordinates().getLatitude(),expectedLatitude);
+    }
+
+
 
     @Test
     void shouldCreateAndAddRoomInHouseRoomList() throws InstantiationException {
@@ -59,27 +93,22 @@ public class HouseTest {
         double height = 1.5;
 
         Location locationDouble = mock(Location.class);
-        GPSCoordinates gpsCoordinatesDouble = mock(GPSCoordinates.class);
 
         FactoryLocation factoryLocationDouble = mock(FactoryLocation.class);
         when(factoryLocationDouble.createLocation(expectedAddress,expectedZipCode,expectedLatitude,expectedLongitude)).thenReturn(locationDouble);
 
-        when(locationDouble.getGpsCoordinates()).thenReturn(gpsCoordinatesDouble);
-        when(locationDouble.getGpsCoordinates().getLatitude()).thenReturn(expectedLatitude);
-        when(locationDouble.getGpsCoordinates().getLongitude()).thenReturn(expectedLongitude);
-        when(locationDouble.getAddress()).thenReturn(expectedAddress);
-        when(locationDouble.getZipCode()).thenReturn(expectedZipCode);
+        Room roomDouble = mock(Room.class);
 
         FactoryRoom factoryRoomDouble = mock(FactoryRoom.class);
-        ArrayList<Room> rooms = mock(ArrayList.class);
-        when(factoryRoomDouble.initRooms()).thenReturn(rooms);
+        when(factoryRoomDouble.createRoom(roomName,floorNumber,area,height)).thenReturn(roomDouble);
+        when(roomDouble.getRoomName()).thenReturn("name");
 
         //act
         House house = new House(factoryLocationDouble,factoryRoomDouble,expectedAddress,expectedZipCode,expectedLatitude,expectedLongitude);
-        house.createRoom(roomName,floorNumber, area, height);
+        house.addRoom(roomName,floorNumber, area, height);
 
         //assert
-        verify(rooms).add(house.createRoom(roomName,floorNumber, area, height));
+        assertEquals(house.addRoom(roomName,floorNumber, area, height).getRoomName(),"name");
 
     }
 
@@ -93,7 +122,6 @@ public class HouseTest {
         double expectedLongitude = 100;
         String expectedAddress = "address";
         String expectedZipCode = "zipCode";
-        String roomName = null;
         int floorNumber = 1;
         double area = 2.4;
         double height = 1.5;
@@ -104,20 +132,20 @@ public class HouseTest {
         when(factoryLocationsDouble.createLocation(expectedAddress, expectedZipCode, expectedLatitude, expectedLongitude)).thenReturn(locationDouble);
 
         FactoryRoom factoryRoomDouble = mock(FactoryRoom.class);
+
         Room roomDouble = mock(Room.class);
-        when(factoryRoomDouble.createRoom(roomName,floorNumber,area,height)).thenReturn(roomDouble).thenThrow(new InstantiationException(expected));
+
+        when(factoryRoomDouble.createRoom(null,floorNumber,area,height)).thenThrow(new InstantiationException(expected));
 
         //act
         House house = new House(factoryLocationsDouble, factoryRoomDouble, expectedAddress, expectedZipCode, expectedLatitude, expectedLongitude);
-
         Exception exception = assertThrows(InstantiationException.class, () ->
-                house.createRoom(roomName,floorNumber,area,height)
-        );
+                house.addRoom(null,floorNumber,area,height) );
 
         // assert
+
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expected));
-
 
     }
 
@@ -141,65 +169,6 @@ public class HouseTest {
         // assert
         assertEquals(listRooms.size(), 0);
     }
-
-    @Test
-    void shouldGetRoom() throws InstantiationException {
-
-        //arrange
-
-        double expectedLatitude = 53;
-        double expectedLongitude = 100;
-        String expectedAddress = "address";
-        String expectedZipCode = "zipCode";
-
-        String roomName = "name";
-        int floorNumber = 1;
-        double area = 2.4;
-        double height = 1.5;
-
-        Location locationDouble = mock(Location.class);
-        GPSCoordinates gpsCoordinatesDouble = mock(GPSCoordinates.class);
-
-        FactoryLocation factoryLocationsDouble = mock(FactoryLocation.class);
-        when(factoryLocationsDouble.createLocation(expectedAddress,expectedZipCode,expectedLatitude,expectedLongitude)).thenReturn(locationDouble);
-
-        when(locationDouble.getGpsCoordinates()).thenReturn(gpsCoordinatesDouble);
-        when(locationDouble.getGpsCoordinates().getLatitude()).thenReturn(expectedLatitude);
-        when(locationDouble.getGpsCoordinates().getLongitude()).thenReturn(expectedLongitude);
-        when(locationDouble.getAddress()).thenReturn(expectedAddress);
-        when(locationDouble.getZipCode()).thenReturn(expectedZipCode);
-
-        FactoryRoom factoryRoomDouble = mock(FactoryRoom.class);
-        ArrayList<Room> rooms = mock(ArrayList.class);
-        when(factoryRoomDouble.initRooms()).thenReturn(rooms);
-
-        //act
-
-        House house = new House(factoryLocationsDouble,factoryRoomDouble,expectedAddress,expectedZipCode,expectedLatitude,expectedLongitude);
-        house.createRoom(roomName,floorNumber, area, height);
-
-
-        //assert
-
-        verify(rooms).add(any(Room.class));
-
-
-
-
-
-
-
-
-
-
-
-    }
-
-
-
-
-
-
 
 
 
