@@ -18,10 +18,17 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * This class contains tests for the GetDevicesOfASpecificRoomController class.
+ * It tests the functionality of getting devices of a specific room in a smart home system.
+ */
 public class GetDevicesOfASpecificRoomControllerTest {
 
+    /**
+     * This test checks the constructor of the GetDevicesOfASpecificRoomController class.
+     */
     @Test
-    public void testConstructor() {
+    public void shouldInstantiateHouseDeviceDTOMapperAndRoomDTOMapper() {
         // Arrange
         House house = new House("address", "zipCode", 55.2, -2.25);
         DeviceDTOMapper deviceDTOMapper = new DeviceDTOMapper(house);
@@ -34,8 +41,12 @@ public class GetDevicesOfASpecificRoomControllerTest {
         assertEquals(deviceDTOMapper, controller.getDeviceDTOMapper());
     }
 
+    /**
+     * This test checks the getDevicesOfASpecificRoom method when the RoomDTO is null.
+     * It is expected to throw an InstantiationException.
+     */
     @Test
-    public void testGetDevicesOfSpecificRoom_NullRoomDTO() {
+    public void nullRoom_shouldThrowInstantiationException() {
         // Arrange
         House house = new House("address", "zipCode", 55.2, -2.25);
         DeviceDTOMapper deviceDTOMapper = new DeviceDTOMapper(house);
@@ -46,8 +57,13 @@ public class GetDevicesOfASpecificRoomControllerTest {
         assertThrows(InstantiationException.class, () -> controller.getDevicesOfASpecificRoom(null));
     }
 
+    /**
+     * This test checks the getDevicesOfASpecificRoom method when the RoomDTO is valid but has no devices.
+     * It is expected to return an empty list.
+     */
+
     @Test
-    public void testGetEmptyListOfDevicesOfSpecificRoom() throws InstantiationException {
+    public void roomWithoutDevices_shouldReturnEmptyListOfDevices() throws InstantiationException {
         // Arrange
         House house = new House("address", "zipCode", 55.2, -2.25);
         Room room = house.createRoom("ChosenRoom", 1, 20.0, 3.0);
@@ -64,9 +80,14 @@ public class GetDevicesOfASpecificRoomControllerTest {
         assertTrue(result.isEmpty());
     }
 
+    /**
+     * This test checks the getDevicesOfASpecificRoom method when the RoomDTO is valid and has devices.
+     * It is expected to return a list of DeviceDTOs.
+     */
+
     /*
     @Test
-    public void testGetDevicesOfSpecificRoom_ReturnsTwoDevices() throws InstantiationException {
+    public void roomWithTwoDevices_shouldReturnListOfTwoDevicesOfSpecificRoom() throws InstantiationException {
         // Arrange
         House house = new House("address", "zipCode", 55.2, -2.25);
         Room room = house.createRoom("Living Room", 1, 20.0, 3.0);
