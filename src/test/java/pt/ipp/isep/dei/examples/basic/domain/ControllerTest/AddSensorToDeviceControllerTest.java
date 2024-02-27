@@ -16,7 +16,7 @@ public class AddSensorToDeviceControllerTest {
 
 
     @Test
-    void GetEmptySensorModels() throws InstantiationException {
+    void emptySensorModels_ShouldReturnZero() throws InstantiationException {
         // arrange
         Configuration config = new PropertyListConfiguration();
         Catalogue catalogue = new Catalogue( config );
@@ -32,7 +32,7 @@ public class AddSensorToDeviceControllerTest {
     }
 
     @Test
-    void GetNonEmptySensorModels() throws InstantiationException {
+    void nonEmptySensorModels_ShouldReturnTwo() throws InstantiationException {
         // arrange
         Configuration config = new PropertyListConfiguration();
         config.addProperty("sensor", "SmartHome.sensors.GA100K");
@@ -50,7 +50,7 @@ public class AddSensorToDeviceControllerTest {
     }
 
     @Test
-    void AddInexistingSensorModelToDevice() throws InstantiationException {
+    void inexistingSensorModel_ShouldReturnNull() throws InstantiationException {
         // arrange
         Configuration config = new PropertyListConfiguration();
         Catalogue catalogue = new Catalogue( config );
@@ -69,7 +69,7 @@ public class AddSensorToDeviceControllerTest {
     }
 
     @Test
-    void AddExistingSensorModelToDevice() throws InstantiationException {
+    void existingSensorModel_ShouldReturnSensor() throws InstantiationException {
         // arrange
         Configuration config = new PropertyListConfiguration();
         config.addProperty("sensor", "Sensors.GA100K");
