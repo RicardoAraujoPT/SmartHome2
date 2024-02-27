@@ -31,7 +31,7 @@ public class RoomDTOMapper {
     }
 
     // Converts a RoomDTO to a Room
-    public static RoomDTO room_DomainToDTO(Room room) {
+    public RoomDTO room_DomainToDTO(Room room) {
         return new RoomDTO(room.getRoomName(), room.getFloorNumber(), room.getArea(), room.getHeight());
     }
 
@@ -41,24 +41,26 @@ public class RoomDTOMapper {
      * @param listOfRoomsInHouse
      * @return ArrayList<RoomDTO>
      */
-    public static ArrayList<RoomDTO> convertDomainToDTO(ArrayList<Room> listOfRoomsInHouse) {
+    public ArrayList<RoomDTO> convertDomainToDTO(ArrayList<Room> listOfRoomsInHouse) {
 
         ArrayList<RoomDTO> listOfRoomsInHouseDTO = new ArrayList<>();
 
         for (int i = 0; i < listOfRoomsInHouse.size(); i++) {
             Room currentRoom = listOfRoomsInHouse.get(i);
-            RoomDTO currentRoomDTO = room_DomainToDTO(currentRoom);
+            RoomDTOMapper myRoomMapper = new RoomDTOMapper(_house);
+            RoomDTO currentRoomDTO = myRoomMapper.room_DomainToDTO(currentRoom);
             listOfRoomsInHouseDTO.add(currentRoomDTO);
         }
         return listOfRoomsInHouseDTO;
     }
 
-    public static Map<String, Room> roomMap_DTOAndDomain(List<Room> rooms) {
+    public Map<String, Room> roomMap_DTOAndDomain(List<Room> rooms) {
 
         Map<String, Room> roomsDTOAndRooms = new HashMap<>();
 
         rooms.forEach(room -> {
-            RoomDTO roomDTO = RoomDTOMapper.room_DomainToDTO(room);
+            RoomDTOMapper myRoomMapper = new RoomDTOMapper(_house);
+            RoomDTO roomDTO = myRoomMapper.room_DomainToDTO(room);
             roomsDTOAndRooms.put(room.getRoomName(), room);
         });
 
