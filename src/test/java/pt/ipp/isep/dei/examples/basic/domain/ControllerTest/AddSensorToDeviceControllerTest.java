@@ -12,11 +12,16 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * This class contains tests for the AddSensorToDeviceController class.
+ * It tests the behavior of the controller when interacting with a catalogue of sensors and a house.
+ */
+
 public class AddSensorToDeviceControllerTest {
 
 
     @Test
-    void emptySensorModels_ShouldReturnZero() throws InstantiationException {
+    void emptyCatalogue_shouldReturnEmptySensorModels() throws InstantiationException {
         // arrange
         Configuration config = new PropertyListConfiguration();
         Catalogue catalogue = new Catalogue( config );
@@ -31,8 +36,12 @@ public class AddSensorToDeviceControllerTest {
         assertEquals( sensorModels.size(), 0);
     }
 
+    /**
+     * This test checks if the getSensorsModels method returns a list with two sensor models when the catalogue contains two sensors.
+     * @throws InstantiationException if the AddSensorToDeviceController cannot be instantiated.
+     */
     @Test
-    void nonEmptySensorModels_ShouldReturnTwo() throws InstantiationException {
+    void catalogueWithTwoSensors_shouldReturnTwoSensorModels() throws InstantiationException {
         // arrange
         Configuration config = new PropertyListConfiguration();
         config.addProperty("sensor", "SmartHome.sensors.GA100K");
@@ -49,6 +58,10 @@ public class AddSensorToDeviceControllerTest {
         assertEquals( sensorModels.size(), 2);
     }
 
+    /**
+     * This test checks if the addSensorToDevice method returns null when the sensor model does not exist in the catalogue.
+     * @throws InstantiationException if the AddSensorToDeviceController cannot be instantiated.
+     */
     @Test
     void inexistingSensorModel_ShouldReturnNull() throws InstantiationException {
         // arrange
@@ -68,8 +81,15 @@ public class AddSensorToDeviceControllerTest {
         assertNull( sensor );
     }
 
+    /**
+     * TThis test checks if the addSensorToDevice method returns a sensor with the correct type when the sensor model
+     * exists in the catalogue.
+     * It asserts that the returned sensor is not null and that its type matches the type added to the catalogue
+     * @throws InstantiationException if the AddSensorToDeviceController cannot be instantiated.
+     */
+
     @Test
-    void existingSensorModel_ShouldReturnSensor() throws InstantiationException {
+    void existingSensorModel_shouldReturnSensorWithCorrectType() throws InstantiationException {
         // arrange
         Configuration config = new PropertyListConfiguration();
         config.addProperty("sensor", "Sensors.GA100K");
