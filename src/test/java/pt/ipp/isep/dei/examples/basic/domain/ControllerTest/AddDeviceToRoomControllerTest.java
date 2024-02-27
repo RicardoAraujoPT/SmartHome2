@@ -42,15 +42,18 @@ public class AddDeviceToRoomControllerTest {
      * Tests adding a device with an empty name to a room.
      */
     @Test
-    public void deviceNameEmpty_shouldGetNullDeviceDTO(){
+    public void deviceNameEmpty_shouldThrowIllegalArgumentException(){
         //Act
         AddDeviceToRoomController myController = new AddDeviceToRoomController(myHouse);
         String deviceName = " ";
         String roomName = "roomName1";
+        String expectedMessage = "Invalid arguments for Device";
         //Act
-        DeviceDTO foundDeviceDTO = myController.addDeviceToRoom(roomName, deviceName);
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> myController.addDeviceToRoom(roomName, deviceName));
+        String actualMessage = exception.getMessage();
         //Assert
-        assertNull(foundDeviceDTO);
+        assertEquals(expectedMessage, actualMessage);
+
     }
 
     /**

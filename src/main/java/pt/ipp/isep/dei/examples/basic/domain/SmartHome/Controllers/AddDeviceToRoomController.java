@@ -39,7 +39,6 @@ public class AddDeviceToRoomController {
      * @return deviceDTO if the device is successfully added, otherwise an IllegalArgumentException is thrown
      */
     public DeviceDTO addDeviceToRoom(String roomName, String deviceName) {
-        try {
             // get room by name from house
             Room myRoom = this._myHouse.getRoomByName(roomName);
             // add device  to room
@@ -48,12 +47,6 @@ public class AddDeviceToRoomController {
             DeviceDTO deviceDTO = DeviceDTOMapper.DeviceToDTO(device);
             // return deviceDTO to indicate successful addition of the device
             return deviceDTO;
-        }
-        catch (IllegalArgumentException e){
-            // catch IllegalArgumentException and return null if it occurs
-            return null;
-        }
-
     }
     //Implementacao alternativa com o HashMap
     private Map<RoomDTO, Room> _rooms_DTOAndRooms = new HashMap<>();
