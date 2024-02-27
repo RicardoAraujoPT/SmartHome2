@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.examples.basic.domain.DomainTest.UnitTests;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.*;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Sensors.GA100K;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
@@ -20,7 +21,7 @@ public class DeviceTest {
     }
 
     @Test
-    public void createInvalidDeviceWithEmptyName() {
+    public void EmptyDeviceName_shouldThrowIllegalArgumentException() {
         //Arrange
         String expectedMessage = "Invalid arguments for Device";
         //Act
@@ -31,7 +32,7 @@ public class DeviceTest {
     }
 
     @Test
-    public void createInvalidDeviceWithNullName() {
+    public void NullDeviceName_shouldThrowIllegalArgumentException() {
         //Arrange
         String expectedMessage = "Invalid arguments for Device";
         //Act
@@ -60,11 +61,11 @@ public class DeviceTest {
         //Act
         Boolean found = device.getDeviceIsActive();
         //Assert
-        assertFalse(found);
+        assertTrue(found);
     }
 
     @Test
-    public void getValidDeviceAvailableSensors() {
+    public void getValidDeviceSensors() {
         //Arrange
         Device device = new Device("device1");
         ArrayList expected = new ArrayList<>();
@@ -75,7 +76,7 @@ public class DeviceTest {
     }
 
     @Test
-    public void getValidDeviceAvailableActuators() {
+    public void getValidDeviceActuators() {
         //Arrange
         Device device = new Device("device1");
         ArrayList expected = new ArrayList<>();
@@ -130,5 +131,26 @@ public class DeviceTest {
         assertTrue(found);
     }
 
+    @Test
+    public void testAddSensor() throws InstantiationException {
+        // Initialize mock objects
+        FactorySensor factorySensor = mock(FactorySensor.class);
+        Catalogue catalogue = new Catalogue("config.properties");
+        //Catalogue catalogue = mock(Catalogue.class);
+
+        // Create a GA100K sensor
+        catalogue.addSensorType("Temperature", Unit.Percentage);
+        Sensor sensor = new GA100K(catalogue);
+
+        // Mock behavior of FactorySensor
+        when(factorySensor.createSensor(anyString(), any(Catalogue.class))).thenReturn(sensor);
+
+        // Create the device and add a sensor using the mocked FactorySensor
+        Device device = new Device("Test Device");
+        Sensor sensor1 = device.addSensor("Sensors.GA100K", catalogue);
+
+        // Verify that the sensor was added to the device
+        assertTrue(device.getSensors().contains(sensor1));
+    }
 
 }

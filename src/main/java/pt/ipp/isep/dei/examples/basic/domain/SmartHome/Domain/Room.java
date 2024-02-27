@@ -1,5 +1,7 @@
 package pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain;
 
+import org.apache.commons.collections.Factory;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -11,6 +13,8 @@ public class Room {
     private double _area;
 
     private Double _height;
+
+    private FactoryDevice _factoryDevice;
     private List<Device> _devices = new ArrayList<>();
 
     public Room(String roomName, Integer floorNumber, double area, Double height) throws InstantiationException{
@@ -23,6 +27,18 @@ public class Room {
         this._area = area;
         this._height = height;
     }
+
+    public Room(String roomName, Integer floorNumber, double area, Double height, FactoryDevice device) throws InstantiationException{
+        if( !isValidConstructorArguments(roomName, floorNumber, area, height) || !isFactoryDeviceValid(device) ) {
+            throw (new InstantiationException("Invalid arguments"));
+        }
+        this._roomName = roomName;
+        this._roomID = UUID.randomUUID().toString();
+        this._floorNumber = floorNumber;
+        this._area = area;
+        this._height = height;
+        this._factoryDevice = device;
+    }
     private boolean isValidConstructorArguments( String roomName, Integer floorNumber, double area, Double height) {
         if (roomName == null || roomName.trim().isEmpty()) {
             return false;
@@ -34,6 +50,13 @@ public class Room {
             return false;
         }
         return height != null && height >= 0;
+    }
+
+    public boolean isFactoryDeviceValid (FactoryDevice factoryDevice){
+        if (factoryDevice == null){
+            return false;
+        }
+        return true;
     }
 
     public String getRoomName() {
@@ -70,6 +93,18 @@ public class Room {
         Device myDevice = new Device(deviceName);
         // add device to list
         _devices.add(myDevice);
+        return myDevice;
+    }
+
+    public Device createFactoryDevice(String deviceName) throws InstantiationException{
+        // instanciate device
+        Device myDevice = _factoryDevice.newDevice(deviceName);
+        // add device to list
+        if (deviceName == null || deviceName.trim().isEmpty()) {
+            return null;
+        }
+        _devices.add(myDevice);
+
         return myDevice;
     }
 

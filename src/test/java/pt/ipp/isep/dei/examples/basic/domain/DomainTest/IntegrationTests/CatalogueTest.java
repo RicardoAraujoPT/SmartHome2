@@ -130,12 +130,12 @@ class CatalogueTest {
     void getSensorOfUniqueModel() throws InstantiationException {
         // arrange
         Configuration config = new PropertyListConfiguration();
-        config.addProperty("sensor", "pt.ipp.isep.dei.examples.basic.domain.SmartHome.Sensors.TSY01");
+        config.addProperty("sensor", "Sensors.TSY01");
         Catalogue catalogue = new Catalogue(config);
         SensorType sensorType = catalogue.addSensorType("Humidity", Unit.Percentage);
 
         // act
-        Sensor sensor = catalogue.getSensor("pt.ipp.isep.dei.examples.basic.domain.SmartHome.Sensors.TSY01");
+        Sensor sensor = catalogue.getSensor("Sensors.TSY01");
 
         // assert
         assertNotNull(sensor);
@@ -146,13 +146,13 @@ class CatalogueTest {
     void getSensorOfListOfTwoModels() throws InstantiationException {
         // arrange
         Configuration config = new PropertyListConfiguration();
-        config.addProperty("sensor", "pt.ipp.isep.dei.examples.basic.domain.SmartHome.Sensors.GA100K");
-        config.addProperty("sensor", "pt.ipp.isep.dei.examples.basic.domain.SmartHome.SensorsTSY01");
+        config.addProperty("sensor", "Sensors.GA100K");
+        config.addProperty("sensor", "SensorsTSY01");
         Catalogue catalogue = new Catalogue(config);
         SensorType sensorType = catalogue.addSensorType("Temperature", Unit.Celsius);
 
         // act
-        Sensor sensor = catalogue.getSensor("pt.ipp.isep.dei.examples.basic.domain.SmartHome.Sensors.GA100K");
+        Sensor sensor = catalogue.getSensor("Sensors.GA100K");
 
         // assert
         assertNotNull(sensor);
