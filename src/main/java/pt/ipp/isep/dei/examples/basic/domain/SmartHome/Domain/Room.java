@@ -82,7 +82,7 @@ public class Room {
      * @param deviceName The name of the device to be created and added.
      */
     public Device createDevice(String deviceName) {
-        // instanciate device
+        // instantiate device
         Device myDevice = new Device(deviceName);
         // check if device name already exists
         repeatedDeviceName(deviceName);
