@@ -23,7 +23,7 @@ public class ListOfDevicesControllerTest {
      */
 
     @Test
-    public void shouldInstantiateValidRoom() throws InstantiationException {
+    void shouldInstantiateValidRoom() throws InstantiationException {
         Room room = new Room("Living Room", 1, 20.0, 3.0);
         ListOfDevicesController controller = new ListOfDevicesController(room);
         assertNotNull(controller);
@@ -34,7 +34,7 @@ public class ListOfDevicesControllerTest {
      * The test asserts that an IllegalArgumentException is thrown with the message "Invalid room".
      */
     @Test
-    public void nullRoom_shouldNotInstantiateRoomAndThrowIllegalArgumentException() {
+    void nullRoom_shouldNotInstantiateRoomAndThrowIllegalArgumentException() {
         Room myRoom = null;
         Exception exception = assertThrows(IllegalArgumentException.class, () -> new ListOfDevicesController(myRoom));
         assertEquals("Invalid room", exception.getMessage());
@@ -45,8 +45,8 @@ public class ListOfDevicesControllerTest {
      * The test asserts that the size of the returned list is 0.
      */
     @Test
-    public void roomWithNoDevices_shouldReturnListWithNoDevices() throws InstantiationException {
-        Room myRoom = new Room("Living Room", 1, 35, 2.5);
+    void roomWithNoDevices_shouldReturnListWithNoDevices() throws InstantiationException {
+        Room myRoom = new Room("Living Room", 1, 35.0, 2.5);
         ListOfDevicesController controller = new ListOfDevicesController(myRoom);
         int expected = 0;
         int actual = controller.getDeviceList().size();
@@ -58,8 +58,8 @@ public class ListOfDevicesControllerTest {
      * The test asserts that the size of the returned list is 1.
      */
     @Test
-    public void roomWithOneDevice_shouldReturnListWithOneDevice() throws InstantiationException {
-        Room myRoom = new Room("Living Room", 1, 35, 2.5);
+    void roomWithOneDevice_shouldReturnListWithOneDevice() throws InstantiationException {
+        Room myRoom = new Room("Living Room", 1, 35.0, 2.5);
         myRoom.createDevice("Device1");
         ListOfDevicesController controller = new ListOfDevicesController(myRoom);
         int expected = 1;
@@ -72,8 +72,8 @@ public class ListOfDevicesControllerTest {
      * The test asserts that the size of the returned list is equal to the number of devices in the room.
      */
     @Test
-    public void roomWithMultipleDevices_shouldReturnListWithMultipleDevice() throws InstantiationException {
-        Room myRoom = new Room("Living Room", 1, 35, 2.5);
+    void roomWithMultipleDevices_shouldReturnListWithMultipleDevice() throws InstantiationException {
+        Room myRoom = new Room("Living Room", 1, 35.0, 2.5);
         myRoom.createDevice("Device1");
         myRoom.createDevice("Device2");
         ListOfDevicesController controller = new ListOfDevicesController(myRoom);
@@ -87,8 +87,8 @@ public class ListOfDevicesControllerTest {
      * The test asserts that the size of the returned list is 0.
      */
     @Test
-    public void roomWithNoDevices_shouldReturnListWithNoDevicesDTO() throws InstantiationException {
-        Room myRoom = new Room("Living Room", 1, 35, 2.5);
+    void roomWithNoDevices_shouldReturnListWithNoDevicesDTO() throws InstantiationException {
+        Room myRoom = new Room("Living Room", 1, 35.0, 2.5);
         ListOfDevicesController controller = new ListOfDevicesController(myRoom);
         int expected = 0;
         int actual = controller.getDeviceDTOList().size();
@@ -100,8 +100,8 @@ public class ListOfDevicesControllerTest {
      * The test asserts that the size of the returned list is 1.
      */
     @Test
-    public void roomWithOneDevice_shouldReturnListWithOneDeviceDTO() throws InstantiationException {
-        Room myRoom = new Room("Living Room", 1, 35, 2.5);
+    void roomWithOneDevice_shouldReturnListWithOneDeviceDTO() throws InstantiationException {
+        Room myRoom = new Room("Living Room", 1, 35.0, 2.5);
         myRoom.createDevice("Device1");
         ListOfDevicesController controller = new ListOfDevicesController(myRoom);
         int expected = 1;
@@ -114,8 +114,8 @@ public class ListOfDevicesControllerTest {
      * The test asserts that the size of the returned list is equal to the number of devices in the room.
      */
     @Test
-    public void roomWithMultipleDevices_shouldReturnListWithMultipleDeviceDTO() throws InstantiationException {
-        Room myRoom = new Room("Living Room", 1, 35, 2.5);
+    void roomWithMultipleDevices_shouldReturnListWithMultipleDeviceDTO() throws InstantiationException {
+        Room myRoom = new Room("Living Room", 1, 35.0, 2.5);
         myRoom.createDevice("Device1");
         myRoom.createDevice("Device2");
         ListOfDevicesController controller = new ListOfDevicesController(myRoom);

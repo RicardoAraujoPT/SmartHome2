@@ -9,12 +9,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class RoomTest {
 
     @Test
-    public void emptyNameDevice_shouldThrowException() throws InstantiationException {
+    void emptyNameDevice_shouldThrowException() throws InstantiationException {
         //arrange
         String expected = "Device name cannot be null or empty";
 
         //act
-        Room myRoom = new Room("Bedroom", 0, 25, 3.2);
+        Room myRoom = new Room("Bedroom", 0, 25.0, 3.2);
         Exception exception =
                 assertThrows(IllegalArgumentException.class, ()
                         -> {
@@ -25,9 +25,9 @@ public class RoomTest {
         assertTrue(actualMessage.contains(expected));
     }
     @Test
-    public void repeatedDeviceName_ShouldThrowException() throws InstantiationException {
+    void repeatedDeviceName_ShouldThrowException() throws InstantiationException {
         //arrange
-        String expected = "Device already exists";
+        String expected = "Device name already exists in the list";
 
         //act
         Room myRoom = new Room("Bedroom", 0, 25.0, 3.2);

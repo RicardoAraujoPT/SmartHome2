@@ -53,7 +53,7 @@ public class US05V2AddDeviceToRoomControllerTest {
 
         String deviceName = "";
 
-        String expectedMessage = "Invalid arguments for Device";
+        String expectedMessage = "Device name cannot be null or empty";
         //Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> myController.addDeviceToRoom(myRoomDTO, deviceName));
         String actualMessage = exception.getMessage();
