@@ -17,7 +17,7 @@ public class DeactivateDeviceControllerTest {
     Room _myRoom;
 
     @Test
-    void deactivateDeviceSuccessfully() throws InstantiationException {
+    void validDevice_shouldreturnFalse() throws InstantiationException {
         //Arrange
         _myHouse = new House("zipCode", "Street", 55, 105);
         _myHouse.createRoom("roomName1", 0, 25, 2.5);
@@ -40,7 +40,7 @@ public class DeactivateDeviceControllerTest {
      * The expected result is that the method returns null, indicating that the device was not found.
      */
     @Test
-    void deactivateDeviceNonExistingDevice() throws InstantiationException {
+    void nonExistingDevice_shouldReturnNull() throws InstantiationException {
         //Arrange
         _myHouse = new House("zipCode", "Street", 55, 105);
         _myHouse.createRoom("roomName1", 0, 25, 2.5);
@@ -63,7 +63,7 @@ public class DeactivateDeviceControllerTest {
      * The expected result is that the method returns false, confirming the device is deactivated.
      */
     @Test
-    void deactivateDeviceWhenDeviceIsAlreadyInactive() throws InstantiationException {
+    void deactivatedDevice_shouldReturnFalse() throws InstantiationException {
         //Arrange
         _myHouse = new House("zipCode", "Street", 55, 105);
         _myHouse.createRoom("roomName1", 0, 25, 2.5);
