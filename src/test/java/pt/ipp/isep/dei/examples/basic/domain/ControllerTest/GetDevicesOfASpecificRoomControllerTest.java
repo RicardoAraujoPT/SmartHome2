@@ -1,19 +1,14 @@
 package pt.ipp.isep.dei.examples.basic.domain.ControllerTest;
 
 import org.junit.jupiter.api.Test;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Controllers.AddDeviceToRoomController;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Controllers.CreateRoomController;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Controllers.GetDevicesOfASpecificRoomController;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Controllers.ListOfRoomsController;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.DeviceDTO;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.RoomDTO;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Device;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.House;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Room;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.DeviceDTOMapper;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.RoomDTOMapper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
