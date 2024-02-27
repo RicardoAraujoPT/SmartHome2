@@ -16,12 +16,12 @@ import static org.mockito.Mockito.*;
 public class DeviceTest {
 
     @Test
-    public void createValidDevice() throws InstantiationException {
+    void createValidDevice() throws InstantiationException {
         Device device = new Device("device1");
     }
 
     @Test
-    public void EmptyDeviceName_shouldThrowIllegalArgumentException() {
+    void EmptyDeviceName_shouldThrowIllegalArgumentException() {
         //Arrange
         String expectedMessage = "Invalid arguments for Device";
         //Act
@@ -32,7 +32,7 @@ public class DeviceTest {
     }
 
     @Test
-    public void NullDeviceName_shouldThrowIllegalArgumentException() {
+    void NullDeviceName_shouldThrowIllegalArgumentException() {
         //Arrange
         String expectedMessage = "Invalid arguments for Device";
         //Act
@@ -43,7 +43,7 @@ public class DeviceTest {
     }
 
     @Test
-    public void getValidDeviceName() {
+    void getValidDeviceName() {
         //Arrange
         Device device = new Device("device1");
         String expected = "device1";
@@ -55,7 +55,7 @@ public class DeviceTest {
 
     @Test
     @Disabled
-    public void getValidDeviceIsActive() {
+    void getValidDeviceIsActive() {
         //Arrange
         Device device = new Device("device1");
         //Act
@@ -65,7 +65,7 @@ public class DeviceTest {
     }
 
     @Test
-    public void getValidDeviceSensors() {
+    void getValidDeviceSensors() {
         //Arrange
         Device device = new Device("device1");
         ArrayList expected = new ArrayList<>();
@@ -76,7 +76,7 @@ public class DeviceTest {
     }
 
     @Test
-    public void getValidDeviceActuators() {
+    void getValidDeviceActuators() {
         //Arrange
         Device device = new Device("device1");
         ArrayList expected = new ArrayList<>();
@@ -87,7 +87,7 @@ public class DeviceTest {
     }
 
     @Test
-    public void setValidDeviceName() {
+    void setValidDeviceName() {
         //Arrange
         Device device = new Device("device1");
         String name = "newDevice";
@@ -99,7 +99,7 @@ public class DeviceTest {
     }
 
     @Test
-    public void setInvalidDeviceName() {
+    void setInvalidDeviceName() {
         //Arrange
         Device device = new Device("device1");
         String name = "";
@@ -112,7 +112,7 @@ public class DeviceTest {
     }
 
     @Test
-    public void deactivateValidDevice() {
+    void deactivateValidDevice() {
         //Arrange
         Device device = new Device("device1");
         //Act
@@ -122,7 +122,7 @@ public class DeviceTest {
     }
 
     @Test
-    public void activateValidDevice() {
+    void activateValidDevice() {
         //Arrange
         Device device = new Device("device1");
         //Act

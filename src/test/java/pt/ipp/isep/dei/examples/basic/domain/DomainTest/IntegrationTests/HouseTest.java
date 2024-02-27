@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class HouseTest {
 
     @Test
-    public void shouldCreateValidHouse() {
+    void shouldCreateValidHouse() {
         //arrange
         String address = "address";
         String zipCode = "zipcode";
@@ -34,8 +34,7 @@ public class HouseTest {
     }
 
     @Test
-
-    public void createHouseInvalidAddress_ShouldThrowException() {
+    void createHouseInvalidAddress_ShouldThrowException() {
 
         //arrange
         String expected = "Invalid address or ZIP code";
@@ -52,8 +51,7 @@ public class HouseTest {
     }
 
     @Test
-
-    public void createHouseInvalidZipCode_ShouldThrowException() {
+    void createHouseInvalidZipCode_ShouldThrowException() {
 
         //arrange
         String expected = "Invalid address or ZIP code";
@@ -71,7 +69,7 @@ public class HouseTest {
 
 
     @Test
-    public void createHouseInvalidLatitude_ShouldThrowException() {
+    void createHouseInvalidLatitude_ShouldThrowException() {
 
         //arrange
         String expected = "Invalid GPS coordinates";
@@ -89,7 +87,7 @@ public class HouseTest {
 
 
     @Test
-    public void createHouseInvalidLongitude_ShouldThrowException() {
+    void createHouseInvalidLongitude_ShouldThrowException() {
 
         //arrange
         String expected = "Invalid GPS coordinates";
@@ -121,7 +119,7 @@ public class HouseTest {
     }
 
     @Test
-    public void create1ValidRoom() throws InstantiationException {
+    void create1ValidRoom() throws InstantiationException {
 
         //arrange
         String address = "address";
@@ -137,7 +135,7 @@ public class HouseTest {
     }
 
     @Test
-    public void create2ValidRooms() throws InstantiationException {
+    void create2ValidRooms() throws InstantiationException {
 
         //arrange
         String address = "address";
@@ -154,7 +152,7 @@ public class HouseTest {
     }
 
     @Test
-    public void createInvalidRoom_ShouldThrowException() {
+    void createInvalidRoom_ShouldThrowException() {
 
         //arrange
         String expected = "Invalid arguments";
@@ -177,7 +175,7 @@ public class HouseTest {
     }
 
     @Test
-    public void testGetRoomByName() throws InstantiationException {
+    void testGetRoomByName() throws InstantiationException {
 
         //arrange
         String address = "address";
@@ -197,7 +195,7 @@ public class HouseTest {
     }
 
     @Test
-    public void getInexistentRoom_ShouldThrowException() throws InstantiationException {
+    void getInexistentRoom_ShouldThrowException() throws InstantiationException {
 
         //arrange
         String expected = "Room name doesn't exist in the list";
@@ -221,7 +219,7 @@ public class HouseTest {
     }
 
     @Test
-    public void getInvalidRoom_ShouldThrowException() throws InstantiationException {
+    void getInvalidRoom_ShouldThrowException() throws InstantiationException {
 
         //arrange
         String expected = "Room name doesn't exist in the list";
@@ -245,7 +243,7 @@ public class HouseTest {
     }
 
     @Test
-    public void repeatedRoomName_ShouldThrowException() throws InstantiationException {
+    void repeatedRoomName_ShouldThrowException() throws InstantiationException {
         //arrange
         String expected = "Room name already exists";
         String address = "address";

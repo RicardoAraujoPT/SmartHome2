@@ -19,7 +19,7 @@ public class GPSCoordinatesTest {
      * Test creating a valid GPS location and checking if latitude and longitude are set correctly.
      */
     @Test
-    public void shouldCreateValidGPSLocation() {
+    void shouldCreateValidGPSLocation() {
 
         // Arrange
         double expectedLatitude = 37.7749;
@@ -38,7 +38,7 @@ public class GPSCoordinatesTest {
      * An IllegalArgumentException is expected.
      */
     @Test
-    public void shouldCreateGPSLocation_InvalidLatitude() {
+    void shouldCreateGPSLocation_InvalidLatitude() {
 
         // Arrange
         double invalidLatitude = 100;
@@ -55,7 +55,7 @@ public class GPSCoordinatesTest {
      * An IllegalArgumentException is expected.
      */
     @Test
-    public void shouldCreateGPSLocation_InvalidLongitude() {
+    void shouldCreateGPSLocation_InvalidLongitude() {
 
         // Arrange
         double validLatitude = 37.7749;
@@ -71,7 +71,7 @@ public class GPSCoordinatesTest {
      * Test setting a valid latitude value using the setLatitude method.
      */
     @Test
-    public void shouldSetLatitude_ValidValue() {
+    void shouldSetLatitude_ValidValue() {
 
         // Arrange
         GPSCoordinates location = new GPSCoordinates(37.7749, -122.4194);
@@ -89,7 +89,7 @@ public class GPSCoordinatesTest {
      * An IllegalArgumentException is expected.
      */
     @Test
-    public void shouldSetLatitude_InvalidValue() {
+    void shouldSetLatitude_InvalidValue() {
 
         // Arrange
         GPSCoordinates location = new GPSCoordinates(37.7749, -122.4194);
@@ -105,7 +105,7 @@ public class GPSCoordinatesTest {
      * Test setting a valid longitude value using the setLongitude method.
      */
     @Test
-    public void shouldSetLongitude_ValidValue() {
+    void shouldSetLongitude_ValidValue() {
 
         // Arrange
         GPSCoordinates location = new GPSCoordinates(37.7749, -122.4194);
@@ -123,7 +123,7 @@ public class GPSCoordinatesTest {
      * An IllegalArgumentException is expected.
      */
     @Test
-    public void shouldSetLongitude_InvalidValue() {
+    void shouldSetLongitude_InvalidValue() {
 
         // Arrange
         GPSCoordinates location = new GPSCoordinates(37.7749, -122.4194);
@@ -139,7 +139,7 @@ public class GPSCoordinatesTest {
      * Test rounding double values to 6 decimal places.
      */
     @Test
-    public void roundTo6DecimalPlaces() {
+    void roundTo6DecimalPlaces() {
 
         // Arrange + Act
         GPSCoordinates location = new GPSCoordinates(37.7749382, -122.4194137);

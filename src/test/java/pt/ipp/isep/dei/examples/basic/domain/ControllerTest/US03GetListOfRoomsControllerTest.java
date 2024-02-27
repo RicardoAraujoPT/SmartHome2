@@ -12,7 +12,7 @@ public class US03GetListOfRoomsControllerTest {
 
 
     @Test
-    public void nullHouse_shouldThrowIllegalArgumentException() {
+    void nullHouse_shouldThrowIllegalArgumentException() {
         //Arrange
         House myHouse = null;
         //act
@@ -22,7 +22,7 @@ public class US03GetListOfRoomsControllerTest {
     }
 
     @Test
-    public void emptyRoomList_shouldFindEmptyList() {
+    void emptyRoomList_shouldFindEmptyList() {
         //Arrange
         House myHouse = new House("zipCode","street",90.0,30.0);
         //Act + Assert
@@ -30,7 +30,7 @@ public class US03GetListOfRoomsControllerTest {
     }
 
     @Test
-    public void validArguments_shouldAddSeveralRoomsToHouse() throws InstantiationException {
+    void validArguments_shouldAddSeveralRoomsToHouse() throws InstantiationException {
         //Arrange
         House myHouse = new House("rua algures","5000-300",90.0,30.0);
         myHouse.createRoom("Bedroom", 0, 35, 2.5);

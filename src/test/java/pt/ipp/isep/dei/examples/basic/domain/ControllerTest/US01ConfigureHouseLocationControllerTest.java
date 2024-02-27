@@ -17,7 +17,7 @@ public class US01ConfigureHouseLocationControllerTest {
      * Verifies that configureHouseLocation method returns a properly configured LocationDTO.
      */
     @Test
-    public void shouldConfigureHouseLocation() {
+    void shouldConfigureHouseLocation() {
         // Arrange
         House myHouse = new House("Address", "ZipCode", 55.000000, 105.000000);
         US01ConfigureHouseLocationController myController = new US01ConfigureHouseLocationController(myHouse);
@@ -41,7 +41,7 @@ public class US01ConfigureHouseLocationControllerTest {
      * Test case to verify that providing a null house to the controller constructor throws an IllegalArgumentException.
      */
     @Test
-    public void nullHouse_shouldThrowIllegalArgumentException() {
+    void nullHouse_shouldThrowIllegalArgumentException() {
         // Arrange
         House myHouse = null;
         String expectedMessage = "Invalid house";
@@ -57,7 +57,7 @@ public class US01ConfigureHouseLocationControllerTest {
      * Test case to verify that providing a null address to the configureHouseLocation method throws an IllegalArgumentException.
      */
     @Test
-    public void nullAdress_shouldThrowIllegalArgumentException() {
+    void nullAdress_shouldThrowIllegalArgumentException() {
         // Arrange
         House myHouse = new House("Address", "ZipCode", 55.000000, 105.000000);
         US01ConfigureHouseLocationController myController = new US01ConfigureHouseLocationController(myHouse);
@@ -75,7 +75,7 @@ public class US01ConfigureHouseLocationControllerTest {
      * Test case to verify that providing a null zip code to the configureHouseLocation method throws an IllegalArgumentException.
      */
     @Test
-    public void nullZipCode_shouldThrowIllegalArgumentException() {
+    void nullZipCode_shouldThrowIllegalArgumentException() {
         // Arrange
         House myHouse = new House("Address", "ZipCode", 55.000000, 105.000000);
         US01ConfigureHouseLocationController myController = new US01ConfigureHouseLocationController(myHouse);
@@ -93,7 +93,7 @@ public class US01ConfigureHouseLocationControllerTest {
      * Test case to verify that providing an invalid latitude to the configureHouseLocation method throws an IllegalArgumentException.
      */
     @Test
-    public void invalidLatitude_shouldThrowIllegalArgumentException() {
+    void invalidLatitude_shouldThrowIllegalArgumentException() {
         // Arrange
         House myHouse = new House("Address", "ZipCode", 55.000000, 105.000000);
         US01ConfigureHouseLocationController myController = new US01ConfigureHouseLocationController(myHouse);
@@ -111,7 +111,7 @@ public class US01ConfigureHouseLocationControllerTest {
      * Test case to verify that providing an invalid longitude to the configureHouseLocation method throws an IllegalArgumentException.
      */
     @Test
-    public void invalidLongitude_shouldThrowIllegalArgumentException() {
+    void invalidLongitude_shouldThrowIllegalArgumentException() {
         // Arrange
         House myHouse = new House("Address", "ZipCode", 55.000000, 105.000000);
         US01ConfigureHouseLocationController myController = new US01ConfigureHouseLocationController(myHouse);

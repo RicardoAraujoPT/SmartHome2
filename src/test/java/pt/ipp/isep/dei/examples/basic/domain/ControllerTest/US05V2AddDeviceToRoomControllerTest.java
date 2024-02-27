@@ -21,7 +21,7 @@ public class US05V2AddDeviceToRoomControllerTest {
      * Tests the successful addition of a device to a room.
      */
     @Test
-    public void shouldAddDeviceToRoom() throws InstantiationException {
+    void shouldAddDeviceToRoom() throws InstantiationException {
         //Arrange
         myHouse = new House("zipCode", "Street", 55, 105);
         Room myRoom = myHouse.createRoom("roomName1", 0, 25, 2.5);
@@ -43,7 +43,7 @@ public class US05V2AddDeviceToRoomControllerTest {
      * Tests adding a device with an empty name to a room.
      */
     @Test
-    public void deviceNameEmpty_shouldThrowIllegalArgumentException() throws InstantiationException {
+    void deviceNameEmpty_shouldThrowIllegalArgumentException() throws InstantiationException {
         //Arrange
         myHouse = new House("zipCode", "Street", 55, 105);
         Room myRoom = myHouse.createRoom("roomName1", 0, 25, 2.5);
@@ -66,7 +66,7 @@ public class US05V2AddDeviceToRoomControllerTest {
      * Tests the behavior when attempting to create an AddDeviceToRoomController with a null house.
      */
     @Test
-    public void testNullHouse_shouldThrowIllegalArgumentException() throws InstantiationException {
+    void testNullHouse_shouldThrowIllegalArgumentException() throws InstantiationException {
         //Arrange
         String expectedMessage = "Provided house cannot be null";
         //Act

@@ -23,7 +23,7 @@ public class GetDevicesOfASpecificRoomControllerTest {
      * This test checks the constructor of the GetDevicesOfASpecificRoomController class.
      */
     @Test
-    public void shouldInstantiateHouseDeviceDTOMapperAndRoomDTOMapper() {
+    void shouldInstantiateHouseDeviceDTOMapperAndRoomDTOMapper() {
         // Arrange
         House house = new House("address", "zipCode", 55.2, -2.25);
         DeviceDTOMapper deviceDTOMapper = new DeviceDTOMapper(house);
@@ -41,7 +41,7 @@ public class GetDevicesOfASpecificRoomControllerTest {
      * It is expected to throw an InstantiationException.
      */
     @Test
-    public void nullRoom_shouldThrowInstantiationException() {
+    void nullRoom_shouldThrowInstantiationException() {
         // Arrange
         House house = new House("address", "zipCode", 55.2, -2.25);
         DeviceDTOMapper deviceDTOMapper = new DeviceDTOMapper(house);
@@ -58,7 +58,7 @@ public class GetDevicesOfASpecificRoomControllerTest {
      */
 
     @Test
-    public void roomWithoutDevices_shouldReturnEmptyListOfDevices() throws InstantiationException {
+    void roomWithoutDevices_shouldReturnEmptyListOfDevices() throws InstantiationException {
         // Arrange
         House house = new House("address", "zipCode", 55.2, -2.25);
         Room room = house.createRoom("ChosenRoom", 1, 20.0, 3.0);
