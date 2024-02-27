@@ -1,22 +1,22 @@
 package pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain;
 
 /**
- * Represents a sensor type.
- * This class encapsulates the properties and behavior of a sensor type in the SmartHome domain.
- * Each sensor type has a description and a unit of measurement.
+ * Represents an actuator type.
+ * This class encapsulates the properties and behavior of an actuator type in the SmartHome domain.
+ * Each actuator type has a description and a unit of measurement.
  */
-public class SensorType {
+public class ActuatorType {
     private final String _strDescription;
     private final Unit _unit;
 
     /**
-     * Creates a new instance of SensorType.
+     * Creates a new instance of ActuatorType.
      *
-     * @param strDescription The description of the sensor type. This parameter must not be null or empty.
-     * @param unit           The unit of measurement for the sensor type. This parameter must not be null.
+     * @param strDescription The description of the actuator type. This parameter must not be null or empty.
+     * @param unit           The unit of measurement for the actuator type. This parameter must not be null.
      * @throws InstantiationException If the provided arguments are not valid (e.g., null or empty description).
      */
-    public SensorType(String strDescription, Unit unit) throws InstantiationException {
+    public ActuatorType(String strDescription, Unit unit) throws InstantiationException {
         if (!isValidConstructorArgument(strDescription))
             throw (new InstantiationException("Invalid arguments"));
 
@@ -32,21 +32,22 @@ public class SensorType {
      */
     private boolean isValidConstructorArgument(String strDescription) {
         return strDescription != null && !strDescription.isEmpty();
+
     }
 
     /**
-     * Gets the description of the sensor type.
+     * Gets the description of the actuator type.
      *
-     * @return The description of the sensor type.
+     * @return The description of the actuator type.
      */
     public String getDescription() {
         return _strDescription;
     }
 
     /**
-     * Gets the unit of measurement for the sensor type.
+     * Gets the unit of measurement for the actuator type.
      *
-     * @return The unit of measurement for the sensor type.
+     * @return The unit of measurement for the actuator type.
      */
     public Unit getUnit() {
         return _unit;
