@@ -37,6 +37,7 @@ public class US05V2AddDeviceToRoomController {
      * @param deviceName The name of the device to be added.
      * @return deviceDTO if the device is successfully added, otherwise an IllegalArgumentException is thrown
      */
+    /*
     public DeviceDTO addDeviceToRoom(String roomName, String deviceName) {
             // get room by name from house
             Room myRoom = this._myHouse.getRoomByName(roomName);
@@ -47,14 +48,15 @@ public class US05V2AddDeviceToRoomController {
             // return deviceDTO to indicate successful addition of the device
             return deviceDTO;
     }
+     */
     //Implementacao alternativa com o HashMap
     private Map<String, Room> _rooms_DTOAndRooms = new HashMap<>();
 
-    public List<DeviceDTO> addDeviceToRoom(RoomDTO roomDTO, String deviceName) {
+    public List<DeviceDTO> addDeviceToRoom(String roomName, String deviceName) {
         List<Room> rooms = _myHouse.getRoomList();
         RoomDTOMapper myRoomMapper = new RoomDTOMapper(_myHouse);
         this._rooms_DTOAndRooms = myRoomMapper.roomMap_DTOAndDomain(rooms);
-        Room room = _rooms_DTOAndRooms.get( roomDTO.getName() );
+        Room room = _rooms_DTOAndRooms.get( roomName );
         room.createDevice(deviceName);
         List<Device> devices = room.getDevices();
         return DeviceDTOMapper.devices_DomainToDTO(devices);

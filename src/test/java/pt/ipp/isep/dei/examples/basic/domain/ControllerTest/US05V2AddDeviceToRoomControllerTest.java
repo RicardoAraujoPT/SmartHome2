@@ -27,13 +27,11 @@ public class US05V2AddDeviceToRoomControllerTest {
         Room myRoom = myHouse.createRoom("roomName1", 0, 25, 2.5);
         US05V2AddDeviceToRoomController myController = new US05V2AddDeviceToRoomController(myHouse);
 
-        RoomDTO myRoomDTO = new RoomDTO(myRoom.getRoomName(), myRoom.getFloorNumber(), myRoom.getArea(), myRoom.getHeight());
-
         String deviceName = "device1";
 
         int expected =1;
         //Act
-        List <DeviceDTO> foundDeviceListDTO = myController.addDeviceToRoom(myRoomDTO, deviceName);
+        List <DeviceDTO> foundDeviceListDTO = myController.addDeviceToRoom(myRoom.getRoomName(), deviceName);
         int found = foundDeviceListDTO.size();
         //Assert
         assertEquals(expected, found);
@@ -49,13 +47,11 @@ public class US05V2AddDeviceToRoomControllerTest {
         Room myRoom = myHouse.createRoom("roomName1", 0, 25, 2.5);
         US05V2AddDeviceToRoomController myController = new US05V2AddDeviceToRoomController(myHouse);
 
-        RoomDTO myRoomDTO = new RoomDTO(myRoom.getRoomName(), myRoom.getFloorNumber(), myRoom.getArea(), myRoom.getHeight());
-
         String deviceName = "";
 
         String expectedMessage = "Device name cannot be null or empty";
         //Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> myController.addDeviceToRoom(myRoomDTO, deviceName));
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> myController.addDeviceToRoom(myRoom.getRoomName(), deviceName));
         String actualMessage = exception.getMessage();
         //Assert
         assertEquals(expectedMessage, actualMessage);
