@@ -4,11 +4,9 @@ import org.apache.commons.collections.Factory;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class Room {
     private String _roomName;
-    private String _roomID;
     private Integer _floorNumber;
     private double _area;
 
@@ -22,7 +20,6 @@ public class Room {
             throw (new InstantiationException("Invalid arguments"));
         }
         this._roomName = roomName;
-        this._roomID = UUID.randomUUID().toString();
         this._floorNumber = floorNumber;
         this._area = area;
         this._height = height;
@@ -33,7 +30,6 @@ public class Room {
             throw (new InstantiationException("Invalid arguments"));
         }
         this._roomName = roomName;
-        this._roomID = UUID.randomUUID().toString();
         this._floorNumber = floorNumber;
         this._area = area;
         this._height = height;
@@ -63,9 +59,6 @@ public class Room {
         return _roomName;
     }
 
-    public String getRoomID() {
-        return _roomID;
-    }
 
     public Integer getFloorNumber() {
         return _floorNumber;
@@ -91,6 +84,8 @@ public class Room {
     public Device createDevice(String deviceName) {
         // instanciate device
         Device myDevice = new Device(deviceName);
+        // check if device name already exists
+        repeatedDeviceName(deviceName);
         // add device to list
         _devices.add(myDevice);
         return myDevice;
@@ -117,5 +112,22 @@ public class Room {
             }
         }
         throw new IllegalArgumentException("Device name doesn't exist in the list");
+    }
+
+    /**
+     * Checks if a device with the given name already exists in the list of devices.
+     *
+     * @param deviceName The name of the device to be checked for repetition.
+     * @throws IllegalArgumentException if a device with the given name already exists in the list.
+     */
+    public void repeatedDeviceName(String deviceName) {
+        for (int i = 0; i < _devices.size(); i++) {
+            Device currentDevice = _devices.get(i);
+            String currentDeviceName = currentDevice.getDeviceName();
+            if (currentDeviceName.equals(deviceName)) {
+                throw new IllegalArgumentException("Device already exists");
+
+            }
+}
     }
 }
