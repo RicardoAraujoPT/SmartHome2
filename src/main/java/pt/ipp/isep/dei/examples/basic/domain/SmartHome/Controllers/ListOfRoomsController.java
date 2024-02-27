@@ -42,7 +42,9 @@ public class ListOfRoomsController {
 
         ArrayList<Room> listOfRoomsInHouse = this._myHouse.getRoomList();
 
-        ArrayList<RoomDTO> listOfRoomsInHouseDTO = RoomDTOMapper.convertDomainToDTO(listOfRoomsInHouse);
+        RoomDTOMapper myRoomMapper = new RoomDTOMapper(_myHouse);
+
+        ArrayList<RoomDTO> listOfRoomsInHouseDTO = myRoomMapper.convertDomainToDTO(listOfRoomsInHouse);
 
         return new ArrayList<>(listOfRoomsInHouseDTO);
 
@@ -51,7 +53,9 @@ public class ListOfRoomsController {
     public List<String> getRooms() {
         List<Room> rooms = _myHouse.getRoomList();
 
-        this._rooms_DTOAndRooms = RoomDTOMapper.roomMap_DTOAndDomain(rooms);
+        RoomDTOMapper myRoomDTOMapper = new RoomDTOMapper(_myHouse);
+
+        this._rooms_DTOAndRooms = myRoomDTOMapper.roomMap_DTOAndDomain(rooms);
 
         return _rooms_DTOAndRooms.keySet().stream().toList();
     }
