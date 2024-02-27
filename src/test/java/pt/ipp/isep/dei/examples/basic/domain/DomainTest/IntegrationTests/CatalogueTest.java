@@ -16,7 +16,7 @@ class CatalogueTest {
         Catalogue catalogue = new Catalogue("config.properties");
 
         // assert
-        assertEquals(catalogue.getSensorModels().size(), 2);
+        assertEquals(catalogue.getSensorModels().size(), 4);
     }
 
     @Test
