@@ -12,6 +12,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SR001Test
 {
+
+    /**
+     * Test of validSR001_ShouldCreateNewInstance method, of class SR001.
+     * @throws InstantiationException
+     */
     @Test
     void validSR001_ShouldCreateNewInstance() throws InstantiationException
     {
@@ -28,6 +33,9 @@ class SR001Test
         assertTrue( value >= 0 && value < 1000 );
     }
 
+    /**
+     * Test of inexistentSensorTypeForSR001_ShouldThrowException method, of class SR001.
+     */
     @Test
     void inexistentSensorTypeForSR001_ShouldThrowException()
     {
