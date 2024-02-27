@@ -11,7 +11,7 @@ public class RoomTest {
     @Test
     void emptyNameDevice_shouldThrowException() throws InstantiationException {
         //arrange
-        String expected = "Invalid arguments";
+        String expected = "Device name cannot be null or empty";
 
         //act
         Room myRoom = new Room("Bedroom", 0, 25.0, 3.2);
@@ -28,10 +28,10 @@ public class RoomTest {
     @Test
     public void nullNameDevice_shouldThrowException() throws InstantiationException {
         //arrange
-        String expected = "Invalid arguments";
+        String expected = "Device name cannot be null or empty";
 
         //act
-        Room myRoom = new Room("Bedroom", 0, 25, 3.2);
+        Room myRoom = new Room("Bedroom", 0, 25.0, 3.2);
         Exception exception =
                 assertThrows(IllegalArgumentException.class, ()
                         -> {

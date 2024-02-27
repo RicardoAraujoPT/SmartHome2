@@ -1,6 +1,5 @@
 package pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain;
 
-import org.apache.commons.collections.Factory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,6 +88,7 @@ public class Room {
         if (isDeviceNameRepeated(deviceName)) {
             throw new IllegalArgumentException("Device name already exists in the list");
         }
+        //check if device name is valid
         if (deviceName == null || deviceName.trim().isEmpty()){
             throw new IllegalArgumentException("Device name cannot be null or empty");
     }
