@@ -20,5 +20,6 @@ public enum Unit {
     Watt_m2,
 
     WindSpeed,
+    OnOff
 
 }
