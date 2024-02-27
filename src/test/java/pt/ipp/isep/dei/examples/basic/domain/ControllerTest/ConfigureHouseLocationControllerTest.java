@@ -62,7 +62,7 @@ public class ConfigureHouseLocationControllerTest {
         House myHouse = new House("Address", "ZipCode", 55.000000, 105.000000);
         ConfigureHouseLocationController myController = new ConfigureHouseLocationController(myHouse);
         LocationDTO inputDTO = new LocationDTO(null, "NewZipCode", 65.000000, 115.000000);
-        String expectedMessage = "Invalid address, ZIP code, latitude or longitude";
+        String expectedMessage = "Invalid address or ZIP code";
 
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> { myController.configureHouseLocation(inputDTO); });
@@ -80,7 +80,7 @@ public class ConfigureHouseLocationControllerTest {
         House myHouse = new House("Address", "ZipCode", 55.000000, 105.000000);
         ConfigureHouseLocationController myController = new ConfigureHouseLocationController(myHouse);
         LocationDTO inputDTO = new LocationDTO("NewAddress", null, 65.000000, 115.000000);
-        String expectedMessage = "Invalid address, ZIP code, latitude or longitude";
+        String expectedMessage = "Invalid address or ZIP code";
 
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> { myController.configureHouseLocation(inputDTO); });
