@@ -5,11 +5,11 @@ import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.House;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Room;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.RoomDTOMapper;
 
-public class CreateRoomController {
+public class US02CreateRoomController {
 
     private House _myHouse;
 
-    public CreateRoomController (House house) throws InstantiationException {
+    public US02CreateRoomController(House house) throws InstantiationException {
         if(house == null){
             throw new InstantiationException ("Invalid house");
         }

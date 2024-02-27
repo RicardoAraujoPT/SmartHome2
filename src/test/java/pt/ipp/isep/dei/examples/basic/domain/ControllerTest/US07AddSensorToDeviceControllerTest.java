@@ -2,7 +2,7 @@ package pt.ipp.isep.dei.examples.basic.domain.ControllerTest;
 
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.DeviceDTO;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.*;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Controllers.AddSensorToDeviceController;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Controllers.US07AddSensorToDeviceController;
 
 import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.plist.PropertyListConfiguration;
@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * It tests the behavior of the controller when interacting with a catalogue of sensors and a house.
  */
 
-public class AddSensorToDeviceControllerTest {
+public class US07AddSensorToDeviceControllerTest {
 
 
     @Test
@@ -27,7 +27,7 @@ public class AddSensorToDeviceControllerTest {
         Catalogue catalogue = new Catalogue( config );
         House myHouse = new House("address","zipcode",55,105);
 
-        AddSensorToDeviceController controller = new AddSensorToDeviceController( myHouse, catalogue );
+        US07AddSensorToDeviceController controller = new US07AddSensorToDeviceController( myHouse, catalogue );
 
         // act
         List<String> sensorModels = controller.getSensorsModels();
@@ -49,7 +49,7 @@ public class AddSensorToDeviceControllerTest {
         Catalogue catalogue = new Catalogue( config );
         House myHouse = new House("address","zipcode",55,105);
 
-        AddSensorToDeviceController controller = new AddSensorToDeviceController( myHouse, catalogue );
+        US07AddSensorToDeviceController controller = new US07AddSensorToDeviceController( myHouse, catalogue );
 
         // act
         List<String> sensorModels = controller.getSensorsModels();
@@ -72,7 +72,7 @@ public class AddSensorToDeviceControllerTest {
         Device device = livingRoom.createDevice("device1");
         DeviceDTO deviceDTO= new DeviceDTO("device1","","Living Room");
 
-        AddSensorToDeviceController controller = new AddSensorToDeviceController( myHouse, catalogue );
+        US07AddSensorToDeviceController controller = new US07AddSensorToDeviceController( myHouse, catalogue );
 
         // act
         Sensor sensor = controller.addSensorToDevice(deviceDTO, "pt.ipp.isep.dei.examples.basic.domain.SmartHome.Sensors.GA100K" );
@@ -101,7 +101,7 @@ public class AddSensorToDeviceControllerTest {
         Device device = livingRoom.createDevice("device1");
         DeviceDTO deviceDTO= new DeviceDTO("device1","","Living Room");
 
-        AddSensorToDeviceController controller = new AddSensorToDeviceController( myHouse, catalogue );
+        US07AddSensorToDeviceController controller = new US07AddSensorToDeviceController( myHouse, catalogue );
 
         // act
         Sensor sensor = controller.addSensorToDevice(deviceDTO, "Sensors.GA100K" );

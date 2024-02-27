@@ -1,14 +1,9 @@
 package pt.ipp.isep.dei.examples.basic.domain.ControllerTest;
 
-import org.apache.commons.configuration2.Configuration;
-import org.apache.commons.configuration2.plist.PropertyListConfiguration;
 import org.junit.jupiter.api.Test;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Controllers.AddDeviceToRoomController;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Controllers.US09GetDevicesByTypeController;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.DeviceDTO;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.*;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Sensors.GA100K;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Sensors.TSY01;
 
 import java.util.*;
 

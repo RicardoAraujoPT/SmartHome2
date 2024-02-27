@@ -1,6 +1,6 @@
 package pt.ipp.isep.dei.examples.basic.domain.ControllerTest;
 import org.junit.jupiter.api.Test;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Controllers.DeactivateDeviceController;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Controllers.US08DeactivateDeviceController;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.DeviceDTO;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Device;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.House;
@@ -10,7 +10,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class DeactivateDeviceControllerTest {
+public class US08DeactivateDeviceControllerTest {
 
     House _myHouse;
 
@@ -25,7 +25,7 @@ public class DeactivateDeviceControllerTest {
         Device myDevice = _myRoom.createDevice("device1");
         Device alreadyInactiveDevice = _myRoom.createDevice("inactiveDevice");
         alreadyInactiveDevice.deactivateDevice();
-        DeactivateDeviceController myController = new DeactivateDeviceController(_myHouse);
+        US08DeactivateDeviceController myController = new US08DeactivateDeviceController(_myHouse);
         DeviceDTO deviceToDeactivate = new DeviceDTO("device1",UUID.randomUUID().toString());
         //Act
         //myController.deactivateDevice(deviceToDeactivate);
@@ -48,7 +48,7 @@ public class DeactivateDeviceControllerTest {
         Device myDevice = _myRoom.createDevice("device1");
         Device alreadyInactiveDevice = _myRoom.createDevice("inactiveDevice");
         alreadyInactiveDevice.deactivateDevice();
-        DeactivateDeviceController myController = new DeactivateDeviceController(_myHouse);
+        US08DeactivateDeviceController myController = new US08DeactivateDeviceController(_myHouse);
         DeviceDTO deviceToDeactivate = new DeviceDTO("device2",UUID.randomUUID().toString());
         //Act
         //myController.deactivateDevice(deviceToDeactivate);
@@ -69,7 +69,7 @@ public class DeactivateDeviceControllerTest {
         _myHouse.createRoom("roomName1", 0, 25, 2.5);
         _myRoom = _myHouse.getRoomByName("roomName1");
         Device myDevice = _myRoom.createDevice("device1");
-        DeactivateDeviceController myController = new DeactivateDeviceController(_myHouse);
+        US08DeactivateDeviceController myController = new US08DeactivateDeviceController(_myHouse);
         DeviceDTO alreadyInactiveDevice = new DeviceDTO("inactiveDevice",UUID.randomUUID().toString());
         //Act
         //myController.deactivateDevice(alreadyInactiveDevice);

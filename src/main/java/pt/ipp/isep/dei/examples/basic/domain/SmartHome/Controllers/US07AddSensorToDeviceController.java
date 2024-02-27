@@ -10,7 +10,7 @@ import java.util.List;
  * It uses a House object to get the room and device to which the sensor will be added.
  * It also uses a Catalogue object to get the sensor models.
  */
-public class AddSensorToDeviceController {
+public class US07AddSensorToDeviceController {
 
     /**
      * The house object that contains the list of rooms and devices.
@@ -29,7 +29,7 @@ public class AddSensorToDeviceController {
      * @throws InstantiationException If the house or catalogue is null.
      */
 
-    public AddSensorToDeviceController(House house, Catalogue catalogue) throws InstantiationException {
+    public US07AddSensorToDeviceController(House house, Catalogue catalogue) throws InstantiationException {
         if (!isValidConstructorArguments(house, catalogue))
             throw (new InstantiationException("Invalid arguments"));
         _house = house;

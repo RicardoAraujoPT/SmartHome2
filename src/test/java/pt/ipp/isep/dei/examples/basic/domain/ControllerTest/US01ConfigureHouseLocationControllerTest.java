@@ -1,7 +1,7 @@
 package pt.ipp.isep.dei.examples.basic.domain.ControllerTest;
 
 import org.junit.jupiter.api.Test;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Controllers.ConfigureHouseLocationController;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Controllers.US01ConfigureHouseLocationController;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.LocationDTO;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.House;
 
@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 /**
  * Test class for ConfigureHouseLocationController.
  */
-public class ConfigureHouseLocationControllerTest {
+public class US01ConfigureHouseLocationControllerTest {
 
     /**
      * Verifies that configureHouseLocation method returns a properly configured LocationDTO.
@@ -20,7 +20,7 @@ public class ConfigureHouseLocationControllerTest {
     public void shouldConfigureHouseLocation() {
         // Arrange
         House myHouse = new House("Address", "ZipCode", 55.000000, 105.000000);
-        ConfigureHouseLocationController myController = new ConfigureHouseLocationController(myHouse);
+        US01ConfigureHouseLocationController myController = new US01ConfigureHouseLocationController(myHouse);
         LocationDTO inputDTO = new LocationDTO("NewAddress", "NewZipCode", 65.000000, 115.000000);
         String expectedAddress = "NewAddress";
         String expectedZipCode = "NewZipCode";
@@ -47,7 +47,7 @@ public class ConfigureHouseLocationControllerTest {
         String expectedMessage = "Invalid house";
 
         // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> { new ConfigureHouseLocationController(myHouse); });
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> { new US01ConfigureHouseLocationController(myHouse); });
 
         // Assert
         assertEquals(expectedMessage, exception.getMessage());
@@ -60,7 +60,7 @@ public class ConfigureHouseLocationControllerTest {
     public void nullAdress_shouldThrowIllegalArgumentException() {
         // Arrange
         House myHouse = new House("Address", "ZipCode", 55.000000, 105.000000);
-        ConfigureHouseLocationController myController = new ConfigureHouseLocationController(myHouse);
+        US01ConfigureHouseLocationController myController = new US01ConfigureHouseLocationController(myHouse);
         LocationDTO inputDTO = new LocationDTO(null, "NewZipCode", 65.000000, 115.000000);
         String expectedMessage = "Invalid address or ZIP code";
 
@@ -78,7 +78,7 @@ public class ConfigureHouseLocationControllerTest {
     public void nullZipCode_shouldThrowIllegalArgumentException() {
         // Arrange
         House myHouse = new House("Address", "ZipCode", 55.000000, 105.000000);
-        ConfigureHouseLocationController myController = new ConfigureHouseLocationController(myHouse);
+        US01ConfigureHouseLocationController myController = new US01ConfigureHouseLocationController(myHouse);
         LocationDTO inputDTO = new LocationDTO("NewAddress", null, 65.000000, 115.000000);
         String expectedMessage = "Invalid address or ZIP code";
 
@@ -96,7 +96,7 @@ public class ConfigureHouseLocationControllerTest {
     public void invalidLatitude_shouldThrowIllegalArgumentException() {
         // Arrange
         House myHouse = new House("Address", "ZipCode", 55.000000, 105.000000);
-        ConfigureHouseLocationController myController = new ConfigureHouseLocationController(myHouse);
+        US01ConfigureHouseLocationController myController = new US01ConfigureHouseLocationController(myHouse);
         LocationDTO inputDTO = new LocationDTO("NewAddress", "NewZipCode", 95.000000, 115.000000);
         String expectedMessage = "Invalid GPS coordinates";
 
@@ -114,7 +114,7 @@ public class ConfigureHouseLocationControllerTest {
     public void invalidLongitude_shouldThrowIllegalArgumentException() {
         // Arrange
         House myHouse = new House("Address", "ZipCode", 55.000000, 105.000000);
-        ConfigureHouseLocationController myController = new ConfigureHouseLocationController(myHouse);
+        US01ConfigureHouseLocationController myController = new US01ConfigureHouseLocationController(myHouse);
         LocationDTO inputDTO = new LocationDTO("NewAddress", "NewZipCode", 65.000000, 195.000000);
         String expectedMessage = "Invalid GPS coordinates";
 

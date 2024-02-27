@@ -8,12 +8,11 @@ import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Room;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.DeviceDTOMapper;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.RoomDTOMapper;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AddDeviceToRoomController {
+public class US05V2AddDeviceToRoomController {
 
     private House _myHouse;
 
@@ -23,7 +22,7 @@ public class AddDeviceToRoomController {
      * @param house The house to which the devices will be added.
      * @throws IllegalArgumentException if the provided house is null.
      */
-    public AddDeviceToRoomController(House house) {
+    public US05V2AddDeviceToRoomController(House house) {
         if (house == null) {
             throw new IllegalArgumentException("Provided house cannot be null");
         }

@@ -8,7 +8,7 @@ import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.LocationDTOMapper
  * The ConfigureHouseLocationController class represents a controller for the use case "Configure House Location".
  * It provides a method to configure the location of a house.
  */
-public class ConfigureHouseLocationController {
+public class US01ConfigureHouseLocationController {
     /**
      * The house being configured.
      */
@@ -20,7 +20,7 @@ public class ConfigureHouseLocationController {
      * @param house The House object to be configured. Must not be null.
      * @throws IllegalArgumentException If the provided house is null.
      */
-    public ConfigureHouseLocationController(House house) {
+    public US01ConfigureHouseLocationController(House house) {
         if (house == null) {
             throw new IllegalArgumentException("Invalid house");
         }

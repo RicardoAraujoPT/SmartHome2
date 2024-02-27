@@ -10,13 +10,13 @@ import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.House;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Room;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.RoomDTOMapper;
 
-public class ListOfRoomsController {
+public class US03GetListOfRoomsController {
 
 
     private static House _myHouse;
     private Map<String, Room> _rooms_DTOAndRooms = new HashMap<>();
 
-    public ListOfRoomsController(House myHouse){
+    public US03GetListOfRoomsController(House myHouse){
         if(myHouse == null){
             throw new IllegalArgumentException("Invalid house");
         }

@@ -11,7 +11,7 @@ import java.util.HashMap;
  * It provides a method to get devices by type in a house.
  **/
 
-public class DeactivateDeviceController {
+public class US08DeactivateDeviceController {
 
     /**
      * The house where the device is located
@@ -22,7 +22,7 @@ public class DeactivateDeviceController {
      * Constructs a new US09GetDevicesByTypeController with the specified house.
      * @param house the house from which the devices will be retrieved.
      */
-    public DeactivateDeviceController(House house) {
+    public US08DeactivateDeviceController(House house) {
         if (house == null) {
             throw new IllegalArgumentException("Invalid house");
         }
