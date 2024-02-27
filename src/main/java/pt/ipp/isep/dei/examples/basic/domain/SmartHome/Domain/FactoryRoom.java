@@ -5,8 +5,7 @@ import java.util.List;
 
 public class FactoryRoom {
 
-    public Room createRoom( String roomName, Integer floorNumber, double area, double height) throws InstantiationException
-    {
+    public Room createRoom( String roomName, Integer floorNumber, double area, double height) throws InstantiationException {
         return new Room(roomName, floorNumber, area, height);
     }
 
@@ -14,5 +13,7 @@ public class FactoryRoom {
 
         return new ArrayList<Room>();
     }
+
+
 
 }

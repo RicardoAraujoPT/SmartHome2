@@ -10,7 +10,6 @@ public class House {
 
     private FactoryLocation _factoryLocation;
     private FactoryRoom _factoryRoom;
-
     private Location _location;
     private ArrayList <Room> _rooms;
 
@@ -36,7 +35,6 @@ public class House {
         this._rooms = factoryRoom.initRooms();
     }
 
-
     /** Getter for the House's location.
      *
      * @return Location object representing the location of the house.
@@ -56,7 +54,7 @@ public class House {
      * @return Room object created and added to the House's roomList.
      * @throws InstantiationException if any given attribute for Room is empty or null.
      */
-    public Room createRoom(String roomName, int floorNumber, double area, double height) throws InstantiationException {
+    public Room addRoom(String roomName, int floorNumber, double area, double height) throws InstantiationException {
 
         Room myRoom = this._factoryRoom.createRoom(roomName, floorNumber, area, height);
 
@@ -64,6 +62,18 @@ public class House {
 
         return myRoom;
     }
+
+    public Room createRoom(String roomName, int floorNumber, double area, double height) throws InstantiationException {
+
+        Room myRoom = new Room(roomName,floorNumber,area,height);
+
+        this._rooms.add(myRoom);
+
+        return myRoom;
+    }
+
+
+
 
     /**
      * Method to get the House's RoomList.
@@ -95,7 +105,7 @@ public class House {
      * @param name The name of the Room object to retrieve.
      * @return Room object with the specified name.
      * @throws IllegalArgumentException if attempting to get a room that doesn't exist in the House's roomList,
-     *                                  or if the name is empty or null.
+     * or if the name is empty or null.
      */
     public Room getRoomByName(String name) {
         for (int i = 0; i < this._rooms.size(); i++) {
