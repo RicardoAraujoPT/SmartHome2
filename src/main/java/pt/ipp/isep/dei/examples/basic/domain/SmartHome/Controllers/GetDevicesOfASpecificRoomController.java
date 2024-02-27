@@ -63,7 +63,7 @@ public class GetDevicesOfASpecificRoomController {
         }
 
         List<Room> rooms = _house.getRoomList();
-        Map<RoomDTO, Room> roomsDTOAndRooms = RoomDTOMapper.roomMap_DTOAndDomain(rooms);
+        Map<String, Room> roomsDTOAndRooms = RoomDTOMapper.roomMap_DTOAndDomain(rooms);
         Room room = roomsDTOAndRooms.get(roomDTO);
 
         if (room == null) {

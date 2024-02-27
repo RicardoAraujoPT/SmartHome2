@@ -53,13 +53,13 @@ public class RoomDTOMapper {
         return listOfRoomsInHouseDTO;
     }
 
-    public static Map<RoomDTO, Room> roomMap_DTOAndDomain(List<Room> rooms) {
+    public static Map<String, Room> roomMap_DTOAndDomain(List<Room> rooms) {
 
-        Map<RoomDTO, Room> roomsDTOAndRooms = new HashMap<>();
+        Map<String, Room> roomsDTOAndRooms = new HashMap<>();
 
         rooms.forEach(room -> {
             RoomDTO roomDTO = RoomDTOMapper.room_DomainToDTO(room);
-            roomsDTOAndRooms.put(roomDTO, room);
+            roomsDTOAndRooms.put(room.getRoomName(), room);
         });
 
         return roomsDTOAndRooms;

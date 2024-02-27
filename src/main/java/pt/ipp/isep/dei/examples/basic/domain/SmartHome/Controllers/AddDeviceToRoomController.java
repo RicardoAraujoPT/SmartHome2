@@ -49,12 +49,12 @@ public class AddDeviceToRoomController {
             return deviceDTO;
     }
     //Implementacao alternativa com o HashMap
-    private Map<RoomDTO, Room> _rooms_DTOAndRooms = new HashMap<>();
+    private Map<String, Room> _rooms_DTOAndRooms = new HashMap<>();
 
     public List<DeviceDTO> addDeviceToRoom(RoomDTO roomDTO, String deviceName) {
         List<Room> rooms = _myHouse.getRoomList();
         this._rooms_DTOAndRooms = RoomDTOMapper.roomMap_DTOAndDomain(rooms);
-        Room room = _rooms_DTOAndRooms.get( roomDTO );
+        Room room = _rooms_DTOAndRooms.get( roomDTO.getName() );
         room.createDevice(deviceName);
         List<Device> devices = room.getDevices();
         return DeviceDTOMapper.devices_DomainToDTO(devices);

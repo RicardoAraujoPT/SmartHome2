@@ -14,7 +14,7 @@ public class ListOfRoomsController {
 
 
     private static House _myHouse;
-    private Map<RoomDTO, Room> _rooms_DTOAndRooms = new HashMap<>();
+    private Map<String, Room> _rooms_DTOAndRooms = new HashMap<>();
 
     public ListOfRoomsController(House myHouse){
         if(myHouse == null){
@@ -48,7 +48,7 @@ public class ListOfRoomsController {
 
     }
 
-    public List<RoomDTO> getRooms() {
+    public List<String> getRooms() {
         List<Room> rooms = _myHouse.getRoomList();
 
         this._rooms_DTOAndRooms = RoomDTOMapper.roomMap_DTOAndDomain(rooms);
