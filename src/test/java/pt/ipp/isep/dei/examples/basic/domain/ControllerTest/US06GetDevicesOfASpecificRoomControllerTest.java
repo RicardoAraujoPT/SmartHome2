@@ -1,7 +1,7 @@
 package pt.ipp.isep.dei.examples.basic.domain.ControllerTest;
 
 import org.junit.jupiter.api.Test;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Controllers.GetDevicesOfASpecificRoomController;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Controllers.US06GetDevicesOfASpecificRoomController;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.DeviceDTO;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.RoomDTO;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Device;
@@ -17,17 +17,17 @@ import static org.junit.jupiter.api.Assertions.*;
  * This class contains tests for the GetDevicesOfASpecificRoomController class.
  * It tests the functionality of getting devices of a specific room in a smart home system.
  */
-public class GetDevicesOfASpecificRoomControllerTest {
+public class US06GetDevicesOfASpecificRoomControllerTest {
 
     /**
      * Test case to verify if a valid House object can be instantiated.
      */
     @Test
-    public void shouldInstantiateValidHouse() {
+    void shouldInstantiateValidHouse() {
         // Arrange
         House house = new House("address", "zipCode", 55.2, -2.25);
         // Act
-        GetDevicesOfASpecificRoomController controller = new GetDevicesOfASpecificRoomController(house);
+        US06GetDevicesOfASpecificRoomController controller = new US06GetDevicesOfASpecificRoomController(house);
         // Assert
         assertNotNull(controller);
     }
@@ -36,16 +36,16 @@ public class GetDevicesOfASpecificRoomControllerTest {
      * Test case to verify if an exception is thrown when a null House object is provided.
      */
     @Test
-    public void shouldThrowExceptionWhenHouseIsNull() {
+    void shouldThrowExceptionWhenHouseIsNull() {
         // Act and Assert
-        assertThrows(IllegalArgumentException.class, () -> new GetDevicesOfASpecificRoomController(null));
+        assertThrows(IllegalArgumentException.class, () -> new US06GetDevicesOfASpecificRoomController(null));
     }
 
     /**
      * Test case to verify if an empty list of devices is returned when a room without devices is provided.
      */
     @Test
-    public void roomWithoutDevices_shouldReturnEmptyListOfDevices() throws InstantiationException {
+    void roomWithoutDevices_shouldReturnEmptyListOfDevices() throws InstantiationException {
         // Arrange
         House house = new House("address", "zipCode", 55.2, -2.25);
         Room room = house.createRoom("ChosenRoom", 1, 20.0, 3.0);
@@ -53,7 +53,7 @@ public class GetDevicesOfASpecificRoomControllerTest {
         RoomDTOMapper roomDTOMapper = new RoomDTOMapper(house);
         RoomDTO roomDTO = roomDTOMapper.room_DomainToDTO(room);
 
-        GetDevicesOfASpecificRoomController controller = new GetDevicesOfASpecificRoomController(house);
+        US06GetDevicesOfASpecificRoomController controller = new US06GetDevicesOfASpecificRoomController(house);
 
         // Act
         List<DeviceDTO> result = controller.getDevicesOfASpecificRoom(roomDTO);
@@ -65,14 +65,14 @@ public class GetDevicesOfASpecificRoomControllerTest {
      * Test case to verify if a list of two devices is returned when a room with two devices is provided.
      */
     @Test
-    public void roomWithTwoDevices_shouldReturnListOfTwoDevicesOfSpecificRoom() throws InstantiationException {
+    void roomWithTwoDevices_shouldReturnListOfTwoDevicesOfSpecificRoom() throws InstantiationException {
         // Arrange
         House house = new House("address", "zipCode", 55.2, -2.25);
         Room room = house.createRoom("Living Room", 1, 20.0, 3.0);
         Device device1 = room.createDevice("Device 1");
         Device device2 = room.createDevice("Device 2");
 
-        GetDevicesOfASpecificRoomController controller = new GetDevicesOfASpecificRoomController(house);
+        US06GetDevicesOfASpecificRoomController controller = new US06GetDevicesOfASpecificRoomController(house);
 
         RoomDTOMapper roomDTOMapper = new RoomDTOMapper(house);
         RoomDTO roomDTO = roomDTOMapper.room_DomainToDTO(room);

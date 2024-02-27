@@ -19,7 +19,7 @@ import java.util.Map;
  * It also uses a House object to get the list of rooms.
  */
 
-public class GetDevicesOfASpecificRoomController {
+public class US06GetDevicesOfASpecificRoomController {
 
     /**
      * The house object that contains the list of rooms.
@@ -36,7 +36,7 @@ public class GetDevicesOfASpecificRoomController {
      * @throws IllegalArgumentException if the provided house is null.
      */
 
-    public GetDevicesOfASpecificRoomController(House house) {
+    public US06GetDevicesOfASpecificRoomController(House house) {
         if (house == null) {
             throw new IllegalArgumentException("Provided house cannot be null");
         }
