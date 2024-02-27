@@ -15,5 +15,10 @@ public enum Unit {
     /**
      * Represents the Percentage unit of measurement.
      */
-    Percentage
+    Percentage,
+
+    Watt_m2,
+
+    WindSpeed,
+
 }

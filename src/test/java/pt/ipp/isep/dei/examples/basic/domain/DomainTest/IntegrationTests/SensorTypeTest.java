@@ -55,4 +55,51 @@ class SensorTypeTest
 
         assertTrue(actualMessage.contains(expectedMessage));
     }
+
+    @Test
+    void testConstructor_ValidParameters_SolarRadiation_ShouldNotThrowException() throws InstantiationException
+    {
+        // arrange
+
+        // act
+        SensorType sensorType = new SensorType( "Solar Irradiation", Unit.Watt_m2 );
+
+        // assert
+        assertEquals("Solar Radiation", sensorType.getDescription());
+        assertEquals( sensorType.getUnit(), Unit.Watt_m2);
+    }
+
+    @Test
+    void testConstructor_EmptyDescription_SolarRadiation_ShouldThrowException()
+    {
+        // arrange
+        String expectedMessage = "Invalid arguments";
+
+        // act + assert
+        Exception exception = assertThrows( InstantiationException.class, () ->
+                new SensorType( "", Unit.Watt_m2
+        ));
+
+        // assert
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    void testConstructor_NullDescription_SolarRadiation_ShouldThrowException()
+    {
+        // arrange
+        String expectedMessage = "Invalid arguments";
+
+        // act + assert
+        Exception exception = assertThrows( InstantiationException.class, () ->
+                new SensorType( null, Unit.Watt_m2)
+        );
+
+        // assert
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
 }
