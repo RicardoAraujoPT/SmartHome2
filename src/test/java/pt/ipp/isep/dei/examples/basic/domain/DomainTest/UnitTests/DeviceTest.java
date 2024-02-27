@@ -133,7 +133,7 @@ public class DeviceTest {
 
 
     @Test
-    void whenAddingValidSensorModel_thenNewSensorIsInstantiated() throws Exception{
+    void whenAddingValidGA100KSensorModel_thenNewSensorIsInstantiated() throws Exception{
         // arrange
         String strSensorModel = "Sensors.GA100K";
         String strSensorTypeDescription = "Temperature";
@@ -159,7 +159,7 @@ public class DeviceTest {
     }
 
     @Test
-    void whenAddingInvalidSensorModel_thenNullIsReturned() throws Exception{
+    void whenAddingInvalidGA100KSensorModel_thenNullIsReturned() throws Exception{
         // arrange
         String strSensorModel = "Sensors.GA100K";
 
@@ -174,5 +174,49 @@ public class DeviceTest {
         // assert
         assertNull(sensor);
     }
+
+    @Test
+    void whenAddingValidTSY01SensorModel_thenNewSensorIsInstantiated() throws Exception{
+        // arrange
+        String strSensorModel = "Sensors.TSY01";
+        String strSensorTypeDescription = "Humidity";
+
+        SensorType sensorTypeDouble = mock(SensorType.class);
+        when(sensorTypeDouble.getDescription()).thenReturn(strSensorTypeDescription);
+
+        Sensor sensorDouble = mock(Sensor.class);
+        when(sensorDouble.getSensorType()).thenReturn(sensorTypeDouble);
+
+        Catalogue catalogueDouble = mock(Catalogue.class);
+        when(catalogueDouble.getSensor(strSensorModel)).thenReturn(sensorDouble);
+
+        Device device = new Device("device1");
+
+        // act
+        Sensor sensor = device.addSensor(strSensorModel, catalogueDouble);
+
+        // assert
+        assertEquals(sensor.getSensorType().getDescription(), strSensorTypeDescription);
+        // Verify that the sensor was added to the device
+        assertTrue(device.getSensors().contains(sensor));
+    }
+
+    @Test
+    void whenAddingInvalidTSY01SensorModel_thenNullIsReturned() throws Exception{
+        // arrange
+        String strSensorModel = "Sensors.TSY01";
+
+        Catalogue catalogueDouble = mock(Catalogue.class);
+        when(catalogueDouble.getSensor(strSensorModel)).thenReturn(null);
+
+        Device device = new Device("device1");
+
+        // act
+        Sensor sensor = device.addSensor(strSensorModel, catalogueDouble);
+
+        // assert
+        assertNull(sensor);
+    }
+
 
 }
