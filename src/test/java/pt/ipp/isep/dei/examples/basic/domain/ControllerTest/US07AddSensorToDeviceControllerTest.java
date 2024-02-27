@@ -75,7 +75,7 @@ public class US07AddSensorToDeviceControllerTest {
         US07AddSensorToDeviceController controller = new US07AddSensorToDeviceController( myHouse, catalogue );
 
         // act
-        Sensor sensor = controller.addSensorToDevice(deviceDTO, "pt.ipp.isep.dei.examples.basic.domain.SmartHome.Sensors.GA100K" );
+        Sensor sensor = controller.addSensorToDevice(deviceDTO, "Sensors.GA100K" );
 
         // assert
         assertNull( sensor );
