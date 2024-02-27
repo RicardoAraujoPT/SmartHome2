@@ -147,7 +147,6 @@ class CatalogueTest {
         // arrange
         Configuration config = new PropertyListConfiguration();
         config.addProperty("sensor", "Sensors.GA100K");
-        config.addProperty("sensor", "SensorsTSY01");
         Catalogue catalogue = new Catalogue(config);
         SensorType sensorType = catalogue.addSensorType("Temperature", Unit.Celsius);
 
