@@ -16,13 +16,16 @@ public class DeactivateDeviceController {
     /**
      * The house where the device is located
      */
-    private House _house;
+    private final House _house;
 
     /**
      * Constructs a new US09GetDevicesByTypeController with the specified house.
      * @param house the house from which the devices will be retrieved.
      */
     public DeactivateDeviceController(House house) {
+        if (house == null) {
+            throw new IllegalArgumentException("Invalid house");
+        }
         this._house = house;
     }
 
@@ -38,6 +41,11 @@ public class DeactivateDeviceController {
         return DeviceDTOMapper.DeviceToDTOWithStatus(myDevice);
     }
 
+    /**
+     * Given a deviceDTO, retrieves the corresponding Device Object
+     * @param deviceDTO the deviceDTO that is to be transformed into Device
+     * @return returns the equivalent Domain Device Object
+     */
     public Device getDeviceFromDomain(DeviceDTO deviceDTO) {
         DeviceDTOMapper deviceDTOMapper = new DeviceDTOMapper(_house);
         HashMap<DeviceDTO,Device> deviceDTODeviceHashMap = deviceDTOMapper.getMapDevicesDTO();

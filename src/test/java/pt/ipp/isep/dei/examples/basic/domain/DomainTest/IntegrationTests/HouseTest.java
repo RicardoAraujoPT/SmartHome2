@@ -1,5 +1,6 @@
-package pt.ipp.isep.dei.examples.basic.domain.DomainTest;
+package pt.ipp.isep.dei.examples.basic.domain.DomainTest.IntegrationTests;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.House;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Room;
@@ -12,8 +13,13 @@ public class HouseTest {
         @Test
         public void shouldCreateValidHouse() {
             //arrange
-            House myHouse = new House("address","zipcode",55,105);
+            String address = "address";
+            String zipCode = "zipcode";
+            double latitude = 55;
+            double longitude = 105;
+
             //act
+            House myHouse = new House(address,zipCode,latitude,longitude);
             String houseAddress = myHouse.getLocation().getAddress();
             double houseLatitude = myHouse.getLocation().getGpsCoordinates().getLatitude();
             double houseLongitude = myHouse.getLocation().getGpsCoordinates().getLongitude();
@@ -26,10 +32,11 @@ public class HouseTest {
         }
 
         @Test
-        public void createHouseWithInvalidAddress() {
+
+        public void createHouseInvalidAddress_ShouldThrowException() {
 
             //arrange
-            String expected = "Invalid ZIP code or address";
+            String expected = "Invalid address or ZIP code";
             String houseZipCode = "zipCode";
             double houseLatitude = 55;
             double houseLongitude = 100;
@@ -43,10 +50,11 @@ public class HouseTest {
         }
 
         @Test
-        public void createHouseWithInvalidZipCode() {
+
+        public void createHouseInvalidZipCode_ShouldThrowException() {
 
             //arrange
-            String expected = "Invalid ZIP code or address";
+            String expected = "Invalid address or ZIP code";
             String houseAddress = "address";
             double houseLatitude = 55;
             double houseLongitude = 100;
@@ -61,7 +69,7 @@ public class HouseTest {
 
 
         @Test
-        public void createHouseWithInvalidLatitude() {
+        public void createHouseInvalidLatitude_ShouldThrowException() {
 
             //arrange
             String expected = "Invalid GPS coordinates";
@@ -79,7 +87,7 @@ public class HouseTest {
 
 
         @Test
-        public void createHouseWithInvalidLongitude() {
+        public void createHouseInvalidLongitude_ShouldThrowException() {
 
             //arrange
             String expected = "Invalid GPS coordinates";
@@ -99,8 +107,12 @@ public class HouseTest {
     void HouseWithoutRooms() {
 
         //arrange
-        House myHouse = new House("address","zipcode",55,105);
-        // act
+        String address = "address";
+        String zipCode = "zipcode";
+        double latitude = 55;
+        double longitude = 105;
+        //act
+        House myHouse = new House(address,zipCode,latitude,longitude);
         List<Room> listRooms = myHouse.getRoomList();
         // assert
         assertEquals(listRooms.size(), 0);
@@ -110,8 +122,12 @@ public class HouseTest {
     public void create1ValidRoom() throws InstantiationException {
 
         //arrange
-        House myHouse = new House("address","zipcode",55,105);
-        // act
+        String address = "address";
+        String zipCode = "zipcode";
+        double latitude = 55;
+        double longitude = 105;
+        //act
+        House myHouse = new House(address,zipCode,latitude,longitude);
         myHouse.createRoom("bedroom",1,2,3);
         int roomListSize = myHouse.getRoomList().size();
         // assert
@@ -122,8 +138,12 @@ public class HouseTest {
         public void create2ValidRooms() throws InstantiationException {
 
         //arrange
-        House myHouse = new House("address","zipcode",55,105);
-        // act
+        String address = "address";
+        String zipCode = "zipcode";
+        double latitude = 55;
+        double longitude = 105;
+        //act
+        House myHouse = new House(address,zipCode,latitude,longitude);
         myHouse.createRoom("bedroom",1,2,3);
         myHouse.createRoom("bathroom",1,2,3);
         int roomListSize = myHouse.getRoomList().size();
@@ -132,15 +152,19 @@ public class HouseTest {
         }
 
         @Test
-        public void createInvalidRoom() {
+        public void createInvalidRoom_ShouldThrowException() {
 
             //arrange
             String expected = "Invalid arguments";
-            House myHouse = new House("address","zipcode",55,105);
+            String address = "address";
+            String zipCode = "zipcode";
+            double latitude = 55;
+            double longitude = 105;
             int floorNumber = 1;
             double roomArea = 25;
             double roomHeight = 2.5;
             //act
+            House myHouse = new House(address,zipCode,latitude,longitude);
             Exception exception = assertThrows(InstantiationException.class, ()
                             -> { myHouse.createRoom(null,floorNumber,roomArea,roomHeight);
             });
@@ -153,9 +177,12 @@ public class HouseTest {
         public void testGetRoomByName() throws InstantiationException {
 
             //arrange
-            House myHouse = new House("address","zipcode",55,105);
-
+            String address = "address";
+            String zipCode = "zipcode";
+            double latitude = 55;
+            double longitude = 105;
             //act
+            House myHouse = new House(address,zipCode,latitude,longitude);
             myHouse.createRoom("bedroom",1,2,3);
             myHouse.createRoom("bathroom",1,2,3);
             String expected = myHouse.getRoomList().get(0).getRoomName();
@@ -167,13 +194,16 @@ public class HouseTest {
         }
 
         @Test
-        public void getInexistentRoom() throws InstantiationException {
+        public void getInexistentRoom_ShouldThrowException() throws InstantiationException {
 
             //arrange
             String expected = "Room name doesn't exist in the list";
-            House myHouse = new House("address","zipcode",55,105);
-
+            String address = "address";
+            String zipCode = "zipcode";
+            double latitude = 55;
+            double longitude = 105;
             //act
+            House myHouse = new House(address,zipCode,latitude,longitude);
             myHouse.createRoom("bedroom",1,2,3);
             myHouse.createRoom("bathroom",1,2,3);
             Exception exception =
@@ -186,16 +216,17 @@ public class HouseTest {
 
         }
 
-
-
         @Test
-        public void getInvalidRoom() throws InstantiationException {
+        public void getInvalidRoom_ShouldThrowException() throws InstantiationException {
 
             //arrange
             String expected = "Room name doesn't exist in the list";
-            House myHouse = new House("address","zipcode",55,105);
-
+            String address = "address";
+            String zipCode = "zipcode";
+            double latitude = 55;
+            double longitude = 105;
             //act
+            House myHouse = new House(address,zipCode,latitude,longitude);
             myHouse.createRoom("bedroom",1,2,3);
             myHouse.createRoom("bathroom",1,2,3);
             Exception exception =
@@ -206,9 +237,7 @@ public class HouseTest {
             String actualMessage = exception.getMessage();
             assertTrue(actualMessage.contains(expected));
 
-
         }
-
 
 
 

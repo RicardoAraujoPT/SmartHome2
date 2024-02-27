@@ -3,7 +3,9 @@ package pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.DeviceDTO;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Device;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.House;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Room;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,8 +33,15 @@ public class DeviceDTOMapper {
         return new DeviceDTO(device.getDeviceName(), device.getDeviceID(),null);
     }
 
-    public static DeviceDTO DeviceToDTOWithLocation(Device device,String roomName) {
-        return new DeviceDTO(device.getDeviceName(), device.getDeviceID(),roomName);
+    public static DeviceDTO device_DomainToDTOWithLocation(Device device,String roomName) {
+        return new DeviceDTO(device.getDeviceName(),roomName);
+    }
+    public static List<DeviceDTO> devices_DomainToDTO(List<Device> devices) {
+        List<DeviceDTO> devicesDTO = new ArrayList<>();
+        for (Device device : devices) {
+            devicesDTO.add(DeviceToDTO(device));
+        }
+        return devicesDTO;
     }
 
     //Converts a RoomDTO with name and status to a Room
@@ -50,5 +59,22 @@ public class DeviceDTOMapper {
         });
 
         return devicesDTOAndDevices;
+    }
+    public HashMap<String, List<DeviceDTO>> devicesMap_DomainToDTO(HashMap<String, HashMap<Room, List<Device>>> groupDevicesByType) {
+        HashMap<String, List<DeviceDTO>> hashMapDTO =  new HashMap<>();
+        for (HashMap.Entry<String, HashMap<Room, List<Device>>> SensorType : groupDevicesByType.entrySet()) {
+            String functionality = SensorType.getKey();
+            HashMap<Room, List<Device>> secondMapContent = SensorType.getValue();
+            List<DeviceDTO> deviceDTOList = new ArrayList<>();
+            for (HashMap.Entry<Room, List<Device>> Room : secondMapContent.entrySet()) {
+                List<Device> devices = Room.getValue();
+                for (Device device : devices) {
+                    DeviceDTO deviceDTO = device_DomainToDTOWithLocation(device, Room.getKey().getRoomName());
+                    deviceDTOList.add(deviceDTO);
+                }
+            }
+            hashMapDTO.put(functionality, deviceDTOList);
+        }
+        return hashMapDTO;
     }
 }

@@ -17,7 +17,7 @@ public class RoomDTOMapper {
     private House _house;
 
     /**
-     * GetRoomsMapper constructor with parameter house.
+     * RoomDTOMapper constructor with parameter house.
      *
      * @param house The house object that this mapper is associated with.
      */
@@ -53,7 +53,7 @@ public class RoomDTOMapper {
         return listOfRoomsInHouseDTO;
     }
 
-    public Map<RoomDTO, Room> RoomMap_DTOAndDomain(List<Room> rooms) {
+    public static Map<RoomDTO, Room> roomMap_DTOAndDomain(List<Room> rooms) {
 
         Map<RoomDTO, Room> roomsDTOAndRooms = new HashMap<>();
 

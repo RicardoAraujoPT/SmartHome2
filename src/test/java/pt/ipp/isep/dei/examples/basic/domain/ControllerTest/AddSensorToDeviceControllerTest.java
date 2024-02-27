@@ -72,9 +72,9 @@ public class AddSensorToDeviceControllerTest {
     void AddExistingSensorModelToDevice() throws InstantiationException {
         // arrange
         Configuration config = new PropertyListConfiguration();
-        config.addProperty("sensor", "pt.ipp.isep.dei.examples.basic.domain.SmartHome.Sensors.GA100K");
+        config.addProperty("sensor", "Sensors.GA100K");
         Catalogue catalogue = new Catalogue( config );
-        catalogue.addSensorType("Temperature", Unit.Celsius);
+        SensorType sensorType = catalogue.addSensorType("Temperature", Unit.Celsius);
 
         House myHouse = new House("address","zipcode",55,105);
         Room livingRoom = myHouse.createRoom( "Living Room", 0, 10, 10);
@@ -84,10 +84,11 @@ public class AddSensorToDeviceControllerTest {
         AddSensorToDeviceController controller = new AddSensorToDeviceController( myHouse, catalogue );
 
         // act
-        Sensor sensor = controller.addSensorToDevice(deviceDTO, "pt.ipp.isep.dei.examples.basic.domain.SmartHome.Sensors.GA100K" );
+        Sensor sensor = controller.addSensorToDevice(deviceDTO, "Sensors.GA100K" );
 
         // assert
         assertNotNull( sensor );
+        assertEquals(sensor.getSensorType(), sensorType);
     }
 
 

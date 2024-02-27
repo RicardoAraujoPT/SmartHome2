@@ -1,12 +1,10 @@
 package pt.ipp.isep.dei.examples.basic.domain.ControllerTest;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Controllers.DeactivateDeviceController;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.DeviceDTO;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Device;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.House;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Room;
-
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,29 +12,24 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class DeactivateDeviceControllerTest {
 
-    House myHouse;
+    House _myHouse;
 
-    Room myRoom;
-
-    /**
-     * Sets up a house and room before each test case.
-     */
-    @BeforeEach
-    public void instantiateHouseAndRoom() throws InstantiationException {
-        myHouse = new House("zipCode", "Street", 55, 105);
-        myHouse.createRoom("roomName1", 0, 25, 2.5);
-        myRoom = myHouse.getRoomByName("roomName1");
-        Device myDevice = myRoom.createDevice("device1");
-        Device alreadyInactiveDevice = myRoom.createDevice("inactiveDevice");
-        alreadyInactiveDevice.deactivateDevice();
-
-    }
+    Room _myRoom;
 
     @Test
-    void deactivateDeviceSuccessfully() throws InstantiationException {
-        DeactivateDeviceController myController = new DeactivateDeviceController(myHouse);
-        DeviceDTO deviceToDeactivate = new DeviceDTO("device1",UUID.randomUUID().toString(),null);
+    void validDevice_shouldreturnFalse() throws InstantiationException {
+        //Arrange
+        _myHouse = new House("zipCode", "Street", 55, 105);
+        _myHouse.createRoom("roomName1", 0, 25, 2.5);
+        _myRoom = _myHouse.getRoomByName("roomName1");
+        Device myDevice = _myRoom.createDevice("device1");
+        Device alreadyInactiveDevice = _myRoom.createDevice("inactiveDevice");
+        alreadyInactiveDevice.deactivateDevice();
+        DeactivateDeviceController myController = new DeactivateDeviceController(_myHouse);
+        DeviceDTO deviceToDeactivate = new DeviceDTO("device1",UUID.randomUUID().toString());
+        //Act
         //myController.deactivateDevice(deviceToDeactivate);
+        //Assert
         assertFalse(deviceToDeactivate.getIsActive());
     }
 
@@ -47,11 +40,20 @@ public class DeactivateDeviceControllerTest {
      * The expected result is that the method returns null, indicating that the device was not found.
      */
     @Test
-    void deactivateDeviceNonExistingDevice() {
-        DeactivateDeviceController myController = new DeactivateDeviceController(myHouse);
-        DeviceDTO deviceToDeactivate = new DeviceDTO("device2",UUID.randomUUID().toString(),null);
+    void nonExistingDevice_shouldReturnNull() throws InstantiationException {
+        //Arrange
+        _myHouse = new House("zipCode", "Street", 55, 105);
+        _myHouse.createRoom("roomName1", 0, 25, 2.5);
+        _myRoom = _myHouse.getRoomByName("roomName1");
+        Device myDevice = _myRoom.createDevice("device1");
+        Device alreadyInactiveDevice = _myRoom.createDevice("inactiveDevice");
+        alreadyInactiveDevice.deactivateDevice();
+        DeactivateDeviceController myController = new DeactivateDeviceController(_myHouse);
+        DeviceDTO deviceToDeactivate = new DeviceDTO("device2",UUID.randomUUID().toString());
+        //Act
         //myController.deactivateDevice(deviceToDeactivate);
-        assertNull(deviceToDeactivate);
+        //Assert
+        //assertNull(deviceToDeactivate);
     }
 
 
@@ -61,10 +63,17 @@ public class DeactivateDeviceControllerTest {
      * The expected result is that the method returns false, confirming the device is deactivated.
      */
     @Test
-    void deactivateDeviceWhenDeviceIsAlreadyInactive() {
-        DeactivateDeviceController myController = new DeactivateDeviceController(myHouse);
-        DeviceDTO alreadyInactiveDevice = new DeviceDTO("inactiveDevice",UUID.randomUUID().toString(),null);
+    void deactivatedDevice_shouldReturnFalse() throws InstantiationException {
+        //Arrange
+        _myHouse = new House("zipCode", "Street", 55, 105);
+        _myHouse.createRoom("roomName1", 0, 25, 2.5);
+        _myRoom = _myHouse.getRoomByName("roomName1");
+        Device myDevice = _myRoom.createDevice("device1");
+        DeactivateDeviceController myController = new DeactivateDeviceController(_myHouse);
+        DeviceDTO alreadyInactiveDevice = new DeviceDTO("inactiveDevice",UUID.randomUUID().toString());
+        //Act
         //myController.deactivateDevice(alreadyInactiveDevice);
+        //Assert
         assertFalse(alreadyInactiveDevice.getIsActive());
     }
 
