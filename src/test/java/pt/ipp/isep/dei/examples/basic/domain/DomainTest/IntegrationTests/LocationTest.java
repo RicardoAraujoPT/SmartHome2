@@ -67,7 +67,7 @@ public class LocationTest {
         String zipCode = null;
         double latitude = 90.0000;
         double longitude = 180.0000;
-        String expectedMessage = "Invalid address, ZIP code, latitude or longitude";
+        String expectedMessage = "Invalid address or ZIP code";
 
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> new Location(address, zipCode, latitude, longitude));
@@ -90,7 +90,7 @@ public class LocationTest {
         String zipCode = "ZipCode";
         double latitude = 90.0000;
         double longitude = 180.0000;
-        String expectedMessage = "Invalid address, ZIP code, latitude or longitude";
+        String expectedMessage = "Invalid address or ZIP code";
 
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> new Location(address, zipCode, latitude, longitude));
@@ -113,7 +113,7 @@ public class LocationTest {
         String zipCode = "";
         double latitude = 90.0000;
         double longitude = 180.0000;
-        String expectedMessage = "Invalid address, ZIP code, latitude or longitude";
+        String expectedMessage = "Invalid address or ZIP code";
 
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> new Location(address, zipCode, latitude, longitude));
