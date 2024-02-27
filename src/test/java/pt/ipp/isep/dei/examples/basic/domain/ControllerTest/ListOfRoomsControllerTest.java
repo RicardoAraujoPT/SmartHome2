@@ -10,24 +10,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 public class ListOfRoomsControllerTest {
 
-    @Test
-    public void getHouseRoomDTOListManyRooms() throws InstantiationException {
-        //Arrange
-        House myHouse = new House("123","street",90.0,30.0);
-        myHouse.createRoom("Test Room1", 0, 35, 2.5);
-        myHouse.createRoom("Test Room2", 0, 35, 2.5);
-        myHouse.createRoom("Test Room3", 0, 35, 2.5);
-        myHouse.createRoom("Test Room4", 0, 35, 2.5);
-        ListOfRoomsController myController = new ListOfRoomsController(myHouse);
-        //Act
-        int expected = myHouse.getRoomList().size();
-        int found = myController.getRoomDTOList().size();
-        //Assert
-        assertEquals(expected, found);
-    }
 
     @Test
-    public void getRoomListDTONullHouse() {
+    public void nullHouse_shouldThrowIllegalArgumentException() {
         //Arrange
         House myHouse = null;
         //act
@@ -37,7 +22,7 @@ public class ListOfRoomsControllerTest {
     }
 
     @Test
-    public void getHouseRoomDTOListWithoutRooms() {
+    public void emptyRoomList_shouldFindEmptyList() {
         //Arrange
         House myHouse = new House("zipCode","street",90.0,30.0);
         //Act + Assert
@@ -45,7 +30,7 @@ public class ListOfRoomsControllerTest {
     }
 
     @Test
-    public void getHouseRoomListWithSeveralRooms() throws InstantiationException {
+    public void validArguments_shouldAddSeveralRoomsToHouse() throws InstantiationException {
         //Arrange
         House myHouse = new House("rua algures","5000-300",90.0,30.0);
         myHouse.createRoom("Bedroom", 0, 35, 2.5);
