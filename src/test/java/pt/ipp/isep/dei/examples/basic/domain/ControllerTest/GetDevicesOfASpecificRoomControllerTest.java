@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Controllers.GetDevicesOfASpecificRoomController;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.DeviceDTO;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.RoomDTO;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Device;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.House;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Room;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.DeviceDTOMapper;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.RoomDTOMapper;
 
 import java.util.List;
@@ -20,54 +20,40 @@ import static org.junit.jupiter.api.Assertions.*;
 public class GetDevicesOfASpecificRoomControllerTest {
 
     /**
-     * This test checks the constructor of the GetDevicesOfASpecificRoomController class.
+     * Test case to verify if a valid House object can be instantiated.
      */
     @Test
-    void shouldInstantiateHouseDeviceDTOMapperAndRoomDTOMapper() {
+    public void shouldInstantiateValidHouse() {
         // Arrange
         House house = new House("address", "zipCode", 55.2, -2.25);
-        DeviceDTOMapper deviceDTOMapper = new DeviceDTOMapper(house);
-        RoomDTOMapper roomDTOMapper = new RoomDTOMapper(house);
-
         // Act
-        GetDevicesOfASpecificRoomController controller = new GetDevicesOfASpecificRoomController(deviceDTOMapper, roomDTOMapper, house);
-
+        GetDevicesOfASpecificRoomController controller = new GetDevicesOfASpecificRoomController(house);
         // Assert
-        assertEquals(deviceDTOMapper, controller.getDeviceDTOMapper());
+        assertNotNull(controller);
     }
 
     /**
-     * This test checks the getDevicesOfASpecificRoom method when the RoomDTO is null.
-     * It is expected to throw an InstantiationException.
+     * Test case to verify if an exception is thrown when a null House object is provided.
      */
     @Test
-    void nullRoom_shouldThrowInstantiationException() {
-        // Arrange
-        House house = new House("address", "zipCode", 55.2, -2.25);
-        DeviceDTOMapper deviceDTOMapper = new DeviceDTOMapper(house);
-        RoomDTOMapper roomDTOMapper = new RoomDTOMapper(house);
-        GetDevicesOfASpecificRoomController controller = new GetDevicesOfASpecificRoomController(deviceDTOMapper, roomDTOMapper, house);
-
+    public void shouldThrowExceptionWhenHouseIsNull() {
         // Act and Assert
-        assertThrows(InstantiationException.class, () -> controller.getDevicesOfASpecificRoom(null));
+        assertThrows(IllegalArgumentException.class, () -> new GetDevicesOfASpecificRoomController(null));
     }
 
     /**
-     * This test checks the getDevicesOfASpecificRoom method when the RoomDTO is valid but has no devices.
-     * It is expected to return an empty list.
+     * Test case to verify if an empty list of devices is returned when a room without devices is provided.
      */
-
     @Test
-    void roomWithoutDevices_shouldReturnEmptyListOfDevices() throws InstantiationException {
+    public void roomWithoutDevices_shouldReturnEmptyListOfDevices() throws InstantiationException {
         // Arrange
         House house = new House("address", "zipCode", 55.2, -2.25);
         Room room = house.createRoom("ChosenRoom", 1, 20.0, 3.0);
-        RoomDTOMapper myRoomMapper = new RoomDTOMapper(house);
-        RoomDTO roomDTO = myRoomMapper.room_DomainToDTO(room); //room is converted to DTO
 
-        DeviceDTOMapper deviceDTOMapper = new DeviceDTOMapper(house);
         RoomDTOMapper roomDTOMapper = new RoomDTOMapper(house);
-        GetDevicesOfASpecificRoomController controller = new GetDevicesOfASpecificRoomController(deviceDTOMapper, roomDTOMapper, house);
+        RoomDTO roomDTO = roomDTOMapper.room_DomainToDTO(room);
+
+        GetDevicesOfASpecificRoomController controller = new GetDevicesOfASpecificRoomController(house);
 
         // Act
         List<DeviceDTO> result = controller.getDevicesOfASpecificRoom(roomDTO);
@@ -75,13 +61,9 @@ public class GetDevicesOfASpecificRoomControllerTest {
         // Assert
         assertTrue(result.isEmpty());
     }
-
     /**
-     * This test checks the getDevicesOfASpecificRoom method when the RoomDTO is valid and has devices.
-     * It is expected to return a list of DeviceDTOs.
+     * Test case to verify if a list of two devices is returned when a room with two devices is provided.
      */
-
-    /*
     @Test
     public void roomWithTwoDevices_shouldReturnListOfTwoDevicesOfSpecificRoom() throws InstantiationException {
         // Arrange
@@ -90,20 +72,16 @@ public class GetDevicesOfASpecificRoomControllerTest {
         Device device1 = room.createDevice("Device 1");
         Device device2 = room.createDevice("Device 2");
 
-        DeviceDTOMapper deviceDTOMapper = new DeviceDTOMapper(house);
+        GetDevicesOfASpecificRoomController controller = new GetDevicesOfASpecificRoomController(house);
+
         RoomDTOMapper roomDTOMapper = new RoomDTOMapper(house);
-        GetDevicesOfASpecificRoomController controller = new GetDevicesOfASpecificRoomController(deviceDTOMapper, roomDTOMapper, house);
-
-        RoomDTO roomDTO = RoomDTOMapper.room_DomainToDTO(room);  //room is converted to DTO
-
+        RoomDTO roomDTO = roomDTOMapper.room_DomainToDTO(room);
         // Act
         List<DeviceDTO> result = controller.getDevicesOfASpecificRoom(roomDTO);
 
-        // Assert - Após debug dá erro no asserTrue
+        // Assert
         assertEquals(2, result.size());
         assertTrue(result.stream().anyMatch(deviceDTO -> deviceDTO.getDeviceName().equals(device1.getDeviceName())));
         assertTrue(result.stream().anyMatch(deviceDTO -> deviceDTO.getDeviceName().equals(device2.getDeviceName())));
     }
-    */
-
 }
