@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CatalogueTest {
     @Test
-    void NewConfiguredCatalogueFromExistingFile() throws InstantiationException {
+    void existingFile_ShouldCreateConfiguredCatalogue() throws InstantiationException {
         // arrange
 
         // act
@@ -20,7 +20,7 @@ class CatalogueTest {
     }
 
     @Test
-    void NewConfiguredCatalogueFromInexistingFile() {
+    void inexistentFile_ShouldThrowException() {
         // arrange
         String expectedMessage = "something went wrong in reading the configuration: ";
 
@@ -36,7 +36,7 @@ class CatalogueTest {
     }
 
     @Test
-    void NewConfiguredEmptyCatalogue() {
+    void emptyCatalogue_ShouldCreateConfiguredCatalogue() {
         // arrange
         Configuration config = new PropertyListConfiguration();
 
@@ -48,7 +48,7 @@ class CatalogueTest {
     }
 
     @Test
-    void GetExistingSensorType() throws InstantiationException {
+    void existingSensorType_ShouldGetSensorType() throws InstantiationException {
         // arrange
         Configuration config = new PropertyListConfiguration();
         Catalogue catalogue = new Catalogue(config);
@@ -62,7 +62,7 @@ class CatalogueTest {
     }
 
     @Test
-    void GetInexistingSensorType() throws InstantiationException {
+    void inexistentSensorType_ShouldReturnNull() throws InstantiationException {
         // arrange
         Configuration config = new PropertyListConfiguration();
         Catalogue catalogue = new Catalogue(config);
@@ -77,7 +77,7 @@ class CatalogueTest {
     }
 
     @Test
-    void addValidSensorType() throws InstantiationException {
+    void validSensorType_ShouldAddSensorType() throws InstantiationException {
         // arrange
         Configuration config = new PropertyListConfiguration();
         Catalogue catalogue = new Catalogue(config);
@@ -91,7 +91,7 @@ class CatalogueTest {
     }
 
     @Test
-    void addEmptyDescriptionSensorType() {
+    void emptyDescriptionSensorType_ShouldThrowException() {
         // arrange
         Configuration config = new PropertyListConfiguration();
         Catalogue catalogue = new Catalogue(config);
@@ -109,7 +109,7 @@ class CatalogueTest {
     }
 
     @Test
-    void addNullDescriptionSensorType() {
+    void nullDescriptionSensorType_ShouldThrowException() {
         // arrange
         Configuration config = new PropertyListConfiguration();
         Catalogue catalogue = new Catalogue(config);
@@ -127,7 +127,7 @@ class CatalogueTest {
     }
 
     @Test
-    void getSensorOfUniqueModel() throws InstantiationException {
+    void uniqueModel_ShouldGetSensor() throws InstantiationException {
         // arrange
         Configuration config = new PropertyListConfiguration();
         config.addProperty("sensor", "Sensors.TSY01");
@@ -143,7 +143,7 @@ class CatalogueTest {
     }
 
     @Test
-    void getSensorOfListOfTwoModels() throws InstantiationException {
+    void listOfTwoModels_ShouldGetSensor() throws InstantiationException {
         // arrange
         Configuration config = new PropertyListConfiguration();
         config.addProperty("sensor", "Sensors.GA100K");
@@ -160,7 +160,7 @@ class CatalogueTest {
     }
 
     @Test
-    void getNullSensorOfEmptyListOfModels() throws InstantiationException {
+    void emptyListOfModels_ShouldReturnNullSensor() throws InstantiationException {
         // arrange
         Configuration config = new PropertyListConfiguration();
         Catalogue catalogue = new Catalogue(config);

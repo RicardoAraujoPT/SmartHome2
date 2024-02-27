@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class GA100KTest
 {
     @Test
-    void NewValidGA100K() throws InstantiationException
+    void validGA100K_ShouldCreateNewInstance() throws InstantiationException
     {
         // arrange
         Configuration config = new PropertyListConfiguration();
@@ -29,7 +29,7 @@ class GA100KTest
     }
 
     @Test
-    void NewInexistentSensorTypeForGA100K()
+    void inexistentSensorTypeForGA100K_ShouldThrowException()
     {
         // arrange
         Configuration config = new PropertyListConfiguration();
