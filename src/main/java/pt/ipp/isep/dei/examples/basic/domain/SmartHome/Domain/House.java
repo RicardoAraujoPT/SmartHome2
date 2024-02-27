@@ -65,8 +65,24 @@ public class House {
         return myRoom;
     }
 
+    /**
+     * Method that verifies if there are duplicate room names in the roomList.
+     *
+     * @param name The name to check for duplicates.
+     * @return Boolean indicating whether there are duplicate room names.
+     */
+    private boolean isRoomNameDuplicated(String name) {
+        for (Room room : this._rooms) {
+            if (room.getRoomName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
     public Room createRoom(String roomName, int floorNumber, double area, double height) throws InstantiationException {
-
+        if (isRoomNameDuplicated(roomName)) {
+            throw new IllegalArgumentException("Room name already exists");
+        }
         Room myRoom = new Room(roomName,floorNumber,area,height);
 
         this._rooms.add(myRoom);

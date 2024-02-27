@@ -30,7 +30,7 @@ public class DeviceDTOMapper {
 
     // Converts a RoomDTO to a Room
     public static DeviceDTO DeviceToDTO(Device device) {
-        return new DeviceDTO(device.getDeviceName(), device.getDeviceID(),null);
+        return new DeviceDTO(device.getDeviceName(),null);
     }
 
     public static DeviceDTO device_DomainToDTOWithLocation(Device device,String roomName) {

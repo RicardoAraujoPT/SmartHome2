@@ -4,7 +4,7 @@ import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Value;
 
 public class TSY01Value implements Value
 {
-    public double _dValue;
+    public int _dValue;
 
     public TSY01Value(int dValue )
     {
