@@ -22,8 +22,15 @@ public enum Unit {
      */
     Watt_m2,
 
+    OnOff,
 
-    OnOff
+    /**
+     * Represents the Wind Speed measurement.
+     */
+    Kmh,
+
+
+
 
 
 

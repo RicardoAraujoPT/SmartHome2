@@ -102,4 +102,47 @@ class SensorTypeTest
 
         assertTrue(actualMessage.contains(expectedMessage));
     }
+
+    @Test
+    void shouldCreateWindSensor_ShouldNotThrowException() throws InstantiationException
+    {
+        // arrange
+
+        // act
+        SensorType sensorType = new SensorType( "Wind Sensor", Unit.Kmh );
+
+        // assert
+        assertEquals("Wind Sensor", sensorType.getDescription());
+        assertEquals( sensorType.getUnit(), Unit.Kmh);
+    }
+
+    @Test
+    void nullDescriptionWindSensor_ShouldThrowException() {
+        // arrange
+        String expectedMessage = "Invalid arguments";
+
+        // act
+        Exception exception = assertThrows( InstantiationException.class, () ->
+                new SensorType( null, Unit.Kmh)
+        );
+
+        // assert
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    void emptyDescriptionWindSensor_ShouldThrowException() {
+        // arrange
+        String expectedMessage = "Invalid arguments";
+
+        // act
+        Exception exception = assertThrows( InstantiationException.class, () ->
+                new SensorType( "", Unit.Kmh)
+        );
+
+        // assert
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
 }

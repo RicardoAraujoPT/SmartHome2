@@ -11,54 +11,52 @@ public class WS8600 implements Sensor {
     private final SensorType _sensorType;
 
 
+
     public WS8600(Catalogue catalogue) throws InstantiationException {
 
         //this is a wind sensor
 
         SensorType sensorType = catalogue.getSensorType("Wind");
-        if( sensorType ==null )
-            throw new InstantiationException("SensorType with description 'Wind' does not exist.");
+        if( sensorType == null )
+            throw new InstantiationException("SensorType with description 'Wind Sensor' does not exist.");
         else
             this._sensorType = sensorType;
     }
 
-    //de onde vem este valor?é introduzido ?
+    // obter a descrição e unidade de medida do sensor
+    public SensorType getSensorType() {
+
+        return this._sensorType;
+    }
+
+    //obter o valor associado a velocidade
     public Value getValue() {
+
         return null;
     }
 
-    public SensorType getSensorType() {
-        return null;
-    }
 
     /*
     return 1 of 8 cardinal points (N,S,E,W,NW,SW,SE,NE)
-     */
+
     public String getWindDirection(double azimuthDegrees){
 
-        if(azimuthDegrees > 0 && azimuthDegrees <= 45){
-            return "NE";
+        if(azimuthDegrees == 0){
+            return "N";
         }
-        if(azimuthDegrees == 90){
+        if(azimuthDegrees == 90.0){
             return "E";
         }
-        if(azimuthDegrees <= 135){
-            return "SE";
-        }
-        if(azimuthDegrees == 180){
+        if(azimuthDegrees == 180.0){
             return "S";
         }
-        if(azimuthDegrees <= 225){
-            return "SW";
-        }
-        if(azimuthDegrees == 270){
+        if(azimuthDegrees == 270.0){
             return "W";
         }
-        if(azimuthDegrees <= 315){
-            return "NW";
-        }
-        return "N";
+        return null;
     }
+
+     */
 
 
 
