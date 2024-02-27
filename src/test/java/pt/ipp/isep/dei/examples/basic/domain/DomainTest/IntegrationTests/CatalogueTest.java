@@ -5,18 +5,23 @@ import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.plist.PropertyListConfiguration;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CatalogueTest {
     @Test
-    void existingFile_ShouldCreateConfiguredCatalogue() throws InstantiationException {
+    void existingFile_ShouldCreateConfiguredCatalogue() throws InstantiationException, IOException {
         // arrange
+        long lineCountExpected = Files.lines(Paths.get("config.properties")).count()-1;
 
         // act
         Catalogue catalogue = new Catalogue("config.properties");
 
         // assert
-        assertEquals(catalogue.getSensorModels().size(), 4);
+        assertEquals(lineCountExpected, catalogue.getSensorModels().size());
     }
 
     @Test
