@@ -23,7 +23,7 @@ public class US06GetDevicesOfASpecificRoomControllerTest {
      * Test case to verify if a valid House object can be instantiated.
      */
     @Test
-    void shouldInstantiateValidHouse() {
+    void validHouse_shouldInstantiateValidHouse() {
         // Arrange
         House house = new House("address", "zipCode", 55.2, -2.25);
         // Act
@@ -36,7 +36,7 @@ public class US06GetDevicesOfASpecificRoomControllerTest {
      * Test case to verify if an exception is thrown when a null House object is provided.
      */
     @Test
-    void shouldThrowExceptionWhenHouseIsNull() {
+    void nullHouse_shouldThrowExceptionWhenHouseIsNull() {
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> new US06GetDevicesOfASpecificRoomController(null));
     }

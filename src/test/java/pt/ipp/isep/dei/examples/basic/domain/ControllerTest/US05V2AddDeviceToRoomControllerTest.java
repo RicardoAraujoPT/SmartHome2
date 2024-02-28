@@ -21,7 +21,7 @@ public class US05V2AddDeviceToRoomControllerTest {
      * Tests the successful addition of a device to a room.
      */
     @Test
-    void shouldAddDeviceToRoom() throws InstantiationException {
+    void validDevice_shouldAddDeviceToRoom() throws InstantiationException {
         //Arrange
         myHouse = new House("zipCode", "Street", 55, 105);
         Room myRoom = myHouse.createRoom("roomName1", 0, 25, 2.5);
