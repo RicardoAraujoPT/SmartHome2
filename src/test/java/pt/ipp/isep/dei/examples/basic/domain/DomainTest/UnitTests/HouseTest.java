@@ -11,8 +11,12 @@ import static org.mockito.Mockito.*;
 
 public class HouseTest {
 
+
+    /**
+     *Tests the instantiation of House objects, passing correct arguments in the constructor method.
+     */
     @Test
-    void shouldCreateValidHouse_ShouldNotThrowException() throws InstantiationException {
+    void shouldCreateValidHouse_ShouldNotThrowException() {
 
         //arrange
         double expectedLatitude = 53;
@@ -44,7 +48,11 @@ public class HouseTest {
         assertEquals(house.getLocation().getGpsCoordinates().getLatitude(),expectedLatitude);
     }
 
-
+    /**
+     *Tests the instantiation of House objects, passing invalid address in the constructor method.
+     *
+     * @throws IllegalArgumentException
+     */
     @Test
     void invalidHouseAddress_ShouldThrowException() throws IllegalArgumentException{
 
@@ -67,6 +75,11 @@ public class HouseTest {
         assertTrue(actualMessage.contains(expected));
     }
 
+    /**
+     *Tests the instantiation of House objects, passing invalid latitude in the constructor method.
+     *
+     * @throws IllegalArgumentException
+     */
     @Test
     void invalidHouseLatitude_ShouldThrowException() throws IllegalArgumentException{
 
@@ -89,7 +102,12 @@ public class HouseTest {
         assertTrue(actualMessage.contains(expected));
     }
 
-
+    /**
+     *Tests the instantiation of Room objects and add it to a list (passing correct arguments in the constructor method)
+     *Tests the functionality of addRoom() method of House objects.
+     *
+     * @throws IllegalArgumentException
+     */
     @Test
     void shouldCreateAndAddRoomInHouseRoomList() throws InstantiationException {
 
@@ -120,6 +138,12 @@ public class HouseTest {
 
     }
 
+    /**
+     *Tests the instantiation of Room objects and add it to a list (passing invalid name in the constructor method).
+     *Tests the functionality of addRoom() method of House objects.
+     *
+     * @throws InstantiationException
+     */
     @Test
     void createAndAddInvalidRoom_ShouldThrowException() throws InstantiationException {
 
@@ -155,8 +179,12 @@ public class HouseTest {
 
     }
 
+    /**
+     * Tests the functionality of getRoomList() method of House objects.
+     *
+     */
     @Test
-    void shouldGetHouseRooms_HouseWithoutRooms() throws InstantiationException {
+    void shouldGetHouseRooms_HouseWithoutRooms() {
 
         // arrange
         double latitude = 53;
@@ -176,6 +204,11 @@ public class HouseTest {
         assertEquals(listRooms.size(), 0);
     }
 
+    /**
+     *Tests the instantiation of Room objects and add it to a list (passing invalid name in the constructor method).
+     *Tests the functionality of getRoomByName() method of House objects.
+     * Tests the instantiation of House objects, passing correct arguments in the constructor method.
+     */
     @Test
     void shouldGetHouseRoomByName() throws InstantiationException {
 
@@ -206,6 +239,13 @@ public class HouseTest {
 
     }
 
+    /**
+     *Tests the instantiation of Room objects and add it to a list (passing correct arguments in the constructor method)
+     *Tests the functionality of addRoom() method of House objects.
+     *Tests the functionality of getRoomByName() method of House objects, when the name of the room we are looking for does not exist in the list.
+     *
+     * @throws IllegalArgumentException
+     */
     @Test
     void houseGetRoomInvalidName_ShouldThrowException() throws InstantiationException {
 
@@ -241,6 +281,13 @@ public class HouseTest {
         assertTrue(actualMessage.contains(expected));
     }
 
+
+    /**
+     *Tests the instantiation of Room objects and add it to a list (passing correct arguments in the constructor method)
+     *Tests the functionality of addRoom() method of House objects, when the name of the room we want to add already exists in the list.
+     *
+     * @throws IllegalArgumentException
+     */
     @Test
     void addRoomDuplicatedName_ShouldThrowException() throws InstantiationException {
 
