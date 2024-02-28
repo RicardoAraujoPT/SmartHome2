@@ -2,7 +2,7 @@ package pt.ipp.isep.dei.examples.basic.domain.SmartHome.Controllers;
 
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.LocationDTO;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.House;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.LocationDTOMapper;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.LocationMapper;
 
 /**
  * The ConfigureHouseLocationController class represents a controller for the use case "Configure House Location".
@@ -37,6 +37,6 @@ public class US01ConfigureHouseLocationController {
 
         this._myHouse.configureLocation(locationDTO.getAddress(), locationDTO.getZipCode(), locationDTO.getLatitude(), locationDTO.getLongitude());
 
-        return LocationDTOMapper.domain2DTO(_myHouse.getLocation());
+        return LocationMapper.domain2DTO(_myHouse.getLocation());
     }
 }

@@ -3,7 +3,7 @@ package pt.ipp.isep.dei.examples.basic.domain.SmartHome.Controllers;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.RoomDTO;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.House;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Room;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.RoomDTOMapper;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.RoomMapper;
 
 public class US02CreateRoomController {
 
@@ -22,7 +22,7 @@ public class US02CreateRoomController {
 
             Room myRoom = _myHouse.createRoom(roomDTO.getName(), roomDTO.getHouseFloor(), roomDTO.getArea(), roomDTO.getHeight());
 
-            RoomDTO myRoomDTO = RoomDTOMapper.room_DomainToDTO(myRoom);
+            RoomDTO myRoomDTO = RoomMapper.room_DomainToDTO(myRoom);
 
             return myRoomDTO;
     }

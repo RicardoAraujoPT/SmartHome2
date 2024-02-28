@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RoomDTOMapper {
+public class RoomMapper {
     private Map<RoomDTO, Room> _roomsDTOAndRooms = new HashMap<>();
     /**
      * The house object that this mapper is associated with.

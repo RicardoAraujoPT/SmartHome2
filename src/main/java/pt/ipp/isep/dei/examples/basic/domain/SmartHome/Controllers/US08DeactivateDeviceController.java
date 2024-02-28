@@ -1,7 +1,7 @@
 package pt.ipp.isep.dei.examples.basic.domain.SmartHome.Controllers;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.DeviceDTO;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.*;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.DeviceDTOMapper;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.DeviceMapper;
 
 
 /**
@@ -35,7 +35,7 @@ public class US08DeactivateDeviceController {
     public DeviceDTO deactivateDevice(DeviceDTO myDeviceDTO) {
         Device myDevice = _house.getRoomByName(myDeviceDTO.getRoomName()).getDeviceByName(myDeviceDTO.getDeviceName());
         myDevice.deactivateDevice();
-        return DeviceDTOMapper.DeviceToDTOWithStatus(myDevice);
+        return DeviceMapper.DeviceToDTOWithStatus(myDevice);
     }
 
 }

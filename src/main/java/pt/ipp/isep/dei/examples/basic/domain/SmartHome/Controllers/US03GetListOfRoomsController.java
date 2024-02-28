@@ -8,7 +8,7 @@ import java.util.Map;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.RoomDTO;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.House;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Room;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.RoomDTOMapper;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.RoomMapper;
 
 public class US03GetListOfRoomsController {
 
@@ -42,7 +42,7 @@ public class US03GetListOfRoomsController {
 
         ArrayList<Room> listOfRoomsInHouse = this._myHouse.getRoomList();
 
-        ArrayList<RoomDTO> listOfRoomsInHouseDTO = RoomDTOMapper.convertDomainToDTO(listOfRoomsInHouse);
+        ArrayList<RoomDTO> listOfRoomsInHouseDTO = RoomMapper.convertDomainToDTO(listOfRoomsInHouse);
 
         return new ArrayList<>(listOfRoomsInHouseDTO);
 
@@ -51,7 +51,7 @@ public class US03GetListOfRoomsController {
     public List<String> getRooms() {
         List<Room> rooms = _myHouse.getRoomList();
 
-        this._rooms_DTOAndRooms = RoomDTOMapper.roomMap_NameAndDomain(rooms);
+        this._rooms_DTOAndRooms = RoomMapper.roomMap_NameAndDomain(rooms);
 
         return _rooms_DTOAndRooms.keySet().stream().toList();
     }
