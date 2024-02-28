@@ -122,6 +122,11 @@ class US09GetDevicesByTypeControllerTest {
         //Assert
         assertEquals(expectedMessage, actualMessage);
     }
+
+    /**
+     * This test checks if an exception is thrown in the event of trying to construct a controller object with a null catalogue
+     * The expected result is an exception.
+     */
     @Test
     void nullCatalogue_shouldThrowIllegalArgumentException() throws IllegalArgumentException {
         //Arrange
