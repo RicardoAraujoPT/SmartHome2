@@ -25,12 +25,67 @@ public class WS8600Test {
 
         // act + assert
         Exception exception = assertThrows( InstantiationException.class, () ->
-                new WS8600( catalogue )
-        );
+                new WS8600( catalogue ));
 
         // assert
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
     }
+
+    @Test
+    void validWS8600_ShouldCreateNewInstance() throws InstantiationException
+    {
+        // arrange
+        Configuration config = new PropertyListConfiguration();
+        Catalogue catalogue = new Catalogue( config );
+        SensorType sensorType = catalogue.addSensorType( "Wind Sensor", Unit.Kmh );
+        // act
+        WS8600 ws8600 = new WS8600( catalogue );
+
+        // assert
+        assertEquals( ws8600.getSensorType(), sensorType );
+        int value = Integer.parseInt( ws8600.getValue().toString() );
+        assertTrue( value >= 0 && value <= 400 );
+    }
+
+    @Test
+    void shouldReturnWindDirection()throws InstantiationException {
+        // arrange
+        Configuration config = new PropertyListConfiguration();
+        Catalogue catalogue = new Catalogue( config );
+        SensorType sensorType = catalogue.addSensorType( "Wind Sensor", Unit.Kmh );
+
+        // act
+        WS8600 ws8600 = new WS8600( catalogue );
+        String windDirection = ws8600.getWindDirection(180);
+
+        // assert
+        assertEquals( ws8600.getSensorType(), sensorType );
+        assertEquals("S",windDirection);
+    }
+
+    @Test
+    void shouldReturnWindDirection_ShouldThrowException()throws InstantiationException{
+        // arrange
+        String expected = "Azimuth degree not valid";
+        Configuration config = new PropertyListConfiguration();
+        Catalogue catalogue = new Catalogue( config );
+        SensorType sensorType = catalogue.addSensorType( "Wind Sensor", Unit.Kmh );
+
+        WS8600 ws8600 = new WS8600( catalogue );
+        // act
+        assertEquals( ws8600.getSensorType(), sensorType );
+        Exception exception =
+                assertThrows(IllegalArgumentException.class, ()
+                        -> {
+                    ws8600.getWindDirection(-180);
+                });
+
+        // assert
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expected));
+    }
+
 }
+
 

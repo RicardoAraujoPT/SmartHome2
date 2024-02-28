@@ -5,6 +5,8 @@ import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Sensor;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.SensorType;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Value;
 
+import java.util.Random;
+
 // Model of Wind Sensor
 public class WS8600 implements Sensor {
 
@@ -16,7 +18,7 @@ public class WS8600 implements Sensor {
 
         //this is a wind sensor
 
-        SensorType sensorType = catalogue.getSensorType("Wind");
+        SensorType sensorType = catalogue.getSensorType("Wind Sensor");
         if( sensorType == null )
             throw new InstantiationException("SensorType with description 'Wind Sensor' does not exist.");
         else
@@ -30,15 +32,18 @@ public class WS8600 implements Sensor {
     }
 
     //obter o valor associado a velocidade
+
     public Value getValue() {
 
-        return null;
+        Random rand = new Random();
+
+        int nValue = rand.nextInt(400);
+
+        return new SR001Value( nValue );
     }
 
 
-    /*
-    return 1 of 8 cardinal points (N,S,E,W,NW,SW,SE,NE)
-
+    //return 1 of 8 cardinal points (N,S,E,W,NW,SW,SE,NE)
     public String getWindDirection(double azimuthDegrees){
 
         if(azimuthDegrees == 0){
@@ -53,10 +58,21 @@ public class WS8600 implements Sensor {
         if(azimuthDegrees == 270.0){
             return "W";
         }
-        return null;
+        if(azimuthDegrees == 45.0){
+            return "NE";
+        }
+        if(azimuthDegrees == 135.0){
+            return "SE";
+        }
+        if(azimuthDegrees == 315.0){
+            return "NW";
+        }
+        if(azimuthDegrees == 225) {
+            return "SW";
+        }
+        throw new IllegalArgumentException("Azimuth degree not valid");
     }
 
-     */
 
 
 
