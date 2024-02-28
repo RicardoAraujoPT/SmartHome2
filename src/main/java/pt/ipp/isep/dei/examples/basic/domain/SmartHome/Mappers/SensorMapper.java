@@ -3,7 +3,7 @@ package pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.SensorDTO;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Sensor;
 
-public class SensorDTOMapper {
+public class SensorMapper {
 
     public static SensorDTO convertToDTO(Sensor sensor) {
         if (sensor == null)

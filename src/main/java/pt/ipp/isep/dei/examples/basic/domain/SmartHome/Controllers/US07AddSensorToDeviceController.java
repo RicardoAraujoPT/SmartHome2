@@ -3,7 +3,7 @@ package pt.ipp.isep.dei.examples.basic.domain.SmartHome.Controllers;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.AddSensorToDeviceDTO;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.SensorDTO;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.*;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.SensorDTOMapper;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.SensorMapper;
 
 import java.util.List;
 
@@ -72,7 +72,7 @@ public class US07AddSensorToDeviceController {
 
         Sensor sensor = device.addSensor(entryDTO._strSensorModel, this._catalogue);
 
-        return SensorDTOMapper.convertToDTO(sensor);
+        return SensorMapper.convertToDTO(sensor);
     }
 
 }

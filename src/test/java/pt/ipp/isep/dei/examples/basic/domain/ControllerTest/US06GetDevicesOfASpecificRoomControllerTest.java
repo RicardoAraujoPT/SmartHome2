@@ -7,7 +7,7 @@ import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.RoomDTO;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Device;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.House;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Room;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.RoomDTOMapper;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.RoomMapper;
 
 import java.util.List;
 
@@ -51,7 +51,7 @@ public class US06GetDevicesOfASpecificRoomControllerTest {
         Room room = house.createRoom("ChosenRoom", 1, 20.0, 3.0);
 
         //RoomDTOMapper roomDTOMapper = new RoomDTOMapper(house);
-        RoomDTO roomDTO = RoomDTOMapper.room_DomainToDTO(room);
+        RoomDTO roomDTO = RoomMapper.room_DomainToDTO(room);
 
         US06GetDevicesOfASpecificRoomController controller = new US06GetDevicesOfASpecificRoomController(house);
 
@@ -74,7 +74,7 @@ public class US06GetDevicesOfASpecificRoomControllerTest {
 
         US06GetDevicesOfASpecificRoomController controller = new US06GetDevicesOfASpecificRoomController(house);
 
-        RoomDTO roomDTO = RoomDTOMapper.room_DomainToDTO(room);
+        RoomDTO roomDTO = RoomMapper.room_DomainToDTO(room);
         // Act
         List<DeviceDTO> result = controller.getDevicesOfASpecificRoom(roomDTO);
 

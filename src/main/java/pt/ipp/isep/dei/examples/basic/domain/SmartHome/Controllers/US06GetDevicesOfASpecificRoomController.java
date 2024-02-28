@@ -5,11 +5,10 @@ import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.House;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Room;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.DeviceDTO;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.RoomDTO;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.DeviceDTOMapper;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.RoomDTOMapper;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.DeviceMapper;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.RoomMapper;
 
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -54,10 +53,10 @@ public class US06GetDevicesOfASpecificRoomController {
     public List<DeviceDTO> getDevicesOfASpecificRoom(RoomDTO roomDTO){
 
         List<Room> rooms = _house.getRoomList();
-        this.rooms_DTOAndRooms = RoomDTOMapper.roomMap_NameAndDomain(rooms);
+        this.rooms_DTOAndRooms = RoomMapper.roomMap_NameAndDomain(rooms);
         Room room = rooms_DTOAndRooms.get(roomDTO.getName());
         List<Device> devices = room.getDevices();
-        return DeviceDTOMapper.devices_DomainToDTO(devices);
+        return DeviceMapper.devices_DomainToDTO(devices);
         }
 }
 

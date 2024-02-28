@@ -2,7 +2,6 @@ package pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers;
 
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.DeviceDTO;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Device;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.House;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Room;
 
 import java.util.ArrayList;
@@ -10,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DeviceDTOMapper {
+public class DeviceMapper {
 
     // Converts a RoomDTO to a Room
     public static DeviceDTO DeviceToDTO(Device device) {
