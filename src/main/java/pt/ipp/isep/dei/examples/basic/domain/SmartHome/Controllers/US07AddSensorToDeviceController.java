@@ -61,9 +61,8 @@ public class US07AddSensorToDeviceController {
      * This method adds a sensor to a device in a room.
      * It first gets the room and device from the house using the room name and device name from the DeviceDTO.
      * Then it adds a sensor to the device using the sensor model and the catalogue.
-     * @param deviceDTO The DeviceDTO that contains the room name and device name.
-     * @param strSensorModel The sensor model to add to the device.
-     * @return The sensor that was added to the device.
+     * @param entryDTO DTO that contains the room name, device name and sensor model.
+     * @return Returns a sensorDTO with the information about the sensor created and added to the device.
      */
     public SensorDTO addSensorToDevice(AddSensorToDeviceDTO entryDTO) {
 
