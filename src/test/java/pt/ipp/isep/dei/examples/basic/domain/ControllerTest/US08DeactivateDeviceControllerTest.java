@@ -10,11 +10,15 @@ import static org.junit.jupiter.api.Assertions.*;
  * valid device;
  * Non existing Device;
  * Already inactive Device
- * And non-existing House
+ * Non-existing House
+ * Non-existing Room
  */
 public class US08DeactivateDeviceControllerTest {
 
-
+    /**
+     * This tests finds an existing Device and deactivates it, asserting that its state is false (is inactive);
+     * @throws InstantiationException
+     */
     @Test
     void validDevice_shouldreturnFalse() throws InstantiationException {
         //Arrange
@@ -22,11 +26,10 @@ public class US08DeactivateDeviceControllerTest {
         _myHouse.createRoom("roomName1", 0, 25, 2.5);
         _myHouse.getRoomByName("roomName1").createDevice("myDevice");
         US08DeactivateDeviceController myController = new US08DeactivateDeviceController(_myHouse);
-        DeviceDTO deviceToDeactivate = new DeviceDTO("myDevice","roomName1");
         //Act
-        myController.deactivateDevice(deviceToDeactivate);
+        myController.deactivateDevice("myDevice","roomName1");
         //Assert
-        assertFalse(deviceToDeactivate.getIsActive());
+        assertFalse(_myHouse.getRoomByName("roomName1").getDeviceByName("myDevice").getDeviceIsActive());
     }
 
 
@@ -36,16 +39,19 @@ public class US08DeactivateDeviceControllerTest {
      * The expected result is that the method returns an exception.
      */
     @Test
-    void nonExistingDevice_shouldReturnNull() throws InstantiationException {
+    void nonExistingDevice_shouldReturnException() throws InstantiationException {
         //Arrange
         House _myHouse = new House("zipCode", "Street", 55, 105);
         _myHouse.createRoom("roomName1", 0, 25, 2.5);
         _myHouse.getRoomByName("roomName1").createDevice("myDevice");
         US08DeactivateDeviceController myController = new US08DeactivateDeviceController(_myHouse);
-        DeviceDTO deviceToDeactivate = new DeviceDTO("myOtherDevice","roomName1");
+        String expected = "Device name doesn't exist in the list";
         //Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->
+                myController.deactivateDevice("myOtherDevice","roomName1"));
+        String actualMessage = exception.getMessage();
         //Assert
-        assertThrows(IllegalArgumentException.class, () -> myController.deactivateDevice(deviceToDeactivate));
+        assertEquals(expected,actualMessage);
     }
 
 
@@ -61,12 +67,11 @@ public class US08DeactivateDeviceControllerTest {
         _myHouse.createRoom("roomName1", 0, 25, 2.5);
         _myHouse.getRoomByName("roomName1").createDevice("myDevice");
         US08DeactivateDeviceController myController = new US08DeactivateDeviceController(_myHouse);
-        DeviceDTO deviceToDeactivate = new DeviceDTO("myDevice","roomName1");
         //Act
-        myController.deactivateDevice(deviceToDeactivate);
-        myController.deactivateDevice(deviceToDeactivate);
+        myController.deactivateDevice("myDevice","roomName1");
+        myController.deactivateDevice("myDevice","roomName1");
         //Assert
-        assertFalse(deviceToDeactivate.getIsActive());
+        assertFalse(_myHouse.getRoomByName("roomName1").getDeviceByName("myDevice").getDeviceIsActive());
     }
 
     /**
@@ -99,10 +104,9 @@ public class US08DeactivateDeviceControllerTest {
         //Arrange
         House _myHouse = new House("zipCode", "Street", 55, 105);
         US08DeactivateDeviceController myController = new US08DeactivateDeviceController(_myHouse);
-        DeviceDTO deviceToDeactivate = new DeviceDTO("myDevice","roomName1");
         String expectedMessage = "Room name doesn't exist in the list";
         //Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> myController.deactivateDevice (deviceToDeactivate));
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> myController.deactivateDevice("myDevice","roomName1"));
         String actualMessage = exception.getMessage();
         //Assert
         assertEquals(expectedMessage, actualMessage);
