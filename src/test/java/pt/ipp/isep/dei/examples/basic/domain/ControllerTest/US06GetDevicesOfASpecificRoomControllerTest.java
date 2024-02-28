@@ -74,8 +74,7 @@ public class US06GetDevicesOfASpecificRoomControllerTest {
 
         US06GetDevicesOfASpecificRoomController controller = new US06GetDevicesOfASpecificRoomController(house);
 
-        RoomDTOMapper roomDTOMapper = new RoomDTOMapper(house);
-        RoomDTO roomDTO = roomDTOMapper.room_DomainToDTO(room);
+        RoomDTO roomDTO = RoomDTOMapper.room_DomainToDTO(room);
         // Act
         List<DeviceDTO> result = controller.getDevicesOfASpecificRoom(roomDTO);
 

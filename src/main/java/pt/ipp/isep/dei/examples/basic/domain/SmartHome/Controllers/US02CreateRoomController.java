@@ -22,9 +22,7 @@ public class US02CreateRoomController {
 
             Room myRoom = _myHouse.createRoom(roomDTO.getName(), roomDTO.getHouseFloor(), roomDTO.getArea(), roomDTO.getHeight());
 
-            RoomDTOMapper myRoomMapper = new RoomDTOMapper(_myHouse);
-
-            RoomDTO myRoomDTO = myRoomMapper.room_DomainToDTO(myRoom);
+            RoomDTO myRoomDTO = RoomDTOMapper.room_DomainToDTO(myRoom);
 
             return myRoomDTO;
     }
