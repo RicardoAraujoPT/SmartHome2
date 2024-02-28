@@ -114,9 +114,8 @@ public class Room {
         return myDevice;
     }
 
-    public Device getDeviceByName(String name) {
-        for (int i = 0; i < this._devices.size(); i++) {
-            Device currentDevice = this._devices.get(i);
+    public Device getDeviceByName(String name) throws IllegalArgumentException {
+        for (Device currentDevice : this._devices) {
             String currentDeviceName = currentDevice.getDeviceName();
             if (currentDeviceName.equals(name)) {
                 return currentDevice;
