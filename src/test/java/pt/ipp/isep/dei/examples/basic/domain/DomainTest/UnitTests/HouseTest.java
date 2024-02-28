@@ -3,7 +3,6 @@ package pt.ipp.isep.dei.examples.basic.domain.DomainTest.UnitTests;
 import org.junit.jupiter.api.Test;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -29,9 +28,9 @@ public class HouseTest {
         Location locationDouble = mock(Location.class);
         GPSCoordinates gpsCoordinatesDouble = mock(GPSCoordinates.class);
 
-        when(locationDouble.getGpsCoordinates()).thenReturn(gpsCoordinatesDouble);
-        when(locationDouble.getGpsCoordinates().getLatitude()).thenReturn(expectedLatitude);
-        when(locationDouble.getGpsCoordinates().getLongitude()).thenReturn(expectedLongitude);
+        when(locationDouble.getGPSCoordinates()).thenReturn(gpsCoordinatesDouble);
+        when(locationDouble.getGPSCoordinates().getLatitude()).thenReturn(expectedLatitude);
+        when(locationDouble.getGPSCoordinates().getLongitude()).thenReturn(expectedLongitude);
         when(locationDouble.getAddress()).thenReturn(expectedAddress);
         when(locationDouble.getZipCode()).thenReturn(expectedZipCode);
 
@@ -44,8 +43,8 @@ public class HouseTest {
         //assert
         assertEquals(house.getLocation().getAddress(),expectedAddress);
         assertEquals(house.getLocation().getZipCode(),expectedZipCode);
-        assertEquals(house.getLocation().getGpsCoordinates().getLatitude(),expectedLatitude);
-        assertEquals(house.getLocation().getGpsCoordinates().getLatitude(),expectedLatitude);
+        assertEquals(house.getLocation().getGPSCoordinates().getLatitude(),expectedLatitude);
+        assertEquals(house.getLocation().getGPSCoordinates().getLatitude(),expectedLatitude);
     }
 
     /**

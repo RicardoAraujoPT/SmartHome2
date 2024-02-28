@@ -49,7 +49,7 @@ public class WS8600Test {
     }
 
     @Test
-    void shouldReturnWindDirection()throws InstantiationException {
+    void shouldReturnWindDirection_South()throws InstantiationException {
         // arrange
         Configuration config = new PropertyListConfiguration();
         Catalogue catalogue = new Catalogue( config );
@@ -62,6 +62,87 @@ public class WS8600Test {
         // assert
         assertEquals( ws8600.getSensorType(), sensorType );
         assertEquals("S",windDirection);
+    }
+
+    @Test
+    void shouldReturnWindDirection_E()throws InstantiationException {
+        // arrange
+        Configuration config = new PropertyListConfiguration();
+        Catalogue catalogue = new Catalogue( config );
+        SensorType sensorType = catalogue.addSensorType( "Wind Sensor", Unit.Kmh );
+
+        // act
+        WS8600 ws8600 = new WS8600( catalogue );
+        String windDirection = ws8600.getWindDirection(90);
+
+        // assert
+        assertEquals( ws8600.getSensorType(), sensorType );
+        assertEquals("E",windDirection);
+    }
+
+    @Test
+    void shouldReturnWindDirection_()throws InstantiationException {
+        // arrange
+        Configuration config = new PropertyListConfiguration();
+        Catalogue catalogue = new Catalogue( config );
+        SensorType sensorType = catalogue.addSensorType( "Wind Sensor", Unit.Kmh );
+
+        // act
+        WS8600 ws8600 = new WS8600( catalogue );
+        String windDirection = ws8600.getWindDirection(270);
+
+        // assert
+        assertEquals( ws8600.getSensorType(), sensorType );
+        assertEquals("W",windDirection);
+    }
+
+    @Test
+    void shouldReturnWindDirection_W () throws InstantiationException {
+        // arrange
+        Configuration config = new PropertyListConfiguration();
+        Catalogue catalogue = new Catalogue( config );
+        SensorType sensorType = catalogue.addSensorType( "Wind Sensor", Unit.Kmh );
+
+        // act
+        WS8600 ws8600 = new WS8600( catalogue );
+        String windDirection = ws8600.getWindDirection(315);
+
+        // assert
+        assertEquals( ws8600.getSensorType(), sensorType );
+        assertEquals("NW",windDirection);
+    }
+
+    @Test
+    void shouldReturnWindDirection_SE () throws InstantiationException {
+        // arrange
+        Configuration config = new PropertyListConfiguration();
+        Catalogue catalogue = new Catalogue( config );
+        SensorType sensorType = catalogue.addSensorType( "Wind Sensor", Unit.Kmh );
+
+        // act
+        WS8600 ws8600 = new WS8600( catalogue );
+        String windDirection = ws8600.getWindDirection(135);
+
+        // assert
+        assertEquals( ws8600.getSensorType(), sensorType );
+        assertEquals("SE",windDirection);
+    }
+
+
+    @Test
+    void shouldReturnWindDirection_NE () throws InstantiationException {
+        // arrange
+        Configuration config = new PropertyListConfiguration();
+        Catalogue catalogue = new Catalogue( config );
+        SensorType sensorType = catalogue.addSensorType( "Wind Sensor", Unit.Kmh );
+
+        // act
+        WS8600 ws8600 = new WS8600( catalogue );
+        String windDirection = ws8600.getWindDirection(45);
+
+        // assert
+        assertEquals( ws8600.getSensorType(), sensorType );
+        assertEquals("NE",windDirection);
     }
 
     @Test

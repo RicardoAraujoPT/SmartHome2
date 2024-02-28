@@ -27,6 +27,11 @@ public class House {
         this._rooms = new ArrayList<>();
     }
 
+    public House(FactoryLocation factoryLocation, FactoryRoom factoryRoom) {
+        _factoryLocation = factoryLocation;
+        _factoryRoom = factoryRoom;
+    }
+
     //only for isolation tests por agora
     public House(FactoryLocation factoryLocation, FactoryRoom factoryRoom,String address, String zipCode, double latitude, double longitude) throws IllegalArgumentException{
 

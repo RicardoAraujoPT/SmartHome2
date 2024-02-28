@@ -11,6 +11,7 @@ public class Location {
     private String _zipCode;
     private String _address;
     private GPSCoordinates _gpsCoordinates;
+    private FactoryGPSCoordinates _factoryGPSCoordinates;
 
     /**
      * Constructor method that allows the instantiation of Location objects, with the following inputs:
@@ -30,21 +31,24 @@ public class Location {
     }
 
     /**
-     * Constructor with an added factoryGPSCoordinates parameter.
+     * Constructor with a factoryGPSCoordinates parameter.
      *
      * @param address
      * @param zipCode
      * @param factoryGPSCoordinates
-     * @param latitude
-     * @param longitude
      */
-    public Location(String address, String zipCode, FactoryGPSCoordinates factoryGPSCoordinates, double latitude, double longitude) {
+    public Location(String address, String zipCode, FactoryGPSCoordinates factoryGPSCoordinates) {
         if (!isAddressValid(address) || !isZipCodeValid(zipCode)) {
             throw new IllegalArgumentException("Invalid address or ZIP code");
         }
         this._address = address;
         this._zipCode = zipCode;
-        this._gpsCoordinates = factoryGPSCoordinates.createGPSCoordinates(latitude, longitude);
+        this._factoryGPSCoordinates = factoryGPSCoordinates;
+    }
+
+    public GPSCoordinates defineGPSCoordinates(double latitude, double longitude) {
+        this._gpsCoordinates = _factoryGPSCoordinates.createGPSCoordinates(latitude, longitude);
+        return this._gpsCoordinates;
     }
 
     /**
@@ -85,7 +89,7 @@ public class Location {
      * Method to obtain the GPS coordinates of the Location objects.
      * @return GPSCoordinates
      */
-    public GPSCoordinates getGpsCoordinates() {
+    public GPSCoordinates getGPSCoordinates() {
         return _gpsCoordinates;
     }
 
@@ -123,7 +127,7 @@ public class Location {
      * @param gpsCoordinates
      * @return boolean
      */
-    public boolean setGpsCoordinates(GPSCoordinates gpsCoordinates) {
+    public boolean setGPSCoordinates(GPSCoordinates gpsCoordinates) {
         if (gpsCoordinates == null) {
             return false;
         }
