@@ -1,6 +1,5 @@
 package pt.ipp.isep.dei.examples.basic.domain.DomainTest.IntegrationTests;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.House;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Room;
@@ -23,8 +22,8 @@ public class HouseTest {
         //act
         House myHouse = new House(address, zipCode, latitude, longitude);
         String houseAddress = myHouse.getLocation().getAddress();
-        double houseLatitude = myHouse.getLocation().getGpsCoordinates().getLatitude();
-        double houseLongitude = myHouse.getLocation().getGpsCoordinates().getLongitude();
+        double houseLatitude = myHouse.getLocation().getGPSCoordinates().getLatitude();
+        double houseLongitude = myHouse.getLocation().getGPSCoordinates().getLongitude();
         String houseZipCode = myHouse.getLocation().getZipCode();
         //assert
         assertEquals("address", houseAddress);
