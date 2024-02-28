@@ -14,7 +14,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class WS8600Test {
 
-
+    /**
+     * This test verifies that an exception is thrown when trying to create a WS8600 instance
+     * with a non-existent sensor type.
+     */
     @Test
     void inexistentWS8600_ShouldThrowException()
     {
@@ -32,6 +35,9 @@ public class WS8600Test {
         assertTrue(actualMessage.contains(expectedMessage));
     }
 
+    /**
+     * This test verifies that a valid WS8600 instance can be created and that its sensor type and value are correct.
+     */
     @Test
     void validWS8600_ShouldCreateNewInstance() throws InstantiationException
     {
@@ -48,6 +54,9 @@ public class WS8600Test {
         assertTrue( value >= 0 && value <= 400 );
     }
 
+    /**
+     * This test verifies that the getWindDirection method returns the correct wind direction when the azimuth degree is 180.
+     */
     @Test
     void shouldReturnWindDirection_South()throws InstantiationException {
         // arrange
@@ -64,6 +73,9 @@ public class WS8600Test {
         assertEquals("S",windDirection);
     }
 
+    /**
+     * This test verifies that the getWindDirection method returns the correct wind direction when the azimuth degree is 90.
+     */
     @Test
     void shouldReturnWindDirection_E()throws InstantiationException {
         // arrange
@@ -80,6 +92,9 @@ public class WS8600Test {
         assertEquals("E",windDirection);
     }
 
+    /**
+     * This test verifies that the getWindDirection method returns the correct wind direction when the azimuth degree is 270.
+     */
     @Test
     void shouldReturnWindDirection_()throws InstantiationException {
         // arrange
@@ -96,6 +111,9 @@ public class WS8600Test {
         assertEquals("W",windDirection);
     }
 
+    /**
+     * This test verifies that the getWindDirection method returns the correct wind direction when the azimuth degree is 315.
+     */
     @Test
     void shouldReturnWindDirection_W () throws InstantiationException {
         // arrange
@@ -112,6 +130,10 @@ public class WS8600Test {
         assertEquals("NW",windDirection);
     }
 
+
+    /**
+     * This test verifies that the getWindDirection method returns the correct wind direction when the azimuth degree is 135.
+     */
     @Test
     void shouldReturnWindDirection_SE () throws InstantiationException {
         // arrange
@@ -128,7 +150,9 @@ public class WS8600Test {
         assertEquals("SE",windDirection);
     }
 
-
+    /**
+     * This test verifies that the getWindDirection method returns the correct wind direction when the azimuth degree is 45.
+     */
     @Test
     void shouldReturnWindDirection_NE () throws InstantiationException {
         // arrange
@@ -145,6 +169,10 @@ public class WS8600Test {
         assertEquals("NE",windDirection);
     }
 
+
+    /**
+     * This test verifies that an exception is thrown when the getWindDirection method is called with an invalid azimuth degree.
+     */
     @Test
     void shouldReturnWindDirection_ShouldThrowException()throws InstantiationException{
         // arrange

@@ -37,7 +37,7 @@ public class WS8600 implements Sensor {
 
         Random rand = new Random();
 
-        int nValue = rand.nextInt(400);
+        int nValue = rand.nextInt(400); // velocidade do vento nao pode ser maior que 400
 
         return new SR001Value( nValue );
     }
@@ -72,15 +72,6 @@ public class WS8600 implements Sensor {
         }
         throw new IllegalArgumentException("Azimuth degree not valid");
     }
-
-
-
-
-
-
-
-
-
 
 
 }
