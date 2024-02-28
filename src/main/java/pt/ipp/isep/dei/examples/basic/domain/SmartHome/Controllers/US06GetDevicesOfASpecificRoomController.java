@@ -4,8 +4,8 @@ import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Device;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.House;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Room;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.DeviceDTO;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.DeviceDTOMapper;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.RoomDTOMapper;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.DeviceMapper;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.RoomMapper;
 
 import java.util.List;
 import java.util.Map;
@@ -41,21 +41,22 @@ public class US06GetDevicesOfASpecificRoomController {
     }
 
     /**
-     * This method retrieves a list of DeviceDTOs for a specific room.
-     * It first gets the list of rooms from the house, then maps the rooms to their DTOs.
-     * It then retrieves the room that matches the provided roomDTOName from the map.
-     * Finally, it gets the devices from the room and maps them to their DTOs before returning them.
+     * Retrieves a list of DeviceDTOs for a specific room.
+     * The method first gets the list of rooms from the house, then maps the rooms to a Map with room names as keys and Room objects as values.
+     * It then retrieves the Room object that matches the provided room name from the map.
+     * Finally, it gets the devices from the Room object, maps them to their DTOs, and returns the list of DeviceDTOs.
      *
      * @param roomDTOName The name of the room for which to retrieve the devices.
      * @return A list of DeviceDTOs for the specified room.
      */
+
     public List<DeviceDTO> getDevicesOfASpecificRoom(String roomDTOName){
 
         List<Room> rooms = _house.getRoomList();
-        this.rooms_DTOAndRooms = RoomDTOMapper.roomMap_NameAndDomain(rooms);
+        this.rooms_DTOAndRooms = RoomMapper.roomMap_NameAndDomain(rooms);
         Room room = rooms_DTOAndRooms.get(roomDTOName);
         List<Device> devices = room.getDevices();
-        return DeviceDTOMapper.devices_DomainToDTO(devices);
+        return DeviceMapper.devices_DomainToDTO(devices);
         }
 }
 
