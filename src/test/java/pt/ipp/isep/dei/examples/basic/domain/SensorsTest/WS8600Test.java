@@ -6,11 +6,8 @@ import org.junit.jupiter.api.Test;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Catalogue;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.SensorType;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Unit;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Sensors.SR001;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Sensors.WS8600;
-
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class WS8600Test {
 
@@ -39,8 +36,7 @@ public class WS8600Test {
      * This test verifies that a valid WS8600 instance can be created and that its sensor type and value are correct.
      */
     @Test
-    void validWS8600_ShouldCreateNewInstance() throws InstantiationException
-    {
+    void validWS8600_ShouldCreateNewInstance() throws InstantiationException {
         // arrange
         Configuration config = new PropertyListConfiguration();
         Catalogue catalogue = new Catalogue( config );
@@ -50,8 +46,8 @@ public class WS8600Test {
 
         // assert
         assertEquals( ws8600.getSensorType(), sensorType );
-        int value = Integer.parseInt( ws8600.getValue().toString() );
-        assertTrue( value >= 0 && value <= 400 );
+        int value = Integer.parseInt( ws8600.getValue().toString());
+        assertTrue(value >= 0 && value <= 400);
     }
 
     /**
@@ -167,6 +163,25 @@ public class WS8600Test {
         // assert
         assertEquals( ws8600.getSensorType(), sensorType );
         assertEquals("NE",windDirection);
+    }
+
+    /**
+     * This test verifies that the getWindDirection method returns the correct wind direction when the azimuth degree is 0.
+     */
+    @Test
+    void shouldReturnWindDirection_N () throws InstantiationException {
+        // arrange
+        Configuration config = new PropertyListConfiguration();
+        Catalogue catalogue = new Catalogue( config );
+        SensorType sensorType = catalogue.addSensorType( "Wind Sensor", Unit.Kmh );
+
+        // act
+        WS8600 ws8600 = new WS8600( catalogue );
+        String windDirection = ws8600.getWindDirection(0);
+
+        // assert
+        assertEquals( ws8600.getSensorType(), sensorType );
+        assertEquals("N",windDirection);
     }
 
 

@@ -7,7 +7,7 @@ import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Value;
  */
 public class WS8600Value implements Value {
 
-    public double _dValue;
+    public int _dValue;
     /**
      * Creates a new instance of WS8600Value.
      *
