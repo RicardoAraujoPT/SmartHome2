@@ -14,6 +14,9 @@ import java.util.Map;
 
 public class US05V2AddDeviceToRoomController {
 
+    /**
+     * The house object that contains the list of rooms.
+     */
     private House _myHouse;
 
     /**
@@ -49,6 +52,20 @@ public class US05V2AddDeviceToRoomController {
             return deviceDTO;
     }
      */
+
+    /**
+     * This method adds a device to a specific room and returns a list of DeviceDTOs for that room.
+     * It first gets the list of rooms from the house, then maps the rooms to their DTOs.
+     * It then retrieves the room that matches the provided roomName from the map.
+     * A device with the provided deviceName is created in the retrieved room.
+     * Finally, it gets the updated list of devices from the room and maps them to their DTOs before returning them.
+     *
+     * @param roomName The name of the room to which the device will be added.
+     * @param deviceName The name of the device to be added.
+     * @return A list of DeviceDTOs for the specified room after the device addition.
+     * @throws IllegalArgumentException If the device with the provided name already exists in the room.
+     */
+
     //Implementacao alternativa com o HashMap
     private Map<String, Room> _rooms_DTOAndRooms = new HashMap<>();
 

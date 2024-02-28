@@ -50,13 +50,10 @@ public class US06GetDevicesOfASpecificRoomControllerTest {
         House house = new House("address", "zipCode", 55.2, -2.25);
         Room room = house.createRoom("ChosenRoom", 1, 20.0, 3.0);
 
-        RoomDTOMapper roomDTOMapper = new RoomDTOMapper(house);
-        RoomDTO roomDTO = roomDTOMapper.room_DomainToDTO(room);
-
         US06GetDevicesOfASpecificRoomController controller = new US06GetDevicesOfASpecificRoomController(house);
 
         // Act
-        List<DeviceDTO> result = controller.getDevicesOfASpecificRoom(roomDTO);
+        List<DeviceDTO> result = controller.getDevicesOfASpecificRoom(room.getRoomName());
 
         // Assert
         assertTrue(result.isEmpty());
@@ -74,9 +71,8 @@ public class US06GetDevicesOfASpecificRoomControllerTest {
 
         US06GetDevicesOfASpecificRoomController controller = new US06GetDevicesOfASpecificRoomController(house);
 
-        RoomDTO roomDTO = RoomDTOMapper.room_DomainToDTO(room);
         // Act
-        List<DeviceDTO> result = controller.getDevicesOfASpecificRoom(roomDTO);
+        List<DeviceDTO> result = controller.getDevicesOfASpecificRoom(room.getRoomName());
 
         // Assert
         assertEquals(2, result.size());

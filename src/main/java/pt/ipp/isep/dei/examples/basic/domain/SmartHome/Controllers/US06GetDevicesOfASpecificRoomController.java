@@ -4,12 +4,9 @@ import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Device;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.House;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Room;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.DeviceDTO;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.RoomDTO;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.DeviceDTOMapper;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.RoomDTOMapper;
 
-
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -44,19 +41,19 @@ public class US06GetDevicesOfASpecificRoomController {
     }
 
     /**
-     * This method returns a list of DeviceDTOs of a specific room.
-     * If the RoomDTO is null, it throws an InstantiationException.
-     * If the RoomDTO does not exist in the map, it returns an empty list.
-     * @param roomDTO The RoomDTO to get the devices from.
-     * @return A list of DeviceDTOs of the specific room.
-     * @throws InstantiationException If the RoomDTO is null.
+     * This method retrieves a list of DeviceDTOs for a specific room.
+     * It first gets the list of rooms from the house, then maps the rooms to their DTOs.
+     * It then retrieves the room that matches the provided roomDTOName from the map.
+     * Finally, it gets the devices from the room and maps them to their DTOs before returning them.
+     *
+     * @param roomDTOName The name of the room for which to retrieve the devices.
+     * @return A list of DeviceDTOs for the specified room.
      */
-    public List<DeviceDTO> getDevicesOfASpecificRoom(RoomDTO roomDTO){
+    public List<DeviceDTO> getDevicesOfASpecificRoom(String roomDTOName){
 
         List<Room> rooms = _house.getRoomList();
-        RoomDTOMapper myRoomMapper = new RoomDTOMapper(_house);
-        this.rooms_DTOAndRooms = myRoomMapper.roomMap_DTOAndDomain(rooms);
-        Room room = rooms_DTOAndRooms.get(roomDTO.getName());
+        this.rooms_DTOAndRooms = RoomDTOMapper.roomMap_DTOAndDomain(rooms);
+        Room room = rooms_DTOAndRooms.get(roomDTOName);
         List<Device> devices = room.getDevices();
         return DeviceDTOMapper.devices_DomainToDTO(devices);
         }

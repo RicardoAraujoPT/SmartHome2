@@ -83,7 +83,7 @@ public class Room {
      *
      * @param deviceName The name of the device to be created and added.
      */
-    public Device createDevice(String deviceName) {
+    public Device createDevice(String deviceName) throws IllegalArgumentException {
         //check if device name is repeated
         if (isDeviceNameRepeated(deviceName)) {
             throw new IllegalArgumentException("Device name already exists in the list");
