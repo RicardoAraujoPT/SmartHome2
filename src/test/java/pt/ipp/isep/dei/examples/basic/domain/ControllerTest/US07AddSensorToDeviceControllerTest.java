@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.examples.basic.domain.ControllerTest;
 
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.DeviceDTO;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.AddSensorToDeviceDTO;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.SensorDTO;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.*;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Controllers.US07AddSensorToDeviceController;
 
@@ -24,20 +25,21 @@ public class US07AddSensorToDeviceControllerTest {
     void emptyCatalogue_shouldReturnEmptySensorModels() throws InstantiationException {
         // arrange
         Configuration config = new PropertyListConfiguration();
-        Catalogue catalogue = new Catalogue( config );
-        House myHouse = new House("address","zipcode",55,105);
+        Catalogue catalogue = new Catalogue(config);
+        House myHouse = new House("address", "zipcode", 55, 105);
 
-        US07AddSensorToDeviceController controller = new US07AddSensorToDeviceController( myHouse, catalogue );
+        US07AddSensorToDeviceController controller = new US07AddSensorToDeviceController(myHouse, catalogue);
 
         // act
         List<String> sensorModels = controller.getSensorsModels();
 
         // assert
-        assertEquals( sensorModels.size(), 0);
+        assertEquals(sensorModels.size(), 0);
     }
 
     /**
      * This test checks if the getSensorsModels method returns a list with two sensor models when the catalogue contains two sensors.
+     *
      * @throws InstantiationException if the AddSensorToDeviceController cannot be instantiated.
      */
     @Test
@@ -46,45 +48,47 @@ public class US07AddSensorToDeviceControllerTest {
         Configuration config = new PropertyListConfiguration();
         config.addProperty("sensor", "SmartHome.sensors.GA100K");
         config.addProperty("sensor", "SmartHome.sensors.TSY01");
-        Catalogue catalogue = new Catalogue( config );
-        House myHouse = new House("address","zipcode",55,105);
+        Catalogue catalogue = new Catalogue(config);
+        House myHouse = new House("address", "zipcode", 55, 105);
 
-        US07AddSensorToDeviceController controller = new US07AddSensorToDeviceController( myHouse, catalogue );
+        US07AddSensorToDeviceController controller = new US07AddSensorToDeviceController(myHouse, catalogue);
 
         // act
         List<String> sensorModels = controller.getSensorsModels();
 
         // assert
-        assertEquals( sensorModels.size(), 2);
+        assertEquals(sensorModels.size(), 2);
     }
 
     /**
      * This test checks if the addSensorToDevice method returns null when the sensor model does not exist in the catalogue.
+     *
      * @throws InstantiationException if the AddSensorToDeviceController cannot be instantiated.
      */
     @Test
     void inexistingSensorModel_ShouldReturnNull() throws InstantiationException {
         // arrange
         Configuration config = new PropertyListConfiguration();
-        Catalogue catalogue = new Catalogue( config );
-        House myHouse = new House("address","zipcode",55,105);
-        Room livingRoom = myHouse.createRoom( "Living Room", 0, 10, 10);
-        Device device = livingRoom.createDevice("device1");
-        DeviceDTO deviceDTO= new DeviceDTO("device1","","Living Room");
+        Catalogue catalogue = new Catalogue(config);
+        House myHouse = new House("address", "zipcode", 55, 105);
+        Room livingRoom = myHouse.createRoom("Living Room", 0, 10, 10);
+        livingRoom.createDevice("device1");
+        AddSensorToDeviceDTO entryDTO = new AddSensorToDeviceDTO("device1", "Living Room", "Sensors.GA100K");
 
-        US07AddSensorToDeviceController controller = new US07AddSensorToDeviceController( myHouse, catalogue );
+        US07AddSensorToDeviceController controller = new US07AddSensorToDeviceController(myHouse, catalogue);
 
         // act
-        Sensor sensor = controller.addSensorToDevice(deviceDTO, "Sensors.GA100K" );
+        SensorDTO sensor = controller.addSensorToDevice(entryDTO);
 
         // assert
-        assertNull( sensor );
+        assertNull(sensor);
     }
 
     /**
      * TThis test checks if the addSensorToDevice method returns a sensor with the correct type when the sensor model
      * exists in the catalogue.
      * It asserts that the returned sensor is not null and that its type matches the type added to the catalogue
+     *
      * @throws InstantiationException if the AddSensorToDeviceController cannot be instantiated.
      */
 
@@ -93,27 +97,24 @@ public class US07AddSensorToDeviceControllerTest {
         // arrange
         Configuration config = new PropertyListConfiguration();
         config.addProperty("sensor", "Sensors.GA100K");
-        Catalogue catalogue = new Catalogue( config );
+        Catalogue catalogue = new Catalogue(config);
         SensorType sensorType = catalogue.addSensorType("Temperature", Unit.Celsius);
 
-        House myHouse = new House("address","zipcode",55,105);
-        Room livingRoom = myHouse.createRoom( "Living Room", 0, 10, 10);
-        Device device = livingRoom.createDevice("device1");
-        DeviceDTO deviceDTO= new DeviceDTO("device1","","Living Room");
+        House myHouse = new House("address", "zipcode", 55, 105);
+        Room livingRoom = myHouse.createRoom("Living Room", 0, 10, 10);
+        livingRoom.createDevice("device1");
+        AddSensorToDeviceDTO entryDTO = new AddSensorToDeviceDTO("device1", "Living Room", "Sensors.GA100K");
 
-        US07AddSensorToDeviceController controller = new US07AddSensorToDeviceController( myHouse, catalogue );
+        US07AddSensorToDeviceController controller = new US07AddSensorToDeviceController(myHouse, catalogue);
 
         // act
-        Sensor sensor = controller.addSensorToDevice(deviceDTO, "Sensors.GA100K" );
+        SensorDTO sensor = controller.addSensorToDevice(entryDTO);
 
         // assert
-        assertNotNull( sensor );
-        assertEquals(sensor.getSensorType(), sensorType);
+        assertNotNull(sensor);
+        assertEquals(sensor._strDescription, sensorType.getDescription());
+        assertEquals(sensor._unit,sensorType.getUnit().toString());
     }
-
-
-
-
 
 
 }
