@@ -71,7 +71,7 @@ public class US05V2AddDeviceToRoomController {
 
     public List<DeviceDTO> addDeviceToRoom(String roomName, String deviceName) {
         List<Room> rooms = _myHouse.getRoomList();
-        this._rooms_DTOAndRooms = RoomDTOMapper.roomMap_DTOAndDomain(rooms);
+        this._rooms_DTOAndRooms = RoomDTOMapper.roomMap_NameAndDomain(rooms);
         Room room = _rooms_DTOAndRooms.get( roomName );
         room.createDevice(deviceName);
         List<Device> devices = room.getDevices();

@@ -19,12 +19,12 @@ public class RoomDTOMapper {
     /**
      * RoomDTOMapper constructor with parameter house.
      *
-     * @param house The house object that this mapper is associated with.
+     * @param //house The house object that this mapper is associated with.
      */
-    public RoomDTOMapper(House house) {
+    /*public RoomDTOMapper(House house) {
         this._house = house;
     }
-
+*/
     // Converts a RoomDTO to a Room
     public static Room room_DTOToDomain(RoomDTO roomDTO) throws InstantiationException {
         return new Room(roomDTO.getName(), roomDTO.getHouseFloor(), roomDTO.getArea(), roomDTO.getHeight());
@@ -53,12 +53,12 @@ public class RoomDTOMapper {
         return listOfRoomsInHouseDTO;
     }
 
-    public static Map<String, Room> roomMap_DTOAndDomain(List<Room> rooms) {
+    public static Map<String, Room> roomMap_NameAndDomain(List<Room> rooms) {
 
         Map<String, Room> roomsDTOAndRooms = new HashMap<>();
 
         rooms.forEach(room -> {
-            RoomDTO roomDTO = RoomDTOMapper.room_DomainToDTO(room);
+            //RoomDTO roomDTO = RoomDTOMapper.room_DomainToDTO(room);
             roomsDTOAndRooms.put(room.getRoomName(), room);
         });
 

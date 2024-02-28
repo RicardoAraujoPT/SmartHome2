@@ -10,11 +10,16 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test class for SR001.
+ * This class contains tests for the SR001 sensor in the SmartHome domain.
+ */
 class SR001Test
 {
 
     /**
      * Test of validSR001_ShouldCreateNewInstance method, of class SR001.
+     * This test checks if a new instance of SR001 can be created with valid parameters.
      * @throws InstantiationException
      */
     @Test
@@ -35,6 +40,7 @@ class SR001Test
 
     /**
      * Test of inexistentSensorTypeForSR001_ShouldThrowException method, of class SR001.
+     * This test checks if an exception is thrown when trying to create a new instance of SR001 with an inexistent sensor type.
      */
     @Test
     void inexistentSensorTypeForSR001_ShouldThrowException()

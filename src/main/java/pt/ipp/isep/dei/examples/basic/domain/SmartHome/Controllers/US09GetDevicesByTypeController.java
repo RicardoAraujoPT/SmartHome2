@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.examples.basic.domain.SmartHome.Controllers;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.DeviceDTO;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.*;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.DeviceDTOMapper;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.RoomDTOMapper;
 
 import java.util.HashMap;
 import java.util.List;
@@ -37,8 +38,7 @@ public class US09GetDevicesByTypeController {
      */
     public HashMap<String, List<DeviceDTO>> getDevicesByType() {
         HashMap<String, HashMap<Room,List<Device>>> groupDevicesByType = _house.groupDevicesByType();
-        DeviceDTOMapper getDevicesMapper = new DeviceDTOMapper(_house);
-        HashMap<String, List<DeviceDTO>> groupDevicesByTypeDTO = getDevicesMapper.devicesMap_DomainToDTO(groupDevicesByType);
+        HashMap<String, List<DeviceDTO>> groupDevicesByTypeDTO = DeviceDTOMapper.devicesMap_DomainToDTO(groupDevicesByType);
         return groupDevicesByTypeDTO;
     }
 }
