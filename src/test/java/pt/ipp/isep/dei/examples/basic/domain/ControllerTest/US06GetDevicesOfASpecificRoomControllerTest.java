@@ -58,6 +58,7 @@ public class US06GetDevicesOfASpecificRoomControllerTest {
         // Assert
         assertTrue(result.isEmpty());
     }
+
     /**
      * Test case to verify if a list of two devices is returned when a room with two devices is provided.
      */

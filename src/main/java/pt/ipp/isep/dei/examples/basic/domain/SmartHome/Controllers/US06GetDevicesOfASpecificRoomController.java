@@ -52,7 +52,7 @@ public class US06GetDevicesOfASpecificRoomController {
     public List<DeviceDTO> getDevicesOfASpecificRoom(String roomDTOName){
 
         List<Room> rooms = _house.getRoomList();
-        this.rooms_DTOAndRooms = RoomDTOMapper.roomMap_DTOAndDomain(rooms);
+        this.rooms_DTOAndRooms = RoomDTOMapper.roomMap_NameAndDomain(rooms);
         Room room = rooms_DTOAndRooms.get(roomDTOName);
         List<Device> devices = room.getDevices();
         return DeviceDTOMapper.devices_DomainToDTO(devices);
