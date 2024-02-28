@@ -16,7 +16,8 @@ public class RoomTest {
     @Test
     void validParameters_shouldNotThrowException() throws InstantiationException {
         //Act
-        Room bedroom = new Room("Bedroom1", 1, 25.0, 2.8);
+        FactoryDevice factoryDevice = new FactoryDevice();
+        Room bedroom = new Room("Bedroom1", 1, 25.0, 2.8, factoryDevice);
 
         //Assert
         assertEquals("Bedroom1", bedroom.getRoomName());
@@ -29,8 +30,9 @@ public class RoomTest {
     void nullRoomName_shouldThrowException() {
         //Arrange
         String expectedMessage = "Invalid arguments";
+        FactoryDevice factoryDevice = new FactoryDevice();
         //Act
-        Exception exception = assertThrows(InstantiationException.class, () -> new Room(null, 1, 25.0, 2.5));
+        Exception exception = assertThrows(InstantiationException.class, () -> new Room(null, 1, 25.0, 2.5, factoryDevice));
         String actualMessage = exception.getMessage();
         //Assert
         assertEquals(expectedMessage, actualMessage);
@@ -40,8 +42,9 @@ public class RoomTest {
     void emptyRoomName_shouldThrowException() {
         //Arrange
         String expectedMessage = "Invalid arguments";
+        FactoryDevice factoryDevice = new FactoryDevice();
         //Act
-        Exception exception = assertThrows(InstantiationException.class, () -> new Room("", 1, 25.0, 2.5));
+        Exception exception = assertThrows(InstantiationException.class, () -> new Room("", 1, 25.0, 2.5, factoryDevice));
         String actualMessage = exception.getMessage();
         //Assert
         assertEquals(expectedMessage, actualMessage);
@@ -51,8 +54,9 @@ public class RoomTest {
     void blankRoomName_shouldThrowException() {
         //Arrange
         String expectedMessage = "Invalid arguments";
+        FactoryDevice factoryDevice = new FactoryDevice();
         //Act
-        Exception exception = assertThrows(InstantiationException.class, () -> new Room(" ", 1, 25.0, 2.5));
+        Exception exception = assertThrows(InstantiationException.class, () -> new Room(" ", 1, 25.0, 2.5, factoryDevice));
         String actualMessage = exception.getMessage();
         //Assert
         assertEquals(expectedMessage, actualMessage);
@@ -62,8 +66,9 @@ public class RoomTest {
     void invalidHouseFloor_shouldThrowException() {
         //Arrange
         String expectedMessage = "Invalid arguments";
+        FactoryDevice factoryDevice = new FactoryDevice();
         //Act
-        Exception exception = assertThrows(InstantiationException.class, () -> new Room("Bedroom", null, 25.0, 2.5));
+        Exception exception = assertThrows(InstantiationException.class, () -> new Room("Bedroom", null, 25.0, 2.5, factoryDevice));
         String actualMessage = exception.getMessage();
         //Assert
         assertEquals(expectedMessage, actualMessage);
@@ -73,8 +78,9 @@ public class RoomTest {
     void AreaIsZero_shouldThrowException() {
         //Arrange
         String expectedMessage = "Invalid arguments";
+        FactoryDevice factoryDevice = new FactoryDevice();
         //Act
-        Exception exception = assertThrows(InstantiationException.class, () -> new Room("Bedroom", 1, 0.0, 2.5));
+        Exception exception = assertThrows(InstantiationException.class, () -> new Room("Bedroom", 1, 0.0, 2.5, factoryDevice));
         String actualMessage = exception.getMessage();
         //Assert
         assertEquals(expectedMessage, actualMessage);
@@ -84,8 +90,9 @@ public class RoomTest {
     void AreaIsNegative_shouldThrowException() {
         //Arrange
         String expectedMessage = "Invalid arguments";
+        FactoryDevice factoryDevice = new FactoryDevice();
         //Act
-        Exception exception = assertThrows(InstantiationException.class, () -> new Room("Bedroom", 1, -10.0, 2.5));
+        Exception exception = assertThrows(InstantiationException.class, () -> new Room("Bedroom", 1, -10.0, 2.5, factoryDevice));
         String actualMessage = exception.getMessage();
         //Assert
         assertEquals(expectedMessage, actualMessage);
@@ -95,8 +102,9 @@ public class RoomTest {
     void heightIsNegative_shouldThrowException() {
         //Arrange
         String expectedMessage = "Invalid arguments";
+        FactoryDevice factoryDevice = new FactoryDevice();
         //Act
-        Exception exception = assertThrows(InstantiationException.class, () -> new Room("Bedroom", 1, 25.0, -2.5));
+        Exception exception = assertThrows(InstantiationException.class, () -> new Room("Bedroom", 1, 25.0, -2.5, factoryDevice));
         String actualMessage = exception.getMessage();
         //Assert
         assertEquals(expectedMessage, actualMessage);
@@ -105,7 +113,8 @@ public class RoomTest {
     @Test
     void shouldReturnValidRoomName() throws InstantiationException {
         //Arrange
-        Room myRoom = new Room("Bedroom", 0, 25.0, 3.2);
+        FactoryDevice factoryDevice = new FactoryDevice();
+        Room myRoom = new Room("Bedroom", 0, 25.0, 3.2, factoryDevice);
         String expected = "Bedroom";
         //Act
         String found = myRoom.getRoomName();
@@ -116,7 +125,8 @@ public class RoomTest {
     @Test
     void shouldReturnValidFloorNumber() throws InstantiationException {
         //Arrange
-        Room myRoom = new Room("Bedroom", 0, 25.0, 3.2);
+        FactoryDevice factoryDevice = new FactoryDevice();
+        Room myRoom = new Room("Bedroom", 0, 25.0, 3.2, factoryDevice);
         Integer expected = 0;
         //Act
         Integer found = myRoom.getFloorNumber();
@@ -127,7 +137,8 @@ public class RoomTest {
     @Test
     void shouldReturnValidArea() throws InstantiationException {
         //Arrange
-        Room myRoom = new Room("Bedroom", 0, 25.0, 3.2);
+        FactoryDevice factoryDevice = new FactoryDevice();
+        Room myRoom = new Room("Bedroom", 0, 25.0, 3.2, factoryDevice);
         Double expected = 25.0;
         //Act
         Double found = myRoom.getArea();
@@ -138,7 +149,8 @@ public class RoomTest {
     @Test
     void shouldReturnValidHeight() throws InstantiationException {
         //Arrange
-        Room myRoom = new Room("Bedroom", 0, 25.0, 3.2);
+        FactoryDevice factoryDevice = new FactoryDevice();
+        Room myRoom = new Room("Bedroom", 0, 25.0, 3.2, factoryDevice);
         Double expected = 3.2;
         //Act
         Double found = myRoom.getHeight();
@@ -149,7 +161,8 @@ public class RoomTest {
     @Test
     void shouldReturnEmptyDeviceList() throws InstantiationException {
         //Arrange
-        Room myRoom = new Room("Bedroom", 0, 25.0, 3.2);
+        FactoryDevice factoryDevice = new FactoryDevice();
+        Room myRoom = new Room("Bedroom", 0, 25.0, 3.2, factoryDevice);
         ArrayList expected = new ArrayList<>();
         //Act
         ArrayList<Device> found = myRoom.getDevices();
@@ -161,8 +174,9 @@ public class RoomTest {
     void nullFactoryDevice_shouldThrowException() {
         //Arrange
         String expectedMessage = "Invalid arguments";
+        FactoryDevice factoryDevice = null;
         //Act
-        Exception exception = assertThrows(InstantiationException.class, () -> new Room("Bedroom", 1, 25.0, 2.5, null));
+        Exception exception = assertThrows(InstantiationException.class, () -> new Room("Bedroom", 1, 25.0, 2.5, factoryDevice));
         String actualMessage = exception.getMessage();
         //Assert
         assertEquals(expectedMessage, actualMessage);
