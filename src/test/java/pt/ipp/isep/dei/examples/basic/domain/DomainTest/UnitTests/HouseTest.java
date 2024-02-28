@@ -220,4 +220,39 @@ public class HouseTest {
         assertTrue(actualMessage.contains(expected));
     }
 
+    @Test
+    void addRoomDuplicatedName_ShouldThrowException() throws InstantiationException {
+
+        // arrange
+        String expected = "Room name already exists";
+        double latitude = 53;
+        double longitude = 100;
+        String address = "address";
+        String zipCode = "zipCode";
+        String name = "name";
+        int floorNumber = 1;
+        double area = 2.4;
+        double height = 1.5;
+
+        FactoryRoom factoryRoomDouble = mock(FactoryRoom.class);
+        Room roomDouble = mock(Room.class);
+        when(factoryRoomDouble.createRoom(name, floorNumber, area, height)).thenReturn(roomDouble);
+        when(roomDouble.getRoomName()).thenReturn("name");
+
+        FactoryLocation factoryLocationDouble = mock(FactoryLocation.class);
+
+        //act
+        House house = new House(factoryLocationDouble, factoryRoomDouble, address, zipCode, latitude, longitude);
+        house.addRoom(name, floorNumber, area, height);
+        Exception exception =
+                assertThrows(IllegalArgumentException.class, ()
+                        -> {
+                    house.addRoom(name, floorNumber, area, height);
+                });
+
+        // assert
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expected));
+    }
+
 }
