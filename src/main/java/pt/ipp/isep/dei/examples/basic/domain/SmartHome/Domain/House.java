@@ -28,13 +28,13 @@ public class House {
     }
 
     //only for isolation tests por agora
-    public House(FactoryLocation factoryLocation, FactoryRoom factoryRoom,String address, String zipCode, double latitude, double longitude) throws InstantiationException{
+    public House(FactoryLocation factoryLocation, FactoryRoom factoryRoom,String address, String zipCode, double latitude, double longitude) throws IllegalArgumentException{
 
         this._location = factoryLocation.createLocation(address, zipCode, latitude, longitude);
 
         this._factoryRoom = factoryRoom;
 
-        this._rooms = factoryRoom.initRooms();
+        this._rooms = new ArrayList<>();
     }
 
     /** Getter for the House's location.
@@ -46,24 +46,6 @@ public class House {
         return this._location;
     }
 
-    /**
-     * Method to create a Room object and add it to the House's roomList.
-     *
-     * @param roomName The name of the room.
-     * @param floorNumber The floor number where the room is located.
-     * @param area The area of the room in square meters.
-     * @param height The height of the room in meters.
-     * @return Room object created and added to the House's roomList.
-     * @throws InstantiationException if any given attribute for Room is empty or null.
-     */
-    public Room addRoom(String roomName, int floorNumber, double area, double height) throws InstantiationException {
-
-        Room myRoom = this._factoryRoom.createRoom(roomName, floorNumber, area, height);
-
-        this._rooms.add(myRoom);
-
-        return myRoom;
-    }
 
     /**
      * Method that verifies if there are duplicate room names in the roomList.
@@ -79,6 +61,17 @@ public class House {
         }
         return false;
     }
+
+    /**
+     * Method to create a Room object and add it to the House's roomList.
+     *
+     * @param roomName The name of the room.
+     * @param floorNumber The floor number where the room is located.
+     * @param area The area of the room in square meters.
+     * @param height The height of the room in meters.
+     * @return Room object created and added to the House's roomList.
+     * @throws InstantiationException if any given attribute for Room is empty or null.
+     */
     public Room createRoom(String roomName, int floorNumber, double area, double height) throws InstantiationException {
         if (isRoomNameDuplicated(roomName)) {
             throw new IllegalArgumentException("Room name already exists");
@@ -90,7 +83,15 @@ public class House {
         return myRoom;
     }
 
-
+    // only for isolation tests for now
+    public Room addRoom(String roomName, int floorNumber, double area, double height) throws InstantiationException {
+        if (isRoomNameDuplicated(roomName)) {
+            throw new IllegalArgumentException("Room name already exists");
+        }
+        Room myRoom = this._factoryRoom.createRoom(roomName, floorNumber, area, height);
+        this._rooms.add(myRoom);
+        return myRoom;
+    }
 
 
     /**
