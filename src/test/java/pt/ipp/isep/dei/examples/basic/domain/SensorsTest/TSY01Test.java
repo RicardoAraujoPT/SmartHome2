@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TSY01Test {
     @Test
-    void NewValidTSY01() throws InstantiationException {
+    void validTSY01_ShouldCreateNewInstance() throws InstantiationException {
         // arrange
         Configuration config = new PropertyListConfiguration();
         Catalogue catalogue = new Catalogue(config);
@@ -26,7 +26,7 @@ class TSY01Test {
     }
 
     @Test
-    void NewInexistentSensorTypeForTSY01() {
+    void inexistentSensorTypeForTSY01_ShouldThrowException() {
         // arrange
         Configuration config = new PropertyListConfiguration();
         Catalogue catalogue = new Catalogue(config);

@@ -15,5 +15,31 @@ public enum Unit {
     /**
      * Represents the Percentage unit of measurement.
      */
-    Percentage
+    Percentage,
+
+    /**
+     * Represents the Watt per hour unit of measurement.
+     */
+    Watt_m2,
+
+    OnOff,
+
+    /**
+     * Represents the Wind Speed measurement.
+     */
+    Kmh,
+
+    /**
+     * Represents the Power Consumption measurement.
+     */
+    Watt,
+
+
+
+
+
+
+
+
+
 }

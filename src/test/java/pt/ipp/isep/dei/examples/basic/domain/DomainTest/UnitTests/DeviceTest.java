@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.examples.basic.domain.DomainTest.UnitTests;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.*;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Sensors.GA100K;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
@@ -15,12 +16,12 @@ import static org.mockito.Mockito.*;
 public class DeviceTest {
 
     @Test
-    public void createValidDevice() throws InstantiationException {
+    void createValidDevice() throws InstantiationException {
         Device device = new Device("device1");
     }
 
     @Test
-    public void createInvalidDeviceWithEmptyName() {
+    void EmptyDeviceName_shouldThrowIllegalArgumentException() {
         //Arrange
         String expectedMessage = "Invalid arguments for Device";
         //Act
@@ -31,7 +32,7 @@ public class DeviceTest {
     }
 
     @Test
-    public void createInvalidDeviceWithNullName() {
+    void NullDeviceName_shouldThrowIllegalArgumentException() {
         //Arrange
         String expectedMessage = "Invalid arguments for Device";
         //Act
@@ -42,7 +43,7 @@ public class DeviceTest {
     }
 
     @Test
-    public void getValidDeviceName() {
+    void getValidDeviceName() {
         //Arrange
         Device device = new Device("device1");
         String expected = "device1";
@@ -53,18 +54,29 @@ public class DeviceTest {
     }
 
     @Test
+    void getValidIsActive() {
+        //Arrange
+        Device device = new Device("device1");
+        String expected = "device1";
+        //Act
+        Boolean found = device.getDeviceIsActive();
+        //Assert
+        assertTrue(found);
+    }
+
+    @Test
     @Disabled
-    public void getValidDeviceIsActive() {
+    void getValidDeviceIsActive() {
         //Arrange
         Device device = new Device("device1");
         //Act
         Boolean found = device.getDeviceIsActive();
         //Assert
-        assertFalse(found);
+        assertTrue(found);
     }
 
     @Test
-    public void getValidDeviceAvailableSensors() {
+    void getValidDeviceSensors() {
         //Arrange
         Device device = new Device("device1");
         ArrayList expected = new ArrayList<>();
@@ -75,7 +87,7 @@ public class DeviceTest {
     }
 
     @Test
-    public void getValidDeviceAvailableActuators() {
+    void getValidDeviceActuators() {
         //Arrange
         Device device = new Device("device1");
         ArrayList expected = new ArrayList<>();
@@ -86,7 +98,7 @@ public class DeviceTest {
     }
 
     @Test
-    public void setValidDeviceName() {
+    void setValidDeviceName() {
         //Arrange
         Device device = new Device("device1");
         String name = "newDevice";
@@ -98,7 +110,7 @@ public class DeviceTest {
     }
 
     @Test
-    public void setInvalidDeviceName() {
+    void setInvalidDeviceName() {
         //Arrange
         Device device = new Device("device1");
         String name = "";
@@ -111,7 +123,7 @@ public class DeviceTest {
     }
 
     @Test
-    public void deactivateValidDevice() {
+    void deactivateValidDevice() {
         //Arrange
         Device device = new Device("device1");
         //Act
@@ -119,5 +131,103 @@ public class DeviceTest {
         //Assert
         assertTrue(found);
     }
+
+    @Test
+    void activateValidDevice() {
+        //Arrange
+        Device device = new Device("device1");
+        //Act
+        Boolean found = device.activateDevice();
+        //Assert
+        assertTrue(found);
+    }
+
+
+    @Test
+    void whenAddingValidGA100KSensorModel_thenNewSensorIsInstantiated() throws Exception{
+        // arrange
+        String strSensorModel = "Sensors.GA100K";
+        String strSensorTypeDescription = "Temperature";
+
+        SensorType sensorTypeDouble = mock(SensorType.class);
+        when(sensorTypeDouble.getDescription()).thenReturn(strSensorTypeDescription);
+
+        Sensor sensorDouble = mock(Sensor.class);
+        when(sensorDouble.getSensorType()).thenReturn(sensorTypeDouble);
+
+        Catalogue catalogueDouble = mock(Catalogue.class);
+        when(catalogueDouble.getSensor(strSensorModel)).thenReturn(sensorDouble);
+
+        Device device = new Device("device1");
+
+        // act
+        Sensor sensor = device.addSensor(strSensorModel, catalogueDouble);
+
+        // assert
+        assertEquals(sensor.getSensorType().getDescription(), strSensorTypeDescription);
+        // Verify that the sensor was added to the device
+        assertTrue(device.getSensors().contains(sensor));
+    }
+
+    @Test
+    void whenAddingInvalidGA100KSensorModel_thenNullIsReturned() throws Exception{
+        // arrange
+        String strSensorModel = "Sensors.GA100K";
+
+        Catalogue catalogueDouble = mock(Catalogue.class);
+        when(catalogueDouble.getSensor(strSensorModel)).thenReturn(null);
+
+        Device device = new Device("device1");
+
+        // act
+        Sensor sensor = device.addSensor(strSensorModel, catalogueDouble);
+
+        // assert
+        assertNull(sensor);
+    }
+
+    @Test
+    void whenAddingValidTSY01SensorModel_thenNewSensorIsInstantiated() throws Exception{
+        // arrange
+        String strSensorModel = "Sensors.TSY01";
+        String strSensorTypeDescription = "Humidity";
+
+        SensorType sensorTypeDouble = mock(SensorType.class);
+        when(sensorTypeDouble.getDescription()).thenReturn(strSensorTypeDescription);
+
+        Sensor sensorDouble = mock(Sensor.class);
+        when(sensorDouble.getSensorType()).thenReturn(sensorTypeDouble);
+
+        Catalogue catalogueDouble = mock(Catalogue.class);
+        when(catalogueDouble.getSensor(strSensorModel)).thenReturn(sensorDouble);
+
+        Device device = new Device("device1");
+
+        // act
+        Sensor sensor = device.addSensor(strSensorModel, catalogueDouble);
+
+        // assert
+        assertEquals(sensor.getSensorType().getDescription(), strSensorTypeDescription);
+        // Verify that the sensor was added to the device
+        assertTrue(device.getSensors().contains(sensor));
+    }
+
+    @Test
+    void whenAddingInvalidTSY01SensorModel_thenNullIsReturned() throws Exception{
+        // arrange
+        String strSensorModel = "Sensors.TSY01";
+
+        Catalogue catalogueDouble = mock(Catalogue.class);
+        when(catalogueDouble.getSensor(strSensorModel)).thenReturn(null);
+
+        Device device = new Device("device1");
+
+        // act
+        Sensor sensor = device.addSensor(strSensorModel, catalogueDouble);
+
+        // assert
+        assertNull(sensor);
+    }
+
 
 }

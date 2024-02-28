@@ -17,7 +17,7 @@ public class SensorType {
      * @throws InstantiationException If the provided arguments are not valid (e.g., null or empty description).
      */
     public SensorType(String strDescription, Unit unit) throws InstantiationException {
-        if (!isValidConstructorArguments(strDescription))
+        if (!isValidConstructorArgument(strDescription))
             throw (new InstantiationException("Invalid arguments"));
 
         this._strDescription = strDescription;
@@ -30,10 +30,8 @@ public class SensorType {
      * @param strDescription The description of the sensor type.
      * @return true if the description is not null and not empty, false otherwise.
      */
-    private boolean isValidConstructorArguments(String strDescription) {
+    private boolean isValidConstructorArgument(String strDescription) {
         return strDescription != null && !strDescription.isEmpty();
-
-        // implement here the rest of validations
     }
 
     /**
