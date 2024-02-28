@@ -27,8 +27,8 @@ public class LocationTest {
         // Assert
         assertEquals(expectedAddress, location.getAddress());
         assertEquals(expectedZipCode, location.getZipCode());
-        assertEquals(expectedLatitude, location.getGpsCoordinates().getLatitude());
-        assertEquals(expectedLongitude, location.getGpsCoordinates().getLongitude());
+        assertEquals(expectedLatitude, location.getGPSCoordinates().getLatitude());
+        assertEquals(expectedLongitude, location.getGPSCoordinates().getLongitude());
     }
 
     /**
@@ -304,9 +304,9 @@ public class LocationTest {
     }
 
     /**
-     * Verifies that the getGpsCoordinates method in the Location class correctly returns the GPS coordinates of the Location instance.
+     * Verifies that the getGPSCoordinates method in the Location class correctly returns the GPS coordinates of the Location instance.
      * It does this by creating a new Location instance with valid latitude and longitude coordinates and then checking that
-     * the getGpsCoordinates method returns the expected coordinates.
+     * the getGPSCoordinates method returns the expected coordinates.
      */
     @Test
     void shouldGetGpsCoordinates() {
@@ -317,7 +317,7 @@ public class LocationTest {
         Location location = new Location("Address", "ZipCode", expectedLatitude, expectedLongitude);
 
         // Act
-        GPSCoordinates result = location.getGpsCoordinates();
+        GPSCoordinates result = location.getGPSCoordinates();
 
         // Assert
         assertEquals(expectedLatitude, result.getLatitude());
@@ -325,9 +325,9 @@ public class LocationTest {
     }
 
     /**
-     * This test verifies that the setGpsCoordinates method in the Location class correctly updates the GPS coordinates of the Location instance.
+     * This test verifies that the setGPSCoordinates method in the Location class correctly updates the GPS coordinates of the Location instance.
      * It does this by creating a new Location instance, setting new GPS coordinates, and then checking that
-     * the getGpsCoordinates method returns the new GPS coordinates.
+     * the getGPSCoordinates method returns the new GPS coordinates.
      */
     @Test
     void shouldSetGpsCoordinatesAndReturnTrue() {
@@ -337,17 +337,17 @@ public class LocationTest {
         GPSCoordinates newCoordinates = new GPSCoordinates(90.0000, 180.0000);
 
         // Act
-        location.setGpsCoordinates(newCoordinates);
+        location.setGPSCoordinates(newCoordinates);
 
         // Assert
-        assertEquals(newCoordinates, location.getGpsCoordinates());
-        assertTrue(location.setGpsCoordinates(newCoordinates));
+        assertEquals(newCoordinates, location.getGPSCoordinates());
+        assertTrue(location.setGPSCoordinates(newCoordinates));
     }
 
     /**
-     * This test verifies that the setGpsCoordinates method in the Location class correctly returns false when given an invalid latitude.
+     * This test verifies that the setGPSCoordinates method in the Location class correctly returns false when given an invalid latitude.
      * It does this by creating a new Location instance and then attempting to set invalid latitude coordinates,
-     * and then checking that the setGpsCoordinates method returns false.
+     * and then checking that the setGPSCoordinates method returns false.
      */
     @Test
     void setGpsCoordinates_NullGpsCoordinates_ShouldReturnFalse() {
@@ -357,7 +357,7 @@ public class LocationTest {
         GPSCoordinates invalidCoordinates = null;
 
         // Act
-        boolean result = location.setGpsCoordinates(invalidCoordinates);
+        boolean result = location.setGPSCoordinates(invalidCoordinates);
 
         // Assert
         assertFalse(result);
