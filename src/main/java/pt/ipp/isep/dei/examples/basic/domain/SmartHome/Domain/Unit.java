@@ -29,6 +29,14 @@ public enum Unit {
      */
     Kmh,
 
+    /**
+     * Represents the Power Consumption measurement.
+     */
+    Watt,
+
+
+
+
 
 
 
