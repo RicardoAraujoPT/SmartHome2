@@ -30,7 +30,7 @@ class SR001Test
         // assert
         assertEquals( sr001.getSensorType(), sensorType );
         int value = Integer.parseInt( sr001.getValue().toString() );
-        assertTrue( value >= 0 && value < 1000 );
+        assertTrue( value >= 0 && value <= 1000 );
     }
 
     /**

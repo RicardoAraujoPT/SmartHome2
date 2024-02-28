@@ -46,7 +46,7 @@ public class SR001 implements Sensor
     {
         Random rand = new Random();
 
-        int nValue = rand.nextInt(1000);
+        int nValue = rand.nextInt(1001);
 
         return new SR001Value( nValue );
     }
