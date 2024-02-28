@@ -3,12 +3,10 @@ import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.DeviceDTO;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.*;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.DeviceDTOMapper;
 
-import java.util.HashMap;
-
 
 /**
  * This class represents a controller for User Story 09 (US09).
- * It provides a method to get devices by type in a house.
+ * It provides a method to deactivate a device in a House
  **/
 
 public class US08DeactivateDeviceController {
@@ -30,8 +28,7 @@ public class US08DeactivateDeviceController {
     }
 
     /**
-     * Deactivates an object Device present in a House.
-     *
+     * Given a deviceDTO, it deactivates an object Device present in a House.
      * @param myDeviceDTO a deviceDTO
      * @return DeviceDTO (deactivated device)
      */
@@ -41,14 +38,4 @@ public class US08DeactivateDeviceController {
         return DeviceDTOMapper.DeviceToDTOWithStatus(myDevice);
     }
 
-    /**
-     * Given a deviceDTO, retrieves the corresponding Device Object
-     * @param deviceDTO the deviceDTO that is to be transformed into Device
-     * @return returns the equivalent Domain Device Object
-     */
-    public Device getDeviceFromDomain(DeviceDTO deviceDTO) {
-        DeviceDTOMapper deviceDTOMapper = new DeviceDTOMapper(_house);
-        HashMap<DeviceDTO,Device> deviceDTODeviceHashMap = deviceDTOMapper.getMapDevicesDTO();
-        return deviceDTODeviceHashMap.get(deviceDTO);
-    }
 }
