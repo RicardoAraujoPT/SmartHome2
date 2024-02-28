@@ -282,8 +282,10 @@ public class RoomTest {
             room.createDevice(existingDeviceName);
 
             // Act & Assert
+
+            // Adding a device with a duplicate name
             Exception exception = assertThrows(IllegalArgumentException.class, () ->
-                    room.createDevice(existingDeviceName)); // Adding a device with a duplicate name
+                    room.createDevice(existingDeviceName));
 
             // Get the actual exception message
             String actualMessage = exception.getMessage();
