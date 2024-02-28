@@ -50,8 +50,8 @@ public class US06GetDevicesOfASpecificRoomControllerTest {
         House house = new House("address", "zipCode", 55.2, -2.25);
         Room room = house.createRoom("ChosenRoom", 1, 20.0, 3.0);
 
-        RoomDTOMapper roomDTOMapper = new RoomDTOMapper(house);
-        RoomDTO roomDTO = roomDTOMapper.room_DomainToDTO(room);
+        //RoomDTOMapper roomDTOMapper = new RoomDTOMapper(house);
+        RoomDTO roomDTO = RoomDTOMapper.room_DomainToDTO(room);
 
         US06GetDevicesOfASpecificRoomController controller = new US06GetDevicesOfASpecificRoomController(house);
 
