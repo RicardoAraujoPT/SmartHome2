@@ -12,22 +12,6 @@ import java.util.Map;
 
 public class DeviceDTOMapper {
 
-    private House _house;
-    private HashMap<DeviceDTO, Device> _mapDevicesDTO = new HashMap<>();
-
-    public HashMap<DeviceDTO, Device> getMapDevicesDTO() {
-        return new HashMap<>(_mapDevicesDTO);
-    }
-
-    public DeviceDTOMapper(House house) {
-        this._house = house;
-    }
-
-    // Converts a DeviceDTO to a Device
-    public static Device DTOToDevice(DeviceDTO deviceDTO) throws InstantiationException {
-        return new Device(deviceDTO.getDeviceName());
-    }
-
     // Converts a RoomDTO to a Room
     public static DeviceDTO DeviceToDTO(Device device) {
         return new DeviceDTO(device.getDeviceName(),null);
@@ -54,13 +38,13 @@ public class DeviceDTOMapper {
         Map<DeviceDTO, Device> devicesDTOAndDevices = new HashMap<>();
 
         devices.forEach(device -> {
-            DeviceDTO deviceDTO = DeviceDTOMapper.DeviceToDTO(device);
+            DeviceDTO deviceDTO = DeviceToDTO(device);
             devicesDTOAndDevices.put(deviceDTO, device);
         });
 
         return devicesDTOAndDevices;
     }
-    public HashMap<String, List<DeviceDTO>> devicesMap_DomainToDTO(HashMap<String, HashMap<Room, List<Device>>> groupDevicesByType) {
+    public static HashMap<String, List<DeviceDTO>> devicesMap_DomainToDTO(HashMap<String, HashMap<Room, List<Device>>> groupDevicesByType) {
         HashMap<String, List<DeviceDTO>> hashMapDTO =  new HashMap<>();
         for (HashMap.Entry<String, HashMap<Room, List<Device>>> SensorType : groupDevicesByType.entrySet()) {
             String functionality = SensorType.getKey();
