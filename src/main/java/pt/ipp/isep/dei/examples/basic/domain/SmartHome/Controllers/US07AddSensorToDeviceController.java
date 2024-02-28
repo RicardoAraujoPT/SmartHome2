@@ -1,7 +1,9 @@
 package pt.ipp.isep.dei.examples.basic.domain.SmartHome.Controllers;
 
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.DeviceDTO;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.AddSensorToDeviceDTO;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.SensorDTO;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.*;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Mappers.SensorDTOMapper;
 
 import java.util.List;
 
@@ -63,15 +65,15 @@ public class US07AddSensorToDeviceController {
      * @param strSensorModel The sensor model to add to the device.
      * @return The sensor that was added to the device.
      */
-    public Sensor addSensorToDevice(DeviceDTO deviceDTO, String strSensorModel) {
+    public SensorDTO addSensorToDevice(AddSensorToDeviceDTO entryDTO) {
 
-        Room room = _house.getRoomByName(deviceDTO.getRoomName());
+        Room room = _house.getRoomByName(entryDTO._roomName);
 
-        Device device =room.getDeviceByName(deviceDTO.getDeviceName());
+        Device device =room.getDeviceByName(entryDTO._deviceName);
 
-        Sensor sensor = device.addSensor(strSensorModel, this._catalogue);
+        Sensor sensor = device.addSensor(entryDTO._strSensorModel, this._catalogue);
 
-        return sensor;
+        return SensorDTOMapper.convertToDTO(sensor);
     }
 
 }
