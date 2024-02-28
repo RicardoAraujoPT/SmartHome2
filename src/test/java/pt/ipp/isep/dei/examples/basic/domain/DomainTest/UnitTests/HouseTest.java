@@ -50,7 +50,7 @@ public class HouseTest {
 
         //arrange
         String expected = "Invalid address or ZIP code";
-        String address = "address";
+        String address = null;
         double latitude = 53;
         double longitude = 100;
         String zipCode = "zipCode";
@@ -65,7 +65,28 @@ public class HouseTest {
         //assert
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expected));
+    }
 
+    @Test
+    void invalidHouseLatitude_ShouldThrowException() throws IllegalArgumentException{
+
+        //arrange
+        String expected = "Invalid address or ZIP code";
+        String address = "address";
+        double latitude = -500;
+        double longitude = 100;
+        String zipCode = "zipCode";
+        FactoryLocation factoryLocationsDouble = mock(FactoryLocation.class);
+        when(factoryLocationsDouble.createLocation(address,zipCode,latitude,longitude)).thenThrow(new IllegalArgumentException(expected));
+        FactoryRoom factoryRoomDouble = mock(FactoryRoom.class);
+
+        //act
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->
+                new House(factoryLocationsDouble,factoryRoomDouble,address,zipCode,latitude,longitude));
+
+        //assert
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expected));
     }
 
 
