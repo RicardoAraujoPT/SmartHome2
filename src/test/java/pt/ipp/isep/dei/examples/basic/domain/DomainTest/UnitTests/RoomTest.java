@@ -30,83 +30,78 @@ public class RoomTest {
         //Arrange
         String expectedMessage = "Invalid arguments";
         //Act
-        Exception exception = assertThrows(InstantiationException.class,() -> new Room(null, 1,25.0,2.5));
-        String actualMessage = exception.getMessage();
-        //Assert
-        assertEquals(expectedMessage, actualMessage);
-    }
-    @Test
-    void emptyRoomName_shouldThrowException () {
-        //Arrange
-        String expectedMessage = "Invalid arguments";
-        //Act
-        Exception exception = assertThrows(InstantiationException.class,() -> new Room("", 1,25.0,2.5));
-        String actualMessage = exception.getMessage();
-        //Assert
-        assertEquals(expectedMessage, actualMessage);
-    }
-    @Test
-    void blankRoomName_shouldThrowException () {
-        //Arrange
-        String expectedMessage = "Invalid arguments";
-        //Act
-        Exception exception = assertThrows(InstantiationException.class,() -> new Room(" ", 1,25.0,2.5));
-        String actualMessage = exception.getMessage();
-        //Assert
-        assertEquals(expectedMessage, actualMessage);
-    }
-    @Test
-    void invalidHouseFloor_shouldThrowException () {
-        //Arrange
-        String expectedMessage = "Invalid arguments";
-        //Act
-        Exception exception = assertThrows(InstantiationException.class,() -> new Room("Bedroom", null,25.0,2.5));
-        String actualMessage = exception.getMessage();
-        //Assert
-        assertEquals(expectedMessage, actualMessage);
-    }
-    @Test
-    void areaIsZero_shouldThrowException () {
-        //Arrange
-        String expectedMessage = "Invalid arguments";
-        //Act
-        Exception exception = assertThrows(InstantiationException.class,() -> new Room("Bedroom", 1,0.0,2.5));
-        String actualMessage = exception.getMessage();
-        //Assert
-        assertEquals(expectedMessage, actualMessage);
-    }
-    @Test
-    void areaIsNegative_shouldThrowException () {
-        //Arrange
-        String expectedMessage = "Invalid arguments";
-        //Act
-        Exception exception = assertThrows(InstantiationException.class,() -> new Room("Bedroom", 1,-10.0,2.5));
+        Exception exception = assertThrows(InstantiationException.class, () -> new Room(null, 1, 25.0, 2.5));
         String actualMessage = exception.getMessage();
         //Assert
         assertEquals(expectedMessage, actualMessage);
     }
 
     @Test
-    void heightIsNegative_shouldThrowException () {
+    void emptyRoomName_shouldThrowException() {
         //Arrange
         String expectedMessage = "Invalid arguments";
         //Act
-        Exception exception = assertThrows(InstantiationException.class,() -> new Room("Bedroom", 1,25.0,-2.5));
+        Exception exception = assertThrows(InstantiationException.class, () -> new Room("", 1, 25.0, 2.5));
         String actualMessage = exception.getMessage();
         //Assert
         assertEquals(expectedMessage, actualMessage);
     }
 
     @Test
-    void heightIsZero_shouldThrowException () {
+    void blankRoomName_shouldThrowException() {
         //Arrange
         String expectedMessage = "Invalid arguments";
         //Act
-        Exception exception = assertThrows(InstantiationException.class,() -> new Room("Bedroom", 1,25.0,0.0));
+        Exception exception = assertThrows(InstantiationException.class, () -> new Room(" ", 1, 25.0, 2.5));
         String actualMessage = exception.getMessage();
         //Assert
         assertEquals(expectedMessage, actualMessage);
     }
+
+    @Test
+    void invalidHouseFloor_shouldThrowException() {
+        //Arrange
+        String expectedMessage = "Invalid arguments";
+        //Act
+        Exception exception = assertThrows(InstantiationException.class, () -> new Room("Bedroom", null, 25.0, 2.5));
+        String actualMessage = exception.getMessage();
+        //Assert
+        assertEquals(expectedMessage, actualMessage);
+    }
+
+    @Test
+    void AreaIsZero_shouldThrowException() {
+        //Arrange
+        String expectedMessage = "Invalid arguments";
+        //Act
+        Exception exception = assertThrows(InstantiationException.class, () -> new Room("Bedroom", 1, 0.0, 2.5));
+        String actualMessage = exception.getMessage();
+        //Assert
+        assertEquals(expectedMessage, actualMessage);
+    }
+
+    @Test
+    void AreaIsNegative_shouldThrowException() {
+        //Arrange
+        String expectedMessage = "Invalid arguments";
+        //Act
+        Exception exception = assertThrows(InstantiationException.class, () -> new Room("Bedroom", 1, -10.0, 2.5));
+        String actualMessage = exception.getMessage();
+        //Assert
+        assertEquals(expectedMessage, actualMessage);
+    }
+
+    @Test
+    void heightIsNegative_shouldThrowException() {
+        //Arrange
+        String expectedMessage = "Invalid arguments";
+        //Act
+        Exception exception = assertThrows(InstantiationException.class, () -> new Room("Bedroom", 1, 25.0, -2.5));
+        String actualMessage = exception.getMessage();
+        //Assert
+        assertEquals(expectedMessage, actualMessage);
+    }
+
     @Test
     void shouldReturnValidRoomName() throws InstantiationException {
         //Arrange
@@ -167,7 +162,7 @@ public class RoomTest {
         //Arrange
         String expectedMessage = "Invalid arguments";
         //Act
-        Exception exception = assertThrows(InstantiationException.class,() -> new Room("Bedroom", 1,25.0,2.5, null));
+        Exception exception = assertThrows(InstantiationException.class, () -> new Room("Bedroom", 1, 25.0, 2.5, null));
         String actualMessage = exception.getMessage();
         //Assert
         assertEquals(expectedMessage, actualMessage);
@@ -224,8 +219,7 @@ public class RoomTest {
     }
 
     @Test
-    void emptyNameDevice_shouldThrowException() throws InstantiationException
-    {
+    void emptyNameDevice_shouldThrowException() throws InstantiationException {
         // Arrange
         String expectedMessage = "Invalid arguments";
 
@@ -238,7 +232,7 @@ public class RoomTest {
 
         // Act + Assert
         Exception exception = assertThrows(InstantiationException.class, () ->
-                myRoom.createFactoryDevice(deviceName) );
+                myRoom.createFactoryDevice(deviceName));
 
         // Act
         String actualMessage = exception.getMessage();
@@ -249,8 +243,7 @@ public class RoomTest {
     }
 
     @Test
-    void nullNameDevice_shouldThrowException() throws InstantiationException
-    {
+    void nullNameDevice_shouldThrowException() throws InstantiationException {
         // Arrange
         String expectedMessage = "Invalid arguments";
 
@@ -263,7 +256,7 @@ public class RoomTest {
 
         // Act + Assert
         Exception exception = assertThrows(InstantiationException.class, () ->
-                myRoom.createFactoryDevice(deviceName) );
+                myRoom.createFactoryDevice(deviceName));
 
         // Act
         String actualMessage = exception.getMessage();
@@ -273,5 +266,33 @@ public class RoomTest {
         assertEquals(myRoom.getDevices().size(), 0);
     }
 
-}
+        @Test
+        void duplicateDeviceName_shouldThrowException() throws InstantiationException {
+            // Arrange
+            String existingDeviceName = "Device1";
+            String expectedMessage = "Device name already exists in the list";
+
+            // Create a mock FactoryDevice
+            FactoryDevice factoryDeviceDouble = mock(FactoryDevice.class);
+
+            // Create a Room instance with a mocked FactoryDevice
+            Room room = new Room("Bedroom", 0, 25.0, 3.2, factoryDeviceDouble);
+
+            // Add a device with an existing name
+            room.createDevice(existingDeviceName);
+
+            // Act & Assert
+            Exception exception = assertThrows(IllegalArgumentException.class, () ->
+                    room.createDevice(existingDeviceName)); // Adding a device with a duplicate name
+
+            // Get the actual exception message
+            String actualMessage = exception.getMessage();
+
+            // Assert
+            assertTrue(actualMessage.contains(expectedMessage));
+            assertEquals(room.getDevices().size(), 1);
+        }
+    }
+
+
 
