@@ -28,33 +28,10 @@ public class US03GetListOfRoomsController {
      * This method accesses the list of rooms in the House object.
      * @return ArrayList<Room>.
      */
-    public static ArrayList<Room> getRoomList(){
-
+    public static ArrayList<RoomDTO> getRoomList(){
         ArrayList<Room> listOfRooms = _myHouse.getRoomList();
-
-        return new ArrayList<>(listOfRooms);
-
+        ArrayList<RoomDTO> roomDTOList = RoomMapper.convertDomainToDTO(listOfRooms);
+        return roomDTOList;
     }
-
-
-    public ArrayList<RoomDTO> getRoomDTOList(){
-
-
-        ArrayList<Room> listOfRoomsInHouse = this._myHouse.getRoomList();
-
-        ArrayList<RoomDTO> listOfRoomsInHouseDTO = RoomMapper.convertDomainToDTO(listOfRoomsInHouse);
-
-        return new ArrayList<>(listOfRoomsInHouseDTO);
-
-    }
-
-    public List<String> getRooms() {
-        List<Room> rooms = _myHouse.getRoomList();
-
-        this._rooms_DTOAndRooms = RoomMapper.roomMap_NameAndDomain(rooms);
-
-        return _rooms_DTOAndRooms.keySet().stream().toList();
-    }
-
 
 }
