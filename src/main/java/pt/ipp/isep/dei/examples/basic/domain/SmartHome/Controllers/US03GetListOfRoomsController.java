@@ -51,7 +51,7 @@ public class US03GetListOfRoomsController {
     public List<String> getRooms() {
         List<Room> rooms = _myHouse.getRoomList();
 
-        this._rooms_DTOAndRooms = RoomDTOMapper.roomMap_DTOAndDomain(rooms);
+        this._rooms_DTOAndRooms = RoomDTOMapper.roomMap_NameAndDomain(rooms);
 
         return _rooms_DTOAndRooms.keySet().stream().toList();
     }
