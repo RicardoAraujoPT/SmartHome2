@@ -19,6 +19,8 @@ public class US03GetListOfRoomsControllerTest {
     /**
      * This test verifies that the constructor of the US03GetListOfRoomsController class throws an IllegalArgumentException
      * when a null House object is passed as an argument.
+     *
+     * @throws IllegalArgumentException
      */
     @Test
     void nullHouse_shouldThrowIllegalArgumentException() {
@@ -45,8 +47,8 @@ public class US03GetListOfRoomsControllerTest {
 
 
     /**
-     * This test verifies that the getRoomList method of the US03GetListOfRoomsController class returns a list of the correct size
-     * when several rooms have been added to the house.
+     * This test verifies that the getRoomList method of the US03GetListOfRoomsController class returns a list
+     * of the correct size when several rooms have been added to the house.
      */
     @Test
     void validArguments_shouldAddSeveralRoomsToHouse() throws InstantiationException {
