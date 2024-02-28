@@ -36,7 +36,7 @@ public class US08DeactivateDeviceController {
      * @return DeviceDTO (deactivated device)
      */
     public DeviceDTO deactivateDevice(DeviceDTO myDeviceDTO) {
-        Device myDevice = getDeviceFromDomain(myDeviceDTO);
+        Device myDevice = _house.getRoomByName(myDeviceDTO.getRoomName()).getDeviceByName(myDeviceDTO.getDeviceName());
         myDevice.deactivateDevice();
         return DeviceDTOMapper.DeviceToDTOWithStatus(myDevice);
     }
