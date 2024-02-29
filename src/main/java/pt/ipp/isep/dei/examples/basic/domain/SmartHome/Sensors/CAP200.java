@@ -19,11 +19,11 @@ public class CAP200 implements Sensor {
 
     }
 
-    public static SensorType getSensorType() {
+    public SensorType getSensorType() {
         return this._sensorType;
     }
 
-    public static Value getValue() {
+    public Value getValue() {
         return new CAP200Value(_capacity);
     }
 
