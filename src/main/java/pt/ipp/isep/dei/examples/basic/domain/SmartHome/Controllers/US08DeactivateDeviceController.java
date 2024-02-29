@@ -27,15 +27,16 @@ public class US08DeactivateDeviceController {
         this._house = house;
     }
 
+
     /**
-     * Given a deviceDTO, it deactivates an object Device present in a House.
-     * @param myDeviceDTO a deviceDTO
-     * @return DeviceDTO (deactivated device)
+     * Given a deviceName and a roomName, it deactivates an object Device present in a House.
+     * @param deviceName the deviceName of the object Device to deactivate
+     * @param roomName the room name in which the device is located
+     * @return returns a deviceDTO
      */
-    public DeviceDTO deactivateDevice(DeviceDTO myDeviceDTO) {
-        Device myDevice = _house.getRoomByName(myDeviceDTO.getRoomName()).getDeviceByName(myDeviceDTO.getDeviceName());
-        myDevice.deactivateDevice();
-        return DeviceMapper.DeviceToDTOWithStatus(myDevice);
+    public DeviceDTO deactivateDevice(String deviceName, String roomName) {
+        _house.getRoomByName(roomName).getDeviceByName(deviceName).deactivateDevice();
+        return DeviceMapper.DeviceToDTOWithStatus(_house.getRoomByName(roomName).getDeviceByName(deviceName));
     }
 
 }
