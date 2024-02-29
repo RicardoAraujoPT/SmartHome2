@@ -22,7 +22,7 @@ public class House {
      * @param latitude
      * @param longitude
      */
-    public House (String address, String zipCode, double latitude, double longitude){
+    public House (String address, String zipCode, double latitude, double longitude) throws InstantiationException {
         this._location = new Location(address, zipCode, latitude, longitude);
         this._rooms = new ArrayList<>();
     }
@@ -33,7 +33,7 @@ public class House {
     }
 
     //only for isolation tests por agora
-    public House(FactoryLocation factoryLocation, FactoryRoom factoryRoom,String address, String zipCode, double latitude, double longitude) throws IllegalArgumentException{
+    public House(FactoryLocation factoryLocation, FactoryRoom factoryRoom,String address, String zipCode, double latitude, double longitude) throws InstantiationException{
 
         this._location = factoryLocation.createLocation(address, zipCode, latitude, longitude);
 
@@ -118,7 +118,7 @@ public class House {
      * @param longitude The new longitude.
      * @return the new Location object of the House or null if any of the parameters is null.
      */
-    public Location configureLocation(String address, String zipCode, Double latitude, Double longitude) throws IllegalArgumentException {
+    public Location configureLocation(String address, String zipCode, Double latitude, Double longitude) throws IllegalArgumentException, InstantiationException {
         this._location= new Location(address, zipCode, latitude, longitude);
         return this._location;
     }

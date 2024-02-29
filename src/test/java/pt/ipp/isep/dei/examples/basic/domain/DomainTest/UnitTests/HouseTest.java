@@ -15,7 +15,7 @@ public class HouseTest {
      *Tests the instantiation of House objects, passing correct arguments in the constructor method.
      */
     @Test
-    void shouldCreateValidHouse_ShouldNotThrowException() {
+    void shouldCreateValidHouse_ShouldNotThrowException() throws InstantiationException {
 
         //arrange
         double expectedLatitude = 53;
@@ -53,7 +53,7 @@ public class HouseTest {
      * @throws IllegalArgumentException
      */
     @Test
-    void invalidHouseAddress_ShouldThrowException() throws IllegalArgumentException{
+    void invalidHouseAddress_ShouldThrowException() throws IllegalArgumentException, InstantiationException {
 
         //arrange
         String expected = "Invalid address or ZIP code";
@@ -80,7 +80,7 @@ public class HouseTest {
      * @throws IllegalArgumentException
      */
     @Test
-    void invalidHouseLatitude_ShouldThrowException() throws IllegalArgumentException{
+    void invalidHouseLatitude_ShouldThrowException() throws IllegalArgumentException, InstantiationException {
 
         //arrange
         String expected = "Invalid address or ZIP code";
@@ -183,7 +183,7 @@ public class HouseTest {
      *
      */
     @Test
-    void shouldGetHouseRooms_HouseWithoutRooms() {
+    void shouldGetHouseRooms_HouseWithoutRooms() throws InstantiationException {
 
         // arrange
         double latitude = 53;

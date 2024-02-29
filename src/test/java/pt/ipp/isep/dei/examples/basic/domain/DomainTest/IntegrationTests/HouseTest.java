@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class HouseTest {
 
     @Test
-    void shouldCreateValidHouse() {
+    void shouldCreateValidHouse() throws InstantiationException {
         //arrange
         String address = "address";
         String zipCode = "zipcode";
@@ -42,7 +42,7 @@ public class HouseTest {
         double houseLongitude = 100;
         //act
         Exception exception = assertThrows(
-                IllegalArgumentException.class, ()
+                InstantiationException.class, ()
                         -> new House(null, houseZipCode, houseLatitude, houseLongitude));
         //assert
         String actualMessage = exception.getMessage();
@@ -59,7 +59,7 @@ public class HouseTest {
         double houseLongitude = 100;
         //act
         Exception exception = assertThrows(
-                IllegalArgumentException.class, ()
+                InstantiationException.class, ()
                         -> new House(houseAddress, null, houseLatitude, houseLongitude));
         //assert
         String actualMessage = exception.getMessage();
@@ -77,7 +77,7 @@ public class HouseTest {
         double houseLongitude = 100;
         //act
         Exception exception = assertThrows(
-                IllegalArgumentException.class, ()
+                InstantiationException.class, ()
                         -> new House(houseAddress, houseZipCode, -180, houseLongitude));
         //assert
         String actualMessage = exception.getMessage();
@@ -95,7 +95,7 @@ public class HouseTest {
         double houseLatitude = 55;
         //act
         Exception exception = assertThrows(
-                IllegalArgumentException.class, ()
+                InstantiationException.class, ()
                         -> new House(houseAddress, houseZipCode, houseLatitude, 300));
         //assert
         String actualMessage = exception.getMessage();
@@ -103,7 +103,7 @@ public class HouseTest {
     }
 
     @Test
-    void HouseWithoutRooms() {
+    void HouseWithoutRooms() throws InstantiationException {
 
         //arrange
         String address = "address";
@@ -151,7 +151,7 @@ public class HouseTest {
     }
 
     @Test
-    void createInvalidRoom_ShouldThrowException() {
+    void createInvalidRoom_ShouldThrowException() throws InstantiationException {
 
         //arrange
         String expected = "Invalid arguments";

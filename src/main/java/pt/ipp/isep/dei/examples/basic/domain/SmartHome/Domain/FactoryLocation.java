@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class FactoryLocation {
 
-        public Location createLocation(String address, String zipCode, double latitude, double longitude) throws IllegalArgumentException{
+        public Location createLocation(String address, String zipCode, double latitude, double longitude) throws InstantiationException{
 
             return new Location(address, zipCode, latitude, longitude);
         }

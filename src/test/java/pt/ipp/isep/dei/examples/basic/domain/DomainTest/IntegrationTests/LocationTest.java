@@ -13,7 +13,7 @@ public class LocationTest {
      * This test verifies that the Location constructor correctly creates a new Location instance.
      */
     @Test
-    void validParameters_ShouldNotThrowException() {
+    void validParameters_ShouldNotThrowException() throws InstantiationException {
 
         // Arrange
         String expectedAddress = "Address";
@@ -47,7 +47,7 @@ public class LocationTest {
         String expectedMessage = "Invalid address or ZIP code";
 
         // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> new Location(address, zipCode, latitude, longitude));
+        Exception exception = assertThrows(InstantiationException.class, () -> new Location(address, zipCode, latitude, longitude));
 
         // Assert
         String actualMessage = exception.getMessage();
@@ -70,7 +70,7 @@ public class LocationTest {
         String expectedMessage = "Invalid address or ZIP code";
 
         // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> new Location(address, zipCode, latitude, longitude));
+        Exception exception = assertThrows(InstantiationException.class, () -> new Location(address, zipCode, latitude, longitude));
 
         // Assert
         String actualMessage = exception.getMessage();
@@ -93,7 +93,7 @@ public class LocationTest {
         String expectedMessage = "Invalid address or ZIP code";
 
         // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> new Location(address, zipCode, latitude, longitude));
+        Exception exception = assertThrows(InstantiationException.class, () -> new Location(address, zipCode, latitude, longitude));
 
         // Assert
         String actualMessage = exception.getMessage();
@@ -116,7 +116,7 @@ public class LocationTest {
         String expectedMessage = "Invalid address or ZIP code";
 
         // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> new Location(address, zipCode, latitude, longitude));
+        Exception exception = assertThrows(InstantiationException.class, () -> new Location(address, zipCode, latitude, longitude));
 
         // Assert
         String actualMessage = exception.getMessage();
@@ -129,7 +129,7 @@ public class LocationTest {
      * the setAddress method returns true and the getAddress method returns the new address.
      */
     @Test
-    void setAddress_ValidAddress_ShouldReturnTrue() {
+    void setAddress_ValidAddress_ShouldReturnTrue() throws InstantiationException {
 
         // Arrange
         String initialAddress = "Address";
@@ -153,7 +153,7 @@ public class LocationTest {
      * the setAddress method returns false.
      */
     @Test
-    void setAddress_NullAddress_ShouldReturnFalse() {
+    void setAddress_NullAddress_ShouldReturnFalse() throws InstantiationException {
 
         // Arrange
         String initialAddress = "Address";
@@ -175,7 +175,7 @@ public class LocationTest {
      * the setAddress method returns false.
      */
     @Test
-    void setAddress_EmptyAddress_ShouldReturnFalse() {
+    void setAddress_EmptyAddress_ShouldReturnFalse() throws InstantiationException {
 
         // Arrange
         String initialAddress = "Address";
@@ -197,7 +197,7 @@ public class LocationTest {
      * the setZipCode method returns true and the getZipCode method returns the new zip code.
      */
     @Test
-    void setZipCode_ValidZipCode_ShouldReturnTrue() {
+    void setZipCode_ValidZipCode_ShouldReturnTrue() throws InstantiationException {
 
         // Arrange
         String initialAddress = "Address";
@@ -221,7 +221,7 @@ public class LocationTest {
      * the setZipCode method returns false.
      */
     @Test
-    void setZipCode_NullZipCode_ShouldReturnFalse() {
+    void setZipCode_NullZipCode_ShouldReturnFalse() throws InstantiationException {
 
         // Arrange
         String initialAddress = "Address";
@@ -243,7 +243,7 @@ public class LocationTest {
      * the setZipCode method returns false.
      */
     @Test
-    void setZipCode_EmptyZipCode_ShouldReturnFalse() {
+    void setZipCode_EmptyZipCode_ShouldReturnFalse() throws InstantiationException {
 
         // Arrange
         String initialAddress = "Address";
@@ -265,7 +265,7 @@ public class LocationTest {
      * the getAddress method returns the expected address.
      */
     @Test
-    void shouldGetAddress() {
+    void shouldGetAddress() throws InstantiationException {
 
         // Arrange
         String expectedAddress = "Address";
@@ -287,7 +287,7 @@ public class LocationTest {
      * the getZipCode method returns the expected zip code.
      */
     @Test
-    void shouldGetZipCode() {
+    void shouldGetZipCode() throws InstantiationException {
 
         // Arrange
         String initialAddress = "Address";
@@ -309,7 +309,7 @@ public class LocationTest {
      * the getGPSCoordinates method returns the expected coordinates.
      */
     @Test
-    void shouldGetGpsCoordinates() {
+    void shouldGetGpsCoordinates() throws InstantiationException {
 
         // Arrange
         double expectedLatitude = 90.0000;
@@ -330,7 +330,7 @@ public class LocationTest {
      * the getGPSCoordinates method returns the new GPS coordinates.
      */
     @Test
-    void shouldSetGpsCoordinatesAndReturnTrue() {
+    void shouldSetGpsCoordinatesAndReturnTrue() throws InstantiationException {
 
         // Arrange
         Location location = new Location("Address", "ZipCode", 0.0000, 0.0000);
@@ -350,7 +350,7 @@ public class LocationTest {
      * and then checking that the setGPSCoordinates method returns false.
      */
     @Test
-    void setGpsCoordinates_NullGpsCoordinates_ShouldReturnFalse() {
+    void setGpsCoordinates_NullGpsCoordinates_ShouldReturnFalse() throws InstantiationException {
 
         // Arrange
         Location location = new Location("Address", "ZipCode", 0.0000, 0.0000);

@@ -38,7 +38,7 @@ public class US03GetListOfRoomsControllerTest {
      * when no rooms have been added to the house.
      */
     @Test
-    void emptyRoomList_shouldFindEmptyList() {
+    void emptyRoomList_shouldFindEmptyList() throws InstantiationException {
         //Arrange
         House myHouse = new House("zipCode", "street", 90.0, 30.0);
         //Act + Assert
