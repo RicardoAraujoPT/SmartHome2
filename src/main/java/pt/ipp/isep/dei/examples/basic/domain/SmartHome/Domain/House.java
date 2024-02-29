@@ -33,13 +33,19 @@ public class House {
     }
 
     //only for isolation tests por agora
+
     public House(FactoryLocation factoryLocation, FactoryRoom factoryRoom,String address, String zipCode, double latitude, double longitude) throws InstantiationException{
 
         this._location = factoryLocation.createLocation(address, zipCode, latitude, longitude);
-
         this._factoryRoom = factoryRoom;
-
         this._rooms = new ArrayList<>();
+    }
+    public Location defineLocation(FactoryLocation factoryLocation,String address, String zipCode) throws InstantiationException{
+
+        this._location = factoryLocation.defineLocation(address, zipCode);
+
+        return this._location;
+
     }
 
     /** Getter for the House's location.
