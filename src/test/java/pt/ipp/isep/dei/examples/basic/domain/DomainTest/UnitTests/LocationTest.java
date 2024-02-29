@@ -314,59 +314,71 @@ public class LocationTest {
     void shouldDefineAndGetGPSCoordinates() throws InstantiationException {
 
         // Arrange
+        double validLatitude = 37.7749;
+        double validLongitude = -122.4194;
+
         GPSCoordinates gpsCoordinatesDouble = mock(GPSCoordinates.class);
-        double expectedLatitude = 90.0000;
-        double expectedLongitude = 180.0000;
+        when(gpsCoordinatesDouble.getLatitude()).thenReturn(validLatitude);
+        when(gpsCoordinatesDouble.getLongitude()).thenReturn(validLongitude);
 
         FactoryGPSCoordinates factoryGPSCoordinatesDouble = mock(FactoryGPSCoordinates.class);
-        when(factoryGPSCoordinatesDouble.createGPSCoordinates(expectedLatitude, expectedLongitude)).thenReturn(gpsCoordinatesDouble);
-        when(gpsCoordinatesDouble.getLatitude()).thenReturn(expectedLatitude);
-        when(gpsCoordinatesDouble.getLongitude()).thenReturn(expectedLongitude);
+        when(factoryGPSCoordinatesDouble.createGPSCoordinates(validLatitude, validLongitude)).thenReturn(gpsCoordinatesDouble);
         Location location = new Location("Address", "ZipCode", factoryGPSCoordinatesDouble);
 
         // Act
-        location.defineGPSCoordinates(expectedLatitude, expectedLongitude);
+        location.defineGPSCoordinates(validLatitude, validLongitude);
         GPSCoordinates result = location.getGPSCoordinates();
 
         // Assert
-        assertEquals(gpsCoordinatesDouble, result);
-        assertEquals(expectedLatitude, result.getLatitude());
-        assertEquals(expectedLongitude, result.getLongitude());
+        assertEquals(validLatitude, result.getLatitude());
+        assertEquals(validLongitude, result.getLongitude());
     }
 
+    /**
+     * Verifies that the defineGPSCoordinates method in the Location class correctly throws an InstantiationException when given an invalid latitude.
+     * It does this by creating a new Location instance and then calling its defineGPSCoordinates method with an invalid latitude.
+     * It then checks that an InstantiationException is thrown with the message "Invalid GPS coordinates".
+     */
     @Test
     void invalidLatitude_ShouldThrowException() throws InstantiationException {
 
         // Arrange
-        GPSCoordinates gpsCoordinatesDouble = mock(GPSCoordinates.class);
-        double invalidLatitude = 100;
-        double validLongitude = -122.4194;
         String expectedMessage = "Invalid GPS coordinates";
 
+        double invalidLatitude = 100;
+        double validLongitude = -122.4194;
+
         FactoryGPSCoordinates factoryGPSCoordinatesDouble = mock(FactoryGPSCoordinates.class);
-        when(factoryGPSCoordinatesDouble.createGPSCoordinates(invalidLatitude, validLongitude)).thenThrow(new IllegalArgumentException(expectedMessage));
+        when(factoryGPSCoordinatesDouble.createGPSCoordinates(invalidLatitude, validLongitude)).thenThrow(new InstantiationException(expectedMessage));
         Location location = new Location("Address", "ZipCode", factoryGPSCoordinatesDouble);
 
         // Act + Assert
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> location.defineGPSCoordinates(invalidLatitude, validLongitude));
-        assertTrue(exception.getMessage().contains(expectedMessage));
+        Exception exception = assertThrows(InstantiationException.class, () -> location.defineGPSCoordinates(invalidLatitude, validLongitude));
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
+    /**
+     * Verifies that the defineGPSCoordinates method in the Location class correctly throws an InstantiationException when given an invalid longitude.
+     * It does this by creating a new Location instance and then calling its defineGPSCoordinates method with an invalid longitude.
+     * It then checks that an InstantiationException is thrown with the message "Invalid GPS coordinates".
+     */
     @Test
     void invalidLongitude_ShouldThrowException() throws InstantiationException {
 
         // Arrange
-        GPSCoordinates gpsCoordinatesDouble = mock(GPSCoordinates.class);
-        double validLatitude = 37.7749;
-        double invalidLongitude = 200;
         String expectedMessage = "Invalid GPS coordinates";
 
+        double validLatitude = 37.7749;
+        double invalidLongitude = 200;
+
         FactoryGPSCoordinates factoryGPSCoordinatesDouble = mock(FactoryGPSCoordinates.class);
-        when(factoryGPSCoordinatesDouble.createGPSCoordinates(validLatitude, invalidLongitude)).thenThrow(new IllegalArgumentException(expectedMessage));
+        when(factoryGPSCoordinatesDouble.createGPSCoordinates(validLatitude, invalidLongitude)).thenThrow(new InstantiationException(expectedMessage));
         Location location = new Location("Address", "ZipCode", factoryGPSCoordinatesDouble);
 
         // Act + Assert
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> location.defineGPSCoordinates(validLatitude, invalidLongitude));
-        assertTrue(exception.getMessage().contains(expectedMessage));
+        Exception exception = assertThrows(InstantiationException.class, () -> location.defineGPSCoordinates(validLatitude, invalidLongitude));
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 }

@@ -121,17 +121,4 @@ public class Location {
         this._zipCode = zipCode;
         return true;
     }
-
-    /**
-     * Method to set the GPS coordinates of the Location objects.
-     * @param gpsCoordinates
-     * @return boolean
-     */
-    public boolean setGPSCoordinates(GPSCoordinates gpsCoordinates) {
-        if (gpsCoordinates == null) {
-            return false;
-        }
-        this._gpsCoordinates = gpsCoordinates;
-        return true;
-    }
 }

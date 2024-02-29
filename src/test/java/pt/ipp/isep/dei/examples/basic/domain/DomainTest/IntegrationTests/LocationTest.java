@@ -1,11 +1,14 @@
 package pt.ipp.isep.dei.examples.basic.domain.DomainTest.IntegrationTests;
 
 import org.junit.jupiter.api.Test;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.FactoryGPSCoordinates;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Location;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.GPSCoordinates;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class LocationTest {
 
@@ -18,23 +21,20 @@ public class LocationTest {
         // Arrange
         String expectedAddress = "Address";
         String expectedZipCode = "ZipCode";
-        double expectedLatitude = 90.0000;
-        double expectedLongitude = 180.0000;
+        FactoryGPSCoordinates factoryGPSCoordinates = new FactoryGPSCoordinates();
 
         // Act
-        Location location = new Location(expectedAddress, expectedZipCode, expectedLatitude, expectedLongitude);
+        Location location = new Location(expectedAddress, expectedZipCode, factoryGPSCoordinates);
 
         // Assert
         assertEquals(expectedAddress, location.getAddress());
         assertEquals(expectedZipCode, location.getZipCode());
-        assertEquals(expectedLatitude, location.getGPSCoordinates().getLatitude());
-        assertEquals(expectedLongitude, location.getGPSCoordinates().getLongitude());
     }
 
     /**
-     * Verifies that the Location constructor correctly throws an IllegalArgumentException when given a null address.
+     * Verifies that the Location constructor correctly throws an InstantiationException when given a null address.
      * It does this by attempting to create a new Location instance with a null address and then checking that an
-     * IllegalArgumentException is thrown with the message "Invalid address, ZIP code, latitude or longitude".
+     * InstantiationException is thrown with the message "Invalid address or ZIP code".
      */
     @Test
     void nullAddress_ShouldThrowException() {
@@ -42,12 +42,11 @@ public class LocationTest {
         // Arrange
         String address = null;
         String zipCode = "ZipCode";
-        double latitude = 90.0000;
-        double longitude = 180.0000;
+        FactoryGPSCoordinates factoryGPSCoordinates = new FactoryGPSCoordinates();
         String expectedMessage = "Invalid address or ZIP code";
 
         // Act
-        Exception exception = assertThrows(InstantiationException.class, () -> new Location(address, zipCode, latitude, longitude));
+        Exception exception = assertThrows(InstantiationException.class, () -> new Location(address, zipCode, factoryGPSCoordinates));
 
         // Assert
         String actualMessage = exception.getMessage();
@@ -55,9 +54,9 @@ public class LocationTest {
     }
 
     /**
-     * Verifies that the Location constructor correctly throws an IllegalArgumentException when given a null zip code.
+     * Verifies that the Location constructor correctly throws an InstantiationException when given a null zip code.
      * It does this by attempting to create a new Location instance with a null zip code and then checking that an
-     * IllegalArgumentException is thrown with the message "Invalid address, ZIP code, latitude or longitude".
+     * InstantiationException is thrown with the message "Invalid address or ZIP code".
      */
     @Test
     void nullZipCode_ShouldThrowException() {
@@ -65,12 +64,11 @@ public class LocationTest {
         // Arrange
         String address = "Address";
         String zipCode = null;
-        double latitude = 90.0000;
-        double longitude = 180.0000;
+        FactoryGPSCoordinates factoryGPSCoordinates = new FactoryGPSCoordinates();
         String expectedMessage = "Invalid address or ZIP code";
 
         // Act
-        Exception exception = assertThrows(InstantiationException.class, () -> new Location(address, zipCode, latitude, longitude));
+        Exception exception = assertThrows(InstantiationException.class, () -> new Location(address, zipCode, factoryGPSCoordinates));
 
         // Assert
         String actualMessage = exception.getMessage();
@@ -78,9 +76,9 @@ public class LocationTest {
     }
 
     /**
-     * Verifies that the Location constructor correctly throws an IllegalArgumentException when given an empty address.
+     * Verifies that the Location constructor correctly throws an InstantiationException when given an empty address.
      * It does this by attempting to create a new Location instance with an empty address and then checking that an
-     * IllegalArgumentException is thrown with the message "Invalid address, ZIP code, latitude or longitude".
+     * InstantiationException is thrown with the message "Invalid address or ZIP code".
      */
     @Test
     void emptyAddress_ShouldThrowException() {
@@ -88,12 +86,11 @@ public class LocationTest {
         // Arrange
         String address = "";
         String zipCode = "ZipCode";
-        double latitude = 90.0000;
-        double longitude = 180.0000;
         String expectedMessage = "Invalid address or ZIP code";
+        FactoryGPSCoordinates factoryGPSCoordinates = new FactoryGPSCoordinates();
 
         // Act
-        Exception exception = assertThrows(InstantiationException.class, () -> new Location(address, zipCode, latitude, longitude));
+        Exception exception = assertThrows(InstantiationException.class, () -> new Location(address, zipCode, factoryGPSCoordinates));
 
         // Assert
         String actualMessage = exception.getMessage();
@@ -101,9 +98,9 @@ public class LocationTest {
     }
 
     /**
-     * Verifies that the Location constructor correctly throws an IllegalArgumentException when given an empty zip code.
+     * Verifies that the Location constructor correctly throws an InstantiationException when given an empty zip code.
      * It does this by attempting to create a new Location instance with an empty zip code and then checking that an
-     * IllegalArgumentException is thrown with the message "Invalid address, ZIP code, latitude or longitude".
+     * InstantiationException is thrown with the message "Invalid address or ZIP code".
      */
     @Test
     void emptyZipCode_ShouldThrowException() {
@@ -111,12 +108,11 @@ public class LocationTest {
         // Arrange
         String address = "Address";
         String zipCode = "";
-        double latitude = 90.0000;
-        double longitude = 180.0000;
+        FactoryGPSCoordinates factoryGPSCoordinates = new FactoryGPSCoordinates();
         String expectedMessage = "Invalid address or ZIP code";
 
         // Act
-        Exception exception = assertThrows(InstantiationException.class, () -> new Location(address, zipCode, latitude, longitude));
+        Exception exception = assertThrows(InstantiationException.class, () -> new Location(address, zipCode, factoryGPSCoordinates));
 
         // Assert
         String actualMessage = exception.getMessage();
@@ -134,9 +130,8 @@ public class LocationTest {
         // Arrange
         String initialAddress = "Address";
         String initialZipCode = "ZipCode";
-        double initialLatitude = 90.0000;
-        double initialLongitude = 180.0000;
-        Location location = new Location(initialAddress, initialZipCode, initialLatitude, initialLongitude);
+        FactoryGPSCoordinates factoryGPSCoordinates = new FactoryGPSCoordinates();
+        Location location = new Location(initialAddress, initialZipCode, factoryGPSCoordinates);
         String newAddress = "New Address";
 
         // Act
@@ -158,9 +153,8 @@ public class LocationTest {
         // Arrange
         String initialAddress = "Address";
         String initialZipCode = "ZipCode";
-        double initialLatitude = 90.0000;
-        double initialLongitude = 180.0000;
-        Location location = new Location(initialAddress, initialZipCode, initialLatitude, initialLongitude);
+        FactoryGPSCoordinates factoryGPSCoordinates = new FactoryGPSCoordinates();
+        Location location = new Location(initialAddress, initialZipCode, factoryGPSCoordinates);
 
         // Act
         boolean result = location.setAddress(null);
@@ -180,9 +174,8 @@ public class LocationTest {
         // Arrange
         String initialAddress = "Address";
         String initialZipCode = "ZipCode";
-        double initialLatitude = 90.0000;
-        double initialLongitude = 180.0000;
-        Location location = new Location(initialAddress, initialZipCode, initialLatitude, initialLongitude);
+        FactoryGPSCoordinates factoryGPSCoordinates = new FactoryGPSCoordinates();
+        Location location = new Location(initialAddress, initialZipCode, factoryGPSCoordinates);
 
         // Act
         boolean result = location.setAddress("");
@@ -202,9 +195,8 @@ public class LocationTest {
         // Arrange
         String initialAddress = "Address";
         String initialZipCode = "ZipCode";
-        double initialLatitude = 90.0000;
-        double initialLongitude = 180.0000;
-        Location location = new Location(initialAddress, initialZipCode, initialLatitude, initialLongitude);
+        FactoryGPSCoordinates factoryGPSCoordinates = new FactoryGPSCoordinates();
+        Location location = new Location(initialAddress, initialZipCode, factoryGPSCoordinates);
         String newZipCode = "New ZipCode";
 
         // Act
@@ -226,9 +218,8 @@ public class LocationTest {
         // Arrange
         String initialAddress = "Address";
         String initialZipCode = "ZipCode";
-        double initialLatitude = 90.0000;
-        double initialLongitude = 180.0000;
-        Location location = new Location(initialAddress, initialZipCode, initialLatitude, initialLongitude);
+        FactoryGPSCoordinates factoryGPSCoordinates = new FactoryGPSCoordinates();
+        Location location = new Location(initialAddress, initialZipCode, factoryGPSCoordinates);
 
         // Act
         boolean result = location.setZipCode(null);
@@ -248,9 +239,8 @@ public class LocationTest {
         // Arrange
         String initialAddress = "Address";
         String initialZipCode = "ZipCode";
-        double initialLatitude = 90.0000;
-        double initialLongitude = 180.0000;
-        Location location = new Location(initialAddress, initialZipCode, initialLatitude, initialLongitude);
+        FactoryGPSCoordinates factoryGPSCoordinates = new FactoryGPSCoordinates();
+        Location location = new Location(initialAddress, initialZipCode, factoryGPSCoordinates);
 
         // Act
         boolean result = location.setZipCode("");
@@ -270,9 +260,8 @@ public class LocationTest {
         // Arrange
         String expectedAddress = "Address";
         String initialZipCode = "ZipCode";
-        double initialLatitude = 90.0000;
-        double initialLongitude = 180.0000;
-        Location location = new Location(expectedAddress, initialZipCode, initialLatitude, initialLongitude);
+        FactoryGPSCoordinates factoryGPSCoordinates = new FactoryGPSCoordinates();
+        Location location = new Location(expectedAddress, initialZipCode, factoryGPSCoordinates);
 
         // Act
         String result = location.getAddress();
@@ -292,9 +281,8 @@ public class LocationTest {
         // Arrange
         String initialAddress = "Address";
         String expectedZipCode = "ZipCode";
-        double initialLatitude = 90.0000;
-        double initialLongitude = 180.0000;
-        Location location = new Location(initialAddress, expectedZipCode, initialLatitude, initialLongitude);
+        FactoryGPSCoordinates factoryGPSCoordinates = new FactoryGPSCoordinates();
+        Location location = new Location(initialAddress, expectedZipCode, factoryGPSCoordinates);
 
         // Act
         String result = location.getZipCode();
@@ -305,61 +293,71 @@ public class LocationTest {
 
     /**
      * Verifies that the getGPSCoordinates method in the Location class correctly returns the GPS coordinates of the Location instance.
-     * It does this by creating a new Location instance with valid latitude and longitude coordinates and then checking that
-     * the getGPSCoordinates method returns the expected coordinates.
+     * It does this by creating a new Location instance, calling its defineGPSCoordinates method with valid latitude and longitude coordinates
+     * and then checking that the getGPSCoordinates method returns the expected coordinates.
      */
     @Test
-    void shouldGetGpsCoordinates() throws InstantiationException {
+    void shouldDefineAndGetGPSCoordinates() throws InstantiationException {
 
         // Arrange
-        double expectedLatitude = 90.0000;
-        double expectedLongitude = 180.0000;
-        Location location = new Location("Address", "ZipCode", expectedLatitude, expectedLongitude);
+        double validLatitude = 37.7749;
+        double validLongitude = -122.4194;
+
+        FactoryGPSCoordinates factoryGPSCoordinatesDouble = new FactoryGPSCoordinates();
+        Location location = new Location("Address", "ZipCode", factoryGPSCoordinatesDouble);
 
         // Act
+        location.defineGPSCoordinates(validLatitude, validLongitude);
         GPSCoordinates result = location.getGPSCoordinates();
 
         // Assert
-        assertEquals(expectedLatitude, result.getLatitude());
-        assertEquals(expectedLongitude, result.getLongitude());
+        assertEquals(validLatitude, result.getLatitude());
+        assertEquals(validLongitude, result.getLongitude());
     }
 
     /**
-     * This test verifies that the setGPSCoordinates method in the Location class correctly updates the GPS coordinates of the Location instance.
-     * It does this by creating a new Location instance, setting new GPS coordinates, and then checking that
-     * the getGPSCoordinates method returns the new GPS coordinates.
+     * Verifies that the defineGPSCoordinates method in the Location class correctly throws an InstantiationException when given an invalid latitude.
+     * It does this by creating a new Location instance and then calling its defineGPSCoordinates method with an invalid latitude.
+     * It then checks that an InstantiationException is thrown with the message "Invalid GPS coordinates".
      */
     @Test
-    void shouldSetGpsCoordinatesAndReturnTrue() throws InstantiationException {
+    void invalidLatitude_ShouldThrowException() throws InstantiationException {
 
         // Arrange
-        Location location = new Location("Address", "ZipCode", 0.0000, 0.0000);
-        GPSCoordinates newCoordinates = new GPSCoordinates(90.0000, 180.0000);
+        String expectedMessage = "Invalid GPS coordinates";
 
-        // Act
-        location.setGPSCoordinates(newCoordinates);
+        double invalidLatitude = 100;
+        double validLongitude = -122.4194;
 
-        // Assert
-        assertEquals(newCoordinates, location.getGPSCoordinates());
-        assertTrue(location.setGPSCoordinates(newCoordinates));
+        FactoryGPSCoordinates factoryGPSCoordinatesDouble = new FactoryGPSCoordinates();
+        Location location = new Location("Address", "ZipCode", factoryGPSCoordinatesDouble);
+
+        // Act + Assert
+        Exception exception = assertThrows(InstantiationException.class, () -> location.defineGPSCoordinates(invalidLatitude, validLongitude));
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     /**
-     * This test verifies that the setGPSCoordinates method in the Location class correctly returns false when given an invalid latitude.
-     * It does this by creating a new Location instance and then attempting to set invalid latitude coordinates,
-     * and then checking that the setGPSCoordinates method returns false.
+     * Verifies that the defineGPSCoordinates method in the Location class correctly throws an InstantiationException when given an invalid longitude.
+     * It does this by creating a new Location instance and then calling its defineGPSCoordinates method with an invalid longitude.
+     * It then checks that an InstantiationException is thrown with the message "Invalid GPS coordinates".
      */
     @Test
-    void setGpsCoordinates_NullGpsCoordinates_ShouldReturnFalse() throws InstantiationException {
+    void invalidLongitude_ShouldThrowException() throws InstantiationException {
 
         // Arrange
-        Location location = new Location("Address", "ZipCode", 0.0000, 0.0000);
-        GPSCoordinates invalidCoordinates = null;
+        String expectedMessage = "Invalid GPS coordinates";
 
-        // Act
-        boolean result = location.setGPSCoordinates(invalidCoordinates);
+        double validLatitude = 37.7749;
+        double invalidLongitude = 200;
 
-        // Assert
-        assertFalse(result);
+        FactoryGPSCoordinates factoryGPSCoordinatesDouble = new FactoryGPSCoordinates();
+        Location location = new Location("Address", "ZipCode", factoryGPSCoordinatesDouble);
+
+        // Act + Assert
+        Exception exception = assertThrows(InstantiationException.class, () -> location.defineGPSCoordinates(validLatitude, invalidLongitude));
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 }
