@@ -21,9 +21,9 @@ public class Location {
      * @param latitude
      * @param longitude
      */
-    public Location(String address, String zipCode, double latitude, double longitude) throws IllegalArgumentException {
+    public Location(String address, String zipCode, double latitude, double longitude) throws InstantiationException  {
         if (!isAddressValid(address) || !isZipCodeValid(zipCode)) {
-            throw new IllegalArgumentException("Invalid address or ZIP code");
+            throw new InstantiationException("Invalid address or ZIP code");
         }
         this._address = address;
         this._zipCode = zipCode;
@@ -37,16 +37,16 @@ public class Location {
      * @param zipCode
      * @param factoryGPSCoordinates
      */
-    public Location(String address, String zipCode, FactoryGPSCoordinates factoryGPSCoordinates) {
+    public Location(String address, String zipCode, FactoryGPSCoordinates factoryGPSCoordinates) throws InstantiationException {
         if (!isAddressValid(address) || !isZipCodeValid(zipCode)) {
-            throw new IllegalArgumentException("Invalid address or ZIP code");
+            throw new InstantiationException ("Invalid address or ZIP code");
         }
         this._address = address;
         this._zipCode = zipCode;
         this._factoryGPSCoordinates = factoryGPSCoordinates;
     }
 
-    public GPSCoordinates defineGPSCoordinates(double latitude, double longitude) {
+    public GPSCoordinates defineGPSCoordinates(double latitude, double longitude) throws InstantiationException {
         this._gpsCoordinates = _factoryGPSCoordinates.createGPSCoordinates(latitude, longitude);
         return this._gpsCoordinates;
     }

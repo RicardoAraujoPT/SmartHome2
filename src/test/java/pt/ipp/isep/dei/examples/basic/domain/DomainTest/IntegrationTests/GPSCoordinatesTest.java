@@ -19,7 +19,7 @@ public class GPSCoordinatesTest {
      * Test creating a valid GPS location and checking if latitude and longitude are set correctly.
      */
     @Test
-    void shouldCreateValidGPSLocation() {
+    void shouldCreateValidGPSLocation() throws InstantiationException {
 
         // Arrange
         double expectedLatitude = 37.7749;
@@ -46,7 +46,7 @@ public class GPSCoordinatesTest {
         String expectedMessage = "Invalid GPS coordinates";
 
         // Act + Assert
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> new GPSCoordinates(invalidLatitude, validLongitude));
+        InstantiationException exception = assertThrows(InstantiationException.class, () -> new GPSCoordinates(invalidLatitude, validLongitude));
         assertTrue(exception.getMessage().contains(expectedMessage));
     }
 
@@ -63,7 +63,7 @@ public class GPSCoordinatesTest {
         String expectedMessage = "Invalid GPS coordinates";
 
         // Act + Assert
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> new GPSCoordinates(validLatitude, invalidLongitude));
+        InstantiationException exception = assertThrows(InstantiationException.class, () -> new GPSCoordinates(validLatitude, invalidLongitude));
         assertTrue(exception.getMessage().contains(expectedMessage));
     }
 
@@ -71,7 +71,7 @@ public class GPSCoordinatesTest {
      * Test setting a valid latitude value using the setLatitude method.
      */
     @Test
-    void shouldSetLatitude_ValidValue() {
+    void shouldSetLatitude_ValidValue() throws InstantiationException {
 
         // Arrange
         GPSCoordinates location = new GPSCoordinates(37.7749, -122.4194);
@@ -89,7 +89,7 @@ public class GPSCoordinatesTest {
      * An IllegalArgumentException is expected.
      */
     @Test
-    void shouldSetLatitude_InvalidValue() {
+    void shouldSetLatitude_InvalidValue() throws InstantiationException {
 
         // Arrange
         GPSCoordinates location = new GPSCoordinates(37.7749, -122.4194);
@@ -105,7 +105,7 @@ public class GPSCoordinatesTest {
      * Test setting a valid longitude value using the setLongitude method.
      */
     @Test
-    void shouldSetLongitude_ValidValue() {
+    void shouldSetLongitude_ValidValue() throws InstantiationException {
 
         // Arrange
         GPSCoordinates location = new GPSCoordinates(37.7749, -122.4194);
@@ -123,7 +123,7 @@ public class GPSCoordinatesTest {
      * An IllegalArgumentException is expected.
      */
     @Test
-    void shouldSetLongitude_InvalidValue() {
+    void shouldSetLongitude_InvalidValue() throws InstantiationException {
 
         // Arrange
         GPSCoordinates location = new GPSCoordinates(37.7749, -122.4194);
@@ -139,7 +139,7 @@ public class GPSCoordinatesTest {
      * Test rounding double values to 6 decimal places.
      */
     @Test
-    void roundTo6DecimalPlaces() {
+    void roundTo6DecimalPlaces() throws InstantiationException {
 
         // Arrange + Act
         GPSCoordinates location = new GPSCoordinates(37.7749382, -122.4194137);
@@ -153,7 +153,7 @@ public class GPSCoordinatesTest {
      * Tests the method with the lower boundary latitude value. Expects the same latitude value as provided.
      */
     @Test
-    void validLatitude_LowerBoundary() {
+    void validLatitude_LowerBoundary() throws InstantiationException {
 
         // Arrange
         double lowerBoundaryLatitude = -90.0000000;
@@ -170,7 +170,7 @@ public class GPSCoordinatesTest {
      * Tests the method with the middle boundary latitude value. Expects the same latitude value as provided.
      */
     @Test
-    void validLatitude_MiddleValue() {
+    void validLatitude_MiddleValue() throws InstantiationException {
 
         // Arrange
         double middleBoundaryLatitude = 0.0000000;
@@ -187,7 +187,7 @@ public class GPSCoordinatesTest {
      * Tests the method with the upper boundary latitude value. Expects the same latitude value as provided.
      */
     @Test
-    void validLatitude_UpperBoundary() {
+    void validLatitude_UpperBoundary() throws InstantiationException {
 
         // Arrange
         double upperBoundaryLatitude = 90.0000000;
@@ -204,7 +204,7 @@ public class GPSCoordinatesTest {
      * Tests the method with the lower boundary longitude value. Expects the same longitude value as provided.
      */
     @Test
-    void validLongitude_LowerBoundary() {
+    void validLongitude_LowerBoundary() throws InstantiationException {
 
         // Arrange
         double latitude = 37.7749295;
@@ -214,14 +214,14 @@ public class GPSCoordinatesTest {
         GPSCoordinates location = new GPSCoordinates(latitude, lowerBoundaryLongitude);
 
         // Assert
-        assertEquals(lowerBoundaryLongitude, location.getLongitude(), 1e-6, "Longitude should be equal to the lower boundary value.");
+        assertEquals(lowerBoundaryLongitude, location.getLongitude(), 1e-6);
     }
 
     /**
      * Tests the method with the middle boundary longitude value. Expects the same longitude value as provided.
      */
     @Test
-    void validLongitude_MiddleValue() {
+    void validLongitude_MiddleValue() throws InstantiationException {
 
         // Arrange
         double latitude = 37.7749295;
@@ -231,14 +231,14 @@ public class GPSCoordinatesTest {
         GPSCoordinates location = new GPSCoordinates(latitude, middleBoundaryLongitude);
 
         // Assert
-        assertEquals(middleBoundaryLongitude, location.getLongitude(), 1e-6, "Longitude should be equal to the middle boundary value.");
+        assertEquals(middleBoundaryLongitude, location.getLongitude(), 1e-6);
     }
 
     /**
      * Tests the method with the upper boundary longitude value. Expects the same longitude value as provided.
      */
     @Test
-    void validLongitude_UpperBoundary() {
+    void validLongitude_UpperBoundary() throws InstantiationException {
 
         // Arrange
         double latitude = 37.7749295;
@@ -248,6 +248,6 @@ public class GPSCoordinatesTest {
         GPSCoordinates location = new GPSCoordinates(latitude, upperBoundaryLongitude);
 
         // Assert
-        assertEquals(upperBoundaryLongitude, location.getLongitude(), 1e-6, "Longitude should be equal to the upper boundary value.");
+        assertEquals(upperBoundaryLongitude, location.getLongitude(), 1e-6);
     }
 }

@@ -128,7 +128,7 @@ class US09GetDevicesByTypeControllerTest {
      * The expected result is an exception.
      */
     @Test
-    void nullCatalogue_shouldThrowIllegalArgumentException() throws IllegalArgumentException {
+    void nullCatalogue_shouldThrowIllegalArgumentException() throws IllegalArgumentException, InstantiationException {
         //Arrange
         String expectedMessage = "Invalid arguments";
         House myHouse = new House("123", "street", 90.0, 30.0);

@@ -21,9 +21,9 @@ public class GPSCoordinates {
      * @param longitude The longitude coordinate to set. Must be within the valid range.
      * @throws IllegalArgumentException If the provided coordinates are invalid.
      */
-    public GPSCoordinates(double latitude, double longitude) {
+    public GPSCoordinates(double latitude, double longitude) throws InstantiationException{
         if (!isLatitudeValid(latitude) || !isLongitudeValid(longitude)) {
-            throw new IllegalArgumentException("Invalid GPS coordinates");
+            throw new InstantiationException("Invalid GPS coordinates");
         }
         this.latitude = roundTo6DecimalPlaces(latitude);
         this.longitude = roundTo6DecimalPlaces(longitude);

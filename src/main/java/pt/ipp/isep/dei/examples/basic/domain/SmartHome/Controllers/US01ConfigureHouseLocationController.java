@@ -20,9 +20,9 @@ public class US01ConfigureHouseLocationController {
      * @param house The House object to be configured. Must not be null.
      * @throws IllegalArgumentException If the provided house is null.
      */
-    public US01ConfigureHouseLocationController(House house) {
+    public US01ConfigureHouseLocationController(House house) throws InstantiationException {
         if (house == null) {
-            throw new IllegalArgumentException("Invalid house");
+            throw new InstantiationException("Invalid house");
         }
         this._myHouse = house;
     }
@@ -33,7 +33,7 @@ public class US01ConfigureHouseLocationController {
      * @param locationDTO The LocationDTO containing information for configuring the house.
      * @return LocationDTO The LocationDTO of the house after configuration.
      */
-    public LocationDTO configureHouseLocation(LocationDTO locationDTO) throws IllegalArgumentException {
+    public LocationDTO configureHouseLocation(LocationDTO locationDTO) throws InstantiationException {
 
         this._myHouse.configureLocation(locationDTO.getAddress(), locationDTO.getZipCode(), locationDTO.getLatitude(), locationDTO.getLongitude());
 

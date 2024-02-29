@@ -16,7 +16,7 @@ public class LocationTest {
      * This test verifies that the Location constructor correctly creates a new Location instance.
      */
     @Test
-    void validParameters_ShouldNotThrowException() {
+    void validParameters_ShouldNotThrowException() throws InstantiationException {
 
         // Arrange
         String expectedAddress = "Address";
@@ -47,7 +47,7 @@ public class LocationTest {
         FactoryGPSCoordinates factoryGPSCoordinatesDouble = mock(FactoryGPSCoordinates.class);
 
         // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> new Location(address, zipCode, factoryGPSCoordinatesDouble));
+        Exception exception = assertThrows(InstantiationException.class, () -> new Location(address, zipCode, factoryGPSCoordinatesDouble));
 
         // Assert
         String actualMessage = exception.getMessage();
@@ -70,7 +70,7 @@ public class LocationTest {
         FactoryGPSCoordinates factoryGPSCoordinatesDouble = mock(FactoryGPSCoordinates.class);
 
         // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> new Location(address, zipCode, factoryGPSCoordinatesDouble));
+        Exception exception = assertThrows(InstantiationException.class, () -> new Location(address, zipCode, factoryGPSCoordinatesDouble));
 
         // Assert
         String actualMessage = exception.getMessage();
@@ -93,7 +93,7 @@ public class LocationTest {
         FactoryGPSCoordinates factoryGPSCoordinatesDouble = mock(FactoryGPSCoordinates.class);
 
         // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> new Location(address, zipCode, factoryGPSCoordinatesDouble));
+        Exception exception = assertThrows(InstantiationException.class, () -> new Location(address, zipCode, factoryGPSCoordinatesDouble));
 
         // Assert
         String actualMessage = exception.getMessage();
@@ -116,7 +116,7 @@ public class LocationTest {
         FactoryGPSCoordinates factoryGPSCoordinatesDouble = mock(FactoryGPSCoordinates.class);
 
         // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> new Location(address, zipCode, factoryGPSCoordinatesDouble));
+        Exception exception = assertThrows(InstantiationException.class, () -> new Location(address, zipCode, factoryGPSCoordinatesDouble));
 
         // Assert
         String actualMessage = exception.getMessage();
@@ -129,7 +129,7 @@ public class LocationTest {
      * the setAddress method returns true and the getAddress method returns the new address.
      */
     @Test
-    void setAddress_ValidAddress_ShouldReturnTrue() {
+    void setAddress_ValidAddress_ShouldReturnTrue() throws InstantiationException {
 
         // Arrange
         String initialAddress = "Address";
@@ -153,7 +153,7 @@ public class LocationTest {
      * the setAddress method returns false.
      */
     @Test
-    void setAddress_NullAddress_ShouldReturnFalse() {
+    void setAddress_NullAddress_ShouldReturnFalse() throws InstantiationException {
 
         // Arrange
         String initialAddress = "Address";
@@ -175,7 +175,7 @@ public class LocationTest {
      * the setAddress method returns false.
      */
     @Test
-    void setAddress_EmptyAddress_ShouldReturnFalse() {
+    void setAddress_EmptyAddress_ShouldReturnFalse() throws InstantiationException {
 
         // Arrange
         String initialAddress = "Address";
@@ -197,7 +197,7 @@ public class LocationTest {
      * the setZipCode method returns true and the getZipCode method returns the new zip code.
      */
     @Test
-    void setZipCode_ValidZipCode_ShouldReturnTrue() {
+    void setZipCode_ValidZipCode_ShouldReturnTrue() throws InstantiationException {
 
         // Arrange
         GPSCoordinates gpsCoordinatesDouble = mock(GPSCoordinates.class);
@@ -222,7 +222,7 @@ public class LocationTest {
      * the setZipCode method returns false.
      */
     @Test
-    void setZipCode_NullZipCode_ShouldReturnFalse() {
+    void setZipCode_NullZipCode_ShouldReturnFalse() throws InstantiationException {
 
         // Arrange
         String initialAddress = "Address";
@@ -244,7 +244,7 @@ public class LocationTest {
      * the setZipCode method returns false.
      */
     @Test
-    void setZipCode_EmptyZipCode_ShouldReturnFalse() {
+    void setZipCode_EmptyZipCode_ShouldReturnFalse() throws InstantiationException {
 
         // Arrange
         GPSCoordinates gpsCoordinatesDouble = mock(GPSCoordinates.class);
@@ -267,7 +267,7 @@ public class LocationTest {
      * the getAddress method returns the expected address.
      */
     @Test
-    void shouldGetAddress() {
+    void shouldGetAddress() throws InstantiationException {
 
         // Arrange
         String expectedAddress = "Address";
@@ -289,7 +289,7 @@ public class LocationTest {
      * the getZipCode method returns the expected zip code.
      */
     @Test
-    void shouldGetZipCode() {
+    void shouldGetZipCode() throws InstantiationException {
 
         // Arrange
         String initialAddress = "Address";
@@ -311,7 +311,7 @@ public class LocationTest {
      * and then checking that the getGPSCoordinates method returns the expected coordinates.
      */
     @Test
-    void shouldDefineAndGetGPSCoordinates() {
+    void shouldDefineAndGetGPSCoordinates() throws InstantiationException {
 
         // Arrange
         GPSCoordinates gpsCoordinatesDouble = mock(GPSCoordinates.class);
@@ -335,7 +335,7 @@ public class LocationTest {
     }
 
     @Test
-    void invalidLatitude_ShouldThrowException() {
+    void invalidLatitude_ShouldThrowException() throws InstantiationException {
 
         // Arrange
         GPSCoordinates gpsCoordinatesDouble = mock(GPSCoordinates.class);
@@ -349,6 +349,24 @@ public class LocationTest {
 
         // Act + Assert
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> location.defineGPSCoordinates(invalidLatitude, validLongitude));
+        assertTrue(exception.getMessage().contains(expectedMessage));
+    }
+
+    @Test
+    void invalidLongitude_ShouldThrowException() throws InstantiationException {
+
+        // Arrange
+        GPSCoordinates gpsCoordinatesDouble = mock(GPSCoordinates.class);
+        double validLatitude = 37.7749;
+        double invalidLongitude = 200;
+        String expectedMessage = "Invalid GPS coordinates";
+
+        FactoryGPSCoordinates factoryGPSCoordinatesDouble = mock(FactoryGPSCoordinates.class);
+        when(factoryGPSCoordinatesDouble.createGPSCoordinates(validLatitude, invalidLongitude)).thenThrow(new IllegalArgumentException(expectedMessage));
+        Location location = new Location("Address", "ZipCode", factoryGPSCoordinatesDouble);
+
+        // Act + Assert
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> location.defineGPSCoordinates(validLatitude, invalidLongitude));
         assertTrue(exception.getMessage().contains(expectedMessage));
     }
 }

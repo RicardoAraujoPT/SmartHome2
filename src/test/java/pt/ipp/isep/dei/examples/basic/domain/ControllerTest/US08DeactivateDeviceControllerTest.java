@@ -100,7 +100,7 @@ public class US08DeactivateDeviceControllerTest {
      * The expected result is that the method should return an exception.
      */
     @Test
-    void nullRoom_shouldThrowIllegalArgumentException() throws IllegalArgumentException {
+    void nullRoom_shouldThrowIllegalArgumentException() throws InstantiationException {
         //Arrange
         House _myHouse = new House("zipCode", "Street", 55, 105);
         US08DeactivateDeviceController myController = new US08DeactivateDeviceController(_myHouse);

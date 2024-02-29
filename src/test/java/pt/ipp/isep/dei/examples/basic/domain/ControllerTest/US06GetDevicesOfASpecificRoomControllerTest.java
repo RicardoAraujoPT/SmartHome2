@@ -22,7 +22,7 @@ public class US06GetDevicesOfASpecificRoomControllerTest {
      * Test case to verify if a valid House object can be instantiated.
      */
     @Test
-    void validHouse_shouldInstantiateValidHouse() {
+    void validHouse_shouldInstantiateValidHouse() throws InstantiationException {
         // Arrange
         House house = new House("address", "zipCode", 55.2, -2.25);
         // Act
