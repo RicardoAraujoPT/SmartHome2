@@ -40,9 +40,11 @@ public class House {
         this._factoryRoom = factoryRoom;
         //this._rooms = new ArrayList<>();
     }
-    public Location defineLocation(FactoryLocation factoryLocation,String address, String zipCode) throws InstantiationException{
 
-        this._location = factoryLocation.defineLocation(address, zipCode);
+    //should this method call defineGPSCoordinates?
+    public Location defineLocation(String address, String zipCode) throws InstantiationException{
+
+        this._location = _factoryLocation.defineLocation(address, zipCode);
 
         return this._location;
 
