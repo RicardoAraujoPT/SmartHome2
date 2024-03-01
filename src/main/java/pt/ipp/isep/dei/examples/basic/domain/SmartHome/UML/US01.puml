@@ -15,15 +15,28 @@ autonumber
 
 [o->":ConfigureHouseLocationController": configureHouseLocation(locationDTO)
 activate ":ConfigureHouseLocationController"
-":ConfigureHouseLocationController"->"myHouse :House": configureLocation(address, zipCode, latitude, longitude)
+":ConfigureHouseLocationController"->"myHouse :House": defineLocation(address, zipCode, latitude, longitude)
 activate "myHouse :House"
-"myHouse :House"->"myLocation :Location" ** : Location(address, zipCode, latitude, longitude)
+"myHouse :House"->"FactoryLocation" : createLocation(address, zipCode)
+activate "FactoryLocation"
+"FactoryLocation"->"myLocation :Location" : Location(address, zipCode, factoryGPSCoordinates)
 activate "myLocation :Location"
-"myLocation :Location"->"myGPSCoordinates :GPSCoordinates" ** : GPSCoordinates(latitude, longitude)
+"myLocation :Location"-->"FactoryLocation" : myLocation
+deactivate "myLocation :Location"
+"FactoryLocation"-->"myHouse :House" : myLocation
+deactivate "FactoryLocation"
+"myHouse :House"->"myLocation :Location" : defineGPSCoordinates(latitude, longitude)
+activate "myLocation :Location"
+"myLocation :Location"->"FactoryGPSCoordinates" : createGPSCoordinates(latitude, longitude)
+"FactoryGPSCoordinates"->"myGPSCoordinates :GPSCoordinates" : GPSCoordinates(latitude, longitude)
 activate "myGPSCoordinates :GPSCoordinates"
-"myGPSCoordinates :GPSCoordinates"-->"myLocation :Location" : myGPSCoordinates
+"myGPSCoordinates :GPSCoordinates"-->"FactoryGPSCoordinates" : myGPSCoordinates
 deactivate "myGPSCoordinates :GPSCoordinates"
-"myLocation :Location"-->"myHouse :House" : myLocation
+"FactoryGPSCoordinates"-->"myLocation :Location" : myGPSCoordinates
+
+"myLocation :Location"->"myHouse :House"  : myGPSCoordinates
+
+
 deactivate "myLocation :Location"
 "myHouse :House"-->":ConfigureHouseLocationController": myLocation
 deactivate "myHouse :House"
