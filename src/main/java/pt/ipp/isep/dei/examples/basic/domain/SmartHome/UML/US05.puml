@@ -8,22 +8,22 @@ autonumber
 
 participant ":US05V2AddDeviceToRoomController"
 participant ":House"
-participant ":RoomDTOMapper"
+participant ":RoomMapper"
 participant "myRoom :Room"
 participant ":FactoryDevice"
 participant "myDevice :Device"
-participant ":DeviceDTOMapper"
+participant ":DeviceMapper"
 
 
 [o-> ":US05V2AddDeviceToRoomController" : addDeviceToRoom(roomName,deviceName)
-":US05V2AddDeviceToRoomController" -> ":House" : getDeviceByName(roomName)
+":US05V2AddDeviceToRoomController" -> ":House" : getRoomList()
 activate ":House"
 ":US05V2AddDeviceToRoomController" <-- ":House" : listOfRooms
 deactivate ":House"
-":US05V2AddDeviceToRoomController" -> ":RoomDTOMapper" : roomMap_DTOAndDomain(rooms)
-activate ":RoomDTOMapper"
-":US05V2AddDeviceToRoomController" <-- ":RoomDTOMapper" : listOfRooms_DTOAndRooms
-deactivate ":RoomDTOMapper"
+":US05V2AddDeviceToRoomController" -> ":RoomMapper" : roomMap_NameAndDomain(rooms)
+activate ":RoomMapper"
+":US05V2AddDeviceToRoomController" <-- ":RoomMapper" : listOfRooms_DTOAndRooms
+deactivate ":RoomMapper"
 ":US05V2AddDeviceToRoomController" -> ":US05V2AddDeviceToRoomController" : listOfRooms_DTOAndRooms.get(roomName)
 ":US05V2AddDeviceToRoomController" -> "myRoom :Room" : addDevice(deviceName)
 activate "myRoom :Room"
@@ -39,10 +39,10 @@ deactivate ":FactoryDevice"
 ":US05V2AddDeviceToRoomController" <-- "myRoom :Room" : listOfDevices
 deactivate "myRoom :Room"
 
-":US05V2AddDeviceToRoomController" -> ":DeviceDTOMapper" : listOfDevices
-activate ":DeviceDTOMapper"
-":US05V2AddDeviceToRoomController" <-- ":DeviceDTOMapper" : listOfDevicesDTO
-deactivate ":DeviceDTOMapper"
+":US05V2AddDeviceToRoomController" -> ":DeviceMapper" : devices_DomainToDTO(listOfDevices)
+activate ":DeviceMapper"
+":US05V2AddDeviceToRoomController" <-- ":DeviceMapper" : listOfDevicesDTO
+deactivate ":DeviceMapper"
 [o<-- ":US05V2AddDeviceToRoomController" : listOfDevicesDTO
 deactivate ":US05V2AddDeviceToRoomController"
 
