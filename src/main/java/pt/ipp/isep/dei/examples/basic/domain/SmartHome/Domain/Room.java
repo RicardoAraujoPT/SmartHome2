@@ -102,13 +102,18 @@ public class Room {
         }
     }
 
-    public Device createFactoryDevice(String deviceName) throws InstantiationException{
+    public Device addDevice(String deviceName) throws InstantiationException{
+        //check if device name is repeated
+        if (isDeviceNameRepeated(deviceName)) {
+            throw new IllegalArgumentException("Device name already exists in the list");
+        }
+        //check if device name is valid
+        if (deviceName == null || deviceName.trim().isEmpty()){
+            throw new IllegalArgumentException("Device name cannot be null or empty");
+        }
         // instanciate device
         Device myDevice = _factoryDevice.newDevice(deviceName);
         // add device to list
-        if (deviceName == null || deviceName.trim().isEmpty()) {
-            return null;
-        }
         _devices.add(myDevice);
 
         return myDevice;

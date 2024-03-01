@@ -16,8 +16,8 @@ public class RoomTest {
     @Test
     void validParameters_shouldNotThrowException() throws InstantiationException {
         //Act
-        FactoryDevice factoryDevice = new FactoryDevice();
-        Room bedroom = new Room("Bedroom1", 1, 25.0, 2.8, factoryDevice);
+        FactoryDevice factoryDeviceDouble = mock(FactoryDevice.class);
+        Room bedroom = new Room("Bedroom1", 1, 25.0, 2.8, factoryDeviceDouble);
 
         //Assert
         assertEquals("Bedroom1", bedroom.getRoomName());
@@ -30,9 +30,9 @@ public class RoomTest {
     void nullRoomName_shouldThrowException() {
         //Arrange
         String expectedMessage = "Invalid arguments";
-        FactoryDevice factoryDevice = new FactoryDevice();
+        FactoryDevice factoryDeviceDouble = mock(FactoryDevice.class);
         //Act
-        Exception exception = assertThrows(InstantiationException.class, () -> new Room(null, 1, 25.0, 2.5, factoryDevice));
+        Exception exception = assertThrows(InstantiationException.class, () -> new Room(null, 1, 25.0, 2.5, factoryDeviceDouble));
         String actualMessage = exception.getMessage();
         //Assert
         assertEquals(expectedMessage, actualMessage);
@@ -42,9 +42,9 @@ public class RoomTest {
     void emptyRoomName_shouldThrowException() {
         //Arrange
         String expectedMessage = "Invalid arguments";
-        FactoryDevice factoryDevice = new FactoryDevice();
+        FactoryDevice factoryDeviceDouble = mock(FactoryDevice.class);
         //Act
-        Exception exception = assertThrows(InstantiationException.class, () -> new Room("", 1, 25.0, 2.5, factoryDevice));
+        Exception exception = assertThrows(InstantiationException.class, () -> new Room("", 1, 25.0, 2.5, factoryDeviceDouble));
         String actualMessage = exception.getMessage();
         //Assert
         assertEquals(expectedMessage, actualMessage);
@@ -54,9 +54,9 @@ public class RoomTest {
     void blankRoomName_shouldThrowException() {
         //Arrange
         String expectedMessage = "Invalid arguments";
-        FactoryDevice factoryDevice = new FactoryDevice();
+        FactoryDevice factoryDeviceDouble = mock(FactoryDevice.class);
         //Act
-        Exception exception = assertThrows(InstantiationException.class, () -> new Room(" ", 1, 25.0, 2.5, factoryDevice));
+        Exception exception = assertThrows(InstantiationException.class, () -> new Room(" ", 1, 25.0, 2.5, factoryDeviceDouble));
         String actualMessage = exception.getMessage();
         //Assert
         assertEquals(expectedMessage, actualMessage);
@@ -66,9 +66,9 @@ public class RoomTest {
     void invalidHouseFloor_shouldThrowException() {
         //Arrange
         String expectedMessage = "Invalid arguments";
-        FactoryDevice factoryDevice = new FactoryDevice();
+        FactoryDevice factoryDeviceDouble = mock(FactoryDevice.class);
         //Act
-        Exception exception = assertThrows(InstantiationException.class, () -> new Room("Bedroom", null, 25.0, 2.5, factoryDevice));
+        Exception exception = assertThrows(InstantiationException.class, () -> new Room("Bedroom", null, 25.0, 2.5, factoryDeviceDouble));
         String actualMessage = exception.getMessage();
         //Assert
         assertEquals(expectedMessage, actualMessage);
@@ -78,9 +78,9 @@ public class RoomTest {
     void AreaIsZero_shouldThrowException() {
         //Arrange
         String expectedMessage = "Invalid arguments";
-        FactoryDevice factoryDevice = new FactoryDevice();
+        FactoryDevice factoryDeviceDouble = mock(FactoryDevice.class);
         //Act
-        Exception exception = assertThrows(InstantiationException.class, () -> new Room("Bedroom", 1, 0.0, 2.5, factoryDevice));
+        Exception exception = assertThrows(InstantiationException.class, () -> new Room("Bedroom", 1, 0.0, 2.5, factoryDeviceDouble));
         String actualMessage = exception.getMessage();
         //Assert
         assertEquals(expectedMessage, actualMessage);
@@ -90,9 +90,9 @@ public class RoomTest {
     void AreaIsNegative_shouldThrowException() {
         //Arrange
         String expectedMessage = "Invalid arguments";
-        FactoryDevice factoryDevice = new FactoryDevice();
+        FactoryDevice factoryDeviceDouble = mock(FactoryDevice.class);
         //Act
-        Exception exception = assertThrows(InstantiationException.class, () -> new Room("Bedroom", 1, -10.0, 2.5, factoryDevice));
+        Exception exception = assertThrows(InstantiationException.class, () -> new Room("Bedroom", 1, -10.0, 2.5, factoryDeviceDouble));
         String actualMessage = exception.getMessage();
         //Assert
         assertEquals(expectedMessage, actualMessage);
@@ -102,9 +102,9 @@ public class RoomTest {
     void heightIsNegative_shouldThrowException() {
         //Arrange
         String expectedMessage = "Invalid arguments";
-        FactoryDevice factoryDevice = new FactoryDevice();
+        FactoryDevice factoryDeviceDouble = mock(FactoryDevice.class);
         //Act
-        Exception exception = assertThrows(InstantiationException.class, () -> new Room("Bedroom", 1, 25.0, -2.5, factoryDevice));
+        Exception exception = assertThrows(InstantiationException.class, () -> new Room("Bedroom", 1, 25.0, -2.5, factoryDeviceDouble));
         String actualMessage = exception.getMessage();
         //Assert
         assertEquals(expectedMessage, actualMessage);
@@ -113,8 +113,8 @@ public class RoomTest {
     @Test
     void shouldReturnValidRoomName() throws InstantiationException {
         //Arrange
-        FactoryDevice factoryDevice = new FactoryDevice();
-        Room myRoom = new Room("Bedroom", 0, 25.0, 3.2, factoryDevice);
+        FactoryDevice factoryDeviceDouble = mock(FactoryDevice.class);
+        Room myRoom = new Room("Bedroom", 0, 25.0, 3.2, factoryDeviceDouble);
         String expected = "Bedroom";
         //Act
         String found = myRoom.getRoomName();
@@ -125,8 +125,8 @@ public class RoomTest {
     @Test
     void shouldReturnValidFloorNumber() throws InstantiationException {
         //Arrange
-        FactoryDevice factoryDevice = new FactoryDevice();
-        Room myRoom = new Room("Bedroom", 0, 25.0, 3.2, factoryDevice);
+        FactoryDevice factoryDeviceDouble = mock(FactoryDevice.class);
+        Room myRoom = new Room("Bedroom", 0, 25.0, 3.2, factoryDeviceDouble);
         Integer expected = 0;
         //Act
         Integer found = myRoom.getFloorNumber();
@@ -137,8 +137,8 @@ public class RoomTest {
     @Test
     void shouldReturnValidArea() throws InstantiationException {
         //Arrange
-        FactoryDevice factoryDevice = new FactoryDevice();
-        Room myRoom = new Room("Bedroom", 0, 25.0, 3.2, factoryDevice);
+        FactoryDevice factoryDeviceDouble = mock(FactoryDevice.class);
+        Room myRoom = new Room("Bedroom", 0, 25.0, 3.2, factoryDeviceDouble);
         Double expected = 25.0;
         //Act
         Double found = myRoom.getArea();
@@ -149,8 +149,8 @@ public class RoomTest {
     @Test
     void shouldReturnValidHeight() throws InstantiationException {
         //Arrange
-        FactoryDevice factoryDevice = new FactoryDevice();
-        Room myRoom = new Room("Bedroom", 0, 25.0, 3.2, factoryDevice);
+        FactoryDevice factoryDeviceDouble = mock(FactoryDevice.class);
+        Room myRoom = new Room("Bedroom", 0, 25.0, 3.2, factoryDeviceDouble);
         Double expected = 3.2;
         //Act
         Double found = myRoom.getHeight();
@@ -161,8 +161,8 @@ public class RoomTest {
     @Test
     void shouldReturnEmptyDeviceList() throws InstantiationException {
         //Arrange
-        FactoryDevice factoryDevice = new FactoryDevice();
-        Room myRoom = new Room("Bedroom", 0, 25.0, 3.2, factoryDevice);
+        FactoryDevice factoryDeviceDouble = mock(FactoryDevice.class);
+        Room myRoom = new Room("Bedroom", 0, 25.0, 3.2, factoryDeviceDouble);
         ArrayList expected = new ArrayList<>();
         //Act
         ArrayList<Device> found = myRoom.getDevices();
@@ -194,7 +194,7 @@ public class RoomTest {
         Room myRoom = new Room("Bedroom", 0, 25.0, 3.2, factoryDeviceDouble);
 
         //Act
-        Device device = myRoom.createFactoryDevice(deviceName);
+        Device device = myRoom.addDevice(deviceName);
 
         //Assert
         assertEquals(myRoom.getDevices().size(), 1);
@@ -212,6 +212,8 @@ public class RoomTest {
 
         Device deviceDouble1 = mock(Device.class);
         Device deviceDouble2 = mock(Device.class);
+        when(deviceDouble1.getDeviceName()).thenReturn(deviceName1);
+        when(deviceDouble2.getDeviceName()).thenReturn(deviceName2);
 
         FactoryDevice factoryDeviceDouble = mock(FactoryDevice.class);
         when(factoryDeviceDouble.newDevice(deviceName1)).thenReturn(deviceDouble1);
@@ -221,8 +223,8 @@ public class RoomTest {
         Room myRoom = new Room("Bedroom", 0, 25.0, 3.2, factoryDeviceDouble);
 
         //Act
-        myRoom.createFactoryDevice(deviceName1);
-        myRoom.createFactoryDevice(deviceName2);
+        myRoom.addDevice(deviceName1);
+        myRoom.addDevice(deviceName2);
 
         //Assert
         assertEquals(myRoom.getDevices().size(), 2);
@@ -235,18 +237,18 @@ public class RoomTest {
     @Test
     void emptyNameDevice_shouldThrowException() throws InstantiationException {
         // Arrange
-        String expectedMessage = "Invalid arguments";
+        String expectedMessage = "Device name cannot be null or empty";
 
         String deviceName = "";
 
         FactoryDevice factoryDeviceDouble = mock(FactoryDevice.class);
-        when(factoryDeviceDouble.newDevice(deviceName)).thenThrow(new InstantiationException(expectedMessage));
+        when(factoryDeviceDouble.newDevice(deviceName)).thenThrow(new IllegalArgumentException(expectedMessage));
 
         Room myRoom = new Room("Bedroom", 0, 25.0, 3.2, factoryDeviceDouble);
 
         // Act + Assert
-        Exception exception = assertThrows(InstantiationException.class, () ->
-                myRoom.createFactoryDevice(deviceName));
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->
+                myRoom.addDevice(deviceName));
 
         // Act
         String actualMessage = exception.getMessage();
@@ -259,18 +261,18 @@ public class RoomTest {
     @Test
     void nullNameDevice_shouldThrowException() throws InstantiationException {
         // Arrange
-        String expectedMessage = "Invalid arguments";
+        String expectedMessage = "Device name cannot be null or empty";
 
         String deviceName = null;
 
         FactoryDevice factoryDeviceDouble = mock(FactoryDevice.class);
-        when(factoryDeviceDouble.newDevice(deviceName)).thenThrow(new InstantiationException(expectedMessage));
+        when(factoryDeviceDouble.newDevice(deviceName)).thenThrow(new IllegalArgumentException(expectedMessage));
 
         Room myRoom = new Room("Bedroom", 0, 25.0, 3.2, factoryDeviceDouble);
 
         // Act + Assert
-        Exception exception = assertThrows(InstantiationException.class, () ->
-                myRoom.createFactoryDevice(deviceName));
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->
+                myRoom.addDevice(deviceName));
 
         // Act
         String actualMessage = exception.getMessage();
@@ -286,20 +288,25 @@ public class RoomTest {
             String existingDeviceName = "Device1";
             String expectedMessage = "Device name already exists in the list";
 
+            Device deviceDouble = mock(Device.class);
+            when(deviceDouble.getDeviceName()).thenReturn(existingDeviceName);
+
             // Create a mock FactoryDevice
             FactoryDevice factoryDeviceDouble = mock(FactoryDevice.class);
+            when(factoryDeviceDouble.newDevice(existingDeviceName)).thenReturn(deviceDouble);
+
 
             // Create a Room instance with a mocked FactoryDevice
             Room room = new Room("Bedroom", 0, 25.0, 3.2, factoryDeviceDouble);
 
             // Add a device with an existing name
-            room.createDevice(existingDeviceName);
+            room.addDevice(existingDeviceName);
 
             // Act & Assert
 
             // Adding a device with a duplicate name
             Exception exception = assertThrows(IllegalArgumentException.class, () ->
-                    room.createDevice(existingDeviceName));
+                    room.addDevice(existingDeviceName));
 
             // Get the actual exception message
             String actualMessage = exception.getMessage();

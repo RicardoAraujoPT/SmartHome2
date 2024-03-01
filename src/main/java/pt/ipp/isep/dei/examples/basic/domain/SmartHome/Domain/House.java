@@ -13,7 +13,7 @@ public class House {
     private FactoryLocation _factoryLocation;
     private FactoryRoom _factoryRoom;
     private Location _location;
-    private ArrayList <Room> _rooms;
+    private ArrayList <Room> _rooms = new ArrayList<>();
 
     /**
      * Constructor method that allows the instantiation of House objects, with the following inputs:
@@ -38,7 +38,7 @@ public class House {
 
         this._location = factoryLocation.createLocation(address, zipCode, latitude, longitude);
         this._factoryRoom = factoryRoom;
-        this._rooms = new ArrayList<>();
+        //this._rooms = new ArrayList<>();
     }
     public Location defineLocation(FactoryLocation factoryLocation,String address, String zipCode) throws InstantiationException{
 
