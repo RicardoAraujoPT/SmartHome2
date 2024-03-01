@@ -8,24 +8,41 @@ import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.*;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
+/**
+ * This is a test class of the US09GetDevicesByTypeController. It contains tests for:
+ * house with many devices;
+ * house with no devices;
+ * Non-existing House
+ * Non-existing Catalogue
+ */
 
 class US09GetDevicesByTypeControllerTest {
+    /*
+     * Test for a house with 2 rooms and many devices.
+     * The expected result is a map with 2 keys, "Temperature" and "Humidity", and a list of devices for each key.
+     * The list of devices for "Temperature" should contain [d1, d3] from r0, and [d0, 0d1] from r1.
+     * The list of devices for "Humidity" should contain devices [d2, d3,d4] from r0 and [d1] from r1.
+     */
     @Test
     void successfully_ShouldReturnDevicesGroupedByType() throws InstantiationException {
         //Arrange
         Catalogue catalogue = new Catalogue("config.properties");
         catalogue.addSensorType("Humidity", Unit.Percentage);
         catalogue.addSensorType("Temperature", Unit.Celsius);
-        House myHouse = new House("123", "street", 90.0, 30.0);
+        FactoryGPSCoordinates factoryGPSCoordinates = new FactoryGPSCoordinates();
+        FactoryDevice factoryDevice = new FactoryDevice();
+        FactoryLocation factoryLocation = new FactoryLocation(factoryGPSCoordinates);
+        FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
+        House myHouse = new House(factoryLocation,factoryRoom);
 
 
         for (int i = 0; i < 2; i++) { // Adding 2 room
-            myHouse.createRoom("r" + i, 0, 25, 10);
+            myHouse.addRoom("r" + i, 0, 25, 10);
             if (i == 0) { //Choosing r0
                 // Adding 5 devices to r0
                 for (int j = 0; j < 5; j++) {
 
-                    myHouse.getRoomList().get(i).createDevice("d" + j);
+                    myHouse.getRoomList().get(i).addDevice("d" + j);
                     // Configuring sensors for each device
                     if (j == 0) {
                         // No sensor for device 0
@@ -48,7 +65,7 @@ class US09GetDevicesByTypeControllerTest {
             if (i == 1) { //Choosing r1
                 // Adding 2 devices to r1
                 for (int j = 0; j < 2; j++) {
-                    myHouse.getRoomList().get(i).createDevice("d" + j);
+                    myHouse.getRoomList().get(i).addDevice("d" + j);
                     if (j == 0) {//2 temperature sensors for device 0
                         myHouse.getRoomList().get(i).getDevices().get(j).addSensor("Sensors.GA100K",catalogue);
                         myHouse.getRoomList().get(i).getDevices().get(j).addSensor("Sensors.GA100K",catalogue);
@@ -81,7 +98,6 @@ class US09GetDevicesByTypeControllerTest {
 
 
         //Assert
-
         assertEquals(expected.size(), actual.size(), "HashMap sizes do not match");
         for (Map.Entry<String, List<DeviceDTO>> entry : expected.entrySet()) {
             String key = entry.getKey();
@@ -95,6 +111,10 @@ class US09GetDevicesByTypeControllerTest {
         }
 
     }
+    /*
+     * Test for a house with no devices.
+     * The expected result is an empty map.
+     */
     @Test
     void houseWithNoDevices_ShouldReturnEmptyMap() throws InstantiationException {
         //Arrange
@@ -107,10 +127,11 @@ class US09GetDevicesByTypeControllerTest {
         HashMap<String, List<DeviceDTO>> actual = us09GetDevicesByTypeController.getDevicesByType();
         //Assert
         assertTrue(actual.isEmpty());
-
-
     }
-
+    /*
+     * Test for a house that does not exist.
+     * The expected result is an exception.
+     */
     @Test
     void nullHouse_shouldThrowIllegalArgumentException() throws IllegalArgumentException, InstantiationException {
         //Arrange
@@ -122,7 +143,6 @@ class US09GetDevicesByTypeControllerTest {
         //Assert
         assertEquals(expectedMessage, actualMessage);
     }
-
     /**
      * This test checks if an exception is thrown in the event of trying to construct a controller object with a null catalogue
      * The expected result is an exception.
