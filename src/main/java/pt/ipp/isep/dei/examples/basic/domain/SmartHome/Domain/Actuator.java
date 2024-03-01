@@ -7,17 +7,19 @@ package pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain;
 public interface Actuator {
 
     /**
-     * Gets the current value of the sensor.
+     * Sets the current value of the actuator.
      *
-     * @return The value of the sensor.
+     * @return The value of the actuator.
      */
-    public Value getValue();
+
+    Value setValue(Value value);
+
 
     /**
      * Gets the type of the actuator.
      *
      * @return The type of the actuator.
      */
-    // public ActuatorType getActuatorType();
+     public ActuatorType getActuatorType();
 
 }

@@ -118,4 +118,13 @@ public class Device {
         return sensor;
     }
 
+    public Actuator addActuator( String strModel, Catalogue catalogue ) {
+        Actuator actuator = catalogue.getActuator( strModel );
+        if( actuator == null )
+            return null;
+
+        _actuators.add( actuator );
+        return actuator;
+    }
+
 }
