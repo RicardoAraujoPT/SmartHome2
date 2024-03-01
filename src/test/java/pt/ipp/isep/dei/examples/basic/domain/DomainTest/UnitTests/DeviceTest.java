@@ -1,27 +1,19 @@
 package pt.ipp.isep.dei.examples.basic.domain.DomainTest.UnitTests;
-
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.*;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Sensors.GA100K;
-
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.BDDMockito.given;
-
 import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class DeviceTest {
+class DeviceTest {
 
     @Test
-    void createValidDevice() throws InstantiationException {
-        Device device = new Device("device1");
+    void validCreatedDevice_shouldInstantiateDeviceWithoutException() throws InstantiationException {
+        Device device = new Device("myDevice");
     }
 
     @Test
-    void EmptyDeviceName_shouldThrowIllegalArgumentException() {
+    void emptyDeviceName_shouldThrowIllegalArgumentException() {
         //Arrange
         String expectedMessage = "Invalid arguments for Device";
         //Act
@@ -32,7 +24,7 @@ public class DeviceTest {
     }
 
     @Test
-    void NullDeviceName_shouldThrowIllegalArgumentException() {
+    void nullDeviceName_shouldThrowIllegalArgumentException() {
         //Arrange
         String expectedMessage = "Invalid arguments for Device";
         //Act
@@ -43,10 +35,10 @@ public class DeviceTest {
     }
 
     @Test
-    void getValidDeviceName() {
+    void validDeviceName_shouldReturnDeviceName() {
         //Arrange
-        Device device = new Device("device1");
-        String expected = "device1";
+        Device device = new Device("myDevice");
+        String expected = "myDevice";
         //Act
         String found = device.getDeviceName();
         //Assert
@@ -54,10 +46,9 @@ public class DeviceTest {
     }
 
     @Test
-    void getValidIsActive() {
+    void validIsActive_shouldReturnTrue() {
         //Arrange
-        Device device = new Device("device1");
-        String expected = "device1";
+        Device device = new Device("myDevice");
         //Act
         Boolean found = device.getDeviceIsActive();
         //Assert
@@ -65,10 +56,9 @@ public class DeviceTest {
     }
 
     @Test
-    @Disabled
-    void getValidDeviceIsActive() {
+    void validDeviceIsActive_shouldReturnTrue() {
         //Arrange
-        Device device = new Device("device1");
+        Device device = new Device("myDevice");
         //Act
         Boolean found = device.getDeviceIsActive();
         //Assert
@@ -76,9 +66,9 @@ public class DeviceTest {
     }
 
     @Test
-    void getValidDeviceSensors() {
+    void validDeviceSensors_shouldReturnValidSensors() {
         //Arrange
-        Device device = new Device("device1");
+        Device device = new Device("myDevice");
         ArrayList expected = new ArrayList<>();
         //Act
         ArrayList<Sensor> found = device.getSensors();
@@ -87,9 +77,9 @@ public class DeviceTest {
     }
 
     @Test
-    void getValidDeviceActuators() {
+    void validDeviceActuators_shouldReturnValidActuators() {
         //Arrange
-        Device device = new Device("device1");
+        Device device = new Device("myDevice");
         ArrayList expected = new ArrayList<>();
         //Act
         ArrayList<Actuator> found = device.getActuators();
@@ -98,10 +88,10 @@ public class DeviceTest {
     }
 
     @Test
-    void setValidDeviceName() {
+    void validNewDeviceName_shouldReturnNewName() {
         //Arrange
-        Device device = new Device("device1");
-        String name = "newDevice";
+        Device device = new Device("myDevice");
+        String name = "myDevice";
         //Act
         device.setDeviceName(name);
         String found = device.getDeviceName();
@@ -110,9 +100,9 @@ public class DeviceTest {
     }
 
     @Test
-    void setInvalidDeviceName() {
+    void invalidNewDeviceName_shouldReturnExceptionMessage() {
         //Arrange
-        Device device = new Device("device1");
+        Device device = new Device("myDevice");
         String name = "";
         String expectedMessage = "Device name cannot be null or empty";
         //Act
@@ -123,28 +113,28 @@ public class DeviceTest {
     }
 
     @Test
-    void deactivateValidDevice() {
+    void validDeactivatedDevice_shouldReturnTrue() {
         //Arrange
-        Device device = new Device("device1");
+        Device device = new Device("myDevice");
         //Act
-        Boolean found = device.deactivateDevice();
+        boolean found = device.deactivateDevice();
         //Assert
         assertTrue(found);
     }
 
     @Test
-    void activateValidDevice() {
+    void validActivatedDevice_shouldReturnTrue() {
         //Arrange
-        Device device = new Device("device1");
+        Device device = new Device("myDevice");
         //Act
-        Boolean found = device.activateDevice();
+        boolean found = device.activateDevice();
         //Assert
         assertTrue(found);
     }
 
 
     @Test
-    void whenAddingValidGA100KSensorModel_thenNewSensorIsInstantiated() throws Exception{
+    void validGA100KSensorModel_shouldReturnInstantiatedSensor() {
         // arrange
         String strSensorModel = "Sensors.GA100K";
         String strSensorTypeDescription = "Temperature";
@@ -158,7 +148,7 @@ public class DeviceTest {
         Catalogue catalogueDouble = mock(Catalogue.class);
         when(catalogueDouble.getSensor(strSensorModel)).thenReturn(sensorDouble);
 
-        Device device = new Device("device1");
+        Device device = new Device("myDevice");
 
         // act
         Sensor sensor = device.addSensor(strSensorModel, catalogueDouble);
@@ -170,14 +160,14 @@ public class DeviceTest {
     }
 
     @Test
-    void whenAddingInvalidGA100KSensorModel_thenNullIsReturned() throws Exception{
+    void invalidGA100KSensorModel_shouldReturnNull() {
         // arrange
         String strSensorModel = "Sensors.GA100K";
 
         Catalogue catalogueDouble = mock(Catalogue.class);
         when(catalogueDouble.getSensor(strSensorModel)).thenReturn(null);
 
-        Device device = new Device("device1");
+        Device device = new Device("myDevice");
 
         // act
         Sensor sensor = device.addSensor(strSensorModel, catalogueDouble);
@@ -187,7 +177,7 @@ public class DeviceTest {
     }
 
     @Test
-    void whenAddingValidTSY01SensorModel_thenNewSensorIsInstantiated() throws Exception{
+    void validTSY01SensorModel_shouldReturnInstantiatedSensor(){
         // arrange
         String strSensorModel = "Sensors.TSY01";
         String strSensorTypeDescription = "Humidity";
@@ -201,7 +191,7 @@ public class DeviceTest {
         Catalogue catalogueDouble = mock(Catalogue.class);
         when(catalogueDouble.getSensor(strSensorModel)).thenReturn(sensorDouble);
 
-        Device device = new Device("device1");
+        Device device = new Device("myDevice");
 
         // act
         Sensor sensor = device.addSensor(strSensorModel, catalogueDouble);
@@ -213,14 +203,14 @@ public class DeviceTest {
     }
 
     @Test
-    void whenAddingInvalidTSY01SensorModel_thenNullIsReturned() throws Exception{
+    void invalidTSY01SensorModel_shouldReturnNull() {
         // arrange
         String strSensorModel = "Sensors.TSY01";
 
         Catalogue catalogueDouble = mock(Catalogue.class);
         when(catalogueDouble.getSensor(strSensorModel)).thenReturn(null);
 
-        Device device = new Device("device1");
+        Device device = new Device("myDevice");
 
         // act
         Sensor sensor = device.addSensor(strSensorModel, catalogueDouble);
