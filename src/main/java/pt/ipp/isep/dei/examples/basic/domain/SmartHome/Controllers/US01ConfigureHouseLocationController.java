@@ -35,7 +35,7 @@ public class US01ConfigureHouseLocationController {
      */
     public LocationDTO configureHouseLocation(LocationDTO locationDTO) throws InstantiationException {
 
-        this._myHouse.configureLocation(locationDTO.getAddress(), locationDTO.getZipCode(), locationDTO.getLatitude(), locationDTO.getLongitude());
+        this._myHouse.defineLocation(locationDTO.getAddress(), locationDTO.getZipCode(), locationDTO.getLatitude(), locationDTO.getLongitude());
 
         return LocationMapper.domain2DTO(_myHouse.getLocation());
     }

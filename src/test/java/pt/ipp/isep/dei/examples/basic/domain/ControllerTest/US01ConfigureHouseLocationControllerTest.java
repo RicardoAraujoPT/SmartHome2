@@ -3,7 +3,7 @@ package pt.ipp.isep.dei.examples.basic.domain.ControllerTest;
 import org.junit.jupiter.api.Test;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Controllers.US01ConfigureHouseLocationController;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.LocationDTO;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.House;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -18,10 +18,17 @@ public class US01ConfigureHouseLocationControllerTest {
      */
     @Test
     void shouldConfigureHouseLocation() throws InstantiationException {
+
         // Arrange
-        House myHouse = new House("Address", "ZipCode", 55.000000, 105.000000);
+        FactoryGPSCoordinates factoryGPSCoordinates = new FactoryGPSCoordinates();
+        FactoryLocation factoryLocation = new FactoryLocation(factoryGPSCoordinates);
+        FactoryDevice factoryDevice = new FactoryDevice();
+        FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
+
+        House myHouse = new House(factoryLocation, factoryRoom);
         US01ConfigureHouseLocationController myController = new US01ConfigureHouseLocationController(myHouse);
         LocationDTO inputDTO = new LocationDTO("NewAddress", "NewZipCode", 65.000000, 115.000000);
+
         String expectedAddress = "NewAddress";
         String expectedZipCode = "NewZipCode";
         double expectedLatitude = 65.000000;
@@ -58,8 +65,14 @@ public class US01ConfigureHouseLocationControllerTest {
      */
     @Test
     void nullAdress_shouldThrowInstantiationException() throws InstantiationException {
+
         // Arrange
-        House myHouse = new House("Address", "ZipCode", 55.000000, 105.000000);
+        FactoryGPSCoordinates factoryGPSCoordinates = new FactoryGPSCoordinates();
+        FactoryLocation factoryLocation = new FactoryLocation(factoryGPSCoordinates);
+        FactoryDevice factoryDevice = new FactoryDevice();
+        FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
+
+        House myHouse = new House(factoryLocation, factoryRoom);
         US01ConfigureHouseLocationController myController = new US01ConfigureHouseLocationController(myHouse);
         LocationDTO inputDTO = new LocationDTO(null, "NewZipCode", 65.000000, 115.000000);
         String expectedMessage = "Invalid address or ZIP code";
@@ -77,7 +90,11 @@ public class US01ConfigureHouseLocationControllerTest {
     @Test
     void nullZipCode_shouldThrowInstantiationException() throws InstantiationException {
         // Arrange
-        House myHouse = new House("Address", "ZipCode", 55.000000, 105.000000);
+        FactoryGPSCoordinates factoryGPSCoordinates = new FactoryGPSCoordinates();
+        FactoryLocation factoryLocation = new FactoryLocation(factoryGPSCoordinates);
+        FactoryDevice factoryDevice = new FactoryDevice();
+        FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
+        House myHouse = new House(factoryLocation, factoryRoom);
         US01ConfigureHouseLocationController myController = new US01ConfigureHouseLocationController(myHouse);
         LocationDTO inputDTO = new LocationDTO("NewAddress", null, 65.000000, 115.000000);
         String expectedMessage = "Invalid address or ZIP code";
@@ -95,7 +112,11 @@ public class US01ConfigureHouseLocationControllerTest {
     @Test
     void invalidLatitude_shouldThrowInstantiationException() throws InstantiationException {
         // Arrange
-        House myHouse = new House("Address", "ZipCode", 55.000000, 105.000000);
+        FactoryGPSCoordinates factoryGPSCoordinates = new FactoryGPSCoordinates();
+        FactoryLocation factoryLocation = new FactoryLocation(factoryGPSCoordinates);
+        FactoryDevice factoryDevice = new FactoryDevice();
+        FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
+        House myHouse = new House(factoryLocation, factoryRoom);
         US01ConfigureHouseLocationController myController = new US01ConfigureHouseLocationController(myHouse);
         LocationDTO inputDTO = new LocationDTO("NewAddress", "NewZipCode", 95.000000, 115.000000);
         String expectedMessage = "Invalid GPS coordinates";
@@ -113,7 +134,11 @@ public class US01ConfigureHouseLocationControllerTest {
     @Test
     void invalidLongitude_shouldThrowInstantiationException() throws InstantiationException {
         // Arrange
-        House myHouse = new House("Address", "ZipCode", 55.000000, 105.000000);
+        FactoryGPSCoordinates factoryGPSCoordinates = new FactoryGPSCoordinates();
+        FactoryLocation factoryLocation = new FactoryLocation(factoryGPSCoordinates);
+        FactoryDevice factoryDevice = new FactoryDevice();
+        FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
+        House myHouse = new House(factoryLocation, factoryRoom);
         US01ConfigureHouseLocationController myController = new US01ConfigureHouseLocationController(myHouse);
         LocationDTO inputDTO = new LocationDTO("NewAddress", "NewZipCode", 65.000000, 195.000000);
         String expectedMessage = "Invalid GPS coordinates";
