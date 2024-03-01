@@ -1,173 +1,215 @@
 package pt.ipp.isep.dei.examples.basic.domain.DomainTest.IntegrationTests;
 
 import org.junit.jupiter.api.Test;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.House;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Room;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.when;
 
 public class HouseTest {
 
     @Test
-    void shouldCreateValidHouse() throws InstantiationException {
+    void shouldCreateValidHouse_validLocation() throws InstantiationException {
         //arrange
         String address = "address";
         String zipCode = "zipcode";
+        double latitude = 55.0;
+        double longitude = 105.0;
+        FactoryGPSCoordinates gpsCoordinates = new FactoryGPSCoordinates();
+        FactoryLocation factoryLocation = new FactoryLocation(gpsCoordinates);
+        FactoryDevice factoryDevice = new FactoryDevice();
+        FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
+
+        //act
+        House myHouse = new House(factoryLocation,factoryRoom);
+        Location houseLocation = myHouse.defineLocation(address,zipCode,latitude,longitude);
+
+        //assert
+        assertEquals(houseLocation.getZipCode(),zipCode);
+        assertEquals(houseLocation.getAddress(),address);
+        assertEquals(houseLocation.getGPSCoordinates().getLatitude(),latitude);
+    }
+
+    @Test
+    void createHouseInvalidAddress_ShouldThrowException() throws InstantiationException {
+
+        //arrange
+        String expected = "Invalid address or ZIP code";
+        String address = null;
+        String zipCode = "zipcode";
+        double latitude = 55.0;
+        double longitude = 105.0;
+        FactoryGPSCoordinates gpsCoordinates = new FactoryGPSCoordinates();
+        FactoryLocation factoryLocation = new FactoryLocation(gpsCoordinates);
+        FactoryDevice factoryDevice = new FactoryDevice();
+        FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
+
+        //act
+        Exception exception = assertThrows(
+                InstantiationException.class, ()
+                        -> new House(factoryLocation,factoryRoom).defineLocation(address,zipCode,latitude,longitude));
+        //assert
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expected));
+    }
+
+
+    @Test
+    void createHouseInvalidZipCode_ShouldThrowException() throws InstantiationException {
+
+        //arrange
+        String expected = "Invalid address or ZIP code";
+        String address = "address";
+        String zipCode = "";
+        double latitude = 55.0;
+        double longitude = 105.0;
+        FactoryGPSCoordinates gpsCoordinates = new FactoryGPSCoordinates();
+        FactoryLocation factoryLocation = new FactoryLocation(gpsCoordinates);
+        FactoryDevice factoryDevice = new FactoryDevice();
+        FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
+
+        //act
+        Exception exception = assertThrows(
+                InstantiationException.class, ()
+                        -> new House(factoryLocation,factoryRoom).defineLocation(address,zipCode,latitude,longitude));
+        //assert
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expected));
+    }
+
+
+    @Test
+    void createHouseInvalidLatitude_ShouldThrowException() throws InstantiationException {
+
+        //arrange
+        String expected = "Invalid GPS coordinates";
+        String address = "address";
+        String zipCode = "zipcode";
+        double latitude = -800;
+        double longitude = 105.0;
+        FactoryGPSCoordinates gpsCoordinates = new FactoryGPSCoordinates();
+        FactoryLocation factoryLocation = new FactoryLocation(gpsCoordinates);
+        FactoryDevice factoryDevice = new FactoryDevice();
+        FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
+
+        //act
+        Exception exception = assertThrows(
+                InstantiationException.class, ()
+                        -> new House(factoryLocation,factoryRoom).defineLocation(address,zipCode,latitude,longitude).defineGPSCoordinates(latitude,longitude));
+        //assert
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expected));
+    }
+
+
+    @Test
+    void createHouseInvalidLongitude_ShouldThrowException() throws InstantiationException {
+
+        //arrange
+        String expected = "Invalid GPS coordinates";
+        String address = "address";
+        String zipCode = "zipcode";
         double latitude = 55;
-        double longitude = 105;
+        double longitude = -9000;
+        FactoryGPSCoordinates gpsCoordinates = new FactoryGPSCoordinates();
+        FactoryLocation factoryLocation = new FactoryLocation(gpsCoordinates);
+        FactoryDevice factoryDevice = new FactoryDevice();
+        FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
 
-        //act
-        House myHouse = new House(address, zipCode, latitude, longitude);
-        String houseAddress = myHouse.getLocation().getAddress();
-        double houseLatitude = myHouse.getLocation().getGPSCoordinates().getLatitude();
-        double houseLongitude = myHouse.getLocation().getGPSCoordinates().getLongitude();
-        String houseZipCode = myHouse.getLocation().getZipCode();
-        //assert
-        assertEquals("address", houseAddress);
-        assertEquals("zipcode", houseZipCode);
-        assertEquals(55, houseLatitude);
-        assertEquals(105, houseLongitude);
-    }
-
-    @Test
-    void createHouseInvalidAddress_ShouldThrowException() {
-
-        //arrange
-        String expected = "Invalid address or ZIP code";
-        String houseZipCode = "zipCode";
-        double houseLatitude = 55;
-        double houseLongitude = 100;
         //act
         Exception exception = assertThrows(
                 InstantiationException.class, ()
-                        -> new House(null, houseZipCode, houseLatitude, houseLongitude));
-        //assert
-        String actualMessage = exception.getMessage();
-        assertTrue(actualMessage.contains(expected));
-    }
-
-    @Test
-    void createHouseInvalidZipCode_ShouldThrowException() {
-
-        //arrange
-        String expected = "Invalid address or ZIP code";
-        String houseAddress = "address";
-        double houseLatitude = 55;
-        double houseLongitude = 100;
-        //act
-        Exception exception = assertThrows(
-                InstantiationException.class, ()
-                        -> new House(houseAddress, null, houseLatitude, houseLongitude));
+                        -> new House(factoryLocation,factoryRoom).defineLocation(address,zipCode,latitude,longitude).defineGPSCoordinates(latitude,longitude));
         //assert
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expected));
     }
 
 
-    @Test
-    void createHouseInvalidLatitude_ShouldThrowException() {
-
-        //arrange
-        String expected = "Invalid GPS coordinates";
-        String houseAddress = "address";
-        String houseZipCode = "zipCode";
-        double houseLongitude = 100;
-        //act
-        Exception exception = assertThrows(
-                InstantiationException.class, ()
-                        -> new House(houseAddress, houseZipCode, -180, houseLongitude));
-        //assert
-        String actualMessage = exception.getMessage();
-        assertTrue(actualMessage.contains(expected));
-    }
-
-
-    @Test
-    void createHouseInvalidLongitude_ShouldThrowException() {
-
-        //arrange
-        String expected = "Invalid GPS coordinates";
-        String houseAddress = "address";
-        String houseZipCode = "zipCode";
-        double houseLatitude = 55;
-        //act
-        Exception exception = assertThrows(
-                InstantiationException.class, ()
-                        -> new House(houseAddress, houseZipCode, houseLatitude, 300));
-        //assert
-        String actualMessage = exception.getMessage();
-        assertTrue(actualMessage.contains(expected));
-    }
 
     @Test
     void HouseWithoutRooms() throws InstantiationException {
 
         //arrange
-        String address = "address";
-        String zipCode = "zipcode";
-        double latitude = 55;
-        double longitude = 105;
+        FactoryGPSCoordinates gpsCoordinates = new FactoryGPSCoordinates();
+        FactoryLocation factoryLocation = new FactoryLocation(gpsCoordinates);
+        FactoryDevice factoryDevice = new FactoryDevice();
+        FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
+
         //act
-        House myHouse = new House(address, zipCode, latitude, longitude);
-        List<Room> listRooms = myHouse.getRoomList();
+        House myHouse = new House(factoryLocation,factoryRoom);
+       ArrayList<Room> rooms = myHouse.getRoomList();
+
+        //assert
+        assertEquals(rooms.size(),0);
+    }
+
+
+    @Test
+    void createAndAdd1ValidRoom() throws InstantiationException {
+
+        //arrange
+        FactoryGPSCoordinates gpsCoordinates = new FactoryGPSCoordinates();
+        FactoryLocation factoryLocation = new FactoryLocation(gpsCoordinates);
+        FactoryDevice factoryDevice = new FactoryDevice();
+        FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
+
+        //act
+        House house = new House(factoryLocation,factoryRoom);
+        ArrayList<Room> rooms = house.getRoomList();
+        house.addRoom("name",2,40,5);
+        ArrayList<Room> rooms1 = house.getRoomList();
+
         // assert
-        assertEquals(listRooms.size(), 0);
+        assertEquals(0,rooms.size());
+        assertEquals(1,rooms1.size());
+
     }
 
     @Test
-    void create1ValidRoom() throws InstantiationException {
+    void createAndAdd2ValidRooms() throws InstantiationException {
 
         //arrange
-        String address = "address";
-        String zipCode = "zipcode";
-        double latitude = 55;
-        double longitude = 105;
+        FactoryGPSCoordinates gpsCoordinates = new FactoryGPSCoordinates();
+        FactoryLocation factoryLocation = new FactoryLocation(gpsCoordinates);
+        FactoryDevice factoryDevice = new FactoryDevice();
+        FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
+
         //act
-        House myHouse = new House(address, zipCode, latitude, longitude);
-        myHouse.createRoom("bedroom", 1, 2, 3);
-        int roomListSize = myHouse.getRoomList().size();
+        House house = new House(factoryLocation,factoryRoom);
+        ArrayList<Room> rooms = house.getRoomList();
+        house.addRoom("name",2,40,5);
+        house.addRoom("name1",2,40,5);
+        ArrayList<Room> rooms2 = house.getRoomList();
+
         // assert
-        assertEquals(1, roomListSize);
+        assertEquals(0,rooms.size());
+        assertEquals(2,rooms2.size());
     }
 
-    @Test
-    void create2ValidRooms() throws InstantiationException {
-
-        //arrange
-        String address = "address";
-        String zipCode = "zipcode";
-        double latitude = 55;
-        double longitude = 105;
-        //act
-        House myHouse = new House(address, zipCode, latitude, longitude);
-        myHouse.createRoom("bedroom", 1, 2, 3);
-        myHouse.createRoom("bathroom", 1, 2, 3);
-        int roomListSize = myHouse.getRoomList().size();
-        // assert
-        assertEquals(2, roomListSize);
-    }
 
     @Test
     void createInvalidRoom_ShouldThrowException() throws InstantiationException {
 
         //arrange
         String expected = "Invalid arguments";
-        String address = "address";
-        String zipCode = "zipcode";
-        double latitude = 55;
-        double longitude = 105;
-        int floorNumber = 1;
-        double roomArea = 25;
-        double roomHeight = 2.5;
+        FactoryGPSCoordinates gpsCoordinates = new FactoryGPSCoordinates();
+        FactoryLocation factoryLocation = new FactoryLocation(gpsCoordinates);
+        FactoryDevice factoryDevice = new FactoryDevice();
+        FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
+
         //act
-        House myHouse = new House(address, zipCode, latitude, longitude);
+        House house = new House(factoryLocation,factoryRoom);
+
         Exception exception = assertThrows(InstantiationException.class, ()
                 -> {
-            myHouse.createRoom(null, floorNumber, roomArea, roomHeight);
+            house.addRoom(null,2,40,5);
         });
+
         //assert
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expected));
@@ -177,16 +219,17 @@ public class HouseTest {
     void testGetRoomByName() throws InstantiationException {
 
         //arrange
-        String address = "address";
-        String zipCode = "zipcode";
-        double latitude = 55;
-        double longitude = 105;
+        FactoryGPSCoordinates gpsCoordinates = new FactoryGPSCoordinates();
+        FactoryLocation factoryLocation = new FactoryLocation(gpsCoordinates);
+        FactoryDevice factoryDevice = new FactoryDevice();
+        FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
+
         //act
-        House myHouse = new House(address, zipCode, latitude, longitude);
-        myHouse.createRoom("bedroom", 1, 2, 3);
-        myHouse.createRoom("bathroom", 1, 2, 3);
-        String expected = myHouse.getRoomList().get(0).getRoomName();
-        String result = myHouse.getRoomByName("bedroom").getRoomName();
+        House house = new House(factoryLocation,factoryRoom);
+        house.addRoom("bedroom", 1, 2, 3);
+        house.addRoom("bathroom", 1, 2, 3);
+        String expected = house.getRoomList().get(0).getRoomName();
+        String result = house.getRoomByName("bedroom").getRoomName();
 
         //assert
         assertEquals(expected, result);
@@ -198,18 +241,18 @@ public class HouseTest {
 
         //arrange
         String expected = "Room name doesn't exist in the list";
-        String address = "address";
-        String zipCode = "zipcode";
-        double latitude = 55;
-        double longitude = 105;
+        FactoryGPSCoordinates gpsCoordinates = new FactoryGPSCoordinates();
+        FactoryLocation factoryLocation = new FactoryLocation(gpsCoordinates);
+        FactoryDevice factoryDevice = new FactoryDevice();
+        FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
         //act
-        House myHouse = new House(address, zipCode, latitude, longitude);
-        myHouse.createRoom("bedroom", 1, 2, 3);
-        myHouse.createRoom("bathroom", 1, 2, 3);
+        House house = new House(factoryLocation,factoryRoom);
+        house.addRoom("bedroom", 1, 2, 3);
+        house.addRoom("bathroom", 1, 2, 3);
         Exception exception =
                 assertThrows(IllegalArgumentException.class, ()
                         -> {
-                    myHouse.getRoomByName("living room");
+                    house.getRoomByName("living room");
                 });
         //assert
         String actualMessage = exception.getMessage();
@@ -222,18 +265,18 @@ public class HouseTest {
 
         //arrange
         String expected = "Room name doesn't exist in the list";
-        String address = "address";
-        String zipCode = "zipcode";
-        double latitude = 55;
-        double longitude = 105;
+        FactoryGPSCoordinates gpsCoordinates = new FactoryGPSCoordinates();
+        FactoryLocation factoryLocation = new FactoryLocation(gpsCoordinates);
+        FactoryDevice factoryDevice = new FactoryDevice();
+        FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
         //act
-        House myHouse = new House(address, zipCode, latitude, longitude);
-        myHouse.createRoom("bedroom", 1, 2, 3);
-        myHouse.createRoom("bathroom", 1, 2, 3);
+        House house = new House(factoryLocation,factoryRoom);
+        house.addRoom("bedroom", 1, 2, 3);
+        house.addRoom("bathroom", 1, 2, 3);
         Exception exception =
                 assertThrows(IllegalArgumentException.class, ()
                         -> {
-                    myHouse.getRoomByName(null);
+                    house.getRoomByName(null);
                 });
         //assert
         String actualMessage = exception.getMessage();
@@ -241,21 +284,22 @@ public class HouseTest {
 
     }
 
+
     @Test
     void repeatedRoomName_ShouldThrowException() throws InstantiationException {
         //arrange
         String expected = "Room name already exists";
-        String address = "address";
-        String zipCode = "zipcode";
-        double latitude = 55;
-        double longitude = 105;
+        FactoryGPSCoordinates gpsCoordinates = new FactoryGPSCoordinates();
+        FactoryLocation factoryLocation = new FactoryLocation(gpsCoordinates);
+        FactoryDevice factoryDevice = new FactoryDevice();
+        FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
         //act
-        House myHouse = new House(address, zipCode, latitude, longitude);
-        myHouse.createRoom("bedroom", 1, 2, 3);
+        House house = new House(factoryLocation,factoryRoom);
+        house.addRoom("bedroom", 1, 2, 3);
         Exception exception =
                 assertThrows(IllegalArgumentException.class, ()
                         -> {
-                    myHouse.createRoom("bedroom", 1, 2, 3);
+                    house.addRoom("bedroom", 1, 2, 3);
                 });
         //assert
         String actualMessage = exception.getMessage();

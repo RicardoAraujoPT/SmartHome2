@@ -13,33 +13,15 @@ public class House {
     private FactoryLocation _factoryLocation;
     private FactoryRoom _factoryRoom;
     private Location _location;
-    private ArrayList <Room> _rooms = new ArrayList<>();
+    private ArrayList <Room> _rooms;
 
-    /**
-     * Constructor method that allows the instantiation of House objects, with the following inputs:
-     * @param address
-     * @param zipCode
-     * @param latitude
-     * @param longitude
-     */
-    public House (String address, String zipCode, double latitude, double longitude) throws InstantiationException {
-        this._location = new Location(address, zipCode, latitude, longitude);
-        this._rooms = new ArrayList<>();
-    }
 
     public House(FactoryLocation factoryLocation, FactoryRoom factoryRoom) {
         _factoryLocation = factoryLocation;
         _factoryRoom = factoryRoom;
+        this._rooms = new ArrayList<>();
     }
 
-    //only for isolation tests por agora
-
-    public House(FactoryLocation factoryLocation, FactoryRoom factoryRoom,String address, String zipCode, double latitude, double longitude) throws InstantiationException{
-
-        this._location = factoryLocation.createLocation(address, zipCode, latitude, longitude);
-        this._factoryRoom = factoryRoom;
-        //this._rooms = new ArrayList<>();
-    }
 
     public Location defineLocation(String address, String zipCode, double latitude, double longitude) throws InstantiationException{
 
@@ -51,15 +33,15 @@ public class House {
 
     }
 
-    /** Getter for the House's location.
-     *
-     * @return Location object representing the location of the house.
-     */
-    public Location getLocation(){
 
-        return this._location;
+    public Room addRoom(String roomName, int floorNumber, double area, double height) throws InstantiationException {
+        if (isRoomNameDuplicated(roomName)) {
+            throw new IllegalArgumentException("Room name already exists");
+        }
+        Room myRoom = this._factoryRoom.createRoom(roomName, floorNumber, area, height);
+        this._rooms.add(myRoom);
+        return myRoom;
     }
-
 
     /**
      * Method that verifies if there are duplicate room names in the roomList.
@@ -76,37 +58,6 @@ public class House {
         return false;
     }
 
-    /**
-     * Method to create a Room object and add it to the House's roomList.
-     *
-     * @param roomName The name of the room.
-     * @param floorNumber The floor number where the room is located.
-     * @param area The area of the room in square meters.
-     * @param height The height of the room in meters.
-     * @return Room object created and added to the House's roomList.
-     * @throws InstantiationException if any given attribute for Room is empty or null.
-     */
-    public Room createRoom(String roomName, int floorNumber, double area, double height) throws InstantiationException {
-        if (isRoomNameDuplicated(roomName)) {
-            throw new IllegalArgumentException("Room name already exists");
-        }
-        Room myRoom = new Room(roomName,floorNumber,area,height);
-
-        this._rooms.add(myRoom);
-
-        return myRoom;
-    }
-
-    // only for isolation tests for now
-    public Room addRoom(String roomName, int floorNumber, double area, double height) throws InstantiationException {
-        if (isRoomNameDuplicated(roomName)) {
-            throw new IllegalArgumentException("Room name already exists");
-        }
-        Room myRoom = this._factoryRoom.createRoom(roomName, floorNumber, area, height);
-        this._rooms.add(myRoom);
-        return myRoom;
-    }
-
 
     /**
      * Method to get the House's RoomList.
@@ -118,19 +69,6 @@ public class House {
         return new ArrayList<>(_rooms);
     }
 
-    /**
-     * Method to configure the location of the House.
-     *
-     * @param address The new address.
-     * @param zipCode The new ZIP code.
-     * @param latitude The new latitude.
-     * @param longitude The new longitude.
-     * @return the new Location object of the House or null if any of the parameters is null.
-     */
-    public Location configureLocation(String address, String zipCode, Double latitude, Double longitude) throws IllegalArgumentException, InstantiationException {
-        this._location= new Location(address, zipCode, latitude, longitude);
-        return this._location;
-    }
 
     /**
      * Method that allows getting a room that exists in the House's roomList.
@@ -151,6 +89,8 @@ public class House {
         throw new IllegalArgumentException("Room name doesn't exist in the list");
     }
 
+
+
     /**
      * This method groups devices by their type. For each room in the house, it iterates over the devices in the room.
      * Each device is then assigned to a group based on its type using the assignDeviceToGroupType method.
@@ -161,7 +101,6 @@ public class House {
      * In these inner maps, the keys are the rooms and the values are lists of devices of the corresponding type in the
      * corresponding room.
      */
-
     public HashMap<String, HashMap<Room, List<Device>>> groupDevicesByType() {
         this._rooms = getRoomList();
         HashMap<String, HashMap<Room,List<Device>>> groupDevices = new HashMap<>();
@@ -173,6 +112,8 @@ public class House {
         }
         return groupDevices;
     }
+
+
     /**
      * This method assigns a device to a group based on its type. If the device has no sensors, it is not assigned to any group.
      * Otherwise, it is assigned to a group based on the type of its sensors.

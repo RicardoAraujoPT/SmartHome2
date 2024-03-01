@@ -8,6 +8,7 @@ import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Value;
 import java.util.Random;
 
 // Model of Wind Sensor
+
 public class WS8600 implements Sensor {
 
     private final SensorType _sensorType;
@@ -25,19 +26,20 @@ public class WS8600 implements Sensor {
             this._sensorType = sensorType;
     }
 
+
     // obter a descrição e unidade de medida do sensor
     public SensorType getSensorType() {
 
         return this._sensorType;
     }
 
-    //obter o valor associado a velocidade
 
+    //obter o valor associado a velocidade
     public Value getValue() {
 
         Random rand = new Random();
 
-        int dValue = rand.nextInt(401);  // velocidade do vento nao pode ser maior que 400
+        int dValue = rand.nextInt(401); // velocidade do vento nao pode ser maior que 400
 
         return new WS8600Value( dValue );
     }
@@ -72,6 +74,5 @@ public class WS8600 implements Sensor {
         }
         throw new IllegalArgumentException("Azimuth degree not valid");
     }
-
 
 }

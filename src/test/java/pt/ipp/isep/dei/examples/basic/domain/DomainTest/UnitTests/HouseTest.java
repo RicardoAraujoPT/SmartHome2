@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.examples.basic.domain.DomainTest.UnitTests;
 import org.junit.jupiter.api.Test;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,313 +12,328 @@ import static org.mockito.Mockito.*;
 public class HouseTest {
 
 
-    /**
-     *Tests the instantiation of House objects, passing correct arguments in the constructor method.
-     */
     @Test
-    void shouldCreateValidHouse_ShouldNotThrowException() throws InstantiationException {
+    void shouldCreateValidHouse_validLocation() throws InstantiationException {
+        //arrange
+        String address = "address";
+        String zipCode = "zipcode";
+        double latitude = 55.0;
+        double longitude = 105.0;
+
+        FactoryLocation factoryLocationDouble = mock(FactoryLocation.class);
+        Location locationDouble = mock(Location.class);
+        when(factoryLocationDouble.defineLocation(address,zipCode)).thenReturn(locationDouble);
+        when(locationDouble.getZipCode()).thenReturn(zipCode);
+        when(locationDouble.getAddress()).thenReturn(address);
+        FactoryRoom factoryRoomDouble = mock(FactoryRoom.class);
+
+        //act
+        House myHouse = new House(factoryLocationDouble,factoryRoomDouble);
+        Location houseLocation = myHouse.defineLocation(address,zipCode,latitude,longitude);
+
+        //assert
+        assertEquals(houseLocation.getZipCode(),zipCode);
+        assertEquals(houseLocation.getAddress(),address);
+    }
+
+    @Test
+    void shouldCreateValidHouse_validGPS() throws InstantiationException {
 
         //arrange
-        double expectedLatitude = 53;
-        double expectedLongitude = 100;
-        String expectedAddress = "address";
-        String expectedZipCode = "zipCode";
+        String address = "address";
+        String zipCode = "zipcode";
+        double latitude = 55.0;
+        double longitude = 105.0;
+
+        FactoryLocation factoryLocationDouble = mock(FactoryLocation.class);
+        Location locationDouble = mock(Location.class);
+        when(factoryLocationDouble.createLocation(address,zipCode,latitude,longitude)).thenReturn(locationDouble);
+
+        GPSCoordinates gpsCoordinatesDouble = mock(GPSCoordinates.class);
+        FactoryGPSCoordinates factoryGPSCoordinatesDouble = mock(FactoryGPSCoordinates.class);
+
+        when(factoryGPSCoordinatesDouble.createGPSCoordinates(latitude,longitude)).thenReturn(gpsCoordinatesDouble);
+        when(factoryLocationDouble.defineLocation(address,zipCode)).thenReturn(locationDouble);
+        when(locationDouble.getZipCode()).thenReturn(zipCode);
+        when(locationDouble.getAddress()).thenReturn(address);
+        when(locationDouble.getGPSCoordinates()).thenReturn(gpsCoordinatesDouble);
+        when(locationDouble.getGPSCoordinates().getLatitude()).thenReturn(latitude);
+        when(locationDouble.getGPSCoordinates().getLongitude()).thenReturn(longitude);
 
         FactoryRoom factoryRoomDouble = mock(FactoryRoom.class);
 
-        Location locationDouble = mock(Location.class);
-        GPSCoordinates gpsCoordinatesDouble = mock(GPSCoordinates.class);
-
-        when(locationDouble.getGPSCoordinates()).thenReturn(gpsCoordinatesDouble);
-        when(locationDouble.getGPSCoordinates().getLatitude()).thenReturn(expectedLatitude);
-        when(locationDouble.getGPSCoordinates().getLongitude()).thenReturn(expectedLongitude);
-        when(locationDouble.getAddress()).thenReturn(expectedAddress);
-        when(locationDouble.getZipCode()).thenReturn(expectedZipCode);
-
-        FactoryLocation factoryLocationsDouble = mock(FactoryLocation.class);
-        when(factoryLocationsDouble.createLocation(expectedAddress,expectedZipCode,expectedLatitude,expectedLongitude)).thenReturn(locationDouble);
-
         //act
-        House house = new House(factoryLocationsDouble,factoryRoomDouble,expectedAddress,expectedZipCode,expectedLatitude,expectedLongitude);
+        House myHouse = new House(factoryLocationDouble,factoryRoomDouble);
+        Location houseLocation = myHouse.defineLocation(address,zipCode,latitude,longitude);
+
 
         //assert
-        assertEquals(house.getLocation().getAddress(),expectedAddress);
-        assertEquals(house.getLocation().getZipCode(),expectedZipCode);
-        assertEquals(house.getLocation().getGPSCoordinates().getLatitude(),expectedLatitude);
-        assertEquals(house.getLocation().getGPSCoordinates().getLatitude(),expectedLatitude);
+        assertEquals(houseLocation.getGPSCoordinates().getLatitude(),latitude);
+        assertEquals(houseLocation.getGPSCoordinates().getLongitude(),longitude);
     }
 
-    /**
-     *Tests the instantiation of House objects, passing invalid address in the constructor method.
-     *
-     * @throws IllegalArgumentException
-     */
     @Test
-    void invalidHouseAddress_ShouldThrowException() throws IllegalArgumentException, InstantiationException {
+    void houseInvalidAddress_ShouldThrowException() throws InstantiationException {
 
         //arrange
         String expected = "Invalid address or ZIP code";
         String address = null;
-        double latitude = 53;
-        double longitude = 100;
-        String zipCode = "zipCode";
-        FactoryLocation factoryLocationsDouble = mock(FactoryLocation.class);
-        when(factoryLocationsDouble.createLocation(address,zipCode,latitude,longitude)).thenThrow(new IllegalArgumentException(expected));
+        String zipCode = "zipcode";
+        double latitude = 55.0;
+        double longitude = 105.0;
+
+        FactoryLocation factoryLocationDouble = mock(FactoryLocation.class);
+        when(factoryLocationDouble.defineLocation(address,zipCode)).thenThrow(new InstantiationException(expected));
         FactoryRoom factoryRoomDouble = mock(FactoryRoom.class);
-
         //act
-        Exception exception = assertThrows(IllegalArgumentException.class, () ->
-                new House(factoryLocationsDouble,factoryRoomDouble,address,zipCode,latitude,longitude));
-
+        Exception exception = assertThrows(
+                InstantiationException.class, ()
+                        -> new House(factoryLocationDouble,factoryRoomDouble).defineLocation(address,zipCode,latitude,longitude));
         //assert
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expected));
     }
 
-    /**
-     *Tests the instantiation of House objects, passing invalid latitude in the constructor method.
-     *
-     * @throws IllegalArgumentException
-     */
+
     @Test
-    void invalidHouseLatitude_ShouldThrowException() throws IllegalArgumentException, InstantiationException {
+    void createHouseInvalidZipCode_ShouldThrowException() throws InstantiationException {
 
         //arrange
         String expected = "Invalid address or ZIP code";
         String address = "address";
-        double latitude = -500;
-        double longitude = 100;
-        String zipCode = "zipCode";
-        FactoryLocation factoryLocationsDouble = mock(FactoryLocation.class);
-        when(factoryLocationsDouble.createLocation(address,zipCode,latitude,longitude)).thenThrow(new IllegalArgumentException(expected));
+        String zipCode = null;
+        double latitude = 55.0;
+        double longitude = 105.0;
+
+        FactoryLocation factoryLocationDouble = mock(FactoryLocation.class);
+        when(factoryLocationDouble.defineLocation(address,zipCode)).thenThrow(new InstantiationException(expected));
         FactoryRoom factoryRoomDouble = mock(FactoryRoom.class);
-
         //act
-        Exception exception = assertThrows(IllegalArgumentException.class, () ->
-                new House(factoryLocationsDouble,factoryRoomDouble,address,zipCode,latitude,longitude));
-
+        Exception exception = assertThrows(
+                InstantiationException.class, ()
+                        -> new House(factoryLocationDouble,factoryRoomDouble).defineLocation(address,zipCode,latitude,longitude));
         //assert
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expected));
     }
 
-    /**
-     *Tests the instantiation of Room objects and add it to a list (passing correct arguments in the constructor method)
-     *Tests the functionality of addRoom() method of House objects.
-     *
-     * @throws IllegalArgumentException
-     */
+
     @Test
-    void shouldCreateAndAddRoomInHouseRoomList() throws InstantiationException {
+    void createHouseInvalidLatitude_ShouldThrowException() throws InstantiationException {
 
         //arrange
-        double expectedLatitude = 53;
-        double expectedLongitude = 100;
-        String expectedAddress = "address";
-        String expectedZipCode = "zipCode";
-        String name = "name";
-        int floorNumber = 1;
-        double area = 2.4;
-        double height = 1.5;
+        String expected = "Invalid GPS coordinates";
+        String address = "address";
+        String zipCode = "zipcode";
+        double latitude = -800;
+        double longitude = 105.0;
 
-        Location locationDouble = mock(Location.class);
         FactoryLocation factoryLocationDouble = mock(FactoryLocation.class);
-        when(factoryLocationDouble.createLocation(expectedAddress,expectedZipCode,expectedLatitude,expectedLongitude)).thenReturn(locationDouble);
-
-        Room roomDouble = mock(Room.class);
+        when(factoryLocationDouble.defineLocation(address,zipCode)).thenThrow(new InstantiationException(expected));
         FactoryRoom factoryRoomDouble = mock(FactoryRoom.class);
-        when(factoryRoomDouble.createRoom(name,floorNumber,area,height)).thenReturn(roomDouble);
-        when(roomDouble.getRoomName()).thenReturn("name");
 
         //act
-        House house = new House(factoryLocationDouble,factoryRoomDouble,expectedAddress,expectedZipCode,expectedLatitude,expectedLongitude);
-        String roomName = house.addRoom(name,floorNumber, area, height).getRoomName();
+        Exception exception = assertThrows(
+                InstantiationException.class, ()
+                        -> new House(factoryLocationDouble,factoryRoomDouble).defineLocation(address,zipCode,latitude,longitude));
         //assert
-        assertEquals(roomName,"name");
-
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expected));
     }
 
-    /**
-     *Tests the instantiation of Room objects and add it to a list (passing invalid name in the constructor method).
-     *Tests the functionality of addRoom() method of House objects.
-     *
-     * @throws InstantiationException
-     */
+
     @Test
-    void createAndAddInvalidRoom_ShouldThrowException() throws InstantiationException {
+    void createHouseInvalidLongitude_ShouldThrowException() throws InstantiationException {
 
         //arrange
+        String expected = "Invalid GPS coordinates";
+        String address = "address";
+        String zipCode = "zipcode";
+        double latitude = 55;
+        double longitude = 6000;
 
-        String expected = "Invalid arguments";
-        double expectedLatitude = 53;
-        double expectedLongitude = 100;
-        String expectedAddress = "address";
-        String expectedZipCode = "zipCode";
-        int floorNumber = 1;
-        double area = 2.4;
-        double height = 1.5;
-
-        Location locationDouble = mock(Location.class);
-
-        FactoryLocation factoryLocationsDouble = mock(FactoryLocation.class);
-        when(factoryLocationsDouble.createLocation(expectedAddress, expectedZipCode, expectedLatitude, expectedLongitude)).thenReturn(locationDouble);
-
+        FactoryLocation factoryLocationDouble = mock(FactoryLocation.class);
+        when(factoryLocationDouble.defineLocation(address,zipCode)).thenThrow(new InstantiationException(expected));
         FactoryRoom factoryRoomDouble = mock(FactoryRoom.class);
 
-        when(factoryRoomDouble.createRoom(null,floorNumber,area,height)).thenThrow(new InstantiationException(expected));
+        //act
+        Exception exception = assertThrows(
+                InstantiationException.class, ()
+                        -> new House(factoryLocationDouble,factoryRoomDouble).defineLocation(address,zipCode,latitude,longitude));
+        //assert
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expected));
+    }
+
+    @Test
+    void HouseWithoutRooms() throws InstantiationException {
+
+        //arrange
+        String address = "address";
+        String zipCode = "zipcode";
+
+        FactoryLocation factoryLocationDouble = mock(FactoryLocation.class);
+        Location locationDouble = mock(Location.class);
+        when(factoryLocationDouble.defineLocation(address,zipCode)).thenReturn(locationDouble);
+        FactoryRoom factoryRoomDouble = mock(FactoryRoom.class);
 
         //act
-        House house = new House(factoryLocationsDouble, factoryRoomDouble, expectedAddress, expectedZipCode, expectedLatitude, expectedLongitude);
-        Exception exception = assertThrows(InstantiationException.class, () ->
-                house.addRoom(null,floorNumber,area,height) );
+        House myHouse = new House(factoryLocationDouble,factoryRoomDouble);
+        ArrayList<Room> rooms = myHouse.getRoomList();
+
+        //assert
+        assertEquals(rooms.size(),0);
+    }
+
+
+    @Test
+    void createAndAdd1ValidRoom() throws InstantiationException {
+
+        //arrange
+        String address = "address";
+        String zipCode = "zipcode";
+
+        FactoryLocation factoryLocationDouble = mock(FactoryLocation.class);
+        Location locationDouble = mock(Location.class);
+        when(factoryLocationDouble.defineLocation(address,zipCode)).thenReturn(locationDouble);
+        FactoryRoom factoryRoomDouble = mock(FactoryRoom.class);
+
+        //act
+        House house = new House(factoryLocationDouble,factoryRoomDouble);
+        ArrayList<Room> rooms = house.getRoomList();
+        house.addRoom("name",2,40,5);
+        ArrayList<Room> rooms1 = house.getRoomList();
 
         // assert
-
-        String actualMessage = exception.getMessage();
-        assertTrue(actualMessage.contains(expected));
+        assertEquals(0,rooms.size());
+        assertEquals(1,rooms1.size());
 
     }
 
-    /**
-     * Tests the functionality of getRoomList() method of House objects.
-     *
-     */
     @Test
-    void shouldGetHouseRooms_HouseWithoutRooms() throws InstantiationException {
+    void createAndAdd2ValidRooms() throws InstantiationException {
 
         // arrange
-        double latitude = 53;
-        double longitude = 100;
-        String address = "address";
-        String zipCode = "zipCode";
+        Room roomDouble1 = mock(Room.class);
+        Room roomDouble2 = mock(Room.class);
 
-        FactoryRoom factoryRoomDouble = mock(FactoryRoom.class);
         FactoryLocation factoryLocationDouble = mock(FactoryLocation.class);
+        FactoryRoom factoryRoomDouble = mock(FactoryRoom.class);
+        when(factoryRoomDouble.createRoom("Living Room1", 0, 10, 9)).thenReturn(roomDouble1);
+        when(factoryRoomDouble.createRoom("Living Room2", 0, 10, 9)).thenReturn(roomDouble2);
+        when(roomDouble1.getRoomName()).thenReturn("Living Room1");
 
-        House house = new House(factoryLocationDouble, factoryRoomDouble,address,zipCode,latitude,longitude);
+        House house = new House(factoryLocationDouble, factoryRoomDouble);
 
         // act
-        List<Room> listRooms = house.getRoomList();
+        house.addRoom("Living Room1", 0, 10, 9);
+        house.addRoom("Living Room2", 0, 10, 9);
 
         // assert
-        assertEquals(listRooms.size(), 0);
+        assertEquals(house.getRoomList().size(), 2);
     }
 
-    /**
-     *Tests the instantiation of Room objects and add it to a list (passing invalid name in the constructor method).
-     *Tests the functionality of getRoomByName() method of House objects.
-     * Tests the instantiation of House objects, passing correct arguments in the constructor method.
-     */
+
     @Test
-    void shouldGetHouseRoomByName() throws InstantiationException {
+    void createInvalidRoom_ShouldThrowException() throws InstantiationException {
 
-        // arrange
-        double latitude = 53;
-        double longitude = 100;
+        //arrange
+        String expected = "Invalid arguments";
         String address = "address";
-        String zipCode = "zipCode";
-        String name = "name";
-        int floorNumber = 1;
-        double area = 2.4;
-        double height = 1.5;
-
-        FactoryRoom factoryRoomDouble = mock(FactoryRoom.class);
-        Room roomDouble = mock(Room.class);
-        when(factoryRoomDouble.createRoom(name,floorNumber,area,height)).thenReturn(roomDouble);
-        when(roomDouble.getRoomName()).thenReturn("name");
+        String zipCode = "zipcode";
 
         FactoryLocation factoryLocationDouble = mock(FactoryLocation.class);
-
-        //act
-        House house = new House(factoryLocationDouble, factoryRoomDouble,address,zipCode,latitude,longitude);
-        house.addRoom(name,floorNumber,area,height);
-        house.getRoomByName("name");
-
-        // assert
-        assertEquals(house.getRoomByName("name").getRoomName(),"name");
-
-    }
-
-    /**
-     *Tests the instantiation of Room objects and add it to a list (passing correct arguments in the constructor method)
-     *Tests the functionality of addRoom() method of House objects.
-     *Tests the functionality of getRoomByName() method of House objects, when the name of the room we are looking for does not exist in the list.
-     *
-     * @throws IllegalArgumentException
-     */
-    @Test
-    void houseGetRoomInvalidName_ShouldThrowException() throws InstantiationException {
-
-        // arrange
-        String expected = "Room name doesn't exist in the list";
-        double latitude = 53;
-        double longitude = 100;
-        String address = "address";
-        String zipCode = "zipCode";
-        String name = "name";
-        int floorNumber = 1;
-        double area = 2.4;
-        double height = 1.5;
-
+        Location locationDouble = mock(Location.class);
+        when(factoryLocationDouble.defineLocation(address,zipCode)).thenReturn(locationDouble);
         FactoryRoom factoryRoomDouble = mock(FactoryRoom.class);
-        Room roomDouble = mock(Room.class);
-        when(factoryRoomDouble.createRoom(name, floorNumber, area, height)).thenReturn(roomDouble);
-        when(roomDouble.getRoomName()).thenReturn("name");
-
-        FactoryLocation factoryLocationDouble = mock(FactoryLocation.class);
+        when(factoryRoomDouble.createRoom(null,2,40,5)).thenThrow(new InstantiationException(expected));
 
         //act
-        House house = new House(factoryLocationDouble, factoryRoomDouble, address, zipCode, latitude, longitude);
-        house.addRoom(name, floorNumber, area, height);
-        Exception exception =
-                assertThrows(IllegalArgumentException.class, ()
-                        -> {
-                    house.getRoomByName("living room");
-                });
+        House house = new House(factoryLocationDouble,factoryRoomDouble);
 
-        // assert
+        Exception exception = assertThrows(InstantiationException.class, ()
+                -> {
+            house.addRoom(null,2,40,5);
+        });
+
+        //assert
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expected));
     }
 
-
-    /**
-     *Tests the instantiation of Room objects and add it to a list (passing correct arguments in the constructor method)
-     *Tests the functionality of addRoom() method of House objects, when the name of the room we want to add already exists in the list.
-     *
-     * @throws IllegalArgumentException
-     */
     @Test
-    void addRoomDuplicatedName_ShouldThrowException() throws InstantiationException {
+    void testGetRoomByName() throws InstantiationException {
 
-        // arrange
-        String expected = "Room name already exists";
-        double latitude = 53;
-        double longitude = 100;
+        //arrange
         String address = "address";
-        String zipCode = "zipCode";
-        String name = "name";
-        int floorNumber = 1;
-        double area = 2.4;
-        double height = 1.5;
-
-        FactoryRoom factoryRoomDouble = mock(FactoryRoom.class);
-        Room roomDouble = mock(Room.class);
-        when(factoryRoomDouble.createRoom(name, floorNumber, area, height)).thenReturn(roomDouble);
-        when(roomDouble.getRoomName()).thenReturn("name");
+        String zipCode = "zipcode";
 
         FactoryLocation factoryLocationDouble = mock(FactoryLocation.class);
+        Location locationDouble = mock(Location.class);
+        when(factoryLocationDouble.defineLocation(address,zipCode)).thenReturn(locationDouble);
+        FactoryRoom factoryRoomDouble = mock(FactoryRoom.class);
+        Room roomDouble = mock(Room.class);
+        when(factoryRoomDouble.createRoom("bedroom",1,2,3)).thenReturn(roomDouble);
+        when(roomDouble.getRoomName()).thenReturn("bedroom");
 
         //act
-        House house = new House(factoryLocationDouble, factoryRoomDouble, address, zipCode, latitude, longitude);
-        house.addRoom(name, floorNumber, area, height);
+        House house = new House(factoryLocationDouble,factoryRoomDouble);
+        house.addRoom("bedroom", 1, 2, 3);
+        house.addRoom("bathroom", 1, 2, 3);
+        String expected = house.getRoomList().get(0).getRoomName();
+        String result = house.getRoomByName("bedroom").getRoomName();
+
+        //assert
+        assertEquals(expected, result);
+
+    }
+
+    @Test
+    void getInexistentRoom_ShouldThrowException() throws InstantiationException {
+
+        //arrange
+        String expected = "Room name doesn't exist in the list";
+        FactoryLocation factoryLocationDouble = mock(FactoryLocation.class);
+        FactoryRoom factoryRoomDouble = mock(FactoryRoom.class);
+        Room roomDouble = mock(Room.class);
+        when(factoryRoomDouble.createRoom("living room",1,2,3)).thenReturn(roomDouble);
+        when(roomDouble.getRoomName()).thenThrow(new IllegalArgumentException(expected));
+
+        //act
+        House house = new House(factoryLocationDouble,factoryRoomDouble);
         Exception exception =
                 assertThrows(IllegalArgumentException.class, ()
                         -> {
-                    house.addRoom(name, floorNumber, area, height);
+                    house.getRoomByName("living room").getRoomName();
                 });
+        //assert
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expected));
 
-        // assert
+    }
+
+    @Test
+    void repeatedRoomName_ShouldThrowException() throws InstantiationException {
+        //arrange
+        String expected = "Room name already exists";
+        String address = "address";
+        String zipCode = "zipcode";
+
+        FactoryLocation factoryLocationDouble = mock(FactoryLocation.class);
+        Location locationDouble = mock(Location.class);
+        when(factoryLocationDouble.defineLocation(address,zipCode)).thenReturn(locationDouble);
+        FactoryRoom factoryRoomDouble = mock(FactoryRoom.class);
+        when(factoryRoomDouble.createRoom("living room",2,40,5)).thenThrow(new InstantiationException(expected));
+
+        //act
+        House house = new House(factoryLocationDouble,factoryRoomDouble);
+
+        Exception exception = assertThrows(InstantiationException.class, ()
+                -> {
+            house.addRoom("living room",2,40,5);
+        });
+
+        //assert
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expected));
     }

@@ -1,6 +1,8 @@
 package pt.ipp.isep.dei.examples.basic.domain.SmartHome.Sensors;
 
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Value;
+
+
 /**
  * Represents a value of a sensor model WS8600.
  * This class encapsulates the value of a sensor model WS8600 in the SmartHome domain.
@@ -8,6 +10,8 @@ import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Value;
 public class WS8600Value implements Value {
 
     public int _dValue;
+
+
     /**
      * Creates a new instance of WS8600Value.
      *
@@ -17,6 +21,7 @@ public class WS8600Value implements Value {
 
         this._dValue = dValue;
     }
+
 
     /**
      * Gets the value of the sensor.
