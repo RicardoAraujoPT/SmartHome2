@@ -41,7 +41,6 @@ public class House {
         //this._rooms = new ArrayList<>();
     }
 
-    //should this method call defineGPSCoordinates? Or should the controller call it?
     public Location defineLocation(String address, String zipCode, double latitude, double longitude) throws InstantiationException{
 
         this._location = _factoryLocation.defineLocation(address, zipCode);

@@ -12,7 +12,7 @@ public class ONF01S implements Sensor {
 
     public ONF01S(Catalogue catalogue) throws InstantiationException
     {
-        // this is a sensor of temperature
+        // this is an ON/OFF status sensor
         SensorType sensorType = catalogue.getSensorType("Status");
         if( sensorType == null )
             throw new InstantiationException("SensorType with description 'Status' does not exist.");
@@ -28,7 +28,7 @@ public class ONF01S implements Sensor {
     public Value getValue()
     {
         Random rand = new Random();
-        boolean bValue = rand.nextBoolean(); // valor true ou false (ON/OFF)
+        boolean bValue = rand.nextBoolean(); // true or false (ON or OFF)
 
         return new ONF01SValue(bValue);
     }

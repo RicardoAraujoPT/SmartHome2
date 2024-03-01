@@ -94,6 +94,7 @@ public class US01ConfigureHouseLocationControllerTest {
         FactoryLocation factoryLocation = new FactoryLocation(factoryGPSCoordinates);
         FactoryDevice factoryDevice = new FactoryDevice();
         FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
+
         House myHouse = new House(factoryLocation, factoryRoom);
         US01ConfigureHouseLocationController myController = new US01ConfigureHouseLocationController(myHouse);
         LocationDTO inputDTO = new LocationDTO("NewAddress", null, 65.000000, 115.000000);
@@ -116,6 +117,7 @@ public class US01ConfigureHouseLocationControllerTest {
         FactoryLocation factoryLocation = new FactoryLocation(factoryGPSCoordinates);
         FactoryDevice factoryDevice = new FactoryDevice();
         FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
+
         House myHouse = new House(factoryLocation, factoryRoom);
         US01ConfigureHouseLocationController myController = new US01ConfigureHouseLocationController(myHouse);
         LocationDTO inputDTO = new LocationDTO("NewAddress", "NewZipCode", 95.000000, 115.000000);

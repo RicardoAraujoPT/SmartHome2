@@ -27,7 +27,7 @@ public class ActuatorType {
     /**
      * Validates the constructor arguments.
      *
-     * @param strDescription The description of the sensor type.
+     * @param strDescription The description of the actuator type.
      * @return true if the description is not null and not empty, false otherwise.
      */
     private boolean isValidConstructorArgument(String strDescription) {
