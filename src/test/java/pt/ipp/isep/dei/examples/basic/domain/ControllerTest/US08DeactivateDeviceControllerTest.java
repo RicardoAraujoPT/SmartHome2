@@ -26,7 +26,7 @@ public class US08DeactivateDeviceControllerTest {
         FactoryDevice factoryDevice = new FactoryDevice();
         FactoryLocation factoryLocation = new FactoryLocation();
         FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
-        House myHouse = new House(factoryLocation, factoryRoom, "address", "zipCode", 55.2, -2.25);
+        House myHouse = new House(factoryLocation, factoryRoom);
         myHouse.addRoom("myRoom",2,25,5).addDevice("myDevice");
         US08DeactivateDeviceController myController = new US08DeactivateDeviceController(myHouse);
         //Act
@@ -46,7 +46,7 @@ public class US08DeactivateDeviceControllerTest {
         FactoryDevice factoryDevice = new FactoryDevice();
         FactoryLocation factoryLocation = new FactoryLocation();
         FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
-        House myHouse = new House(factoryLocation, factoryRoom, "address", "zipCode", 55.2, -2.25);
+        House myHouse = new House(factoryLocation, factoryRoom);
         myHouse.addRoom("myRoom",2,25,5);
         US08DeactivateDeviceController myController = new US08DeactivateDeviceController(myHouse);
         String expected = "Device name doesn't exist in the list";
@@ -70,7 +70,7 @@ public class US08DeactivateDeviceControllerTest {
         FactoryDevice factoryDevice = new FactoryDevice();
         FactoryLocation factoryLocation = new FactoryLocation();
         FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
-        House myHouse = new House(factoryLocation, factoryRoom, "address", "zipCode", 55.2, -2.25);
+        House myHouse = new House(factoryLocation, factoryRoom);
         myHouse.addRoom("myRoom",2,25,5).addDevice("myDevice");
         US08DeactivateDeviceController myController = new US08DeactivateDeviceController(myHouse);
         //Act
@@ -111,7 +111,7 @@ public class US08DeactivateDeviceControllerTest {
         FactoryDevice factoryDevice = new FactoryDevice();
         FactoryLocation factoryLocation = new FactoryLocation();
         FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
-        House myHouse = new House(factoryLocation, factoryRoom, "address", "zipCode", 55.2, -2.25);
+        House myHouse = new House(factoryLocation, factoryRoom);
         US08DeactivateDeviceController myController = new US08DeactivateDeviceController(myHouse);
         String expectedMessage = "Room name doesn't exist in the list";
         //Act
