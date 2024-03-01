@@ -7,20 +7,26 @@ title US02: add and configure new Room
 
 autonumber
 participant ":CreateRoomController"
-participant ":House"
+participant "myHouse : House"
+participant ":FactoryRoom"
+participant "myRoom : Room"
 participant ":RoomDTOMapper"
 
 [o-> ":CreateRoomController" : createRoom(roomDTO)
 activate ":CreateRoomController"
-":CreateRoomController" -> ":House" : createRoom(name, floorNumber, area, height)
-activate ":House"
-":House" -> "myRoom : Room" ** : Room(name, floorNumber, area, height)
+":CreateRoomController" -> "myHouse : House" : addRoom(name, floorNumber, area, height, factoryDevice)
+activate "myHouse : House"
+"myHouse : House" -> ":FactoryRoom" : createRoom(name, floorNumber, area, height, factoryDevice)
+activate ":FactoryRoom"
+":FactoryRoom" -> "myRoom : Room" ** : Room(name, floorNumber, area, height, factoryDevice)
 activate "myRoom : Room"
-"myRoom : Room" --> ":House" : myRoom
+"myRoom : Room" --> ":FactoryRoom" : myRoom
 deactivate "myRoom : Room"
-":House" -> ":House" : addRoomToList
-":House" --> ":CreateRoomController" : myRoom
-deactivate ":House"
+":FactoryRoom" --> "myHouse : House" : myRoom
+deactivate ":FactoryRoom"
+"myHouse : House" -> "myHouse : House" : addRoomToList
+"myHouse : House" --> ":CreateRoomController" : myRoom
+deactivate "myHouse : House"
 ":CreateRoomController" -> ":RoomDTOMapper" : DomainToDTO(myRoom)
 activate ":RoomDTOMapper"
 ":RoomDTOMapper" --> ":CreateRoomController" : myRoomDTO
