@@ -2,6 +2,9 @@ package pt.ipp.isep.dei.examples.basic.domain.ControllerTest;
 
 import org.junit.jupiter.api.Test;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Controllers.US03GetListOfRoomsController;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.FactoryDevice;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.FactoryLocation;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.FactoryRoom;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.House;
 
 import java.util.ArrayList;
@@ -40,7 +43,11 @@ public class US03GetListOfRoomsControllerTest {
     @Test
     void emptyRoomList_shouldFindEmptyList() throws InstantiationException {
         //Arrange
-        House myHouse = new House("zipCode", "street", 90.0, 30.0);
+        FactoryDevice factoryDevice = new FactoryDevice();
+        FactoryLocation factoryLocation = new FactoryLocation();
+        FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
+        House myHouse = new House(factoryLocation, factoryRoom);
+
         //Act + Assert
         assertEquals(new ArrayList<>(), myHouse.getRoomList());
     }
@@ -53,11 +60,15 @@ public class US03GetListOfRoomsControllerTest {
     @Test
     void validArguments_shouldAddSeveralRoomsToHouse() throws InstantiationException {
         //Arrange
-        House myHouse = new House("rua algures", "5000-300", 90.0, 30.0);
-        myHouse.createRoom("Bedroom", 0, 35, 2.5);
-        myHouse.createRoom("Guest Room", 0, 35, 2.5);
-        myHouse.createRoom("Kitchen", 0, 35, 2.5);
-        myHouse.createRoom("Bathroom", 0, 35, 2.5);
+        FactoryDevice factoryDevice = new FactoryDevice();
+        FactoryLocation factoryLocation = new FactoryLocation();
+        FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
+        House myHouse = new House(factoryLocation, factoryRoom);
+
+        myHouse.addRoom("Bedroom", 0, 35, 2.5);
+        myHouse.addRoom("Guest Room", 0, 35, 2.5);
+        myHouse.addRoom("Kitchen", 0, 35, 2.5);
+        myHouse.addRoom("Bathroom", 0, 35, 2.5);
         US03GetListOfRoomsController myController = new US03GetListOfRoomsController(myHouse);
         //Act
         int expected = myHouse.getRoomList().size();

@@ -4,8 +4,7 @@ import org.junit.jupiter.api.Test;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Controllers.US05V2AddDeviceToRoomController;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.DeviceDTO;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.DTO.RoomDTO;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.House;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Room;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.*;
 
 import java.util.List;
 
@@ -23,11 +22,18 @@ public class US05V2AddDeviceToRoomControllerTest {
     @Test
     void validDevice_shouldAddDeviceToRoom() throws InstantiationException {
         //Arrange
-        myHouse = new House("zipCode", "Street", 55, 105);
-        Room myRoom = myHouse.createRoom("roomName1", 0, 25, 2.5);
-        US05V2AddDeviceToRoomController myController = new US05V2AddDeviceToRoomController(myHouse);
-
+        String roomName = "roomName1";
+        Integer houseFloor = 0;
+        Double area = 25.0;
+        Double height = 3.2;
         String deviceName = "device1";
+
+        FactoryDevice factoryDevice = new FactoryDevice();
+        FactoryLocation factoryLocation = new FactoryLocation();
+        FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
+        House myHouse = new House(factoryLocation, factoryRoom);
+        Room myRoom = myHouse.addRoom(roomName, houseFloor, area, height);
+        US05V2AddDeviceToRoomController myController = new US05V2AddDeviceToRoomController(myHouse);
 
         int expected =1;
         //Act
@@ -43,11 +49,18 @@ public class US05V2AddDeviceToRoomControllerTest {
     @Test
     void deviceNameEmpty_shouldThrowIllegalArgumentException() throws InstantiationException {
         //Arrange
-        myHouse = new House("zipCode", "Street", 55, 105);
-        Room myRoom = myHouse.createRoom("roomName1", 0, 25, 2.5);
-        US05V2AddDeviceToRoomController myController = new US05V2AddDeviceToRoomController(myHouse);
-
+        String roomName = "roomName1";
+        Integer houseFloor = 0;
+        Double area = 25.0;
+        Double height = 3.2;
         String deviceName = "";
+
+        FactoryDevice factoryDevice = new FactoryDevice();
+        FactoryLocation factoryLocation = new FactoryLocation();
+        FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
+        House myHouse = new House(factoryLocation, factoryRoom);
+        Room myRoom = myHouse.addRoom(roomName, houseFloor, area, height);
+        US05V2AddDeviceToRoomController myController = new US05V2AddDeviceToRoomController(myHouse);
 
         String expectedMessage = "Device name cannot be null or empty";
         //Act

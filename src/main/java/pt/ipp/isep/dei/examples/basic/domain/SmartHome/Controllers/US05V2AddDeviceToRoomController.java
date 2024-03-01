@@ -68,11 +68,11 @@ public class US05V2AddDeviceToRoomController {
     //Implementacao alternativa com o HashMap
     private Map<String, Room> _rooms_DTOAndRooms = new HashMap<>();
 
-    public List<DeviceDTO> addDeviceToRoom(String roomName, String deviceName) {
+    public List<DeviceDTO> addDeviceToRoom(String roomName, String deviceName) throws InstantiationException {
         List<Room> rooms = _myHouse.getRoomList();
         this._rooms_DTOAndRooms = RoomMapper.roomMap_NameAndDomain(rooms);
         Room room = _rooms_DTOAndRooms.get( roomName );
-        room.createDevice(deviceName);
+        room.addDevice(deviceName);
         List<Device> devices = room.getDevices();
         return DeviceMapper.devices_DomainToDTO(devices);
     }
