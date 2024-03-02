@@ -14,28 +14,28 @@ import static org.junit.jupiter.api.Assertions.*;
  * Test class for SR001.
  * This class contains tests for the SR001 sensor in the SmartHome domain.
  */
-class SR001Test
-{
+class SR001Test {
 
     /**
      * Test of validSR001_ShouldCreateNewInstance method, of class SR001.
      * This test checks if a new instance of SR001 can be created with valid parameters.
+     *
      * @throws InstantiationException
      */
     @Test
-    void validSR001_ShouldCreateNewInstance() throws InstantiationException
-    {
+    void validSR001_ShouldCreateNewInstance() throws InstantiationException {
         // arrange
         Configuration config = new PropertyListConfiguration();
-        Catalogue catalogue = new Catalogue( config );
-        SensorType sensorType = catalogue.addSensorType( "Solar Irradiation", Unit.Watt_m2 );
+        FactorySensorType factorySensorType = new FactorySensorType();
+        Catalogue catalogue = new Catalogue(config, factorySensorType);
+        SensorType sensorType = catalogue.addSensorType("Solar Irradiation", Unit.Watt_m2);
         // act
-        SR001 sr001 = new SR001( catalogue );
+        SR001 sr001 = new SR001(catalogue);
 
         // assert
-        assertEquals( sr001.getSensorType(), sensorType );
-        int value = Integer.parseInt( sr001.getValue().toString() );
-        assertTrue( value >= 0 && value <= 1000 );
+        assertEquals(sr001.getSensorType(), sensorType);
+        int value = Integer.parseInt(sr001.getValue().toString());
+        assertTrue(value >= 0 && value <= 1000);
     }
 
     /**
@@ -43,16 +43,16 @@ class SR001Test
      * This test checks if an exception is thrown when trying to create a new instance of SR001 with an inexistent sensor type.
      */
     @Test
-    void inexistentSensorTypeForSR001_ShouldThrowException()
-    {
+    void inexistentSensorTypeForSR001_ShouldThrowException() throws InstantiationException {
         // arrange
         Configuration config = new PropertyListConfiguration();
-        Catalogue catalogue = new Catalogue( config );
+        FactorySensorType factorySensorType = new FactorySensorType();
+        Catalogue catalogue = new Catalogue(config, factorySensorType);
         String expectedMessage = "SensorType with description 'Solar Irradiation' does not exist.";
 
         // act + assert
-        Exception exception = assertThrows( InstantiationException.class, () ->
-                new SR001( catalogue )
+        Exception exception = assertThrows(InstantiationException.class, () ->
+                new SR001(catalogue)
         );
 
         // assert

@@ -3,10 +3,7 @@ package pt.ipp.isep.dei.examples.basic.domain.ActuatorTest;
 import org.junit.jupiter.api.Test;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Actuator.SIV280;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Actuator.SIV280Value;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.ActuatorType;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Catalogue;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Unit;
-import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Value;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -16,7 +13,8 @@ public class SIV280Test {
     @Test
     void validSIV280_ShouldCreateNewInstance() throws InstantiationException {
         // arrange
-        Catalogue catalogue = new Catalogue("config.properties");
+        FactorySensorType factorySensorType = new FactorySensorType();
+        Catalogue catalogue = new Catalogue("config.properties",factorySensorType);
         ActuatorType actuatorType = catalogue.addActuatorType("Set Integer Value", Unit.Celsius);
         // act
         SIV280 siv280 = new SIV280(catalogue, 10, 35);
@@ -27,7 +25,8 @@ public class SIV280Test {
     @Test
     void invalidSIV280_ShouldThrowInstantiationException() throws InstantiationException {
         // arrange
-        Catalogue catalogue = new Catalogue("config.properties");
+        FactorySensorType factorySensorType = new FactorySensorType();
+        Catalogue catalogue = new Catalogue("config.properties",factorySensorType);
         String expectedMessage = "Actuator Type with description 'Set Integer Value' does not exist.";
         // act
         Exception exception = assertThrows(InstantiationException.class, () ->
@@ -41,7 +40,8 @@ public class SIV280Test {
     @Test
     void invalidMinMaxSIV280_ShouldThrowInstantiationException() throws InstantiationException {
         // arrange
-        Catalogue catalogue = new Catalogue("config.properties");
+        FactorySensorType factorySensorType = new FactorySensorType();
+        Catalogue catalogue = new Catalogue("config.properties",factorySensorType);
         ActuatorType actuatorType = catalogue.addActuatorType("Set Integer Value", Unit.Celsius);
         String expectedMessage = "Max value is lower than min value";
         // act
@@ -56,7 +56,8 @@ public class SIV280Test {
     @Test
     void validSIV280_SetValidValue() throws InstantiationException {
         // arrange
-        Catalogue catalogue = new Catalogue("config.properties");
+        FactorySensorType factorySensorType = new FactorySensorType();
+        Catalogue catalogue = new Catalogue("config.properties",factorySensorType);
         ActuatorType actuatorType = catalogue.addActuatorType("Set Integer Value", Unit.Celsius);
         SIV280 siv280 = new SIV280(catalogue, 10, 35);
         Value expectedValue = new SIV280Value(22);
@@ -69,7 +70,8 @@ public class SIV280Test {
     @Test
     void validSIV280_SetInvalidMinValue() throws InstantiationException {
         // arrange
-        Catalogue catalogue = new Catalogue("config.properties");
+        FactorySensorType factorySensorType = new FactorySensorType();
+        Catalogue catalogue = new Catalogue("config.properties",factorySensorType);
         ActuatorType actuatorType = catalogue.addActuatorType("Set Integer Value", Unit.Celsius);
         SIV280 siv280 = new SIV280(catalogue, 10, 35);
         Value expectedValue = new SIV280Value(8);
@@ -87,7 +89,8 @@ public class SIV280Test {
     @Test
     void validSIV280_SetInvalidMaxValue() throws InstantiationException {
         // arrange
-        Catalogue catalogue = new Catalogue("config.properties");
+        FactorySensorType factorySensorType = new FactorySensorType();
+        Catalogue catalogue = new Catalogue("config.properties",factorySensorType);
         ActuatorType actuatorType = catalogue.addActuatorType("Set Integer Value", Unit.Celsius);
         SIV280 siv280 = new SIV280(catalogue, 10, 35);
         Value expectedValue = new SIV280Value(40);

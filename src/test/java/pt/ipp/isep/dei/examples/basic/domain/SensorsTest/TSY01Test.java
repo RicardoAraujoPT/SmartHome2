@@ -14,7 +14,8 @@ class TSY01Test {
     void validTSY01_ShouldCreateNewInstance() throws InstantiationException {
         // arrange
         Configuration config = new PropertyListConfiguration();
-        Catalogue catalogue = new Catalogue(config);
+        FactorySensorType factorySensorType = new FactorySensorType();
+        Catalogue catalogue = new Catalogue(config,factorySensorType);
         SensorType sensorType = catalogue.addSensorType("Humidity", Unit.Percentage);
         // act
         TSY01 tsy01 = new TSY01(catalogue);
@@ -26,10 +27,11 @@ class TSY01Test {
     }
 
     @Test
-    void inexistentSensorTypeForTSY01_ShouldThrowException() {
+    void inexistentSensorTypeForTSY01_ShouldThrowException() throws InstantiationException{
         // arrange
         Configuration config = new PropertyListConfiguration();
-        Catalogue catalogue = new Catalogue(config);
+        FactorySensorType factorySensorType = new FactorySensorType();
+        Catalogue catalogue = new Catalogue(config,factorySensorType);
         // SensorType sensorType = catalogue.addSensorType( "Humidity", Unit.Humidity );
         String expectedMessage = "SensorType with description 'Humidity' does not exist.";
 

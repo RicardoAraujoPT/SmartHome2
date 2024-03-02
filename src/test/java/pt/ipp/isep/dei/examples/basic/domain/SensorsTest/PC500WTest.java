@@ -4,6 +4,7 @@ import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.plist.PropertyListConfiguration;
 import org.junit.jupiter.api.Test;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Catalogue;
+import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.FactorySensorType;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.SensorType;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain.Unit;
 import pt.ipp.isep.dei.examples.basic.domain.SmartHome.Sensors.PC500W;
@@ -16,9 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * It tests the creation of a new instance of PC500W with valid parameters and checks if an exception is thrown when
  * trying to create a new instance with an inexistent sensor type.
  * It includes the following tests:
- *  - inexistentPC500W_ShouldThrowException
- *  - validPC500W_ShouldCreateNewInstance
- *
+ * - inexistentPC500W_ShouldThrowException
+ * - validPC500W_ShouldCreateNewInstance
  */
 public class PC500WTest {
 
@@ -28,16 +28,16 @@ public class PC500WTest {
      * sensor type.
      */
     @Test
-    void inexistentPC500W_ShouldThrowException()
-    {
+    void inexistentPC500W_ShouldThrowException() throws InstantiationException{
         // arrange
         Configuration config = new PropertyListConfiguration();
-        Catalogue catalogue = new Catalogue( config );
+        FactorySensorType factorySensorType = new FactorySensorType();
+        Catalogue catalogue = new Catalogue(config, factorySensorType);
         String expectedMessage = "SensorType with description 'Power Consumption' does not exist.";
 
         // act + assert
-        Exception exception = assertThrows( InstantiationException.class, () ->
-                new PC500W( catalogue ));
+        Exception exception = assertThrows(InstantiationException.class, () ->
+                new PC500W(catalogue));
 
         // assert
         String actualMessage = exception.getMessage();
@@ -50,19 +50,19 @@ public class PC500WTest {
      * value are as expected.
      */
     @Test
-    void validPC500W_ShouldCreateNewInstance() throws InstantiationException
-    {
+    void validPC500W_ShouldCreateNewInstance() throws InstantiationException {
         // arrange
+        FactorySensorType factorySensorType = new FactorySensorType();
         Configuration config = new PropertyListConfiguration();
-        Catalogue catalogue = new Catalogue( config );
-        SensorType sensorType = catalogue.addSensorType( "Power Consumption", Unit.Watt);
+        Catalogue catalogue = new Catalogue(config,factorySensorType);
+        SensorType sensorType = catalogue.addSensorType("Power Consumption", Unit.Watt);
         // act
-        PC500W pc500WSensor = new PC500W( catalogue );
+        PC500W pc500WSensor = new PC500W(catalogue);
 
         // assert
-        assertEquals(pc500WSensor.getSensorType(), sensorType );
-        int value = Integer.parseInt( pc500WSensor.getValue().toString() );
-        assertTrue( value >= 0 && value <= 500 );
+        assertEquals(pc500WSensor.getSensorType(), sensorType);
+        int value = Integer.parseInt(pc500WSensor.getValue().toString());
+        assertTrue(value >= 0 && value <= 500);
     }
 
 }

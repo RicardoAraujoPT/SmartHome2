@@ -15,7 +15,8 @@ public class OPNCL0100Test {
     @Test
     void validOPNCL0100_ShouldCreateNewInstance() throws InstantiationException {
         // arrange
-        Catalogue catalogue = new Catalogue("config.properties");
+        FactorySensorType factorySensorType = new FactorySensorType();
+        Catalogue catalogue = new Catalogue("config.properties",factorySensorType);
         ActuatorType actuatorType = catalogue.addActuatorType("Open-Close", Unit.Percentage);
         // act
         OPNCL0100 opncl0100 = new OPNCL0100(catalogue);
@@ -26,7 +27,8 @@ public class OPNCL0100Test {
     @Test
     void invalidOPNCL0100_ShouldThrowInstantiationException() throws InstantiationException {
         // arrange
-        Catalogue catalogue = new Catalogue("config.properties");
+        FactorySensorType factorySensorType = new FactorySensorType();
+        Catalogue catalogue = new Catalogue("config.properties",factorySensorType);
         String expectedMessage = "ActuatorType with description 'Open-Close' does not exist.";
         // act
         Exception exception = assertThrows(InstantiationException.class, () ->
@@ -40,7 +42,8 @@ public class OPNCL0100Test {
     @Test
     void validOPNCL0100_SetValidValue() throws InstantiationException {
         // arrange
-        Catalogue catalogue = new Catalogue("config.properties");
+        FactorySensorType factorySensorType = new FactorySensorType();
+        Catalogue catalogue = new Catalogue("config.properties",factorySensorType);
         ActuatorType actuatorType = catalogue.addActuatorType("Open-Close", Unit.Percentage);
         OPNCL0100 opncl0100 = new OPNCL0100(catalogue);
         Value expectedValue = new OPNCL0100Value(50);
@@ -53,7 +56,8 @@ public class OPNCL0100Test {
     @Test
     void validOPNCL0100_SetInvalidMinValue() throws InstantiationException {
         // arrange
-        Catalogue catalogue = new Catalogue("config.properties");
+        FactorySensorType factorySensorType = new FactorySensorType();
+        Catalogue catalogue = new Catalogue("config.properties",factorySensorType);
         ActuatorType actuatorType = catalogue.addActuatorType("Open-Close", Unit.Percentage);
         OPNCL0100 opncl0100 = new OPNCL0100(catalogue);
         Value expectedValue = new OPNCL0100Value(-1);
@@ -70,7 +74,8 @@ public class OPNCL0100Test {
     @Test
     void validOPNCL0100_SetInvalidMaxValue() throws InstantiationException {
         // arrange
-        Catalogue catalogue = new Catalogue("config.properties");
+        FactorySensorType factorySensorType = new FactorySensorType();
+        Catalogue catalogue = new Catalogue("config.properties",factorySensorType);
         ActuatorType actuatorType = catalogue.addActuatorType("Open-Close", Unit.Percentage);
         OPNCL0100 opncl0100 = new OPNCL0100(catalogue);
         Value expectedValue = new OPNCL0100Value(101);
