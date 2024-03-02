@@ -16,13 +16,31 @@ public class House {
     private ArrayList <Room> _rooms;
 
 
+    /**
+     * Method that create house objects.
+     * It uses a factory location constructor object to define location and then define gpscoordinates.
+     * It uses a factory room constructor object to create room objects.
+     *
+     * @param factoryLocation location constructor
+     * @param factoryRoom room constructor
+     */
     public House(FactoryLocation factoryLocation, FactoryRoom factoryRoom) {
         _factoryLocation = factoryLocation;
         _factoryRoom = factoryRoom;
         this._rooms = new ArrayList<>();
     }
 
-
+    /**
+     * Method that create location and gpscoordinates objects.
+     * It uses a factory location constructor object to define location and then define gpscoordinates.
+     *
+     * @param address location address
+     * @param zipCode location zip code
+     * @param latitude gps latitude
+     * @param longitude gps longitude
+     *
+     * @return location
+     */
     public Location defineLocation(String address, String zipCode, double latitude, double longitude) throws InstantiationException{
 
         this._location = _factoryLocation.defineLocation(address, zipCode);
@@ -33,7 +51,16 @@ public class House {
 
     }
 
-
+    /**
+     * Method that create and add room objects in the house roomList.
+     *
+     * @param roomName The name of the room.
+     * @param floorNumber floor number in the house.
+     * @param area room area.
+     * @param height room height.
+     *
+     * @return myRoom.
+     */
     public Room addRoom(String roomName, int floorNumber, double area, double height) throws InstantiationException {
         if (isRoomNameDuplicated(roomName)) {
             throw new IllegalArgumentException("Room name already exists");
@@ -57,7 +84,6 @@ public class House {
         }
         return false;
     }
-
 
     /**
      * Method to get the House's RoomList.
