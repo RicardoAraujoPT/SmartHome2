@@ -26,7 +26,12 @@ public class US07AddSensorToDeviceControllerTest {
         // arrange
         Configuration config = new PropertyListConfiguration();
         Catalogue catalogue = new Catalogue(config);
-        House myHouse = new House("address", "zipcode", 55, 105);
+
+        FactoryDevice factoryDevice = new FactoryDevice();
+        FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
+        FactoryLocation factoryLocation = new FactoryLocation();
+
+        House myHouse = new House(factoryLocation,factoryRoom);
 
         US07AddSensorToDeviceController controller = new US07AddSensorToDeviceController(myHouse, catalogue);
 
@@ -49,7 +54,12 @@ public class US07AddSensorToDeviceControllerTest {
         config.addProperty("sensor", "SmartHome.sensors.GA100K");
         config.addProperty("sensor", "SmartHome.sensors.TSY01");
         Catalogue catalogue = new Catalogue(config);
-        House myHouse = new House("address", "zipcode", 55, 105);
+
+        FactoryDevice factoryDevice = new FactoryDevice();
+        FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
+        FactoryLocation factoryLocation = new FactoryLocation();
+
+        House myHouse = new House(factoryLocation,factoryRoom);
 
         US07AddSensorToDeviceController controller = new US07AddSensorToDeviceController(myHouse, catalogue);
 
@@ -70,9 +80,14 @@ public class US07AddSensorToDeviceControllerTest {
         // arrange
         Configuration config = new PropertyListConfiguration();
         Catalogue catalogue = new Catalogue(config);
-        House myHouse = new House("address", "zipcode", 55, 105);
-        Room livingRoom = myHouse.createRoom("Living Room", 0, 10, 10);
-        livingRoom.createDevice("device1");
+
+        FactoryDevice factoryDevice = new FactoryDevice();
+        FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
+        FactoryLocation factoryLocation = new FactoryLocation();
+
+        House myHouse = new House(factoryLocation,factoryRoom);
+        Room livingRoom = myHouse.addRoom("Living Room", 0, 10, 10);
+        livingRoom.addDevice("device1");
         AddSensorToDeviceDTO entryDTO = new AddSensorToDeviceDTO("device1", "Living Room", "Sensors.GA100K");
 
         US07AddSensorToDeviceController controller = new US07AddSensorToDeviceController(myHouse, catalogue);
@@ -98,11 +113,16 @@ public class US07AddSensorToDeviceControllerTest {
         Configuration config = new PropertyListConfiguration();
         config.addProperty("sensor", "Sensors.GA100K");
         Catalogue catalogue = new Catalogue(config);
+
+        FactoryDevice factoryDevice = new FactoryDevice();
+        FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
+        FactoryLocation factoryLocation = new FactoryLocation();
+
         SensorType sensorType = catalogue.addSensorType("Temperature", Unit.Celsius);
 
-        House myHouse = new House("address", "zipcode", 55, 105);
-        Room livingRoom = myHouse.createRoom("Living Room", 0, 10, 10);
-        livingRoom.createDevice("device1");
+        House myHouse = new House(factoryLocation,factoryRoom);
+        Room livingRoom = myHouse.addRoom("Living Room", 0, 10, 10);
+        livingRoom.addDevice("device1");
         AddSensorToDeviceDTO entryDTO = new AddSensorToDeviceDTO("device1", "Living Room", "Sensors.GA100K");
 
         US07AddSensorToDeviceController controller = new US07AddSensorToDeviceController(myHouse, catalogue);
