@@ -25,7 +25,8 @@ public class US07AddSensorToDeviceControllerTest {
     void emptyCatalogue_shouldReturnEmptySensorModels() throws InstantiationException {
         // arrange
         Configuration config = new PropertyListConfiguration();
-        Catalogue catalogue = new Catalogue(config);
+        FactorySensorType factorySensorType = new FactorySensorType();
+        Catalogue catalogue = new Catalogue(config,factorySensorType);
 
         FactoryDevice factoryDevice = new FactoryDevice();
         FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
@@ -53,7 +54,9 @@ public class US07AddSensorToDeviceControllerTest {
         Configuration config = new PropertyListConfiguration();
         config.addProperty("sensor", "SmartHome.sensors.GA100K");
         config.addProperty("sensor", "SmartHome.sensors.TSY01");
-        Catalogue catalogue = new Catalogue(config);
+
+        FactorySensorType factorySensorType = new FactorySensorType();
+        Catalogue catalogue = new Catalogue(config,factorySensorType);
 
         FactoryDevice factoryDevice = new FactoryDevice();
         FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
@@ -79,7 +82,8 @@ public class US07AddSensorToDeviceControllerTest {
     void inexistingSensorModel_ShouldReturnNull() throws InstantiationException {
         // arrange
         Configuration config = new PropertyListConfiguration();
-        Catalogue catalogue = new Catalogue(config);
+        FactorySensorType factorySensorType = new FactorySensorType();
+        Catalogue catalogue = new Catalogue(config,factorySensorType);
 
         FactoryDevice factoryDevice = new FactoryDevice();
         FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
@@ -112,7 +116,8 @@ public class US07AddSensorToDeviceControllerTest {
         // arrange
         Configuration config = new PropertyListConfiguration();
         config.addProperty("sensor", "Sensors.GA100K");
-        Catalogue catalogue = new Catalogue(config);
+        FactorySensorType factorySensorType = new FactorySensorType();
+        Catalogue catalogue = new Catalogue(config,factorySensorType);
 
         FactoryDevice factoryDevice = new FactoryDevice();
         FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);

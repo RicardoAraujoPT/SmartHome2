@@ -18,7 +18,7 @@ public class FactorySensorType {
      * @return A new instance of SensorType.
      * @throws InstantiationException If the provided arguments are not valid (e.g., null or empty description).
      */
-    public SensorType createSensorType(String description, Unit unit) throws InstantiationException {
+    public SensorType newSensorType(String description, Unit unit) throws InstantiationException {
 
         return new SensorType(description, unit);
     }

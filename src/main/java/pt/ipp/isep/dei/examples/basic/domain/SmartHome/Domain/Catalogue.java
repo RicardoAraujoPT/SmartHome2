@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.examples.basic.domain.SmartHome.Domain;
 
 import java.io.File;
+
 import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.builder.fluent.Configurations;
 import org.apache.commons.configuration2.ex.ConfigurationException;
@@ -14,18 +15,28 @@ import java.util.Optional;
 public class Catalogue {
     private List<SensorType> _listSensorTypes = new ArrayList<>();
     private List<String> _listStringClassesSensors;
-    private List <ActuatorType> _listActuatorTypes = new ArrayList<>();
-    private List <String> _listStringClassesActuators;
+    private List<ActuatorType> _listActuatorTypes = new ArrayList<>();
+    private List<String> _listStringClassesActuators;
+    private FactorySensorType _factorySensorType;
 
-    public Catalogue(Configuration config) {
+    public Catalogue(Configuration config, FactorySensorType factorySensorType) throws InstantiationException {
+
+        if (!isValidConstructorArguments(config, factorySensorType))
+            throw (new InstantiationException("Invalid arguments"));
+
         // access configuration properties
         String[] arrayStringClassesSensors = config.getStringArray("sensor");
         this._listStringClassesSensors = List.of(arrayStringClassesSensors);
         String[] arrayStringClassesActuators = config.getStringArray("actuator");
         this._listStringClassesActuators = List.of(arrayStringClassesActuators);
+        this._factorySensorType = factorySensorType;
     }
 
-    public Catalogue(String filePathname) throws InstantiationException {
+    public Catalogue(String filePathname, FactorySensorType factorySensorType) throws InstantiationException {
+
+        if (!isValidConstructorArguments(filePathname, factorySensorType))
+            throw (new InstantiationException("Invalid arguments"));
+
         Configurations configs = new Configurations();
         try {
             Configuration config = configs.properties(new File(filePathname)); // e.g. filePathname = "config.properties"
@@ -35,14 +46,47 @@ public class Catalogue {
             this._listStringClassesSensors = List.of(arrayStringClassesSensors);
             String[] arrayStringClassesActuators = config.getStringArray("actuator");
             this._listStringClassesActuators = List.of(arrayStringClassesActuators);
+            this._factorySensorType = factorySensorType;
         } catch (ConfigurationException exception) {
             // Something went wrong
             throw new InstantiationException("something went wrong in reading the configuration: " + exception.getMessage());
         }
     }
 
+    /**
+     * Method to validate Catalogue's constructor entry parameters.
+     *
+     * @param config            Configuration file.
+     * @param factorySensorType Factory to create sensor types.
+     * @return
+     */
+    private boolean isValidConstructorArguments(Configuration config, FactorySensorType factorySensorType) {
+        if (config == null)
+            return false;
+        if (factorySensorType == null)
+            return false;
+
+        return true;
+    }
+
+    /**
+     * Method to validate Catalogue's constructor entry parameters.
+     *
+     * @param filePathname      String pathname for the configuration file.
+     * @param factorySensorType Factory to create sensor types.
+     * @return
+     */
+    private boolean isValidConstructorArguments(String filePathname, FactorySensorType factorySensorType) {
+        if (filePathname == null || filePathname.isEmpty() || filePathname.isBlank())
+            return false;
+        if (factorySensorType == null)
+            return false;
+
+        return true;
+    }
+
     public SensorType addSensorType(String strDescription, Unit unit) throws InstantiationException {
-        SensorType _sensor = new SensorType(strDescription, unit);
+        SensorType _sensor = _factorySensorType.newSensorType(strDescription, unit);
 
         this._listSensorTypes.add(_sensor);
 

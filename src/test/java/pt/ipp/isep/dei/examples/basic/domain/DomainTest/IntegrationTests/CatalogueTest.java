@@ -15,10 +15,14 @@ class CatalogueTest {
     @Test
     void existingFile_ShouldCreateConfiguredCatalogue() throws InstantiationException, IOException {
         // arrange
-        long lineCountExpected = Files.lines(Paths.get("config.properties")).count()-1;
+        long lineCountExpected = Files.lines(Paths.get("config.properties")).count() - 3; // Subtract 3 for title line and actuators.
+        FactorySensorType factorySensorType = new FactorySensorType();
+        // 1 Title line
+        // 5 Sensors
+        // 2 Actuators
 
         // act
-        Catalogue catalogue = new Catalogue("config.properties");
+        Catalogue catalogue = new Catalogue("config.properties", factorySensorType);
 
         // assert
         assertEquals(lineCountExpected, catalogue.getSensorModels().size());
@@ -28,10 +32,11 @@ class CatalogueTest {
     void inexistentFile_ShouldThrowException() {
         // arrange
         String expectedMessage = "something went wrong in reading the configuration: ";
+        FactorySensorType factorySensorType = new FactorySensorType();
 
         // act + assert
         Exception exception = assertThrows(InstantiationException.class, () ->
-                new Catalogue("asdfasdfasdf")
+                new Catalogue("asdfasdfasdf", factorySensorType)
         );
 
         // assert
@@ -41,12 +46,13 @@ class CatalogueTest {
     }
 
     @Test
-    void emptyCatalogue_ShouldCreateConfiguredCatalogue() {
+    void emptyCatalogue_ShouldCreateConfiguredCatalogue() throws InstantiationException {
         // arrange
         Configuration config = new PropertyListConfiguration();
+        FactorySensorType factorySensorType = new FactorySensorType();
 
         // act
-        Catalogue catalogue = new Catalogue(config);
+        Catalogue catalogue = new Catalogue(config, factorySensorType);
 
         // assert
         assertEquals(catalogue.getSensorModels().size(), 0);
@@ -56,7 +62,8 @@ class CatalogueTest {
     void existingSensorType_ShouldGetSensorType() throws InstantiationException {
         // arrange
         Configuration config = new PropertyListConfiguration();
-        Catalogue catalogue = new Catalogue(config);
+        FactorySensorType factorySensorType = new FactorySensorType();
+        Catalogue catalogue = new Catalogue(config, factorySensorType);
 
         // act
         SensorType sensorType = catalogue.addSensorType("Humidity", Unit.Percentage);
@@ -70,7 +77,8 @@ class CatalogueTest {
     void inexistentSensorType_ShouldReturnNull() throws InstantiationException {
         // arrange
         Configuration config = new PropertyListConfiguration();
-        Catalogue catalogue = new Catalogue(config);
+        FactorySensorType factorySensorType = new FactorySensorType();
+        Catalogue catalogue = new Catalogue(config, factorySensorType);
 
         // act
         SensorType sensorType = catalogue.addSensorType("Humidity", Unit.Percentage);
@@ -85,7 +93,8 @@ class CatalogueTest {
     void validSensorType_ShouldAddSensorType() throws InstantiationException {
         // arrange
         Configuration config = new PropertyListConfiguration();
-        Catalogue catalogue = new Catalogue(config);
+        FactorySensorType factorySensorType = new FactorySensorType();
+        Catalogue catalogue = new Catalogue(config, factorySensorType);
 
         // act
         SensorType sensorType = catalogue.addSensorType("Humidity", Unit.Percentage);
@@ -96,10 +105,11 @@ class CatalogueTest {
     }
 
     @Test
-    void emptyDescriptionSensorType_ShouldThrowException() {
+    void emptyDescriptionSensorType_ShouldThrowException() throws InstantiationException {
         // arrange
         Configuration config = new PropertyListConfiguration();
-        Catalogue catalogue = new Catalogue(config);
+        FactorySensorType factorySensorType = new FactorySensorType();
+        Catalogue catalogue = new Catalogue(config, factorySensorType);
         String expectedMessage = "Invalid arguments";
 
         // act + assert
@@ -114,10 +124,11 @@ class CatalogueTest {
     }
 
     @Test
-    void nullDescriptionSensorType_ShouldThrowException() {
+    void nullDescriptionSensorType_ShouldThrowException() throws InstantiationException {
         // arrange
         Configuration config = new PropertyListConfiguration();
-        Catalogue catalogue = new Catalogue(config);
+        FactorySensorType factorySensorType = new FactorySensorType();
+        Catalogue catalogue = new Catalogue(config, factorySensorType);
         String expectedMessage = "Invalid arguments";
 
         // act + assert
@@ -136,7 +147,8 @@ class CatalogueTest {
         // arrange
         Configuration config = new PropertyListConfiguration();
         config.addProperty("sensor", "Sensors.TSY01");
-        Catalogue catalogue = new Catalogue(config);
+        FactorySensorType factorySensorType = new FactorySensorType();
+        Catalogue catalogue = new Catalogue(config,factorySensorType);
         SensorType sensorType = catalogue.addSensorType("Humidity", Unit.Percentage);
 
         // act
@@ -152,7 +164,8 @@ class CatalogueTest {
         // arrange
         Configuration config = new PropertyListConfiguration();
         config.addProperty("sensor", "Sensors.GA100K");
-        Catalogue catalogue = new Catalogue(config);
+        FactorySensorType factorySensorType = new FactorySensorType();
+        Catalogue catalogue = new Catalogue(config,factorySensorType);
         SensorType sensorType = catalogue.addSensorType("Temperature", Unit.Celsius);
 
         // act
@@ -167,7 +180,8 @@ class CatalogueTest {
     void emptyListOfModels_ShouldReturnNullSensor() throws InstantiationException {
         // arrange
         Configuration config = new PropertyListConfiguration();
-        Catalogue catalogue = new Catalogue(config);
+        FactorySensorType factorySensorType = new FactorySensorType();
+        Catalogue catalogue = new Catalogue(config,factorySensorType);
         catalogue.addSensorType("Humidity", Unit.Percentage);
 
         // act
