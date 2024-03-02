@@ -12,10 +12,10 @@ participant ":roomsMapper"
 participant ":myRoom: Room"
 participant ":devicesMapper"
 
-[o-> ":getRoomDevicesController" :getListOfDevicesinRoom (roomDTO)
+[o-> ":getRoomDevicesController" :getListOfDevicesinRoom (roomDTOName)
 activate ":getRoomDevicesController"
 
-":getRoomDevicesController" -> ":roomsMapper" : getRoomFromDomain(roomDTO)
+":getRoomDevicesController" -> ":roomsMapper" : getRoomFromDomain(roomDTOName)
 activate ":roomsMapper"
 ":roomsMapper" --> ":getRoomDevicesController" : myRoom
 

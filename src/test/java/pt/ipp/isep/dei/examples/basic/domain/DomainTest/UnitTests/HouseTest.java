@@ -12,6 +12,13 @@ import static org.mockito.Mockito.*;
 public class HouseTest {
 
 
+
+    /**
+     * Test to ensure that a valid house with a valid location can be created successfully.
+     * This test checks if the house's location is correctly defined with the provided parameters.
+     *
+     * @throws InstantiationException If there is an issue with instantiating the required factory objects.
+     */
     @Test
     void shouldCreateValidHouse_validLocation() throws InstantiationException {
         //arrange
@@ -36,6 +43,12 @@ public class HouseTest {
         assertEquals(houseLocation.getAddress(),address);
     }
 
+    /**
+     * Test to ensure that a valid house with a valid gps can be created successfully.
+     * This test checks if the house's location is correctly defined with the provided parameters.
+     *
+     * @throws InstantiationException If there is an issue with instantiating the required factory objects.
+     */
     @Test
     void shouldCreateValidHouse_validGPS() throws InstantiationException {
 
@@ -72,6 +85,13 @@ public class HouseTest {
         assertEquals(houseLocation.getGPSCoordinates().getLongitude(),longitude);
     }
 
+    /**
+     * Test to ensure that attempting to create a house with an invalid address results in an exception.
+     * The test checks if InstantiationException is thrown with the expected error message.
+     *
+     * @throws InstantiationException If an attempt to create a house with an invalid address is made.
+     */
+
     @Test
     void houseInvalidAddress_ShouldThrowException() throws InstantiationException {
 
@@ -94,7 +114,12 @@ public class HouseTest {
         assertTrue(actualMessage.contains(expected));
     }
 
-
+    /**
+     * Test to ensure that attempting to create a house with an invalid zipCode results in an exception.
+     * The test checks if InstantiationException is thrown with the expected error message.
+     *
+     * @throws InstantiationException If an attempt to create a house with an invalid zipCode is made.
+     */
     @Test
     void createHouseInvalidZipCode_ShouldThrowException() throws InstantiationException {
 
@@ -118,6 +143,12 @@ public class HouseTest {
     }
 
 
+    /**
+     * Test to ensure that attempting to create a house with an invalid latitude results in an exception.
+     * The test checks if InstantiationException is thrown with the expected error message.
+     *
+     * @throws InstantiationException If an attempt to create a house with an invalid latitude is made.
+     */
     @Test
     void createHouseInvalidLatitude_ShouldThrowException() throws InstantiationException {
 
@@ -142,6 +173,12 @@ public class HouseTest {
     }
 
 
+    /**
+     * Test to ensure that attempting to create a house with an invalid longitude results in an exception.
+     * The test checks if InstantiationException is thrown with the expected error message.
+     *
+     * @throws InstantiationException If an attempt to create a house with an invalid longitude is made.
+     */
     @Test
     void createHouseInvalidLongitude_ShouldThrowException() throws InstantiationException {
 
@@ -165,6 +202,12 @@ public class HouseTest {
         assertTrue(actualMessage.contains(expected));
     }
 
+    /**
+     * Test to verify that a house without rooms is created successfully.
+     * The test checks if the list of rooms in the house is empty after instantiation.
+     *
+     * @throws InstantiationException If there is an issue with instantiating the required factory objects.
+     */
     @Test
     void HouseWithoutRooms() throws InstantiationException {
 
@@ -185,6 +228,13 @@ public class HouseTest {
         assertEquals(rooms.size(),0);
     }
 
+
+    /**
+     * Test to ensure that a valid room can be created and added to a house successfully.
+     * The test checks if the number of rooms in the house increases by one after adding a valid room.
+     *
+     * @throws InstantiationException If there is an issue with instantiating the required factory objects.
+     */
 
     @Test
     void createAndAdd1ValidRoom() throws InstantiationException {
@@ -210,6 +260,13 @@ public class HouseTest {
 
     }
 
+
+    /**
+     * Test to ensure that a valid room can be created and added to a house successfully.
+     * The test checks if the number of rooms in the house increases by two after adding 2 valid rooms.
+     *
+     * @throws InstantiationException If there is an issue with instantiating the required factory objects.
+     */
     @Test
     void createAndAdd2ValidRooms() throws InstantiationException {
 
@@ -233,7 +290,12 @@ public class HouseTest {
         assertEquals(house.getRoomList().size(), 2);
     }
 
-
+    /**
+     * Test to ensure that attempting to create an invalid room (with null name) results in an exception.
+     * The test checks if InstantiationException is thrown with the expected error message.
+     *
+     * @throws InstantiationException If an attempt to create an invalid room is made.
+     */
     @Test
     void createInvalidRoom_ShouldThrowException() throws InstantiationException {
 
@@ -261,6 +323,12 @@ public class HouseTest {
         assertTrue(actualMessage.contains(expected));
     }
 
+    /**
+     * Test to verify the functionality of retrieving a room by its name.
+     * The test checks if the correct room is obtained by calling the getRoomByName method.
+     *
+     * @throws InstantiationException If there is an issue with instantiating the required factory objects.
+     */
     @Test
     void testGetRoomByName() throws InstantiationException {
 
@@ -288,6 +356,18 @@ public class HouseTest {
 
     }
 
+
+    /**
+     * Test to verify that attempting to get a non-existent room by name results in an exception.
+     * The test checks if IllegalArgumentException is thrown with the expected error message.
+     *
+     * This test sets up a house with existing rooms, adds "bedroom" and "bathroom" to the house.
+     * It then attempts to retrieve a room named "living room," which does not exist in the list of rooms.
+     * The test expects an IllegalArgumentException to be thrown with the error message "Room name doesn't exist in the list."
+     *
+     * @throws InstantiationException If there is an issue with instantiating the required factory objects.
+     */
+
     @Test
     void getInexistentRoom_ShouldThrowException() throws InstantiationException {
 
@@ -312,6 +392,17 @@ public class HouseTest {
 
     }
 
+
+    /**
+     * Test case to verify that attempting to add a room with a repeated name results in an exception.
+     * The test checks if IllegalArgumentException is thrown with the expected error message.
+     *
+     * This test sets up a house with an existing room named "bedroom."
+     * It then attempts to add another room with the same name ("bedroom").
+     * The test expects an IllegalArgumentException to be thrown with the error message "Room name already exists."
+     *
+     * @throws InstantiationException If there is an issue with instantiating the required factory objects.
+     */
     @Test
     void repeatedRoomName_ShouldThrowException() throws InstantiationException {
         //arrange
