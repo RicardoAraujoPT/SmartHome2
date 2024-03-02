@@ -15,6 +15,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * This class contains tests for the PC500W sensor in the SmartHome domain.
  * It tests the creation of a new instance of PC500W with valid parameters and checks if an exception is thrown when
  * trying to create a new instance with an inexistent sensor type.
+ * It includes the following tests:
+ *  - inexistentPC500W_ShouldThrowException
+ *  - validPC500W_ShouldCreateNewInstance
  *
  */
 public class PC500WTest {

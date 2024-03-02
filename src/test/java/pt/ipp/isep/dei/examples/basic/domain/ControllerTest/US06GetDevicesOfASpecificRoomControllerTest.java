@@ -14,16 +14,21 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
 /**
- * This class contains tests for the GetDevicesOfASpecificRoomController class.
- * It tests the functionality of getting devices of a specific room in a smart home system.
+ * Test class for the US06GetDevicesOfASpecificRoomController.
+ * It tests the functionality of retrieving devices of a specific room in a smart home system.
+ * It includes the following tests:
+ *  - validHouse_shouldInstantiateValidHouse
+ *  - nullHouse_shouldThrowExceptionWhenHouseIsNull
+ *  -  roomWithoutDevices_shouldReturnEmptyListOfDevices
+ *  - roomWithTwoDevices_shouldReturnListOfTwoDevicesOfSpecificRoom
  */
 public class US06GetDevicesOfASpecificRoomControllerTest {
 
     /**
      * Test case for the US06GetDevicesOfASpecificRoomController constructor.
      * The test setup involves creating a mock House object.
-     * The test then calls the US06GetDevicesOfASpecificRoomController constructor with the mock House object and
-     * asserts that the returned object is not null.
+     * This test verifies if a new instance of US06GetDevicesOfASpecificRoomController can be created with a valid
+     * House object.
      */
     @Test
     void validHouse_shouldInstantiateValidHouse() {
@@ -48,25 +53,23 @@ public class US06GetDevicesOfASpecificRoomControllerTest {
      * The test verifies that the method correctly returns an empty list when the room has no devices.
      * The test setup involves creating a mock House object with a single Room, but without any Devices using Factory
      * classes.
-     * The test then calls the getDevicesOfASpecificRoom method with the name of the created room and asserts that the
-     * returned list is empty.
      *
      * @throws InstantiationException if the creation of the Room object fails.
      */
     @Test
     void roomWithoutDevices_shouldReturnEmptyListOfDevices() throws InstantiationException {
         // Arrange
+        FactoryDevice factoryDevice = new FactoryDevice();
+        FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
+        FactoryLocation factoryLocation = new FactoryLocation();
 
-        FactoryRoom factoryRoom = mock (FactoryRoom.class);
-        FactoryLocation factoryLocation = mock (FactoryLocation.class);
-
-        House house = new House(factoryLocation, factoryRoom,"address", "zipCode", 55.2, -2.25);
-        Room roomDTO = house.createRoom("ChosenRoom", 1, 20.0, 3.0);
+        House house = new House(factoryLocation, factoryRoom);
+        Room myRoom = house.addRoom("ChosenRoom", 1, 20.0, 3.0);
 
         US06GetDevicesOfASpecificRoomController controller = new US06GetDevicesOfASpecificRoomController(house);
 
         // Act
-        List<DeviceDTO> result = controller.getDevicesOfASpecificRoom(roomDTO.getRoomName());
+        List<DeviceDTO> result = controller.getDevicesOfASpecificRoom(myRoom.getRoomName());
 
         // Assert
         assertTrue(result.isEmpty());
@@ -76,8 +79,6 @@ public class US06GetDevicesOfASpecificRoomControllerTest {
     /**
      * The test verifies that the method correctly returns a list of two devices when the provided room has two devices.
      * The test setup involves creating a House object with a single Room and two Devices using Factory classes.
-     * The test then calls the getDevicesOfASpecificRoom method with the name of the created room and asserts that the
-     * returned list contains the two created devices.
      *
      * @throws InstantiationException if the creation of the Room or Device objects fails.
      */
@@ -87,15 +88,17 @@ public class US06GetDevicesOfASpecificRoomControllerTest {
         FactoryDevice factoryDevice = new FactoryDevice();
         FactoryRoom factoryRoom = new FactoryRoom(factoryDevice);
         FactoryLocation factoryLocation = new FactoryLocation();
-        House house = new House(factoryLocation, factoryRoom, "address", "zipCode", 55.2, -2.25);
+
+        House house = new House(factoryLocation, factoryRoom);
+        Room myRoom = house.addRoom("ChosenRoom", 1, 20.0, 3.0);
+
         US06GetDevicesOfASpecificRoomController controller = new US06GetDevicesOfASpecificRoomController(house);
 
-        Room roomDTO = house.createRoom("Living Room", 1, 20.0, 3.0);
-        Device device1 = roomDTO.createDevice("Device 1");
-        Device device2 = roomDTO.createDevice("Device 2");
+        Device device1 = myRoom.addDevice("Device 1");
+        Device device2 = myRoom.addDevice("Device 2");
 
         // Act
-        List<DeviceDTO> result = controller.getDevicesOfASpecificRoom(roomDTO.getRoomName());
+        List<DeviceDTO> result = controller.getDevicesOfASpecificRoom(myRoom.getRoomName());
 
         // Assert
         assertEquals(2, result.size());
