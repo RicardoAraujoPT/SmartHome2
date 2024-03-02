@@ -18,7 +18,7 @@ public class House {
 
     /**
      * Method that create house objects.
-     * It uses a factory location constructor object to define location and then define gpscoordinates.
+     * It uses a factory location constructor object to define location and then define gps coordinates.
      * It uses a factory room constructor object to create room objects.
      *
      * @param factoryLocation location constructor
@@ -32,7 +32,7 @@ public class House {
 
     /**
      * Method that create location and gpscoordinates objects.
-     * It uses a factory location constructor object to define location and then define gpscoordinates.
+     * It uses a factory location constructor object to define location and then define gps coordinates.
      *
      * @param address location address
      * @param zipCode location zip code
@@ -173,6 +173,8 @@ public class House {
         }
     }
 
+
+    
     /**
      * This method checks if a device with a given name is in the list of devices for a given room in a given list of
      * devices grouped by room.
@@ -191,6 +193,28 @@ public class House {
             }
         }
         return false;
+    }
+
+
+
+    //--------------------------------
+
+    public Room createRoom(String roomName, int floorNumber, double area, double height) throws InstantiationException {
+        if (isRoomNameDuplicated(roomName)) {
+            throw new IllegalArgumentException("Room name already exists");
+        }
+        Room myRoom = new Room(roomName, floorNumber, area, height);
+        this._rooms.add(myRoom);
+        return myRoom;
+    }
+
+    public House(String address, String zipCode,double latitude, double longitude) throws InstantiationException {
+        this._location = new Location(address,zipCode,latitude,longitude);
+        this._rooms = new ArrayList<>();
+    }
+
+    public Location configureLocation(String address, String zipCode,double latitude, double longitude) throws InstantiationException {
+        return  new Location(address,zipCode,latitude,longitude);
     }
 
 }
