@@ -51,6 +51,12 @@ public class House {
 
     }
 
+    public Location getLocation(){
+
+        return this._location;
+    }
+
+
     /**
      * Method that create and add room objects in the house roomList.
      *
