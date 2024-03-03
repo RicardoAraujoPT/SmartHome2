@@ -26,7 +26,8 @@ class US09GetDevicesByTypeControllerTest {
     @Test
     void successfully_ShouldReturnDevicesGroupedByType() throws InstantiationException {
         //Arrange
-        Catalogue catalogue = new Catalogue("config.properties");
+        FactorySensorType factorySensorType = new FactorySensorType();
+        Catalogue catalogue = new Catalogue("config.properties",factorySensorType);
         catalogue.addSensorType("Humidity", Unit.Percentage);
         catalogue.addSensorType("Temperature", Unit.Celsius);
         FactoryGPSCoordinates factoryGPSCoordinates = new FactoryGPSCoordinates();
@@ -118,7 +119,8 @@ class US09GetDevicesByTypeControllerTest {
     @Test
     void houseWithNoDevices_ShouldReturnEmptyMap() throws InstantiationException {
         //Arrange
-        Catalogue catalogue = new Catalogue("config.properties");
+        FactorySensorType factorySensorType = new FactorySensorType();
+        Catalogue catalogue = new Catalogue("config.properties",factorySensorType);
         catalogue.addSensorType("Humidity", Unit.Percentage);
         catalogue.addSensorType("Temperature", Unit.Celsius);
         House myHouse = new House("123", "street", 90.0, 30.0);
@@ -136,7 +138,8 @@ class US09GetDevicesByTypeControllerTest {
     void nullHouse_shouldThrowIllegalArgumentException() throws IllegalArgumentException, InstantiationException {
         //Arrange
         String expectedMessage = "Invalid arguments";
-        Catalogue catalogue = new Catalogue("config.properties");
+        FactorySensorType factorySensorType = new FactorySensorType();
+        Catalogue catalogue = new Catalogue("config.properties",factorySensorType);
         //Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> new US09GetDevicesByTypeController(null,catalogue));
         String actualMessage = exception.getMessage();
