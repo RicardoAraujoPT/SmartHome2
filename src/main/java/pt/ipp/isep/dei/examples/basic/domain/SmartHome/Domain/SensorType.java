@@ -31,7 +31,10 @@ public class SensorType {
      * @return true if the description is not null and not empty, false otherwise.
      */
     private boolean isValidConstructorArgument(String strDescription) {
-        return strDescription != null && !strDescription.isEmpty();
+        if (strDescription == null || strDescription.isEmpty() || strDescription.isBlank()) {
+            return false;
+        }
+        return true;
     }
 
     /**
