@@ -1,4 +1,6 @@
 package smartHomeDDD.controllers;
+import smartHomeDDD.domain.actuator.FactoryActuator;
+import smartHomeDDD.domain.actuator.ImplFactoryActuator;
 import smartHomeDDD.domain.actuator.OPNCL0100;
 import smartHomeDDD.domain.actuatorModel.ActuatorModel;
 import smartHomeDDD.domain.actuatorModel.FactoryActuatorModel;
@@ -48,6 +50,7 @@ class GetDevicesByFunctionalityControllerTest {
         IRepositoryActuatorType RepositoryActuatorTypeMem = new RepositoryActuatorTypeMem();
         IRepositoryActuatorModel repositoryActuatorModel = new RepositoryActuatorModelMem();
         IRepositoryDevice repositoryDevice = new RepositoryDeviceMem();
+        FactoryActuator factoryActuator = new ImplFactoryActuator();
 
         DeviceName deviceName = new DeviceName("Device");
         DeviceId deviceID = new DeviceId("Device1");
@@ -109,7 +112,7 @@ class GetDevicesByFunctionalityControllerTest {
         repositorySensorModel.save(sensorModel2);
         repositorySensor.save(new PC500W(secondDeviceID, sensorModelID2, sensorID2));
         repositorySensor.save(new PC500W(deviceID, sensorModelID, sensorID));
-        repositoryActuatorMem.save(new OPNCL0100(actuatorID, deviceID, actuatorModelID));
+        repositoryActuatorMem.save(factoryActuator.createActuator(actuatorID, deviceID, actuatorModelID));
 
         ServiceDeviceByType serviceDeviceByType = new ServiceDeviceByType(repositorySensor, repositorySensorType,
                 repositoryActuatorMem, RepositoryActuatorTypeMem, repositoryDevice, repositoryActuatorModel, repositorySensorModel);
@@ -138,6 +141,7 @@ class GetDevicesByFunctionalityControllerTest {
         IRepositoryActuatorType RepositoryActuatorTypeMem = new RepositoryActuatorTypeMem();
         IRepositoryActuatorModel repositoryActuatorModel = new RepositoryActuatorModelMem();
         IRepositoryDevice repositoryDevice = new RepositoryDeviceMem();
+        FactoryActuator factoryActuator = new ImplFactoryActuator();
 
         DeviceName deviceName = new DeviceName("Device");
         DeviceId deviceID = new DeviceId("Device1");
@@ -172,7 +176,7 @@ class GetDevicesByFunctionalityControllerTest {
 
         ActuatorModel actuatorModel = factoryActuatorModel.createActuatorModel(actuatorModelID, actuatorTypeID);
         repositoryActuatorModel.save(actuatorModel);
-        repositoryActuatorMem.save(new OPNCL0100(actuatorID, deviceID, actuatorModelID));
+        repositoryActuatorMem.save(factoryActuator.createActuator(actuatorID, deviceID, actuatorModelID));
 
         ServiceDeviceByType serviceDeviceByType = new ServiceDeviceByType(repositorySensor, repositorySensorType,
                 repositoryActuatorMem, RepositoryActuatorTypeMem, repositoryDevice, repositoryActuatorModel, repositorySensorModel);

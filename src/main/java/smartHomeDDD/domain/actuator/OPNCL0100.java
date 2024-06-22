@@ -36,7 +36,7 @@ public class OPNCL0100 implements Actuator, AggregateRoot<ActuatorID> {
      *                        //@param actuatorModelName The model name of the actuator.
      *                        //@param typeDescription   The description of the type of the actuator.
      */
-    public OPNCL0100(ActuatorID actuatorID, DeviceId deviceID, ActuatorModelID actuatorModelID
+    protected OPNCL0100(ActuatorID actuatorID, DeviceId deviceID, ActuatorModelID actuatorModelID
     ) {
         this._actuatorID = actuatorID;
         this._deviceID = deviceID;

@@ -36,7 +36,7 @@ public class ONF01A implements Actuator, AggregateRoot<ActuatorID> {
      * @param deviceID        The unique identifier of the device which the actuator belongs to.
      * @param actuatorModelID The model of the actuator.
      */
-    public ONF01A(ActuatorID actuatorID, DeviceId deviceID, ActuatorModelID actuatorModelID)
+    protected ONF01A(ActuatorID actuatorID, DeviceId deviceID, ActuatorModelID actuatorModelID)
     {
         this._actuatorID = actuatorID;
         this._deviceID = deviceID;

@@ -42,7 +42,7 @@ public class SPV300 implements Actuator, AggregateRoot<ActuatorID> {
      * @throws IllegalArgumentException if any of the arguments are null
      */
 
-    public SPV300(ActuatorID actuatorID, DeviceId deviceID, ActuatorModelID actuatorModelID)
+    protected SPV300(ActuatorID actuatorID, DeviceId deviceID, ActuatorModelID actuatorModelID)
     {
         this._actuatorID = actuatorID;
         this._deviceID = deviceID;

@@ -16,8 +16,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import smartHomeDDD.domain.actuator.OPNCL0100;
-import smartHomeDDD.domain.actuator.SIV280;
+import smartHomeDDD.domain.actuator.*;
 import smartHomeDDD.domain.device.Device;
 import smartHomeDDD.domain.device.FactoryDevice;
 import smartHomeDDD.domain.repository.*;
@@ -429,9 +428,10 @@ class DeviceControllerWebTest {
         DeviceEntryWebDTO deviceEntryWebDTO = new DeviceEntryWebDTO("r1", "device1", "siemens", true);
         when(generateRandomId.generateID()).thenReturn("d1");
         Device device = setupDevice(deviceEntryWebDTO);
+        FactoryActuator factoryActuator = new ImplFactoryActuator();
 
-        OPNCL0100 actuator1 = new OPNCL0100(new ActuatorID("a1"), new DeviceId("d1"), new ActuatorModelID("OPNCL0100"));
-        SIV280 actuator2 = new SIV280(new ActuatorID("a2"), new DeviceId("d1"), new ActuatorModelID("SIV280"));
+        Actuator actuator1 = factoryActuator.createActuator(new ActuatorID("a1"), new DeviceId("d1"), new ActuatorModelID("OPNCL0100"));
+        Actuator actuator2 = factoryActuator.createActuator(new ActuatorID("a2"), new DeviceId("d1"), new ActuatorModelID("SIV280"));
 
         when(repositoryDevice.containsOfIdentity(device.identity())).thenReturn(true);
         when(repositoryActuator.getActuatorsByDeviceID(device.identity())).thenReturn(List.of(actuator1, actuator2));

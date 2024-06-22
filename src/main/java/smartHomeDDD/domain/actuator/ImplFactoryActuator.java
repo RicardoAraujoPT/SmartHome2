@@ -6,6 +6,9 @@ import smartHomeDDD.domain.valueobject.ActuatorModelID;
 import smartHomeDDD.domain.valueobject.DeviceId;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
 
 /**
  * Factory class for the creation of actuator Objects.
@@ -33,7 +36,11 @@ public class ImplFactoryActuator implements FactoryActuator {
         try {
             String actuatorModelName = actuatorModelID.toString();
             String strModelPath = "smartHomeDDD.domain.actuator." + actuatorModelName;
-            return (Actuator) Class.forName(strModelPath).getConstructor(classTypes).newInstance(arguments);
+            Class<?> clazz = Class.forName(strModelPath);
+            java.lang.reflect.Constructor<?> constructor = clazz.getDeclaredConstructor(classTypes);
+            constructor.setAccessible(true); // Make the protected constructor accessible
+            return (Actuator) constructor.newInstance(arguments);
+            //return (Actuator) Class.forName(strModelPath).getConstructor(classTypes).newInstance(arguments);
         } catch (ClassNotFoundException |
                  NoSuchMethodException |
                  InstantiationException |
