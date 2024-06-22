@@ -33,6 +33,7 @@ class RoomAggregateTest {
     @Test
     void validArguments_shouldCreateARoom() {
         // Arrange
+        ImplFactoryRoom factoryRoom = new ImplFactoryRoom();
         HouseId houseIdDouble = mock(HouseId.class);
         IsInside isInside = new IsInside(true);
         RoomID roomID = new RoomID("1");
@@ -44,7 +45,7 @@ class RoomAggregateTest {
         RoomName roomName = new RoomName("Living Room");
 
         // Act
-        Room room = new Room(houseIdDouble, roomID, floorNumber, dimensions, isInside, roomName);
+        Room room = factoryRoom.createRoom(houseIdDouble, roomID, floorNumber, dimensions, isInside, roomName);
 
         // Assert
         assertNotNull(room);
@@ -60,6 +61,7 @@ class RoomAggregateTest {
     @Test
     void shouldReturnRoomId_WhenGettingIdentity() {
         // Arrange
+        ImplFactoryRoom factoryRoom = new ImplFactoryRoom();
         HouseId houseIdDouble = mock(HouseId.class);
         RoomID roomID = new RoomID("1");
         IsInside isInside = new IsInside(true);
@@ -69,7 +71,7 @@ class RoomAggregateTest {
         Height height = new Height(10.5);
         Dimensions dimensions = new Dimensions(length, width, height);
         RoomName roomName = new RoomName("Living Room");
-        Room room = new Room(houseIdDouble, roomID, floorNumber, dimensions, isInside, roomName);
+        Room room = factoryRoom.createRoom(houseIdDouble, roomID, floorNumber, dimensions, isInside, roomName);
 
         // Act
         RoomID roomId = room.identity();
@@ -84,6 +86,7 @@ class RoomAggregateTest {
     @Test
     void shouldReturnTrue_WhenComparingItself() {
         // Arrange
+        ImplFactoryRoom factoryRoom = new ImplFactoryRoom();
         HouseId houseIdDouble = mock(HouseId.class);
         RoomID roomID = new RoomID("1");
         IsInside isInside = new IsInside(true);
@@ -93,7 +96,7 @@ class RoomAggregateTest {
         Height height = new Height(10.5);
         Dimensions dimensions = new Dimensions(length, width, height);
         RoomName roomName = new RoomName("Living Room");
-        Room room = new Room(houseIdDouble, roomID, floorNumber, dimensions, isInside, roomName);
+        Room room = factoryRoom.createRoom(houseIdDouble, roomID, floorNumber, dimensions, isInside, roomName);
 
         // Act
         boolean isEquals = room.sameAs(room);
@@ -108,6 +111,7 @@ class RoomAggregateTest {
     @Test
     void shouldReturnTrue_WhenComparingTwoEqualRooms() {
         // Arrange
+        ImplFactoryRoom factoryRoom = new ImplFactoryRoom();
         HouseId houseIdDouble = mock(HouseId.class);
         RoomID roomID = new RoomID("1");
         IsInside isInside = new IsInside(true);
@@ -117,8 +121,8 @@ class RoomAggregateTest {
         Height height = new Height(10.5);
         Dimensions dimensions = new Dimensions(length, width, height);
         RoomName roomName = new RoomName("Living Room");
-        Room room = new Room(houseIdDouble, roomID, floorNumber, dimensions, isInside, roomName);
-        Room room2 = new Room(houseIdDouble, roomID, floorNumber, dimensions, isInside, roomName);
+        Room room = factoryRoom.createRoom(houseIdDouble, roomID, floorNumber, dimensions, isInside, roomName);
+        Room room2 = factoryRoom.createRoom(houseIdDouble, roomID, floorNumber, dimensions, isInside, roomName);
 
         // Act
         boolean isEquals = room.sameAs(room2);
@@ -133,6 +137,7 @@ class RoomAggregateTest {
     @Test
     void shouldReturnFalse_WhenComparingTwoDifferentRooms() {
         // Arrange
+        ImplFactoryRoom factoryRoom = new ImplFactoryRoom();
         HouseId houseIdDouble = mock(HouseId.class);
         RoomID roomID1 = new RoomID("1");
         RoomID roomID2 = new RoomID("2");
@@ -143,8 +148,8 @@ class RoomAggregateTest {
         Height height = new Height(10.5);
         Dimensions dimensions = new Dimensions(length, width, height);
         RoomName roomName = new RoomName("Living Room");
-        Room room = new Room(houseIdDouble, roomID1, floorNumber, dimensions, isInside, roomName);
-        Room room2 = new Room(houseIdDouble, roomID2, floorNumber, dimensions, isInside, roomName);
+        Room room = factoryRoom.createRoom(houseIdDouble, roomID1, floorNumber, dimensions, isInside, roomName);
+        Room room2 = factoryRoom.createRoom(houseIdDouble, roomID2, floorNumber, dimensions, isInside, roomName);
 
         // Act
         boolean isEquals = room.equals(room2);
@@ -159,6 +164,7 @@ class RoomAggregateTest {
     @Test
     void shouldReturnFalse_WhenComparingRoomWithDifferentObject() {
         // Arrange
+        ImplFactoryRoom factoryRoom = new ImplFactoryRoom();
         RoomID roomID = new RoomID("1");
         IsInside isInside = new IsInside(true);
         HouseId houseIdDouble = mock(HouseId.class);
@@ -168,7 +174,7 @@ class RoomAggregateTest {
         Height height = new Height(10.5);
         Dimensions dimensions = new Dimensions(length, width, height);
         RoomName roomName = new RoomName("Living Room");
-        Room room = new Room(houseIdDouble, roomID, floorNumber, dimensions, isInside, roomName);
+        Room room = factoryRoom.createRoom(houseIdDouble, roomID, floorNumber, dimensions, isInside, roomName);
         Object obj = new Object();
 
         // Act
@@ -184,6 +190,7 @@ class RoomAggregateTest {
     @Test
     void shouldReturnTrue_WhenComparingTwoEqualRoomsWithDifferentHouseIds() {
         // Arrange
+        ImplFactoryRoom factoryRoom = new ImplFactoryRoom();
         HouseId houseId1Double = mock(HouseId.class);
         HouseId houseId2Double = mock(HouseId.class);
         IsInside isInside = new IsInside(true);
@@ -194,8 +201,8 @@ class RoomAggregateTest {
         Height height = new Height(10.5);
         Dimensions dimensions = new Dimensions(length, width, height);
         RoomName roomName = new RoomName("Living Room");
-        Room room = new Room(houseId1Double, roomID, floorNumber, dimensions, isInside, roomName);
-        Room room2 = new Room(houseId2Double, roomID, floorNumber, dimensions, isInside, roomName);
+        Room room = factoryRoom.createRoom(houseId1Double, roomID, floorNumber, dimensions, isInside, roomName);
+        Room room2 = factoryRoom.createRoom(houseId2Double, roomID, floorNumber, dimensions, isInside, roomName);
 
         // Act
         boolean isEquals = room.equals(room2);
@@ -210,6 +217,7 @@ class RoomAggregateTest {
     @Test
     void shouldReturnTrue_WhenComparingTwoEqualRoomsWithDifferentFloorNumbers() {
         // Arrange
+        ImplFactoryRoom factoryRoom = new ImplFactoryRoom();
         HouseId houseIdDouble = mock(HouseId.class);
         RoomID roomID = new RoomID("1");
         IsInside isInside = new IsInside(true);
@@ -220,8 +228,8 @@ class RoomAggregateTest {
         Height height = new Height(10.5);
         Dimensions dimensions = new Dimensions(length, width, height);
         RoomName roomName = new RoomName("Living Room");
-        Room room = new Room(houseIdDouble, roomID, floorNumber1, dimensions, isInside, roomName);
-        Room room2 = new Room(houseIdDouble, roomID, floorNumber2, dimensions, isInside, roomName);
+        Room room = factoryRoom.createRoom(houseIdDouble, roomID, floorNumber1, dimensions, isInside, roomName);
+        Room room2 = factoryRoom.createRoom(houseIdDouble, roomID, floorNumber2, dimensions, isInside, roomName);
 
         // Act
         boolean isEquals = room.equals(room2);
@@ -236,6 +244,7 @@ class RoomAggregateTest {
     @Test
     void shouldReturnTrue_WhenComparingTwoEqualRoomsWithDifferentDimensions() {
         // Arrange
+        ImplFactoryRoom factoryRoom = new ImplFactoryRoom();
         HouseId houseIdDouble = mock(HouseId.class);
         RoomID roomID = new RoomID("1");
         IsInside isInside = new IsInside(true);
@@ -249,8 +258,8 @@ class RoomAggregateTest {
         Dimensions dimensions1 = new Dimensions(length1, width1, height1);
         Dimensions dimensions2 = new Dimensions(length2, width2, height2);
         RoomName roomName = new RoomName("Living Room");
-        Room room = new Room(houseIdDouble, roomID, floorNumber, dimensions1, isInside, roomName);
-        Room room2 = new Room(houseIdDouble, roomID, floorNumber, dimensions2, isInside, roomName);
+        Room room = factoryRoom.createRoom(houseIdDouble, roomID, floorNumber, dimensions1, isInside, roomName);
+        Room room2 = factoryRoom.createRoom(houseIdDouble, roomID, floorNumber, dimensions2, isInside, roomName);
 
         // Act
         boolean isEquals = room.equals(room2);
@@ -265,6 +274,7 @@ class RoomAggregateTest {
     @Test
     void shouldReturnFalse_WhenComparingRoomsWithDifferentIds() {
         // Arrange
+        ImplFactoryRoom factoryRoom = new ImplFactoryRoom();
         HouseId houseIdDouble = mock(HouseId.class);
         RoomID roomID1 = new RoomID("1");
         RoomID roomID2 = new RoomID("2");
@@ -275,8 +285,8 @@ class RoomAggregateTest {
         Height height = new Height(10.5);
         Dimensions dimensions = new Dimensions(length, width, height);
         RoomName roomName = new RoomName("Living Room");
-        Room room = new Room(houseIdDouble, roomID1, floorNumber, dimensions, isInside, roomName);
-        Room room2 = new Room(houseIdDouble, roomID2, floorNumber, dimensions, isInside, roomName);
+        Room room = factoryRoom.createRoom(houseIdDouble, roomID1, floorNumber, dimensions, isInside, roomName);
+        Room room2 = factoryRoom.createRoom(houseIdDouble, roomID2, floorNumber, dimensions, isInside, roomName);
 
         // Act
         boolean isEquals = room.equals(room2);
@@ -291,6 +301,7 @@ class RoomAggregateTest {
     @Test
     void shouldReturnFalse_WhenComparingRoomsFromDifferentHouses() {
         // Arrange
+        ImplFactoryRoom factoryRoom = new ImplFactoryRoom();
         HouseId houseId1Double = mock(HouseId.class);
         HouseId houseId2Double = mock(HouseId.class);
         RoomID roomID = new RoomID("1");
@@ -301,8 +312,8 @@ class RoomAggregateTest {
         Height height = new Height(10.5);
         Dimensions dimensions = new Dimensions(length, width, height);
         RoomName roomName = new RoomName("Living Room");
-        Room room = new Room(houseId1Double, roomID, floorNumber, dimensions, isInside, roomName);
-        Room room2 = new Room(houseId2Double, roomID, floorNumber, dimensions, isInside, roomName);
+        Room room = factoryRoom.createRoom(houseId1Double, roomID, floorNumber, dimensions, isInside, roomName);
+        Room room2 = factoryRoom.createRoom(houseId2Double, roomID, floorNumber, dimensions, isInside, roomName);
 
         // Act
         boolean isSame = room.sameAs(room2);
@@ -317,6 +328,7 @@ class RoomAggregateTest {
     @Test
     void shouldReturnFalse_WhenComparingRoomsFromDifferentFloors() {
         // Arrange
+        ImplFactoryRoom factoryRoom = new ImplFactoryRoom();
         HouseId houseIdDouble = mock(HouseId.class);
         RoomID roomID = new RoomID("1");
         IsInside isInside = new IsInside(true);
@@ -327,8 +339,8 @@ class RoomAggregateTest {
         Height height = new Height(10.5);
         Dimensions dimensions = new Dimensions(length, width, height);
         RoomName roomName = new RoomName("Living Room");
-        Room room = new Room(houseIdDouble, roomID, floorNumber1, dimensions, isInside, roomName);
-        Room room2 = new Room(houseIdDouble, roomID, floorNumber2, dimensions, isInside, roomName);
+        Room room = factoryRoom.createRoom(houseIdDouble, roomID, floorNumber1, dimensions, isInside, roomName);
+        Room room2 = factoryRoom.createRoom(houseIdDouble, roomID, floorNumber2, dimensions, isInside, roomName);
 
         // Act
         boolean isSame = room.sameAs(room2);
@@ -343,6 +355,7 @@ class RoomAggregateTest {
     @Test
     void shouldReturnFalse_WhenComparingRoomsWithDifferentDimensions() {
         // Arrange
+        ImplFactoryRoom factoryRoom = new ImplFactoryRoom();
         HouseId houseIdDouble = mock(HouseId.class);
         RoomID roomID = new RoomID("1");
         IsInside isInside = new IsInside(true);
@@ -356,8 +369,8 @@ class RoomAggregateTest {
         Dimensions dimensions1 = new Dimensions(length1, width1, height1);
         Dimensions dimensions2 = new Dimensions(length2, width2, height2);
         RoomName roomName = new RoomName("Living Room");
-        Room room = new Room(houseIdDouble, roomID, floorNumber, dimensions1, isInside, roomName);
-        Room room2 = new Room(houseIdDouble, roomID, floorNumber, dimensions2, isInside, roomName);
+        Room room = factoryRoom.createRoom(houseIdDouble, roomID, floorNumber, dimensions1, isInside, roomName);
+        Room room2 = factoryRoom.createRoom(houseIdDouble, roomID, floorNumber, dimensions2, isInside, roomName);
 
         // Act
         boolean isSame = room.sameAs(room2);
@@ -373,6 +386,7 @@ class RoomAggregateTest {
     void shouldReturnFalse_WhenComparingRoomsWithDifferentIndoorsState()
     {
         // Arrange
+        ImplFactoryRoom factoryRoom = new ImplFactoryRoom();
         HouseId houseIdDouble = mock(HouseId.class);
         RoomID roomID = new RoomID("1");
         IsInside isInside = new IsInside(true);
@@ -383,8 +397,8 @@ class RoomAggregateTest {
         Height height1 = new Height(10.5);
         Dimensions dimensions = new Dimensions(length1, width1, height1);
         RoomName roomName = new RoomName("Living Room");
-        Room room = new Room(houseIdDouble, roomID, floorNumber, dimensions, isInside, roomName);
-        Room room2 = new Room(houseIdDouble, roomID, floorNumber, dimensions, isInside2, roomName);
+        Room room = factoryRoom.createRoom(houseIdDouble, roomID, floorNumber, dimensions, isInside, roomName);
+        Room room2 = factoryRoom.createRoom(houseIdDouble, roomID, floorNumber, dimensions, isInside2, roomName);
 
         // Act
         boolean isSame = room.sameAs(room2);
@@ -401,6 +415,7 @@ class RoomAggregateTest {
     {
 
         // Arrange
+        ImplFactoryRoom factoryRoom = new ImplFactoryRoom();
         HouseId houseIdDouble = mock(HouseId.class);
         RoomID roomID = new RoomID("1");
         IsInside isInside = new IsInside(true);
@@ -411,8 +426,8 @@ class RoomAggregateTest {
         Dimensions dimensions = new Dimensions(length1, width1, height1);
         RoomName roomName = new RoomName("Living Room");
         RoomName roomName2 = new RoomName("Bedroom");
-        Room room = new Room(houseIdDouble, roomID, floorNumber, dimensions, isInside, roomName);
-        Room room2 = new Room(houseIdDouble, roomID, floorNumber, dimensions, isInside, roomName2);
+        Room room = factoryRoom.createRoom(houseIdDouble, roomID, floorNumber, dimensions, isInside, roomName);
+        Room room2 = factoryRoom.createRoom(houseIdDouble, roomID, floorNumber, dimensions, isInside, roomName2);
 
         // Act
         boolean isSame = room.sameAs(room2);
