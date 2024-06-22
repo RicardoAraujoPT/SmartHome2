@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import smartHomeDDD.domain.device.Device;
 import smartHomeDDD.domain.house.House;
 import smartHomeDDD.domain.repository.*;
+import smartHomeDDD.domain.room.ImplFactoryRoom;
 import smartHomeDDD.domain.room.Room;
 import smartHomeDDD.domain.sensor.FactorySensor;
 import smartHomeDDD.domain.sensor.Sensor;
@@ -336,8 +337,9 @@ class HouseWebControllerTest {
     @Test
     void getRoomsByHouseID_shouldReturnRooms() throws Exception {
         // Arrange
+        ImplFactoryRoom factoryRoom = new ImplFactoryRoom();
         HouseId houseId = new HouseId("h1");
-        Room room = new Room(houseId, new RoomID("r1"), new FloorNumber(0), new Dimensions(new Length(10), new Width(10.0), new Height(10.0)), true, new RoomName("Living Room"));
+        Room room = factoryRoom.createRoom(houseId, new RoomID("r1"), new FloorNumber(0), new Dimensions(new Length(10), new Width(10.0), new Height(10.0)), true, new RoomName("Living Room"));
         List<Room> rooms = new ArrayList<>();
         rooms.add(room);
 
@@ -456,12 +458,13 @@ class HouseWebControllerTest {
         when(repositoryHouse.containsOfIdentity(new HouseId("House01"))).thenReturn(true);
 
         // create and save PGM
+        ImplFactoryRoom factoryRoom = new ImplFactoryRoom();
         DeviceId id = new DeviceId("d6");
         DeviceName name = new DeviceName("Power Grid Meter");
         DeviceModel model = new DeviceModel("deviceModel");
         ActivationStatus status = new ActivationStatus(true);
         RoomID roomID = new RoomID("r4");
-        Room entranceRoom = new Room(houseID,roomID,new FloorNumber(0), new Dimensions(new Length(10), new Width(10), new Height(10)),true, new RoomName("Entrance"));
+        Room entranceRoom = factoryRoom.createRoom(houseID,roomID,new FloorNumber(0), new Dimensions(new Length(10), new Width(10), new Height(10)),true, new RoomName("Entrance"));
         Device PowerGridMeter = new Device(id,name,model,status,roomID);
         when(repositoryDevice.findAll()).thenReturn(List.of(PowerGridMeter));
         when(repositoryRoom.ofIdentity(roomID)).thenReturn(Optional.of(entranceRoom));
@@ -543,12 +546,13 @@ class HouseWebControllerTest {
         when(repositoryHouse.containsOfIdentity(new HouseId("House01"))).thenReturn(true);
 
         // create and save PGM
+        ImplFactoryRoom factoryRoom = new ImplFactoryRoom();
         DeviceId id = new DeviceId("d6");
         DeviceName name = new DeviceName("Power Grid Meter");
         DeviceModel model = new DeviceModel("deviceModel");
         ActivationStatus status = new ActivationStatus(true);
         RoomID roomID = new RoomID("r4");
-        Room entranceRoom = new Room(houseID,roomID,new FloorNumber(0), new Dimensions(new Length(10), new Width(10), new Height(10)),true, new RoomName("Entrance"));
+        Room entranceRoom = factoryRoom.createRoom(houseID,roomID,new FloorNumber(0), new Dimensions(new Length(10), new Width(10), new Height(10)),true, new RoomName("Entrance"));
         Device PowerGridMeter = new Device(id,name,model,status,roomID);
         when(repositoryDevice.findAll()).thenReturn(List.of(PowerGridMeter));
         when(repositoryRoom.ofIdentity(roomID)).thenReturn(Optional.of(entranceRoom));
@@ -624,6 +628,7 @@ class HouseWebControllerTest {
     void peakPowerConsumption_InvalidStartAndEnd_shouldReturnException() throws Exception {
         // Arrange
         // get house id from repo
+        ImplFactoryRoom factoryRoom = new ImplFactoryRoom();
         HouseId houseID = new HouseId("House01");
         when(repositoryHouse.containsOfIdentity(houseID)).thenReturn(true);
         DeviceId id = new DeviceId("d6");
@@ -631,7 +636,7 @@ class HouseWebControllerTest {
         DeviceModel model = new DeviceModel("deviceModel");
         ActivationStatus status = new ActivationStatus(true);
         RoomID roomID = new RoomID("r4");
-        Room entranceRoom = new Room(houseID,roomID,new FloorNumber(0), new Dimensions(new Length(10), new Width(10), new Height(10)),true, new RoomName("Entrance"));
+        Room entranceRoom = factoryRoom.createRoom(houseID,roomID,new FloorNumber(0), new Dimensions(new Length(10), new Width(10), new Height(10)),true, new RoomName("Entrance"));
         Device PowerGridMeter = new Device(id,name,model,status,roomID);
         when(repositoryDevice.findAll()).thenReturn(List.of(PowerGridMeter));
         when(repositoryRoom.ofIdentity(roomID)).thenReturn(Optional.of(entranceRoom));
@@ -665,12 +670,13 @@ class HouseWebControllerTest {
 
 
         // Create and save Power Grid Meter
+        ImplFactoryRoom factoryRoom = new ImplFactoryRoom();
         DeviceId id = new DeviceId("d6");
         DeviceName name = new DeviceName("Power Grid Meter");
         DeviceModel model = new DeviceModel("deviceModel");
         ActivationStatus status = new ActivationStatus(true);
         RoomID roomID = new RoomID("r4");
-        Room entranceRoom = new Room(houseID,roomID,new FloorNumber(0), new Dimensions(new Length(10), new Width(10), new Height(10)),true, new RoomName("Entrance"));
+        Room entranceRoom = factoryRoom.createRoom(houseID,roomID,new FloorNumber(0), new Dimensions(new Length(10), new Width(10), new Height(10)),true, new RoomName("Entrance"));
         Device PowerGridMeter = new Device(id,name,model,status,roomID);
         when(repositoryDevice.findAll()).thenReturn(List.of(PowerGridMeter));
         when(repositoryRoom.ofIdentity(roomID)).thenReturn(Optional.of(entranceRoom));
@@ -736,12 +742,13 @@ class HouseWebControllerTest {
         HouseId houseID = new HouseId("House01");
         when(repositoryHouse.containsOfIdentity(houseID)).thenReturn(true);
         // create and save PGM
+        ImplFactoryRoom factoryRoom = new ImplFactoryRoom();
         DeviceId id = new DeviceId("d6");
         DeviceName name = new DeviceName("Power Grid Meter");
         DeviceModel model = new DeviceModel("deviceModel");
         ActivationStatus status = new ActivationStatus(true);
         RoomID roomID = new RoomID("r4");
-        Room entranceRoom = new Room(houseID,roomID,new FloorNumber(0), new Dimensions(new Length(10), new Width(10), new Height(10)),true, new RoomName("Entrance"));
+        Room entranceRoom = factoryRoom.createRoom(houseID,roomID,new FloorNumber(0), new Dimensions(new Length(10), new Width(10), new Height(10)),true, new RoomName("Entrance"));
         Device PowerGridMeter = new Device(id,name,model,status,roomID);
         when(repositoryDevice.findAll()).thenReturn(List.of(PowerGridMeter));
         when(repositoryRoom.ofIdentity(roomID)).thenReturn(Optional.of(entranceRoom));
@@ -771,13 +778,14 @@ class HouseWebControllerTest {
     void peakPowerConsumption_DevicesWithoutEnergyConsumptionSensors_shouldReturnException() throws Exception {
 
         // Arrange
+        ImplFactoryRoom factoryRoom = new ImplFactoryRoom();
         HouseId houseID = new HouseId("House01");
         DeviceId id = new DeviceId("d6");
         DeviceName name = new DeviceName("Power Grid Meter");
         DeviceModel model = new DeviceModel("deviceModel");
         ActivationStatus activationStatus = new ActivationStatus(true);
         RoomID roomID = new RoomID("r4");
-        Room entranceRoom = new Room(houseID,roomID,new FloorNumber(0), new Dimensions(new Length(10), new Width(10), new Height(10)),true, new RoomName("Entrance"));
+        Room entranceRoom = factoryRoom.createRoom(houseID,roomID,new FloorNumber(0), new Dimensions(new Length(10), new Width(10), new Height(10)),true, new RoomName("Entrance"));
         Device PowerGridMeter = new Device(id,name,model,activationStatus,roomID);
         when(repositoryDevice.findAll()).thenReturn(List.of(PowerGridMeter));
         when(repositoryRoom.ofIdentity(roomID)).thenReturn(Optional.of(entranceRoom));
@@ -818,12 +826,13 @@ class HouseWebControllerTest {
         when(repositoryHouse.containsOfIdentity(houseID)).thenReturn(true);
 
         // Create and save Power Grid Meter
+        ImplFactoryRoom factoryRoom = new ImplFactoryRoom();
         DeviceId id = new DeviceId("d6");
         DeviceName name = new DeviceName("Power Grid Meter");
         DeviceModel model = new DeviceModel("deviceModel");
         ActivationStatus status = new ActivationStatus(true);
         RoomID roomID = new RoomID("r4");
-        Room entranceRoom = new Room(houseID,roomID,new FloorNumber(0), new Dimensions(new Length(10), new Width(10), new Height(10)),true, new RoomName("Entrance"));
+        Room entranceRoom = factoryRoom.createRoom(houseID,roomID,new FloorNumber(0), new Dimensions(new Length(10), new Width(10), new Height(10)),true, new RoomName("Entrance"));
         Device PowerGridMeter = new Device(id,name,model,status,roomID);
         when(repositoryDevice.findAll()).thenReturn(List.of(PowerGridMeter));
         when(repositoryRoom.ofIdentity(roomID)).thenReturn(Optional.of(entranceRoom));
@@ -875,12 +884,13 @@ class HouseWebControllerTest {
         when(repositoryHouse.containsOfIdentity(houseID)).thenReturn(true);
 
         // Create and save Power Grid Meter
+        ImplFactoryRoom factoryRoom = new ImplFactoryRoom();
         DeviceId id = new DeviceId("d6");
         DeviceName name = new DeviceName("Power Grid Meter");
         DeviceModel model = new DeviceModel("deviceModel");
         ActivationStatus status = new ActivationStatus(true);
         RoomID roomID = new RoomID("r4");
-        Room entranceRoom = new Room(houseID,roomID,new FloorNumber(0), new Dimensions(new Length(10), new Width(10), new Height(10)),true, new RoomName("Entrance"));
+        Room entranceRoom = factoryRoom.createRoom(houseID,roomID,new FloorNumber(0), new Dimensions(new Length(10), new Width(10), new Height(10)),true, new RoomName("Entrance"));
         Device PowerGridMeter = new Device(id,name,model,status,roomID);
         when(repositoryDevice.findAll()).thenReturn(List.of(PowerGridMeter));
         when(repositoryRoom.ofIdentity(roomID)).thenReturn(Optional.of(entranceRoom));

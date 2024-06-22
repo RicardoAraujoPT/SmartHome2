@@ -45,7 +45,7 @@ public class Room implements AggregateRoot<RoomID> {
      * @throws IllegalArgumentException If any of the parameters are null.
      */
 
-    public Room(HouseId houseId, RoomID roomId, FloorNumber floorNumber, Dimensions dimensions, boolean isInside, RoomName roomName) {
+    protected Room(HouseId houseId, RoomID roomId, FloorNumber floorNumber, Dimensions dimensions, boolean isInside, RoomName roomName) {
         this._roomID = roomId;
         this._houseId = houseId;
         this.m_floorNumber = floorNumber;
