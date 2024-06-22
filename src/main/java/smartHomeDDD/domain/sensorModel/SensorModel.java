@@ -29,7 +29,7 @@ public class SensorModel implements AggregateRoot<SensorModelID> {
      * @param sensorTypeID  The unique identifier of the type of sensor associated with this model.
      * @throws IllegalArgumentException exception thrown if any of the parameters are null.
      */
-    public SensorModel(SensorModelID sensorModelID, SensorTypeID sensorTypeID)
+    protected SensorModel(SensorModelID sensorModelID, SensorTypeID sensorTypeID)
     {
         if (sensorModelID == null) {
             throw new IllegalArgumentException("Parameter 'sensorModelID' cannot be null.");

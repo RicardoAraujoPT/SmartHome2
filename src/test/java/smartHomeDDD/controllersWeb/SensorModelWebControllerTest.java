@@ -13,7 +13,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import smartHomeDDD.domain.repository.IRepositorySensorModel;
+import smartHomeDDD.domain.sensorModel.FactorySensorModel;
+import smartHomeDDD.domain.sensorModel.ImplFactorySensorModel;
 import smartHomeDDD.domain.sensorModel.SensorModel;
+import smartHomeDDD.domain.sensorType.FactorySensorType;
 import smartHomeDDD.domain.valueobject.SensorModelID;
 import smartHomeDDD.domain.valueobject.SensorTypeID;
 
@@ -58,9 +61,10 @@ class SensorModelWebControllerTest {
     @Test
     void getModelsByType_shouldReturnListOfModels() throws Exception {
         // Arrange
+        FactorySensorModel factorySensorModel = new ImplFactorySensorModel();
         SensorModelID sensorModelID = new SensorModelID("GA100K");
         SensorTypeID sensorTypeID = new SensorTypeID("T1");
-        SensorModel sensorModel = new SensorModel(sensorModelID, sensorTypeID);
+        SensorModel sensorModel = factorySensorModel.createSensorModel(sensorModelID, sensorTypeID);
 
         when(repositorySensorModel.getModelsBySensorType(sensorTypeID)).thenReturn(List.of(sensorModel));
 
@@ -116,9 +120,10 @@ class SensorModelWebControllerTest {
     @Test
     void getSensorModelByValidID_shouldReturnSensorModelID() throws Exception {
         //Arrange
+        FactorySensorModel factorySensorModel = new ImplFactorySensorModel();
         SensorModelID sensorModelID = new SensorModelID("GA100K");
 
-        when(repositorySensorModel.ofIdentity(sensorModelID)).thenReturn(Optional.of(new SensorModel(sensorModelID, new SensorTypeID("T1"))));
+        when(repositorySensorModel.ofIdentity(sensorModelID)).thenReturn(Optional.of(factorySensorModel.createSensorModel(sensorModelID, new SensorTypeID("T1"))));
 
         // Act
         MvcResult result = mockMvc

@@ -23,6 +23,8 @@ import smartHomeDDD.domain.repository.*;
 import smartHomeDDD.domain.sensor.FactorySensor;
 import smartHomeDDD.domain.sensor.GA100K;
 import smartHomeDDD.domain.sensor.TSY01;
+import smartHomeDDD.domain.sensorModel.FactorySensorModel;
+import smartHomeDDD.domain.sensorModel.ImplFactorySensorModel;
 import smartHomeDDD.domain.sensorModel.SensorModel;
 import smartHomeDDD.domain.sensorReading.SensorReading;
 import smartHomeDDD.domain.sensorType.FactorySensorType;
@@ -751,6 +753,7 @@ class DeviceControllerWebTest {
     void getDevicesByFunction_shouldReturnListOfDevicesGroupedByFunctionality() throws Exception {
         // Arrange
         FactorySensorType factorySensorType = new ImplFactorySensorType();
+        FactorySensorModel factorySensorModel = new ImplFactorySensorModel();
         DeviceEntryWebDTO deviceEntryWebDTO = new DeviceEntryWebDTO( "r1", "lamp", "siemens", true);
         when(generateRandomId.generateID()).thenReturn("d1");
         Device device = setupDevice(deviceEntryWebDTO);
@@ -762,7 +765,7 @@ class DeviceControllerWebTest {
         when(repositoryActuator.findAll()).thenReturn(List.of());
 
         //Mock assignDeviceToSensorGroupType
-        when(repositorySensorModel.ofIdentity(sensor1.getSensorModelID())).thenReturn(java.util.Optional.of(new SensorModel(new SensorModelID("GA100K"), new SensorTypeID("Temperature"))));
+        when(repositorySensorModel.ofIdentity(sensor1.getSensorModelID())).thenReturn(java.util.Optional.of(factorySensorModel.createSensorModel(new SensorModelID("GA100K"), new SensorTypeID("Temperature"))));
         when(repositorySensorType.ofIdentity(new SensorTypeID("Temperature"))).thenReturn(java.util.Optional.of(factorySensorType.createSensorType(new SensorTypeID("T1"), new Description("Temperature"),new Unit("Celsius"))));
         when(repositoryDevice.ofIdentity(sensor1.getDeviceID())).thenReturn(java.util.Optional.of(device));
 
