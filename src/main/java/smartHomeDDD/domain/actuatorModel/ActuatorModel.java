@@ -25,7 +25,7 @@ public class ActuatorModel implements AggregateRoot<ActuatorModelID> {
      *
      * @param actuatorModelID The unique identifier for the actuator model.
      */
-    public ActuatorModel(ActuatorModelID actuatorModelID, ActuatorTypeID actuatorTypeID) {
+    protected ActuatorModel(ActuatorModelID actuatorModelID, ActuatorTypeID actuatorTypeID) {
         this._actuatorModelID = actuatorModelID;
         this._actuatorTypeID = actuatorTypeID;
     }

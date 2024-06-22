@@ -78,7 +78,7 @@ class ServiceHouseTest {
         ServiceHouse serviceHouse = new ServiceHouse(repoHouse, factoryHouse);
         HouseId id = new HouseId("1");
         Location newLocation = new Location(new Address("New Address"), new ZipCode("Portugal", "1234-123"), new GPSCoordinates(new Latitude(55), new Longitude(60)));
-        House house = new House(id, newLocation);
+        House house = factoryHouse.createHouse(id, newLocation);
         when(repoHouse.ofIdentity(id)).thenReturn(Optional.of(house));
         when(repoHouse.update(house)).thenReturn(house);
 
@@ -115,8 +115,8 @@ class ServiceHouseTest {
         IRepositoryHouse repoHouse = mock(IRepositoryHouse.class);
         FactoryHouse factoryHouse = new ImplFactoryHouse();
         ServiceHouse serviceHouse = new ServiceHouse(repoHouse, factoryHouse);
-        House house1 = new House(new HouseId("1"), new Location(new Address("Address 1"), new ZipCode("Portugal", "1234-123"), new GPSCoordinates(new Latitude(55), new Longitude(60))));
-        House house2 = new House(new HouseId("2"), new Location(new Address("Address 2"), new ZipCode("Portugal", "1234-123"), new GPSCoordinates(new Latitude(55), new Longitude(60))));
+        House house1 = factoryHouse.createHouse(new HouseId("1"), new Location(new Address("Address 1"), new ZipCode("Portugal", "1234-123"), new GPSCoordinates(new Latitude(55), new Longitude(60))));
+        House house2 = factoryHouse.createHouse(new HouseId("2"), new Location(new Address("Address 2"), new ZipCode("Portugal", "1234-123"), new GPSCoordinates(new Latitude(55), new Longitude(60))));
         when(repoHouse.findAll()).thenReturn(List.of(house1, house2));
 
         // Act
@@ -137,7 +137,7 @@ class ServiceHouseTest {
         FactoryHouse factoryHouse = new ImplFactoryHouse();
         ServiceHouse serviceHouse = new ServiceHouse(repoHouse, factoryHouse);
         HouseId id = new HouseId("1");
-        House house = new House(id, new Location(new Address("New Address"), new ZipCode("Portugal", "1234-123"), new GPSCoordinates(new Latitude(55), new Longitude(60))));
+        House house = factoryHouse.createHouse(id, new Location(new Address("New Address"), new ZipCode("Portugal", "1234-123"), new GPSCoordinates(new Latitude(55), new Longitude(60))));
         when(repoHouse.ofIdentity(id)).thenReturn(Optional.of(house));
 
         // Act

@@ -23,7 +23,7 @@ public class House implements AggregateRoot<HouseId> {
      * @param houseId       the unique identifier of the house
      * @param houseLocation the location of the house
      */
-    public House(HouseId houseId, Location houseLocation)
+    protected House(HouseId houseId, Location houseLocation)
     {
         this._houseId = houseId;
         this._houseLocation = houseLocation;

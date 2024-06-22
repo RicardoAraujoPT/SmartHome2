@@ -21,7 +21,7 @@ public class ActuatorType implements AggregateRoot<ActuatorTypeID> {
     /**
      * The Unique Identifier of the ActuatorType.
      */
-    private  final ActuatorTypeID _actuatorTypeID;
+    protected  final ActuatorTypeID _actuatorTypeID;
 
     /**
      * Constructs an ActuatorType object with the specified unit, description, and identifier.

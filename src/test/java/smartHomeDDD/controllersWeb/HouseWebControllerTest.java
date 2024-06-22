@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import smartHomeDDD.domain.device.Device;
 import smartHomeDDD.domain.house.House;
+import smartHomeDDD.domain.house.ImplFactoryHouse;
 import smartHomeDDD.domain.repository.*;
 import smartHomeDDD.domain.room.ImplFactoryRoom;
 import smartHomeDDD.domain.room.Room;
@@ -107,8 +108,9 @@ class HouseWebControllerTest {
     @Test
     void validHouse_shouldConfigureAndUpdateLocation() throws Exception {
         // Arrange
+        ImplFactoryHouse factoryHouse = new ImplFactoryHouse();
         HouseId houseId = new HouseId("House01");
-        House house = new House(houseId, new Location(
+        House house = factoryHouse.createHouse(houseId, new Location(
                 new Address("Rua dos Croissants"),
                 new ZipCode("Portugal", "1234-123"),
                 new GPSCoordinates(new Latitude(55.0), new Longitude(90.0))));
@@ -192,10 +194,16 @@ class HouseWebControllerTest {
     @Test
     void getHouses_shouldReturnListOfHouses() throws Exception {
         // Arrange
-        List<House> houses = List.of(
-                new House(new HouseId("House01"), new Location(new Address("Rua das Flores"), new ZipCode("Portugal", "1234-123"), new GPSCoordinates(new Latitude(55.0), new Longitude(90.0)))),
-                new House(new HouseId("House02"), new Location(new Address("Rua das Gramíneas"), new ZipCode("Portugal", "1234-123"), new GPSCoordinates(new Latitude(55.0), new Longitude(90.0))))
-        );
+        ImplFactoryHouse factoryHouse = new ImplFactoryHouse();
+        House house1 = factoryHouse.createHouse(new HouseId("House01"), new Location(
+                new Address("Rua das Flores"),
+                new ZipCode("Portugal", "1234-123"),
+                new GPSCoordinates(new Latitude(55.0), new Longitude(90.0))));
+        House house2 = factoryHouse.createHouse(new HouseId("House02"), new Location(
+                new Address("Rua das Gramíneas"),
+                new ZipCode("Portugal", "1234-123"),
+                new GPSCoordinates(new Latitude(55.0), new Longitude(90.0))));
+        List<House> houses = List.of(house1, house2);
         when(repositoryHouse.findAll()).thenReturn(houses);
 
         // Act
@@ -271,7 +279,8 @@ class HouseWebControllerTest {
     void obtainHouseByValidID_shouldReturnHouseID() throws Exception {
         // Arrange
         HouseId houseId = new HouseId("House01");
-        House house = new House(houseId, new Location(
+        ImplFactoryHouse factoryHouse = new ImplFactoryHouse();
+        House house = factoryHouse.createHouse(houseId, new Location(
                 new Address("Rua dos Croissants"),
                 new ZipCode("Portugal", "1234-123"),
                 new GPSCoordinates(new Latitude(55.0), new Longitude(90.0))));
