@@ -33,7 +33,7 @@ public class SensorType implements AggregateRoot<SensorTypeID> {
      * @param sensorTypeID The unique identifier for the sensor type.
      * @throws IllegalArgumentException If any of the parameters are null.
      */
-    public SensorType(Unit unit, Description description, SensorTypeID sensorTypeID)
+    protected SensorType(Unit unit, Description description, SensorTypeID sensorTypeID)
     {
         if (unit == null) {
             throw new IllegalArgumentException("Parameter 'unit' cannot be null.");
