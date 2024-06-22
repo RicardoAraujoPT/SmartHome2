@@ -67,7 +67,7 @@ public class RoomDataModel {
         width = room.getDimensions().getWidth().toDouble();
         length = room.getDimensions().getLength().toDouble();
         height = room.getDimensions().getHeight().toDouble();
-        isInside = room.isInside();
+        isInside = room.getIsInside().getIsInside();
         roomName = room.getRoomName().toString();
     }
 
@@ -85,7 +85,7 @@ public class RoomDataModel {
         Width width = new Width(roomDataModel.width);
         Height height = new Height(roomDataModel.height);
         Dimensions dimensions = new Dimensions(length, width, height);
-        boolean isInside = roomDataModel.isInside;
+        IsInside isInside = new IsInside(roomDataModel.isInside);
         RoomName roomName = new RoomName(roomDataModel.roomName);
 
         return factory.createRoom(houseId, roomId, floorNumber, dimensions, isInside, roomName);

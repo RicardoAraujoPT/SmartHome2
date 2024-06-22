@@ -31,7 +31,7 @@ class ImplFactoryRoomTest {
         RoomID roomId = mock(RoomID.class);
         FloorNumber floorNumber = mock(FloorNumber.class);
         Dimensions dimensions = mock(Dimensions.class);
-        boolean isInside = true;
+        IsInside isInside = mock(IsInside.class);
         RoomName roomName = mock(RoomName.class);
 
         // Act
@@ -42,12 +42,13 @@ class ImplFactoryRoomTest {
                     FloorNumber floor = (FloorNumber) context.arguments().get(2);
                     Dimensions dim = (Dimensions) context.arguments().get(3);
                     RoomName name  = (RoomName) context.arguments().get(5);
-
+                    IsInside isInside1 = (IsInside) context.arguments().get(4);
                     when(mock.getHouseId()).thenReturn(id);
                     when(mock.identity()).thenReturn(room);
                     when(mock.getFloorNumber()).thenReturn(floor);
                     when(mock.getDimensions()).thenReturn(dim);
                     when(mock.getRoomName()).thenReturn(name);
+                    when(mock.getIsInside()).thenReturn(isInside1);
                 })) {
 
             Room roomCreated = implFactoryRoom.createRoom(houseId, roomId, floorNumber, dimensions, isInside, roomName);

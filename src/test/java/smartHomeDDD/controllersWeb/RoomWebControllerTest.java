@@ -86,7 +86,7 @@ class RoomWebControllerTest {
         Height height = new Height(roomWebDTO.getHeight());
         FloorNumber floorNumber = new FloorNumber(roomWebDTO.getFloorNumber());
         HouseId houseId = new HouseId(roomWebDTO.getHouseId());
-        boolean isInside = roomWebDTO.isInside();
+        IsInside isInside = new IsInside(roomWebDTO.isInside());
         Dimensions dimensions = new Dimensions(length, width, height);
         RoomName roomName = new RoomName(roomWebDTO.getRoomName());
         return factoryRoom.createRoom(houseId, roomID, floorNumber, dimensions, isInside, roomName);

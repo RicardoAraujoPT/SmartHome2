@@ -73,7 +73,7 @@ public class ServiceRoom {
      * @return The room that was added.
      * @throws IllegalArgumentException If the house is not found.
      */
-    public Room addRoomToHouse(HouseId houseId,FloorNumber floorNumber, Dimensions dimensions, boolean isInside, RoomName roomName) {
+    public Room addRoomToHouse(HouseId houseId,FloorNumber floorNumber, Dimensions dimensions, IsInside isInside, RoomName roomName) {
         if (!_repositoryHouse.containsOfIdentity(houseId)) {
             throw new EntityNotFoundException("House not found");
         }

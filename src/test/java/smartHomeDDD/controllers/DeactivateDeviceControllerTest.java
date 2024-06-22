@@ -33,10 +33,11 @@ class DeactivateDeviceControllerTest {
         Length length = new Length(10);
         Width width = new Width(10);
         Height height = new Height(10);
+        IsInside isInside = new IsInside(true);
         Dimensions dimensions = new Dimensions(length, width, height);
         RoomName roomName = new RoomName("Living Room");
         FactoryRoom factoryRoom = new ImplFactoryRoom();
-        return factoryRoom.createRoom(houseId, roomId, floorNumber, dimensions, true, roomName);
+        return factoryRoom.createRoom(houseId, roomId, floorNumber, dimensions, isInside, roomName);
     }
 
     /**

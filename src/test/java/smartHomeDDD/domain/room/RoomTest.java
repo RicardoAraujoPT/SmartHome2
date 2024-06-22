@@ -34,10 +34,10 @@ class RoomTest {
     void validArguments_shouldCreateARoom(){
         // Arrange
         RoomID roomIDDouble = mock(RoomID.class);
+        IsInside isInside = mock(IsInside.class);
         HouseId houseIdDouble = mock(HouseId.class);
         FloorNumber floorNumberDouble = mock(FloorNumber.class);
         Dimensions dimensionsDouble = mock(Dimensions.class);
-        boolean isInside = true;
         RoomName roomName = mock(RoomName.class);
 
         // Act
@@ -49,7 +49,7 @@ class RoomTest {
         assertEquals(room.getHouseId(), houseIdDouble);
         assertEquals(room.getFloorNumber(), floorNumberDouble);
         assertEquals(room.getDimensions(), dimensionsDouble);
-        assertEquals(room.isInside(), isInside);
+        assertEquals(room.getIsInside(), isInside);
         assertEquals(room.getRoomName(), roomName);
     }
 
@@ -60,10 +60,10 @@ class RoomTest {
     void shouldReturnRoomId_WhenGettingIdentity(){
         // Arrange
         RoomID roomIDDouble = mock(RoomID.class);
+        IsInside isInside = mock(IsInside.class);
         HouseId houseIdDouble = mock(HouseId.class);
         FloorNumber floorNumberDouble = mock(FloorNumber.class);
         Dimensions dimensionsDouble = mock(Dimensions.class);
-        boolean isInside = true;
         RoomName roomName = mock(RoomName.class);
         Room room = new Room(houseIdDouble, roomIDDouble, floorNumberDouble, dimensionsDouble, isInside, roomName);
 
@@ -81,10 +81,10 @@ class RoomTest {
     void shouldReturnTrue_WhenComparingItself() {
         // Arrange
         RoomID roomIDDouble = mock(RoomID.class);
+        IsInside isInside = mock(IsInside.class);
         HouseId houseIdDouble = mock(HouseId.class);
         FloorNumber floorNumberDouble = mock(FloorNumber.class);
         Dimensions dimensionsDouble = mock(Dimensions.class);
-        boolean isInside = true;
         RoomName roomName = mock(RoomName.class);
         Room room = new Room(houseIdDouble, roomIDDouble, floorNumberDouble, dimensionsDouble, isInside, roomName);
         // Act
@@ -101,10 +101,10 @@ class RoomTest {
     void shouldReturnTrue_WhenComparingTwoEqualRooms() {
         // Arrange
         RoomID roomIDDouble = mock(RoomID.class);
+        IsInside isInside = mock(IsInside.class);
         HouseId houseIdDouble = mock(HouseId.class);
         FloorNumber floorNumberDouble = mock(FloorNumber.class);
         Dimensions dimensionsDouble = mock(Dimensions.class);
-        boolean isInside = true;
         RoomName roomName = mock(RoomName.class);
         Room room = new Room(houseIdDouble, roomIDDouble, floorNumberDouble, dimensionsDouble, isInside, roomName);
         Room room2 = new Room(houseIdDouble, roomIDDouble, floorNumberDouble, dimensionsDouble, isInside, roomName);
@@ -123,11 +123,11 @@ class RoomTest {
     void shouldReturnFalse_WhenComparingTwoEqualRoomsWithDifferentID() {
         // Arrange
         HouseId houseIdDouble = mock(HouseId.class);
+        IsInside isInside = mock(IsInside.class);
         RoomID roomID1Double = mock(RoomID.class);
         RoomID roomID2Double = mock(RoomID.class);
         FloorNumber floorNumberDouble = mock(FloorNumber.class);
         Dimensions dimensionsDouble = mock(Dimensions.class);
-        boolean isInside = true;
         RoomName roomName = mock(RoomName.class);
         Room room = new Room(houseIdDouble, roomID1Double, floorNumberDouble, dimensionsDouble, isInside, roomName);
         Room room2 = new Room(houseIdDouble, roomID2Double, floorNumberDouble, dimensionsDouble, isInside, roomName);
@@ -146,10 +146,10 @@ class RoomTest {
     void shouldReturnFalse_WhenComparingRoomWithDifferentObject()  {
         // Arrange
         RoomID roomIDDouble = mock(RoomID.class);
+        IsInside isInside = mock(IsInside.class);
         HouseId houseIdDouble = mock(HouseId.class);
         FloorNumber floorNumberDouble = mock(FloorNumber.class);
         Dimensions dimensionsDouble = mock(Dimensions.class);
-        boolean isInside = true;
         RoomName roomName = mock(RoomName.class);
         Room room = new Room(houseIdDouble, roomIDDouble, floorNumberDouble, dimensionsDouble, isInside, roomName);
         Object obj = new Object();
@@ -168,10 +168,10 @@ class RoomTest {
     void shouldReturnTrue_WhenComparingTwoEqualRoomsSameAs()  {
         // Arrange
         RoomID roomIDDouble = mock(RoomID.class);
+        IsInside isInside = mock(IsInside.class);
         HouseId houseIdDouble = mock(HouseId.class);
         FloorNumber floorNumberDouble = mock(FloorNumber.class);
         Dimensions dimensionsDouble = mock(Dimensions.class);
-        boolean isInside = true;
         RoomName roomName = mock(RoomName.class);
         Room room = new Room(houseIdDouble, roomIDDouble, floorNumberDouble, dimensionsDouble, isInside, roomName);
         Room room2 = new Room(houseIdDouble, roomIDDouble, floorNumberDouble, dimensionsDouble, isInside, roomName);
@@ -190,11 +190,11 @@ class RoomTest {
     void shouldReturnFalse_WhenComparingRoomsFromDifferentHouses()  {
         // Arrange
         RoomID roomIDDouble = mock(RoomID.class);
+        IsInside isInside = mock(IsInside.class);
         HouseId houseId1Double = mock(HouseId.class);
         HouseId houseId2Double = mock(HouseId.class);
         FloorNumber floorNumberDouble = mock(FloorNumber.class);
         Dimensions dimensionsDouble = mock(Dimensions.class);
-        boolean isInside = true;
         RoomName roomName = mock(RoomName.class);
 
         Room room = new Room(houseId1Double, roomIDDouble, floorNumberDouble, dimensionsDouble, isInside, roomName);
@@ -214,11 +214,11 @@ class RoomTest {
     void shouldReturnFalse_WhenComparingRoomsFromDifferentFloors()  {
         // Arrange
         RoomID roomIDDouble = mock(RoomID.class);
+        IsInside isInside = mock(IsInside.class);
         HouseId houseIdDouble = mock(HouseId.class);
         FloorNumber floorNumber1Double = mock(FloorNumber.class);
         FloorNumber floorNumber2Double = mock(FloorNumber.class);
         Dimensions dimensionsDouble = mock(Dimensions.class);
-        boolean isInside = true;
         RoomName roomName = mock(RoomName.class);
 
         Room room = new Room(houseIdDouble, roomIDDouble, floorNumber1Double, dimensionsDouble, isInside, roomName);
@@ -238,11 +238,11 @@ class RoomTest {
     void shouldReturnFalse_WhenComparingRoomsWithDifferentDimensions()  {
         // Arrange
         RoomID roomIDDouble = mock(RoomID.class);
+        IsInside isInside = mock(IsInside.class);
         HouseId houseIdDouble = mock(HouseId.class);
         FloorNumber floorNumberDouble = mock(FloorNumber.class);
         Dimensions dimensions1Double = mock(Dimensions.class);
         Dimensions dimensions2Double = mock(Dimensions.class);
-        boolean isInside = true;
         RoomName roomName = mock(RoomName.class);
 
         Room room = new Room(houseIdDouble, roomIDDouble, floorNumberDouble, dimensions1Double, isInside, roomName);
@@ -263,11 +263,11 @@ class RoomTest {
     {
         // Arrange
         RoomID roomIDDouble = mock(RoomID.class);
+        IsInside isInside = mock(IsInside.class);
+        IsInside isInside2 = mock(IsInside.class);
         HouseId houseIdDouble = mock(HouseId.class);
         FloorNumber floorNumberDouble = mock(FloorNumber.class);
         Dimensions dimensionsDouble = mock(Dimensions.class);
-        boolean isInside = true;
-        boolean isInside2 = false;
         RoomName roomName = mock(RoomName.class);
 
         Room room = new Room(houseIdDouble, roomIDDouble, floorNumberDouble, dimensionsDouble, isInside, roomName);
@@ -287,10 +287,10 @@ class RoomTest {
     {
         // Arrange
         RoomID roomIDDouble = mock(RoomID.class);
+        IsInside isInside = mock(IsInside.class);
         HouseId houseIdDouble = mock(HouseId.class);
         FloorNumber floorNumberDouble = mock(FloorNumber.class);
         Dimensions dimensionsDouble = mock(Dimensions.class);
-        boolean isInside = true;
         RoomName roomName1 = mock(RoomName.class);
         RoomName roomName2 = mock(RoomName.class);
 
@@ -311,10 +311,10 @@ class RoomTest {
     void shouldReturnSameHashCodeInSameObject(){
         // Arrange
         RoomID roomIDDouble = mock(RoomID.class);
+        IsInside isInside = mock(IsInside.class);
         HouseId houseIdDouble = mock(HouseId.class);
         FloorNumber floorNumberDouble = mock(FloorNumber.class);
         Dimensions dimensionsDouble = mock(Dimensions.class);
-        boolean isInside = true;
         RoomName roomName = mock(RoomName.class);
 
         Room room = new Room(houseIdDouble, roomIDDouble, floorNumberDouble, dimensionsDouble, isInside, roomName);
@@ -332,11 +332,11 @@ class RoomTest {
     void testEquals() {
         // Arrange
         RoomID roomID1 = mock(RoomID.class);
+        IsInside isInside = mock(IsInside.class);
         RoomID roomID2 = mock(RoomID.class);
         HouseId houseId = mock(HouseId.class);
         FloorNumber floorNumber = mock(FloorNumber.class);
         Dimensions dimensions = mock(Dimensions.class);
-        boolean isInside = true;
         RoomName roomName = mock(RoomName.class);
 
         Room room1 = new Room(houseId, roomID1, floorNumber, dimensions, isInside, roomName );
@@ -358,33 +358,32 @@ class RoomTest {
     }
 
     @Test
-    void testIsInside() {
+    void testGetIsInside() {
         // Arrange
         RoomID roomID = mock(RoomID.class);
+        IsInside isInside = mock(IsInside.class);
+        IsInside isInside2 = mock(IsInside.class);
         HouseId houseId = mock(HouseId.class);
         FloorNumber floorNumber = mock(FloorNumber.class);
         Dimensions dimensions = mock(Dimensions.class);
         RoomName roomName = mock(RoomName.class);
 
-        Room roomInside = new Room(houseId, roomID, floorNumber, dimensions, true, roomName);
-        Room roomOutside = new Room(houseId, roomID, floorNumber, dimensions, false, roomName);
+        Room roomInside = new Room(houseId, roomID, floorNumber, dimensions, isInside, roomName);
+        Room roomOutside = new Room(houseId, roomID, floorNumber, dimensions, isInside2, roomName);
 
         // Act & Assert
         // Scenario 1: Room is inside
-        assertTrue(roomInside.isInside());
-
-        // Scenario 2: Room is outside
-        assertFalse(roomOutside.isInside());
+        assertEquals(roomInside, roomOutside);
     }
 
     @Test
     void testHashCode() {
         // Arrange
         RoomID roomID = mock(RoomID.class);
+        IsInside isInside = mock(IsInside.class);
         HouseId houseId = mock(HouseId.class);
         FloorNumber floorNumber = mock(FloorNumber.class);
         Dimensions dimensions = mock(Dimensions.class);
-        boolean isInside = true;
         RoomName roomName = mock(RoomName.class);
 
         Room room = new Room(houseId, roomID, floorNumber, dimensions, isInside, roomName);

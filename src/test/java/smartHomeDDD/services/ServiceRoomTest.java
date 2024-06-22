@@ -130,12 +130,12 @@ class ServiceRoomTest {
         RoomName roomName = new RoomName("Living Room");
         when(repoHouse.containsOfIdentity(houseId)).thenReturn(true);
         RoomID roomId = new RoomID("r1");
-        Room room = factoryRoom.createRoom(houseId, roomId, floorNumber, dimensions, true, roomName);
+        Room room = factoryRoom.createRoom(houseId, roomId, floorNumber, dimensions,new IsInside(true), roomName);
         when(repoRoom.save(room)).thenReturn(room);
         when(generateRandomId.generateID()).thenReturn("r1");
 
         // Act
-        Room result = serviceRoom.addRoomToHouse(houseId, floorNumber, dimensions, true, roomName);
+        Room result = serviceRoom.addRoomToHouse(houseId, floorNumber, dimensions, new IsInside(true), roomName);
 
         // Assert
         assertEquals(room, result);
@@ -161,7 +161,7 @@ class ServiceRoomTest {
 
         // Act + Assert
         assertThrows(EntityNotFoundException.class, () -> serviceRoom.addRoomToHouse(houseId, floorNumber, dimensions,
-                true, roomName));
+                new IsInside(true), roomName));
     }
 
     /**
@@ -179,9 +179,9 @@ class ServiceRoomTest {
         RoomID roomId1 = new RoomID("r1");
         RoomID roomId2 = new RoomID("r2");
         Room room1 = factoryRoom.createRoom(houseId, roomId1, new FloorNumber(1), new Dimensions(new Length(10),
-                new Width(10), new Height(10)), true, new RoomName("Living Room"));
+                new Width(10), new Height(10)), new IsInside(true), new RoomName("Living Room"));
         Room room2 = factoryRoom.createRoom(houseId, roomId2, new FloorNumber(1), new Dimensions(new Length(10),
-                new Width(10), new Height(10)), true, new RoomName("Kitchen"));
+                new Width(10), new Height(10)), new IsInside(true), new RoomName("Kitchen"));
         when(repoHouse.containsOfIdentity(houseId)).thenReturn(true);
         when(repoRoom.getRoomsByHouseID(houseId)).thenReturn(List.of(room1, room2));
 
@@ -228,7 +228,7 @@ class ServiceRoomTest {
         RoomID roomId = new RoomID("1");
         HouseId houseId = new HouseId("1");
         Room room = factoryRoom.createRoom(houseId, roomId, new FloorNumber(1), new Dimensions(new Length(10),
-                new Width(10), new Height(10)), true, new RoomName("Living Room"));
+                new Width(10), new Height(10)), new IsInside(true), new RoomName("Living Room"));
         when(repoRoom.ofIdentity(roomId)).thenReturn(Optional.of(room));
 
         // Act

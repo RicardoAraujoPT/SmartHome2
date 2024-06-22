@@ -46,7 +46,7 @@ public class AddNewRoomToHouseController {
         Length length = RoomMapper.DTOToLength(DTO.getLength());
         Width width = RoomMapper.DTOToWidth(DTO.getWidth());
         Height height = RoomMapper.DTOToHeight(DTO.getHeight());
-        boolean isInside = DTO.isInside();
+        IsInside isInside = RoomMapper.DTOToIsInside(DTO.isInside());
         RoomName roomName = RoomMapper.DTOToRoomName(DTO.getRoomName());
 
         // Create dimensions object

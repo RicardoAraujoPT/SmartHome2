@@ -100,7 +100,7 @@ public class RepositoryRoomMem implements IRepositoryRoom {
     public List<Room> getOutsideRooms(Iterable<Room> rooms) {
         List<Room> outsideRooms = new ArrayList<>();
         for (Room room : rooms) {
-            if (!room.isInside()) {
+            if (!room.getIsInside().getIsInside()) {
                 outsideRooms.add(room);
             }
         }

@@ -56,6 +56,8 @@ public class RoomMapper {
      */
     public static Dimensions DTOToDimensions(Length length, Width width, Height height) { return new Dimensions (length,width,height); }
 
+    public static IsInside DTOToIsInside(boolean isInside) { return new IsInside(isInside); }
+
     /**
      * Converts a RoomDTO object to a HouseId domain object.
      */
@@ -67,7 +69,7 @@ public class RoomMapper {
                 Double.parseDouble(room.getDimensions().getHeight().toString()),
                 Integer.valueOf(room.getFloorNumber().toString()),
                 room.getHouseId().toString(),
-                room.isInside(),
+                room.getIsInside().getIsInside(),
                 room.getRoomName().toString()
         );
     }
@@ -109,7 +111,7 @@ public class RoomMapper {
         double height = Double.parseDouble(room.getDimensions().getHeight().toString());
         Integer floorNumber = Integer.valueOf(room.getFloorNumber().toString());
         String houseId = room.getHouseId().toString();
-        boolean isInside = room.isInside();
+        boolean isInside = room.getIsInside().getIsInside();
         String roomName = room.getRoomName().toString();
         return new RoomExitWebDTO(roomId, length, width, height, floorNumber, houseId, isInside, roomName);
     }

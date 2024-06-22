@@ -68,8 +68,8 @@ class GetMaxTemperatureDifferenceControllerTest
         GenerateRandomId generateRandomId = new GenerateRandomId();
         ServiceSensor serviceSensor = new ServiceSensor(factorySensor,sensorRepository, deviceRepository, generateRandomId);
 
-        Room roomOutside = factoryRoom.createRoom( new HouseId("h1"), new RoomID("r1"), new FloorNumber(1), new Dimensions(new Length(10),new Width(10),new Height(10)), false, new RoomName("room1"));
-        Room roomInside = factoryRoom.createRoom( new HouseId("h1"), new RoomID("r2"), new FloorNumber(1), new Dimensions(new Length(10),new Width(10),new Height(10)), true, new RoomName("room2"));
+        Room roomOutside = factoryRoom.createRoom( new HouseId("h1"), new RoomID("r1"), new FloorNumber(1), new Dimensions(new Length(10),new Width(10),new Height(10)), new IsInside(false), new RoomName("room1"));
+        Room roomInside = factoryRoom.createRoom( new HouseId("h1"), new RoomID("r2"), new FloorNumber(1), new Dimensions(new Length(10),new Width(10),new Height(10)), new IsInside(true), new RoomName("room2"));
         roomRepository.save(roomOutside);
         roomRepository.save(roomInside);
 
@@ -147,8 +147,8 @@ class GetMaxTemperatureDifferenceControllerTest
         GenerateRandomId generateRandomId = new GenerateRandomId();
         ServiceSensor serviceSensor = new ServiceSensor(factorySensor,sensorRepository, deviceRepository, generateRandomId);
 
-        Room roomOutside = factoryRoom.createRoom( new HouseId("h1"), new RoomID("r1"), new FloorNumber(1), new Dimensions(new Length(10),new Width(10),new Height(10)), false, new RoomName("room1"));
-        Room roomInside = factoryRoom.createRoom( new HouseId("h1"), new RoomID("r2"), new FloorNumber(1), new Dimensions(new Length(10),new Width(10),new Height(10)), true, new RoomName("room2"));
+        Room roomOutside = factoryRoom.createRoom( new HouseId("h1"), new RoomID("r1"), new FloorNumber(1), new Dimensions(new Length(10),new Width(10),new Height(10)), new IsInside(false), new RoomName("room1"));
+        Room roomInside = factoryRoom.createRoom( new HouseId("h1"), new RoomID("r2"), new FloorNumber(1), new Dimensions(new Length(10),new Width(10),new Height(10)), new IsInside(true), new RoomName("room2"));
         roomRepository.save(roomOutside);
         roomRepository.save(roomInside);
 
@@ -228,8 +228,8 @@ class GetMaxTemperatureDifferenceControllerTest
         GenerateRandomId generateRandomId = new GenerateRandomId();
         ServiceSensor serviceSensor = new ServiceSensor(factorySensor,sensorRepository, deviceRepository, generateRandomId);
 
-        Room roomOutside = factoryRoom.createRoom( new HouseId("h1"), new RoomID("r1"), new FloorNumber(1), new Dimensions(new Length(10),new Width(10),new Height(10)), false, new RoomName("room1"));
-        Room roomInside = factoryRoom.createRoom( new HouseId("h1"), new RoomID("r2"), new FloorNumber(1), new Dimensions(new Length(10),new Width(10),new Height(10)), true, new RoomName("room2"));
+        Room roomOutside = factoryRoom.createRoom( new HouseId("h1"), new RoomID("r1"), new FloorNumber(1), new Dimensions(new Length(10),new Width(10),new Height(10)), new IsInside(false), new RoomName("room1"));
+        Room roomInside = factoryRoom.createRoom( new HouseId("h1"), new RoomID("r2"), new FloorNumber(1), new Dimensions(new Length(10),new Width(10),new Height(10)), new IsInside(true), new RoomName("room2"));
         roomRepository.save(roomOutside);
         roomRepository.save(roomInside);
 
@@ -312,8 +312,8 @@ class GetMaxTemperatureDifferenceControllerTest
         GenerateRandomId generateRandomId = new GenerateRandomId();
         ServiceSensor serviceSensor = new ServiceSensor(factorySensor,sensorRepository, deviceRepository, generateRandomId);
 
-        Room roomOutside = factoryRoom.createRoom( new HouseId("h1"), new RoomID("r1"), new FloorNumber(1), new Dimensions(new Length(10),new Width(10),new Height(10)), false, new RoomName("room1"));
-        Room roomInside = factoryRoom.createRoom( new HouseId("h1"), new RoomID("r2"), new FloorNumber(1), new Dimensions(new Length(10),new Width(10),new Height(10)), true, new RoomName("room2"));
+        Room roomOutside = factoryRoom.createRoom( new HouseId("h1"), new RoomID("r1"), new FloorNumber(1), new Dimensions(new Length(10),new Width(10),new Height(10)),new IsInside(false), new RoomName("room1"));
+        Room roomInside = factoryRoom.createRoom( new HouseId("h1"), new RoomID("r2"), new FloorNumber(1), new Dimensions(new Length(10),new Width(10),new Height(10)),new IsInside(true), new RoomName("room2"));
         roomRepository.save(roomOutside);
         roomRepository.save(roomInside);
 
@@ -395,8 +395,8 @@ class GetMaxTemperatureDifferenceControllerTest
         ServiceSensor serviceSensor = new ServiceSensor(factorySensor,sensorRepository, deviceRepository, generateRandomId);
 
 
-        Room roomOutside = factoryRoom.createRoom( new HouseId("h1"), new RoomID("r1"), new FloorNumber(1), new Dimensions(new Length(10),new Width(10),new Height(10)), false, new RoomName("room1"));
-        Room roomInside = factoryRoom.createRoom( new HouseId("h1"), new RoomID("r2"), new FloorNumber(1), new Dimensions(new Length(10),new Width(10),new Height(10)), true, new RoomName("room2"));
+        Room roomOutside = factoryRoom.createRoom( new HouseId("h1"), new RoomID("r1"), new FloorNumber(1), new Dimensions(new Length(10),new Width(10),new Height(10)),new IsInside(false), new RoomName("room1"));
+        Room roomInside = factoryRoom.createRoom( new HouseId("h1"), new RoomID("r2"), new FloorNumber(1), new Dimensions(new Length(10),new Width(10),new Height(10)), new IsInside(true), new RoomName("room2"));
         roomRepository.save(roomOutside);
         roomRepository.save(roomInside);
 
@@ -475,8 +475,8 @@ class GetMaxTemperatureDifferenceControllerTest
         ServiceSensor serviceSensor = new ServiceSensor(factorySensor,sensorRepository, deviceRepository, generateRandomId);
 
 
-        Room roomOutside = factoryRoom.createRoom( new HouseId("h1"), new RoomID("r1"), new FloorNumber(1), new Dimensions(new Length(10),new Width(10),new Height(10)), false, new RoomName("room1"));
-        Room roomInside = factoryRoom.createRoom( new HouseId("h1"), new RoomID("r2"), new FloorNumber(1), new Dimensions(new Length(10),new Width(10),new Height(10)), true, new RoomName("room2"));
+        Room roomOutside = factoryRoom.createRoom( new HouseId("h1"), new RoomID("r1"), new FloorNumber(1), new Dimensions(new Length(10),new Width(10),new Height(10)), new IsInside(false), new RoomName("room1"));
+        Room roomInside = factoryRoom.createRoom( new HouseId("h1"), new RoomID("r2"), new FloorNumber(1), new Dimensions(new Length(10),new Width(10),new Height(10)), new IsInside(true), new RoomName("room2"));
         roomRepository.save(roomOutside);
         roomRepository.save(roomInside);
 
@@ -558,8 +558,8 @@ class GetMaxTemperatureDifferenceControllerTest
         ServiceSensor serviceSensor = new ServiceSensor(factorySensor,sensorRepository, deviceRepository, generateRandomId);
 
 
-        Room roomOutside = factoryRoom.createRoom( new HouseId("h1"), new RoomID("r1"), new FloorNumber(1), new Dimensions(new Length(10),new Width(10),new Height(10)), false, new RoomName("room1"));
-        Room roomInside = factoryRoom.createRoom( new HouseId("h1"), new RoomID("r2"), new FloorNumber(1), new Dimensions(new Length(10),new Width(10),new Height(10)), true, new RoomName("room2"));
+        Room roomOutside = factoryRoom.createRoom( new HouseId("h1"), new RoomID("r1"), new FloorNumber(1), new Dimensions(new Length(10),new Width(10),new Height(10)), new IsInside(false), new RoomName("room1"));
+        Room roomInside = factoryRoom.createRoom( new HouseId("h1"), new RoomID("r2"), new FloorNumber(1), new Dimensions(new Length(10),new Width(10),new Height(10)), new IsInside(true), new RoomName("room2"));
         roomRepository.save(roomOutside);
         roomRepository.save(roomInside);
 
@@ -633,8 +633,8 @@ class GetMaxTemperatureDifferenceControllerTest
         ServiceSensor serviceSensor = new ServiceSensor(factorySensor,sensorRepository, deviceRepository, generateRandomId);
 
 
-        Room roomOutside = factoryRoom.createRoom( new HouseId("h1"), new RoomID("r1"), new FloorNumber(1), new Dimensions(new Length(10),new Width(10),new Height(10)), false, new RoomName("room1"));
-        Room roomInside = factoryRoom.createRoom( new HouseId("h1"), new RoomID("r2"), new FloorNumber(1), new Dimensions(new Length(10),new Width(10),new Height(10)), true, new RoomName("room2"));
+        Room roomOutside = factoryRoom.createRoom( new HouseId("h1"), new RoomID("r1"), new FloorNumber(1), new Dimensions(new Length(10),new Width(10),new Height(10)), new IsInside(false), new RoomName("room1"));
+        Room roomInside = factoryRoom.createRoom( new HouseId("h1"), new RoomID("r2"), new FloorNumber(1), new Dimensions(new Length(10),new Width(10),new Height(10)), new IsInside(true), new RoomName("room2"));
         roomRepository.save(roomOutside);
         roomRepository.save(roomInside);
 

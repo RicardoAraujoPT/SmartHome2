@@ -3,6 +3,7 @@ package smartHomeDDD.domain.repository;
 import org.springframework.dao.DataIntegrityViolationException;
 import smartHomeDDD.domain.room.Room;
 import smartHomeDDD.domain.valueobject.HouseId;
+import smartHomeDDD.domain.valueobject.IsInside;
 import smartHomeDDD.domain.valueobject.RoomID;
 import smartHomeDDD.persistence.mem.RepositoryRoomMem;
 import org.junit.jupiter.api.Test;
@@ -191,19 +192,25 @@ class RepositoryRoomMemTest {
 
     @Test
     void ListOfOutsideRooms_shouldReturnEmptyList() {
-        //Arrange
+        // Arrange
         IRepositoryRoom repository = new RepositoryRoomMem();
         Room room1 = mock(Room.class);
+        IsInside isInside1 = mock(IsInside.class);
         when(room1.identity()).thenReturn(mock(RoomID.class));
-        when(room1.isInside()).thenReturn(true);
+        when(room1.getIsInside()).thenReturn(isInside1);
+        when(isInside1.getIsInside()).thenReturn(true); // room1 is inside
 
         Room room2 = mock(Room.class);
+        IsInside isInside2 = mock(IsInside.class);
         when(room2.identity()).thenReturn(mock(RoomID.class));
-        when(room2.isInside()).thenReturn(true);
+        when(room2.getIsInside()).thenReturn(isInside2);
+        when(isInside2.getIsInside()).thenReturn(true); // room2 is inside
 
         Room room3 = mock(Room.class);
+        IsInside isInside3 = mock(IsInside.class);
         when(room3.identity()).thenReturn(mock(RoomID.class));
-        when(room3.isInside()).thenReturn(true);
+        when(room3.getIsInside()).thenReturn(isInside3);
+        when(isInside3.getIsInside()).thenReturn(true); // room3 is inside
 
         repository.save(room1);
         repository.save(room2);
@@ -211,31 +218,38 @@ class RepositoryRoomMemTest {
 
         Iterable<Room> allRooms = repository.findAll();
 
-        //Act
+        // Act
         List<Room> outsideRooms = repository.getOutsideRooms(allRooms);
 
-        //Assert
+        // Assert
         assertTrue(outsideRooms.isEmpty());
     }
 
-    /**
+
+        /**
      * Verifies that the getOutsideRooms method returns a list of outside rooms when there are outside rooms in the repository.
      */
     @Test
     void ListOfOutsideRooms_shouldReturnListOfOutsideRooms() {
-        //Arrange
+        // Arrange
         IRepositoryRoom repository = new RepositoryRoomMem();
         Room room1 = mock(Room.class);
+        IsInside isInside1 = mock(IsInside.class);
         when(room1.identity()).thenReturn(mock(RoomID.class));
-        when(room1.isInside()).thenReturn(false);
+        when(room1.getIsInside()).thenReturn(isInside1);
+        when(isInside1.getIsInside()).thenReturn(false); // room1 is outside
 
         Room room2 = mock(Room.class);
+        IsInside isInside2 = mock(IsInside.class);
         when(room2.identity()).thenReturn(mock(RoomID.class));
-        when(room2.isInside()).thenReturn(true);
+        when(room2.getIsInside()).thenReturn(isInside2);
+        when(isInside2.getIsInside()).thenReturn(true); // room2 is inside
 
         Room room3 = mock(Room.class);
+        IsInside isInside3 = mock(IsInside.class);
         when(room3.identity()).thenReturn(mock(RoomID.class));
-        when(room3.isInside()).thenReturn(false);
+        when(room3.getIsInside()).thenReturn(isInside3);
+        when(isInside3.getIsInside()).thenReturn(false); // room3 is outside
 
         repository.save(room1);
         repository.save(room2);
@@ -243,11 +257,15 @@ class RepositoryRoomMemTest {
 
         Iterable<Room> allRooms = repository.findAll();
 
-        //Act
+        // Act
         List<Room> outsideRooms = repository.getOutsideRooms(allRooms);
 
-        //Assert
+        // Assert
         assertFalse(outsideRooms.isEmpty());
+        assertEquals(2, outsideRooms.size());
+        assertTrue(outsideRooms.contains(room1));
+        assertTrue(outsideRooms.contains(room3));
+        assertFalse(outsideRooms.contains(room2));
     }
 
 }

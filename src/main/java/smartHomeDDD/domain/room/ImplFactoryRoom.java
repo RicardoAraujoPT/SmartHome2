@@ -24,7 +24,7 @@ public class ImplFactoryRoom implements FactoryRoom {
      * @return Room object
      */
     @Override
-    public Room createRoom(HouseId houseId, RoomID roomId, FloorNumber floorNumber, Dimensions dimensions, boolean isInside, RoomName roomName)
+    public Room createRoom(HouseId houseId, RoomID roomId, FloorNumber floorNumber, Dimensions dimensions, IsInside isInside, RoomName roomName)
     {
         return new Room(houseId, roomId, floorNumber, dimensions, isInside, roomName);
     }

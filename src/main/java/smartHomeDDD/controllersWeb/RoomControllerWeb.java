@@ -60,12 +60,12 @@ public class RoomControllerWeb {
     public ResponseEntity<?> addRoom(@RequestBody RoomEntryWebDTO roomWebDTO) {
         try {
             HouseId houseId = HouseMapper.DTOToHouseId(roomWebDTO.getHouseId());
+            IsInside isInside = RoomMapper.DTOToIsInside(roomWebDTO.isInside());
             FloorNumber floorNumber = RoomMapper.DTOToFloorNumber(roomWebDTO.getFloorNumber());
             Length length = RoomMapper.DTOToLength(roomWebDTO.getLength());
             Width width = RoomMapper.DTOToWidth(roomWebDTO.getWidth());
             Height height = RoomMapper.DTOToHeight(roomWebDTO.getHeight());
             Dimensions dimensions = RoomMapper.DTOToDimensions(length, width, height);
-            boolean isInside = roomWebDTO.isInside();
             RoomName roomName = RoomMapper.DTOToRoomName(roomWebDTO.getRoomName());
 
             Room addedRoom = serviceRoom.addRoomToHouse(houseId, floorNumber, dimensions, isInside, roomName);

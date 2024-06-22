@@ -26,7 +26,7 @@ public class Room implements AggregateRoot<RoomID> {
     /**
      * boolean value that indicates whether the room is inside the house.
      */
-    private final boolean isInside;
+    private final IsInside isInside;
 
     /**
      * The name of the room.
@@ -45,7 +45,7 @@ public class Room implements AggregateRoot<RoomID> {
      * @throws IllegalArgumentException If any of the parameters are null.
      */
 
-    protected Room(HouseId houseId, RoomID roomId, FloorNumber floorNumber, Dimensions dimensions, boolean isInside, RoomName roomName) {
+    protected Room(HouseId houseId, RoomID roomId, FloorNumber floorNumber, Dimensions dimensions, IsInside isInside, RoomName roomName) {
         this._roomID = roomId;
         this._houseId = houseId;
         this.m_floorNumber = floorNumber;
@@ -88,7 +88,7 @@ public class Room implements AggregateRoot<RoomID> {
     /**
      * Retrieves the state of the room regarding whether it's inside or outside.
      */
-    public boolean isInside() {
+    public IsInside getIsInside() {
         return isInside;
     }
 

@@ -97,7 +97,7 @@ public class Main extends SpringBootServletInitializer {
                                 new Length(Integer.parseInt(roomParts[3])),
                                 new Width(Integer.parseInt(roomParts[4])),
                                 new Height(Integer.parseInt(roomParts[5]))),
-                        Boolean.parseBoolean(roomParts[6]),
+                        new IsInside(Boolean.parseBoolean(roomParts[6])),
                         new RoomName(roomParts[7])
                 );
 

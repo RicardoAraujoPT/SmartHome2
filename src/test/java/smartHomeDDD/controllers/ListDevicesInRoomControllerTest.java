@@ -58,8 +58,8 @@ class ListDevicesInRoomControllerTest {
         deviceRepo.save(device3);
 
         ImplFactoryRoom factoryRoom = new ImplFactoryRoom();
-        Room room1 = factoryRoom.createRoom(new HouseId("House1"), roomId, new FloorNumber(0), new Dimensions(new Length(15.0), new Width(7.5), new Height(2.5)), true, roomName1);
-        Room room2 = factoryRoom.createRoom(new HouseId("House1"), roomID2, new FloorNumber(0), new Dimensions(new Length(15.0), new Width(7.5), new Height(2.5)), true, roomName2);
+        Room room1 = factoryRoom.createRoom(new HouseId("House1"), roomId, new FloorNumber(0), new Dimensions(new Length(15.0), new Width(7.5), new Height(2.5)), new IsInside(true), roomName1);
+        Room room2 = factoryRoom.createRoom(new HouseId("House1"), roomID2, new FloorNumber(0), new Dimensions(new Length(15.0), new Width(7.5), new Height(2.5)), new IsInside(true), roomName2);
 
         RepositoryRoomMem roomRepo = new RepositoryRoomMem();
         roomRepo.save(room1);
@@ -112,9 +112,9 @@ class ListDevicesInRoomControllerTest {
         deviceRepo.save(device3);
 
         ImplFactoryRoom factoryRoom = new ImplFactoryRoom();
-        Room room1 = factoryRoom.createRoom(new HouseId("House1"), roomID1, new FloorNumber(0), new Dimensions(new Length(15.0), new Width(7.5), new Height(2.5)), true, roomName1);
-        Room room2 = factoryRoom.createRoom(new HouseId("House1"), roomID2, new FloorNumber(0), new Dimensions(new Length(15.0), new Width(7.5), new Height(2.5)), true, roomName2);
-        Room room3 = factoryRoom.createRoom(new HouseId("House1"), roomID3, new FloorNumber(0), new Dimensions(new Length(15.0), new Width(7.5), new Height(2.5)), true, roomName3);
+        Room room1 = factoryRoom.createRoom(new HouseId("House1"), roomID1, new FloorNumber(0), new Dimensions(new Length(15.0), new Width(7.5), new Height(2.5)), new IsInside(true), roomName1);
+        Room room2 = factoryRoom.createRoom(new HouseId("House1"), roomID2, new FloorNumber(0), new Dimensions(new Length(15.0), new Width(7.5), new Height(2.5)), new IsInside(true), roomName2);
+        Room room3 = factoryRoom.createRoom(new HouseId("House1"), roomID3, new FloorNumber(0), new Dimensions(new Length(15.0), new Width(7.5), new Height(2.5)), new IsInside(true), roomName3);
 
         RepositoryRoomMem roomRepo = new RepositoryRoomMem();
         roomRepo.save(room1);
@@ -164,8 +164,8 @@ class ListDevicesInRoomControllerTest {
         deviceRepo.save(device3);
 
         ImplFactoryRoom factoryRoom = new ImplFactoryRoom();
-        Room room1 = factoryRoom.createRoom(new HouseId("House1"), roomID1, new FloorNumber(0), new Dimensions(new Length(15.0), new Width(7.5), new Height(2.5)), true, roomName1);
-        Room room2 = factoryRoom.createRoom(new HouseId("House1"), roomID2, new FloorNumber(0), new Dimensions(new Length(15.0), new Width(7.5), new Height(2.5)), true, roomName2);
+        Room room1 = factoryRoom.createRoom(new HouseId("House1"), roomID1, new FloorNumber(0), new Dimensions(new Length(15.0), new Width(7.5), new Height(2.5)), new IsInside(true), roomName1);
+        Room room2 = factoryRoom.createRoom(new HouseId("House1"), roomID2, new FloorNumber(0), new Dimensions(new Length(15.0), new Width(7.5), new Height(2.5)), new IsInside(true), roomName2);
 
         RepositoryRoomMem roomRepo = new RepositoryRoomMem();
         roomRepo.save(room1);
@@ -215,8 +215,8 @@ class ListDevicesInRoomControllerTest {
         deviceRepo.save(device3);
 
         ImplFactoryRoom factoryRoom = new ImplFactoryRoom();
-        Room room1 = factoryRoom.createRoom(new HouseId("House1"), roomID1, new FloorNumber(0), new Dimensions(new Length(15.0), new Width(7.5), new Height(2.5)), true, roomName1);
-        Room room2 = factoryRoom.createRoom(new HouseId("House1"), roomID2, new FloorNumber(0), new Dimensions(new Length(15.0), new Width(7.5), new Height(2.5)), true, roomName2);
+        Room room1 = factoryRoom.createRoom(new HouseId("House1"), roomID1, new FloorNumber(0), new Dimensions(new Length(15.0), new Width(7.5), new Height(2.5)), new IsInside(true), roomName1);
+        Room room2 = factoryRoom.createRoom(new HouseId("House1"), roomID2, new FloorNumber(0), new Dimensions(new Length(15.0), new Width(7.5), new Height(2.5)), new IsInside(true), roomName2);
 
         RepositoryRoomMem roomRepo = new RepositoryRoomMem();
         roomRepo.save(room1);

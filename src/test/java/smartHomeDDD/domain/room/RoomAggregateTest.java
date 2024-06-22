@@ -34,13 +34,13 @@ class RoomAggregateTest {
     void validArguments_shouldCreateARoom() {
         // Arrange
         HouseId houseIdDouble = mock(HouseId.class);
+        IsInside isInside = new IsInside(true);
         RoomID roomID = new RoomID("1");
         FloorNumber floorNumber = new FloorNumber(3);
         Length length = new Length(10.5);
         Width width = new Width(10.5);
         Height height = new Height(10.5);
         Dimensions dimensions = new Dimensions(length, width, height);
-        boolean isInside = true;
         RoomName roomName = new RoomName("Living Room");
 
         // Act
@@ -62,12 +62,12 @@ class RoomAggregateTest {
         // Arrange
         HouseId houseIdDouble = mock(HouseId.class);
         RoomID roomID = new RoomID("1");
+        IsInside isInside = new IsInside(true);
         FloorNumber floorNumber = new FloorNumber(3);
         Length length = new Length(10.5);
         Width width = new Width(10.5);
         Height height = new Height(10.5);
         Dimensions dimensions = new Dimensions(length, width, height);
-        boolean isInside = true;
         RoomName roomName = new RoomName("Living Room");
         Room room = new Room(houseIdDouble, roomID, floorNumber, dimensions, isInside, roomName);
 
@@ -86,12 +86,12 @@ class RoomAggregateTest {
         // Arrange
         HouseId houseIdDouble = mock(HouseId.class);
         RoomID roomID = new RoomID("1");
+        IsInside isInside = new IsInside(true);
         FloorNumber floorNumber = new FloorNumber(3);
         Length length = new Length(10.5);
         Width width = new Width(10.5);
         Height height = new Height(10.5);
         Dimensions dimensions = new Dimensions(length, width, height);
-        boolean isInside = true;
         RoomName roomName = new RoomName("Living Room");
         Room room = new Room(houseIdDouble, roomID, floorNumber, dimensions, isInside, roomName);
 
@@ -110,12 +110,12 @@ class RoomAggregateTest {
         // Arrange
         HouseId houseIdDouble = mock(HouseId.class);
         RoomID roomID = new RoomID("1");
+        IsInside isInside = new IsInside(true);
         FloorNumber floorNumber = new FloorNumber(3);
         Length length = new Length(10.5);
         Width width = new Width(10.5);
         Height height = new Height(10.5);
         Dimensions dimensions = new Dimensions(length, width, height);
-        boolean isInside = true;
         RoomName roomName = new RoomName("Living Room");
         Room room = new Room(houseIdDouble, roomID, floorNumber, dimensions, isInside, roomName);
         Room room2 = new Room(houseIdDouble, roomID, floorNumber, dimensions, isInside, roomName);
@@ -136,12 +136,12 @@ class RoomAggregateTest {
         HouseId houseIdDouble = mock(HouseId.class);
         RoomID roomID1 = new RoomID("1");
         RoomID roomID2 = new RoomID("2");
+        IsInside isInside = new IsInside(true);
         FloorNumber floorNumber = new FloorNumber(3);
         Length length = new Length(10.5);
         Width width = new Width(10.5);
         Height height = new Height(10.5);
         Dimensions dimensions = new Dimensions(length, width, height);
-        boolean isInside = true;
         RoomName roomName = new RoomName("Living Room");
         Room room = new Room(houseIdDouble, roomID1, floorNumber, dimensions, isInside, roomName);
         Room room2 = new Room(houseIdDouble, roomID2, floorNumber, dimensions, isInside, roomName);
@@ -160,13 +160,13 @@ class RoomAggregateTest {
     void shouldReturnFalse_WhenComparingRoomWithDifferentObject() {
         // Arrange
         RoomID roomID = new RoomID("1");
+        IsInside isInside = new IsInside(true);
         HouseId houseIdDouble = mock(HouseId.class);
         FloorNumber floorNumber = new FloorNumber(3);
         Length length = new Length(10.5);
         Width width = new Width(10.5);
         Height height = new Height(10.5);
         Dimensions dimensions = new Dimensions(length, width, height);
-        boolean isInside = true;
         RoomName roomName = new RoomName("Living Room");
         Room room = new Room(houseIdDouble, roomID, floorNumber, dimensions, isInside, roomName);
         Object obj = new Object();
@@ -186,13 +186,13 @@ class RoomAggregateTest {
         // Arrange
         HouseId houseId1Double = mock(HouseId.class);
         HouseId houseId2Double = mock(HouseId.class);
+        IsInside isInside = new IsInside(true);
         RoomID roomID = new RoomID("1");
         FloorNumber floorNumber = new FloorNumber(3);
         Length length = new Length(10.5);
         Width width = new Width(10.5);
         Height height = new Height(10.5);
         Dimensions dimensions = new Dimensions(length, width, height);
-        boolean isInside = true;
         RoomName roomName = new RoomName("Living Room");
         Room room = new Room(houseId1Double, roomID, floorNumber, dimensions, isInside, roomName);
         Room room2 = new Room(houseId2Double, roomID, floorNumber, dimensions, isInside, roomName);
@@ -212,13 +212,13 @@ class RoomAggregateTest {
         // Arrange
         HouseId houseIdDouble = mock(HouseId.class);
         RoomID roomID = new RoomID("1");
+        IsInside isInside = new IsInside(true);
         FloorNumber floorNumber1 = new FloorNumber(3);
         FloorNumber floorNumber2 = new FloorNumber(4);
         Length length = new Length(10.5);
         Width width = new Width(10.5);
         Height height = new Height(10.5);
         Dimensions dimensions = new Dimensions(length, width, height);
-        boolean isInside = true;
         RoomName roomName = new RoomName("Living Room");
         Room room = new Room(houseIdDouble, roomID, floorNumber1, dimensions, isInside, roomName);
         Room room2 = new Room(houseIdDouble, roomID, floorNumber2, dimensions, isInside, roomName);
@@ -238,6 +238,7 @@ class RoomAggregateTest {
         // Arrange
         HouseId houseIdDouble = mock(HouseId.class);
         RoomID roomID = new RoomID("1");
+        IsInside isInside = new IsInside(true);
         FloorNumber floorNumber = new FloorNumber(3);
         Length length1 = new Length(10.5);
         Width width1 = new Width(10.5);
@@ -247,7 +248,6 @@ class RoomAggregateTest {
         Height height2 = new Height(10.5);
         Dimensions dimensions1 = new Dimensions(length1, width1, height1);
         Dimensions dimensions2 = new Dimensions(length2, width2, height2);
-        boolean isInside = true;
         RoomName roomName = new RoomName("Living Room");
         Room room = new Room(houseIdDouble, roomID, floorNumber, dimensions1, isInside, roomName);
         Room room2 = new Room(houseIdDouble, roomID, floorNumber, dimensions2, isInside, roomName);
@@ -268,12 +268,12 @@ class RoomAggregateTest {
         HouseId houseIdDouble = mock(HouseId.class);
         RoomID roomID1 = new RoomID("1");
         RoomID roomID2 = new RoomID("2");
+        IsInside isInside = new IsInside(true);
         FloorNumber floorNumber = new FloorNumber(3);
         Length length = new Length(10.5);
         Width width = new Width(10.5);
         Height height = new Height(10.5);
         Dimensions dimensions = new Dimensions(length, width, height);
-        boolean isInside = true;
         RoomName roomName = new RoomName("Living Room");
         Room room = new Room(houseIdDouble, roomID1, floorNumber, dimensions, isInside, roomName);
         Room room2 = new Room(houseIdDouble, roomID2, floorNumber, dimensions, isInside, roomName);
@@ -294,12 +294,12 @@ class RoomAggregateTest {
         HouseId houseId1Double = mock(HouseId.class);
         HouseId houseId2Double = mock(HouseId.class);
         RoomID roomID = new RoomID("1");
+        IsInside isInside = new IsInside(true);
         FloorNumber floorNumber = new FloorNumber(3);
         Length length = new Length(10.5);
         Width width = new Width(10.5);
         Height height = new Height(10.5);
         Dimensions dimensions = new Dimensions(length, width, height);
-        boolean isInside = true;
         RoomName roomName = new RoomName("Living Room");
         Room room = new Room(houseId1Double, roomID, floorNumber, dimensions, isInside, roomName);
         Room room2 = new Room(houseId2Double, roomID, floorNumber, dimensions, isInside, roomName);
@@ -319,13 +319,13 @@ class RoomAggregateTest {
         // Arrange
         HouseId houseIdDouble = mock(HouseId.class);
         RoomID roomID = new RoomID("1");
+        IsInside isInside = new IsInside(true);
         FloorNumber floorNumber1 = new FloorNumber(3);
         FloorNumber floorNumber2 = new FloorNumber(4);
         Length length = new Length(10.5);
         Width width = new Width(10.5);
         Height height = new Height(10.5);
         Dimensions dimensions = new Dimensions(length, width, height);
-        boolean isInside = true;
         RoomName roomName = new RoomName("Living Room");
         Room room = new Room(houseIdDouble, roomID, floorNumber1, dimensions, isInside, roomName);
         Room room2 = new Room(houseIdDouble, roomID, floorNumber2, dimensions, isInside, roomName);
@@ -345,6 +345,7 @@ class RoomAggregateTest {
         // Arrange
         HouseId houseIdDouble = mock(HouseId.class);
         RoomID roomID = new RoomID("1");
+        IsInside isInside = new IsInside(true);
         FloorNumber floorNumber = new FloorNumber(3);
         Length length1 = new Length(10.5);
         Width width1 = new Width(10.5);
@@ -354,7 +355,6 @@ class RoomAggregateTest {
         Height height2 = new Height(10.5);
         Dimensions dimensions1 = new Dimensions(length1, width1, height1);
         Dimensions dimensions2 = new Dimensions(length2, width2, height2);
-        boolean isInside = true;
         RoomName roomName = new RoomName("Living Room");
         Room room = new Room(houseIdDouble, roomID, floorNumber, dimensions1, isInside, roomName);
         Room room2 = new Room(houseIdDouble, roomID, floorNumber, dimensions2, isInside, roomName);
@@ -375,13 +375,13 @@ class RoomAggregateTest {
         // Arrange
         HouseId houseIdDouble = mock(HouseId.class);
         RoomID roomID = new RoomID("1");
+        IsInside isInside = new IsInside(true);
+        IsInside isInside2 = new IsInside(false);
         FloorNumber floorNumber = new FloorNumber(3);
         Length length1 = new Length(10.5);
         Width width1 = new Width(10.5);
         Height height1 = new Height(10.5);
         Dimensions dimensions = new Dimensions(length1, width1, height1);
-        boolean isInside = true;
-        boolean isInside2 = false;
         RoomName roomName = new RoomName("Living Room");
         Room room = new Room(houseIdDouble, roomID, floorNumber, dimensions, isInside, roomName);
         Room room2 = new Room(houseIdDouble, roomID, floorNumber, dimensions, isInside2, roomName);
@@ -403,12 +403,12 @@ class RoomAggregateTest {
         // Arrange
         HouseId houseIdDouble = mock(HouseId.class);
         RoomID roomID = new RoomID("1");
+        IsInside isInside = new IsInside(true);
         FloorNumber floorNumber = new FloorNumber(3);
         Length length1 = new Length(10.5);
         Width width1 = new Width(10.5);
         Height height1 = new Height(10.5);
         Dimensions dimensions = new Dimensions(length1, width1, height1);
-        boolean isInside = true;
         RoomName roomName = new RoomName("Living Room");
         RoomName roomName2 = new RoomName("Bedroom");
         Room room = new Room(houseIdDouble, roomID, floorNumber, dimensions, isInside, roomName);

@@ -6,6 +6,6 @@ import smartHomeDDD.domain.valueobject.*;
  * Factory for creating Room instances.
  */
 public interface FactoryRoom {
-    Room createRoom(HouseId houseId, RoomID roomId, FloorNumber floorNumber, Dimensions dimensions, boolean isInside, RoomName roomName);
+    Room createRoom(HouseId houseId, RoomID roomId, FloorNumber floorNumber, Dimensions dimensions, IsInside isInside, RoomName roomName);
 
 }

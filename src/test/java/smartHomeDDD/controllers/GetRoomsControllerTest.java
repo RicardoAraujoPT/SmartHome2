@@ -105,8 +105,8 @@ class GetRoomsControllerTest {
         HouseId houseId = new HouseId("1");
 
         FactoryRoom factoryRoom = new ImplFactoryRoom();
-        Room room1 = factoryRoom.createRoom(houseId, new RoomID("room1"), new FloorNumber(0), new Dimensions(new Length(15.0), new Width(7.5), new Height(2.5)), true, new RoomName("Living Room"));
-        Room room2 = factoryRoom.createRoom(houseId, new RoomID("room2"), new FloorNumber(0), new Dimensions(new Length(15.0), new Width(7.5), new Height(2.5)), true, new RoomName("Kitchen"));
+        Room room1 = factoryRoom.createRoom(houseId, new RoomID("room1"), new FloorNumber(0), new Dimensions(new Length(15.0), new Width(7.5), new Height(2.5)), new IsInside(true), new RoomName("Living Room"));
+        Room room2 = factoryRoom.createRoom(houseId, new RoomID("room2"), new FloorNumber(0), new Dimensions(new Length(15.0), new Width(7.5), new Height(2.5)), new IsInside(true), new RoomName("Kitchen"));
 
         IRepositoryRoom repositoryRoom = new RepositoryRoomMem();
         repositoryRoom.save(room1);
