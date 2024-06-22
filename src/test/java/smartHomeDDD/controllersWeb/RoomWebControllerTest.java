@@ -16,6 +16,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import smartHomeDDD.domain.device.Device;
+import smartHomeDDD.domain.device.FactoryDevice;
+import smartHomeDDD.domain.device.ImplFactoryDevice;
 import smartHomeDDD.domain.repository.IRepositoryDevice;
 import smartHomeDDD.domain.repository.IRepositoryHouse;
 import smartHomeDDD.domain.repository.IRepositoryRoom;
@@ -264,10 +266,11 @@ class RoomWebControllerTest {
     @Test
     void getDevicesByRoomID_shouldReturnDevices() throws Exception {
         // Arrange
+        FactoryDevice factoryDevice = new ImplFactoryDevice();
         RoomID roomID = new RoomID("r1");
 
-        Device device1 = new Device(new DeviceId("d1"), new DeviceName("name1"), new DeviceModel("model1"), new ActivationStatus(true), roomID);
-        Device device2 = new Device(new DeviceId("d2"), new DeviceName("name2"), new DeviceModel("model2"), new ActivationStatus(true), roomID);
+        Device device1 = factoryDevice.createDevice(new DeviceId("d1"), new DeviceName("name1"), new DeviceModel("model1"), new ActivationStatus(true), roomID);
+        Device device2 = factoryDevice.createDevice(new DeviceId("d2"), new DeviceName("name2"), new DeviceModel("model2"), new ActivationStatus(true), roomID);
 
         when(repositoryRoom.containsOfIdentity(roomID)).thenReturn(true);
         when(repositoryDevice.getDevicesInRoom(roomID)).thenReturn(java.util.List.of(device1, device2));

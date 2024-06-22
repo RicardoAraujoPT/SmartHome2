@@ -51,7 +51,7 @@ public class Device implements AggregateRoot<DeviceId> {
      * @param roomId      The unique identifier for the room in which the device is located.
      * @throws IllegalArgumentException If any of the arguments are invalid.
      */
-    public Device(DeviceId deviceId, DeviceName deviceName, DeviceModel deviceModel, ActivationStatus status, RoomID roomId)
+    protected Device(DeviceId deviceId, DeviceName deviceName, DeviceModel deviceModel, ActivationStatus status, RoomID roomId)
     {
 
         if (status.toString().contains("false"))

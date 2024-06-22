@@ -314,12 +314,9 @@ class RepositoryDeviceMemTest {
     void savePowerGridMeterDevice_ShouldThrowException() {
         // Arrange
         IRepositoryDevice repository = new RepositoryDeviceMem();
-        DeviceId deviceId = new DeviceId("PowerGridMeter");
-        DeviceName deviceName = new DeviceName("123");
-        DeviceModel deviceModel = new DeviceModel("Dyson");
-        RoomID roomId = new RoomID("room1");
-        ActivationStatus activationStatus = new ActivationStatus(true);
-        Device device = new Device(deviceId,deviceName,deviceModel,activationStatus,roomId);
+        DeviceId deviceId = mock(DeviceId.class);
+        Device device = mock(Device.class);
+        when(device.identity()).thenReturn(deviceId);
         repository.save(device);
 
         String expectedMessage = "Device already exists";
