@@ -59,7 +59,7 @@ class ActuatorModelTest {
         // Act
         ActuatorModel myActuatorModel = new ActuatorModel(modelIDDouble, typeIDDouble);
         // Act
-        boolean isEquals = false;
+        boolean isEquals = myActuatorModel.equals(null);
         // Assert
         assertFalse(isEquals);
     }
@@ -91,10 +91,10 @@ class ActuatorModelTest {
         ActuatorModelID modelIDDouble = mock(ActuatorModelID.class);
         ActuatorTypeID typeIDDouble = mock(ActuatorTypeID.class);
         // Second actuator
-        ActuatorModelID ModelID2 = new ActuatorModelID("OPNCL0100");
+        ActuatorModelID modelIDDouble2 = mock(ActuatorModelID.class);
         // Act
         ActuatorModel myActuatorModel = new ActuatorModel(modelIDDouble, typeIDDouble);
-        ActuatorModel myActuatorModel2 = new ActuatorModel(ModelID2, typeIDDouble);
+        ActuatorModel myActuatorModel2 = new ActuatorModel(modelIDDouble2, typeIDDouble);
         boolean isEquals = myActuatorModel.sameAs(myActuatorModel2);
         // Assert
         assertFalse(isEquals);
@@ -132,7 +132,7 @@ class ActuatorModelTest {
         boolean isEquals = myActuatorModel.equals(myActuatorModel);
 
         // Assert
-        assertTrue(true);
+        assertTrue(isEquals);
     }
 
     /**
@@ -180,7 +180,7 @@ class ActuatorModelTest {
         // Arrange
         ActuatorModelID modelID1 = mock(ActuatorModelID.class);
         ActuatorModelID modelID2 = mock(ActuatorModelID.class);
-        ActuatorTypeID typeID = new ActuatorTypeID("Type1");
+        ActuatorTypeID typeID = mock(ActuatorTypeID.class);
 
         ActuatorModel actuatorModel1 = new ActuatorModel(modelID1, typeID);
         ActuatorModel actuatorModel2 = new ActuatorModel(modelID2, typeID);
@@ -200,7 +200,7 @@ class ActuatorModelTest {
         // Arrange
         ActuatorModelID modelID1 = mock(ActuatorModelID.class);
         ActuatorModelID modelID2 = mock(ActuatorModelID.class);
-        ActuatorTypeID typeID = new ActuatorTypeID("Type1");
+        ActuatorTypeID typeID = mock(ActuatorTypeID.class);
 
         ActuatorModel actuatorModel1 = new ActuatorModel(modelID1, typeID);
         ActuatorModel actuatorModel2 = new ActuatorModel(modelID2, typeID);

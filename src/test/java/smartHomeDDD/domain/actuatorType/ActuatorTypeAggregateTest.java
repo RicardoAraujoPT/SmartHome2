@@ -43,10 +43,10 @@ class ActuatorTypeAggregateTest {
         ImplFactoryActuatorType factoryActuatorType = new ImplFactoryActuatorType();
         Unit unit = new Unit("Celsius");
         Description description = new Description("ActuatorOnOff");
-        ActuatorTypeID actuatorTypeIDDouble = new ActuatorTypeID("actuatorTypeID1");
+        ActuatorTypeID actuatorTypeID = new ActuatorTypeID("actuatorTypeID1");
 
         // Act
-        ActuatorType actuatorType = factoryActuatorType.createActuatorType(unit, description, actuatorTypeIDDouble);
+        ActuatorType actuatorType = factoryActuatorType.createActuatorType(unit, description, actuatorTypeID);
 
         // Assert
         assertEquals(actuatorType.getDescription(), description);
@@ -61,13 +61,13 @@ class ActuatorTypeAggregateTest {
         ImplFactoryActuatorType factoryActuatorType = new ImplFactoryActuatorType();
         Unit unit = new Unit("Celsius");
         Description description = new Description("ActuatorOnOff");
-        ActuatorTypeID actuatorTypeIDDouble = new ActuatorTypeID("actuatorTypeID1");
+        ActuatorTypeID actuatorTypeID = new ActuatorTypeID("actuatorTypeID1");
 
         // Act
-        ActuatorType actuatorType = factoryActuatorType.createActuatorType(unit, description, actuatorTypeIDDouble);
+        ActuatorType actuatorType = factoryActuatorType.createActuatorType(unit, description, actuatorTypeID);
 
         // Assert
-        assertEquals(actuatorType.identity(), actuatorTypeIDDouble);
+        assertEquals(actuatorType.identity(), actuatorTypeID);
     }
 
 
@@ -80,10 +80,10 @@ class ActuatorTypeAggregateTest {
         ImplFactoryActuatorType factoryActuatorType = new ImplFactoryActuatorType();
         Unit unit = new Unit("Celsius");
         Description description = new Description("ActuatorOnOff");
-        ActuatorTypeID actuatorTypeIDDouble = new ActuatorTypeID("actuatorTypeID1");
+        ActuatorTypeID actuatorTypeID = new ActuatorTypeID("actuatorTypeID1");
 
-        ActuatorType actuatorType = factoryActuatorType.createActuatorType(unit, description, actuatorTypeIDDouble);
-        ActuatorType actuatorType2 = factoryActuatorType.createActuatorType(unit, description, actuatorTypeIDDouble);
+        ActuatorType actuatorType = factoryActuatorType.createActuatorType(unit, description, actuatorTypeID);
+        ActuatorType actuatorType2 = factoryActuatorType.createActuatorType(unit, description, actuatorTypeID);
 
         // Act
         boolean isEquals = actuatorType.sameAs(actuatorType2);
@@ -114,5 +114,4 @@ class ActuatorTypeAggregateTest {
         // Assert
         assertFalse(isEquals);
     }
-
 }

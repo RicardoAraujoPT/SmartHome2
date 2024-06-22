@@ -118,10 +118,10 @@ class ActuatorTypeTest {
         Unit unit = mock(Unit.class);
         Description description = mock(Description.class);
         ActuatorTypeID actuatorTypeID = mock(ActuatorTypeID.class);
-        new ActuatorType(unit, description, actuatorTypeID);
+        ActuatorType actuatorType = new ActuatorType(unit, description, actuatorTypeID);
 
         // Act
-        boolean isEqual = false;
+        boolean isEqual = actuatorType.equals(null);
 
         // Assert
         assertFalse(isEqual);
@@ -153,9 +153,14 @@ class ActuatorTypeTest {
         // Arrange
         Description description = mock(Description.class);
         ActuatorTypeID actuatorTypeID = mock(ActuatorTypeID.class);
+        String expectedMessage = "Unit cannot be null";
 
-        // Act and Assert
-        assertThrows(IllegalArgumentException.class, () -> new ActuatorType(null, description, actuatorTypeID));
+        // Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> new ActuatorType(null, description, actuatorTypeID));
+        String actualMessage = exception.getMessage();
+
+        // Assert
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     /**
@@ -166,9 +171,14 @@ class ActuatorTypeTest {
         // Arrange
         Unit unit = mock(Unit.class);
         Description description = mock(Description.class);
+        String expectedMessage = "ActuatorTypeID cannot be null";
 
-        // Act and Assert
-        assertThrows(IllegalArgumentException.class, () -> new ActuatorType(unit, description, null));
+        // Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> new ActuatorType(unit, description, null));
+        String actualMessage = exception.getMessage();
+
+        //Assert
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     /**
@@ -179,9 +189,14 @@ class ActuatorTypeTest {
         // Arrange
         Unit unit = mock(Unit.class);
         ActuatorTypeID actuatorTypeID = mock(ActuatorTypeID.class);
+        String expectedMessage = "Description cannot be null";
 
-        // Act and Assert
-        assertThrows(IllegalArgumentException.class, () -> new ActuatorType(unit, null, actuatorTypeID));
+        // Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> new ActuatorType(unit, null, actuatorTypeID));
+        String actualMessage = exception.getMessage();
+
+        // Assert
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     /**
@@ -306,18 +321,12 @@ class ActuatorTypeTest {
         Unit unitDouble = mock(Unit.class);
         Description descriptionDouble = mock(Description.class);
         ActuatorTypeID actuatorTypeIDDouble = mock(ActuatorTypeID.class);
-
-        // Act
         ActuatorType actuatorType = new ActuatorType(unitDouble, descriptionDouble, actuatorTypeIDDouble);
 
+        // Act
+        boolean isEquals = actuatorType.equals(actuatorType);
+
         // Assert
-        assertEquals(actuatorType, actuatorType);
+        assertTrue(isEquals);
     }
 }
-
-
-
-
-
-
-
