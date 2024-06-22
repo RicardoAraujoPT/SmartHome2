@@ -26,6 +26,8 @@ import smartHomeDDD.domain.sensor.TSY01;
 import smartHomeDDD.domain.sensorModel.FactorySensorModel;
 import smartHomeDDD.domain.sensorModel.ImplFactorySensorModel;
 import smartHomeDDD.domain.sensorModel.SensorModel;
+import smartHomeDDD.domain.sensorReading.FactorySensorReading;
+import smartHomeDDD.domain.sensorReading.ImplFactorySensorReading;
 import smartHomeDDD.domain.sensorReading.SensorReading;
 import smartHomeDDD.domain.sensorType.FactorySensorType;
 import smartHomeDDD.domain.sensorType.ImplFactorySensorType;
@@ -532,11 +534,12 @@ class DeviceControllerWebTest {
     @Test
     void getSensorReadingsOfDevice_shouldReturnListOfSensors() throws Exception {
         // Arrange
+        FactorySensorReading factorySensorReading = new ImplFactorySensorReading();
         DeviceEntryWebDTO deviceEntryWebDTO = new DeviceEntryWebDTO("r1", "lamp", "siemens", true);
         when(generateRandomId.generateID()).thenReturn("d1");
         Device device = setupDevice(deviceEntryWebDTO);
         Timestamp t1 = Timestamp.valueOf("2021-01-01 11:00:00");
-        SensorReading sensorReading = new SensorReading(new SensorReadingID("sr1"), new Reading("10"), new DeviceId("d1"), new SensorID("s1"), t1);
+        SensorReading sensorReading = factorySensorReading.createSensorReading(new SensorReadingID("sr1"), new Reading("10"), new DeviceId("d1"), new SensorID("s1"), t1);
 
         when(repositoryDevice.containsOfIdentity(device.identity())).thenReturn(true);
         when(repositorySensorReading.getSensorReadingsByDeviceId(device.identity())).thenReturn(List.of(sensorReading));

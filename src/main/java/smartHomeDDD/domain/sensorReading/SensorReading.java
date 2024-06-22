@@ -43,7 +43,7 @@ public class SensorReading implements AggregateRoot<SensorReadingID>
      * @param sensorID  The unique identifier of the Sensor which the reading belongs to.
      * @param timeStamp The timestamp of the sensor reading.
      */
-    public SensorReading(SensorReadingID sensorReadingID, Reading reading, DeviceId deviceID, SensorID sensorID, Timestamp timeStamp)
+    protected SensorReading(SensorReadingID sensorReadingID, Reading reading, DeviceId deviceID, SensorID sensorID, Timestamp timeStamp)
     {
         this._sensorReadingID = sensorReadingID;
         this._reading = reading;

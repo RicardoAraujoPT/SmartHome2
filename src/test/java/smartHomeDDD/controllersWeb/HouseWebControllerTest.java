@@ -24,6 +24,8 @@ import smartHomeDDD.domain.room.ImplFactoryRoom;
 import smartHomeDDD.domain.room.Room;
 import smartHomeDDD.domain.sensor.FactorySensor;
 import smartHomeDDD.domain.sensor.Sensor;
+import smartHomeDDD.domain.sensorReading.FactorySensorReading;
+import smartHomeDDD.domain.sensorReading.ImplFactorySensorReading;
 import smartHomeDDD.domain.sensorReading.SensorReading;
 import smartHomeDDD.domain.valueobject.*;
 
@@ -467,6 +469,7 @@ class HouseWebControllerTest {
         //Arrange
         HouseId houseID = new HouseId("House01");
         FactoryDevice factoryDevice = new ImplFactoryDevice();
+        FactorySensorReading factorySensorReading = new ImplFactorySensorReading();
         // get house id from repo
         when(repositoryHouse.containsOfIdentity(new HouseId("House01"))).thenReturn(true);
 
@@ -511,14 +514,14 @@ class HouseWebControllerTest {
         when(repositorySensor.findAll()).thenReturn(sensors);
 
         // readings for air conditioner
-        SensorReading sensorReading = new SensorReading(new SensorReadingID("sensorReading1"), new Reading("10"), id1, sId1, Timestamp.valueOf("2021-01-01 11:00:00"));
-        SensorReading sensorReading1 = new SensorReading(new SensorReadingID("sensorReading2"), new Reading("3"), id1, sId1, Timestamp.valueOf("2021-01-01 11:30:00"));
+        SensorReading sensorReading = factorySensorReading.createSensorReading(new SensorReadingID("sensorReading1"), new Reading("10"), id1, sId1, Timestamp.valueOf("2021-01-01 11:00:00"));
+        SensorReading sensorReading1 = factorySensorReading.createSensorReading(new SensorReadingID("sensorReading2"), new Reading("3"), id1, sId1, Timestamp.valueOf("2021-01-01 11:30:00"));
         // readings for fridge
-        SensorReading sensorReading2 = new SensorReading(new SensorReadingID("sensorReading3"), new Reading("10"), id2, sId2, Timestamp.valueOf("2021-01-01 12:00:38"));
-        SensorReading sensorReading3 = new SensorReading(new SensorReadingID("sensorReading4"), new Reading("30"), id2, sId2, Timestamp.valueOf("2021-01-01 12:45:00"));
+        SensorReading sensorReading2 = factorySensorReading.createSensorReading(new SensorReadingID("sensorReading3"), new Reading("10"), id2, sId2, Timestamp.valueOf("2021-01-01 12:00:38"));
+        SensorReading sensorReading3 = factorySensorReading.createSensorReading(new SensorReadingID("sensorReading4"), new Reading("30"), id2, sId2, Timestamp.valueOf("2021-01-01 12:45:00"));
         // readings for microwave
-        SensorReading sensorReading4 = new SensorReading(new SensorReadingID("sensorReading5"), new Reading("7"), id3, sId3, Timestamp.valueOf("2021-01-01 14:46:00"));
-        SensorReading sensorReading5 = new SensorReading(new SensorReadingID("sensorReading6"), new Reading("30"), id3, sId3, Timestamp.valueOf("2021-01-01 15:55:20"));
+        SensorReading sensorReading4 = factorySensorReading.createSensorReading(new SensorReadingID("sensorReading5"), new Reading("7"), id3, sId3, Timestamp.valueOf("2021-01-01 14:46:00"));
+        SensorReading sensorReading5 = factorySensorReading.createSensorReading(new SensorReadingID("sensorReading6"), new Reading("30"), id3, sId3, Timestamp.valueOf("2021-01-01 15:55:20"));
 
         when(repositorySensorReading.getMeasurementsFromDeviceWithinPeriod(eq(id1), any(Timestamp.class),any(Timestamp.class))).thenReturn(Arrays.asList(sensorReading,sensorReading1));
         when(repositorySensorReading.getMeasurementsFromDeviceWithinPeriod(eq(id2), any(Timestamp.class),any(Timestamp.class))).thenReturn(Arrays.asList(sensorReading2,sensorReading3));
@@ -556,6 +559,7 @@ class HouseWebControllerTest {
         //Arrange
         HouseId houseID = new HouseId("House01");
         FactoryDevice factoryDevice = new ImplFactoryDevice();
+        FactorySensorReading factorySensorReading = new ImplFactorySensorReading();
         // get house id from repo
         when(repositoryHouse.containsOfIdentity(new HouseId("House01"))).thenReturn(true);
 
@@ -585,12 +589,12 @@ class HouseWebControllerTest {
         Sensor sensor1 = factorySensor.createSensor(id1,sensorModelID,sId1);
 
         // readings for Solar Panel 1
-        SensorReading sensorReading2 = new SensorReading(new SensorReadingID("sensorReading3"), new Reading("-100"), id2, sId2, Timestamp.valueOf("2021-01-01 12:00:38"));
-        SensorReading sensorReading3 = new SensorReading(new SensorReadingID("sensorReading4"), new Reading("-30"), id2, sId2, Timestamp.valueOf("2021-01-01 12:45:00"));
+        SensorReading sensorReading2 = factorySensorReading.createSensorReading(new SensorReadingID("sensorReading3"), new Reading("-100"), id2, sId2, Timestamp.valueOf("2021-01-01 12:00:38"));
+        SensorReading sensorReading3 = factorySensorReading.createSensorReading(new SensorReadingID("sensorReading4"), new Reading("-30"), id2, sId2, Timestamp.valueOf("2021-01-01 12:45:00"));
 
         // readings for Solar Panel 2
-        SensorReading sensorReading4 = new SensorReading(new SensorReadingID("sensorReading3"), new Reading("-150"), id1, sId1, Timestamp.valueOf("2021-01-01 12:00:38"));
-        SensorReading sensorReading5 = new SensorReading(new SensorReadingID("sensorReading4"), new Reading("-35"), id1, sId1, Timestamp.valueOf("2021-01-01 12:45:00"));
+        SensorReading sensorReading4 = factorySensorReading.createSensorReading(new SensorReadingID("sensorReading3"), new Reading("-150"), id1, sId1, Timestamp.valueOf("2021-01-01 12:00:38"));
+        SensorReading sensorReading5 = factorySensorReading.createSensorReading(new SensorReadingID("sensorReading4"), new Reading("-35"), id1, sId1, Timestamp.valueOf("2021-01-01 12:45:00"));
 
         // air conditioner
         DeviceId id3 = new DeviceId("air conditioner");
@@ -598,8 +602,8 @@ class HouseWebControllerTest {
         Sensor sensor3 = factorySensor.createSensor(id3, sensorModelID, sId3);
 
         // readings from air conditioner
-        SensorReading sensorReading6 = new SensorReading(new SensorReadingID("sensorReading1"), new Reading("10"), id3, sId3, Timestamp.valueOf("2021-01-01 11:00:00"));
-        SensorReading sensorReading7 = new SensorReading(new SensorReadingID("sensorReading2"), new Reading("25"), id3, sId3, Timestamp.valueOf("2021-01-01 13:30:00"));
+        SensorReading sensorReading6 = factorySensorReading.createSensorReading(new SensorReadingID("sensorReading1"), new Reading("10"), id3, sId3, Timestamp.valueOf("2021-01-01 11:00:00"));
+        SensorReading sensorReading7 = factorySensorReading.createSensorReading(new SensorReadingID("sensorReading2"), new Reading("25"), id3, sId3, Timestamp.valueOf("2021-01-01 13:30:00"));
 
         //save sensors from Solar Panel
         when(repositorySensor.save(sensor2)).thenReturn(sensor2);
@@ -681,6 +685,7 @@ class HouseWebControllerTest {
         //Arrange
         HouseId houseID = new HouseId("House01");
         FactoryDevice factoryDevice = new ImplFactoryDevice();
+        FactorySensorReading factorySensorReading = new ImplFactorySensorReading();
         // get house id from repo
         when(repositoryHouse.containsOfIdentity(houseID)).thenReturn(true);
 
@@ -719,11 +724,11 @@ class HouseWebControllerTest {
         when(repositorySensor.findAll()).thenReturn(sensors);
 
         // readings for air conditioner
-        SensorReading sensorReading = new SensorReading(new SensorReadingID("sensorReading1"), new Reading("10"), id1, sId1, Timestamp.valueOf("2021-01-01 11:00:00"));
-        SensorReading sensorReading1 = new SensorReading(new SensorReadingID("sensorReading2"), new Reading("3"), id1, sId1, Timestamp.valueOf("2021-01-01 13:30:00"));
+        SensorReading sensorReading = factorySensorReading.createSensorReading(new SensorReadingID("sensorReading1"), new Reading("10"), id1, sId1, Timestamp.valueOf("2021-01-01 11:00:00"));
+        SensorReading sensorReading1 = factorySensorReading.createSensorReading(new SensorReadingID("sensorReading2"), new Reading("3"), id1, sId1, Timestamp.valueOf("2021-01-01 13:30:00"));
         // readings for Solar Panel
-        SensorReading sensorReading2 = new SensorReading(new SensorReadingID("sensorReading3"), new Reading("-100"), id2, sId2, Timestamp.valueOf("2021-01-01 14:00:38"));
-        SensorReading sensorReading3 = new SensorReading(new SensorReadingID("sensorReading4"), new Reading("-30"), id2, sId2, Timestamp.valueOf("2021-01-01 18:45:00"));
+        SensorReading sensorReading2 = factorySensorReading.createSensorReading(new SensorReadingID("sensorReading3"), new Reading("-100"), id2, sId2, Timestamp.valueOf("2021-01-01 14:00:38"));
+        SensorReading sensorReading3 = factorySensorReading.createSensorReading(new SensorReadingID("sensorReading4"), new Reading("-30"), id2, sId2, Timestamp.valueOf("2021-01-01 18:45:00"));
 
 
         when(repositorySensorReading.getMeasurementsFromDeviceWithinPeriod(eq(id1), any(Timestamp.class),any(Timestamp.class))).thenReturn(Arrays.asList(sensorReading,sensorReading1));
@@ -841,6 +846,7 @@ class HouseWebControllerTest {
     void peakPowerConsumption_NoConsumption_shouldReturnZeroConsumption() throws Exception {
         // Arrange
         FactoryDevice factoryDevice = new ImplFactoryDevice();
+        FactorySensorReading factorySensorReading = new ImplFactorySensorReading();
         HouseId houseID = new HouseId("House01");
         when(repositoryHouse.containsOfIdentity(houseID)).thenReturn(true);
 
@@ -868,7 +874,7 @@ class HouseWebControllerTest {
         when(repositorySensor.findAll()).thenReturn(sensors);
 
         // Create sensor readings that indicate energy generation
-        SensorReading sensorReading1 = new SensorReading(new SensorReadingID("sensorReading1"), new Reading("0"), id1, sId1, Timestamp.valueOf("2021-01-01 11:00:00"));
+        SensorReading sensorReading1 = factorySensorReading.createSensorReading(new SensorReadingID("sensorReading1"), new Reading("0"), id1, sId1, Timestamp.valueOf("2021-01-01 11:00:00"));
 
         when(repositorySensorReading.getMeasurementsFromDeviceWithinPeriod(eq(id1), any(Timestamp.class), any(Timestamp.class))).thenReturn(List.of(sensorReading1));
 
@@ -900,6 +906,7 @@ class HouseWebControllerTest {
     void peakPowerConsumption_EqualConsumptionInIntervals_shouldReturnPeak() throws Exception {
         // Arrange
         FactoryDevice factoryDevice = new ImplFactoryDevice();
+        FactorySensorReading factorySensorReading = new ImplFactorySensorReading();
         HouseId houseID = new HouseId("House01");
         when(repositoryHouse.containsOfIdentity(houseID)).thenReturn(true);
 
@@ -927,8 +934,8 @@ class HouseWebControllerTest {
         when(repositorySensor.findAll()).thenReturn(sensors);
 
         // Create sensor readings with equal power consumption
-        SensorReading sensorReading1 = new SensorReading(new SensorReadingID("sensorReading1"), new Reading("10"), id1, sId1, Timestamp.valueOf("2021-01-01 11:00:00"));
-        SensorReading sensorReading2 = new SensorReading(new SensorReadingID("sensorReading2"), new Reading("10"), id1, sId1, Timestamp.valueOf("2021-01-01 11:30:00"));
+        SensorReading sensorReading1 = factorySensorReading.createSensorReading(new SensorReadingID("sensorReading1"), new Reading("10"), id1, sId1, Timestamp.valueOf("2021-01-01 11:00:00"));
+        SensorReading sensorReading2 = factorySensorReading.createSensorReading(new SensorReadingID("sensorReading2"), new Reading("10"), id1, sId1, Timestamp.valueOf("2021-01-01 11:30:00"));
 
         when(repositorySensorReading.getMeasurementsFromDeviceWithinPeriod(eq(id1), any(Timestamp.class), any(Timestamp.class))).thenReturn(Arrays.asList(sensorReading1, sensorReading2));
 

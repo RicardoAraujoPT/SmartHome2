@@ -21,7 +21,7 @@ public class ActuatorType implements AggregateRoot<ActuatorTypeID> {
     /**
      * The Unique Identifier of the ActuatorType.
      */
-    protected  final ActuatorTypeID _actuatorTypeID;
+    private final ActuatorTypeID _actuatorTypeID;
 
     /**
      * Constructs an ActuatorType object with the specified unit, description, and identifier.
@@ -31,7 +31,7 @@ public class ActuatorType implements AggregateRoot<ActuatorTypeID> {
      * @param actuatorTypeID The unique identifier for the actuator type.
      * @throws IllegalArgumentException If any of the parameters are null.
      */
-    public ActuatorType(Unit unit, Description description, ActuatorTypeID actuatorTypeID) {
+    protected ActuatorType(Unit unit, Description description, ActuatorTypeID actuatorTypeID) {
         if (unit == null) {
             throw new IllegalArgumentException("Unit cannot be null");
         }
