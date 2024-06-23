@@ -34,7 +34,7 @@ public class ImplFactorySensor implements FactorySensor {
         try {
             String sensorModelName = sensorModelID.toString();
             String strModelPath = "smartHomeDDD.domain.sensor." + sensorModelName;
-            return (Sensor) Class.forName(strModelPath).getConstructor(classTypes).newInstance(arguments);
+            return (Sensor) Class.forName(strModelPath).getDeclaredConstructor(classTypes).newInstance(arguments);
         } catch (ClassNotFoundException |
                  NoSuchMethodException |
                  InstantiationException |

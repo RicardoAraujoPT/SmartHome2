@@ -49,7 +49,7 @@ public class AVPC500W implements SensorValueTwoLocalTimes, AggregateRoot<SensorI
      * @param sensorID      The unique identifier of the sensor.
      * @throws IllegalArgumentException if any of the arguments are invalid.
      */
-    public AVPC500W(DeviceId deviceId,
+    protected AVPC500W(DeviceId deviceId,
                     SensorModelID sensorModelID,
                     SensorID sensorID) {
 

@@ -55,7 +55,7 @@ public class SUNSET567 implements SensorValueLocalDateGps, AggregateRoot<SensorI
      * @param sensorID      The unique identifier of the sensor.
      */
 
-    public SUNSET567(DeviceId deviceId, SensorModelID sensorModelID, SensorID sensorID){
+    protected SUNSET567(DeviceId deviceId, SensorModelID sensorModelID, SensorID sensorID){
         this._deviceID = deviceId;
         this._sensorModelID = sensorModelID;
         this._sensorID = sensorID;

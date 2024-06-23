@@ -52,7 +52,7 @@ public class ONF01S implements SensorValue, AggregateRoot<SensorID> {
      * @param sensorModelID The model of the sensor.
      * @param sensorID      The unique identifier of the sensor.
      */
-    public ONF01S(DeviceId deviceID, SensorModelID sensorModelID, SensorID sensorID) {
+    protected ONF01S(DeviceId deviceID, SensorModelID sensorModelID, SensorID sensorID) {
 
         this._sensorID = sensorID;
         this._deviceID = deviceID;

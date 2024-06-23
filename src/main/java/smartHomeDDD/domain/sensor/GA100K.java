@@ -53,7 +53,7 @@ public class GA100K implements SensorValue,AggregateRoot<SensorID> {
      * @param sensorModelID The model ID of the sensor.
      * @param sensorID      The unique identifier of the sensor.
      */
-    public GA100K(DeviceId deviceID,
+    protected GA100K(DeviceId deviceID,
                   SensorModelID sensorModelID,
                   SensorID sensorID) {
 

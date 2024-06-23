@@ -36,11 +36,7 @@ public class ImplFactoryActuator implements FactoryActuator {
         try {
             String actuatorModelName = actuatorModelID.toString();
             String strModelPath = "smartHomeDDD.domain.actuator." + actuatorModelName;
-            Class<?> clazz = Class.forName(strModelPath);
-            java.lang.reflect.Constructor<?> constructor = clazz.getDeclaredConstructor(classTypes);
-            constructor.setAccessible(true); // Make the protected constructor accessible
-            return (Actuator) constructor.newInstance(arguments);
-            //return (Actuator) Class.forName(strModelPath).getConstructor(classTypes).newInstance(arguments);
+            return (Actuator) Class.forName(strModelPath).getDeclaredConstructor(classTypes).newInstance(arguments);
         } catch (ClassNotFoundException |
                  NoSuchMethodException |
                  InstantiationException |

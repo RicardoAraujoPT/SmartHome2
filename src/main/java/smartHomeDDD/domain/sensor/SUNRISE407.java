@@ -60,7 +60,7 @@ public class SUNRISE407 implements SensorValueLocalDateGps, AggregateRoot<Sensor
      * @param sensorID      The unique identifier of the sensor.
      */
 
-    public SUNRISE407(DeviceId deviceId, SensorModelID sensorModelID, SensorID sensorID) {
+    protected SUNRISE407(DeviceId deviceId, SensorModelID sensorModelID, SensorID sensorID) {
         this.deviceID = deviceId;
         this.sensorModelID = sensorModelID;
         this.sensorID = sensorID;

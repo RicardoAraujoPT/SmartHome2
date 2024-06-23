@@ -20,9 +20,7 @@ import smartHomeDDD.domain.actuator.*;
 import smartHomeDDD.domain.device.Device;
 import smartHomeDDD.domain.device.FactoryDevice;
 import smartHomeDDD.domain.repository.*;
-import smartHomeDDD.domain.sensor.FactorySensor;
-import smartHomeDDD.domain.sensor.GA100K;
-import smartHomeDDD.domain.sensor.TSY01;
+import smartHomeDDD.domain.sensor.*;
 import smartHomeDDD.domain.sensorModel.FactorySensorModel;
 import smartHomeDDD.domain.sensorModel.ImplFactorySensorModel;
 import smartHomeDDD.domain.sensorModel.SensorModel;
@@ -333,9 +331,10 @@ class DeviceControllerWebTest {
         DeviceEntryWebDTO deviceEntryWebDTO = new DeviceEntryWebDTO( "r1", "lamp", "siemens", true);
         when(generateRandomId.generateID()).thenReturn("d1");
         Device device = setupDevice(deviceEntryWebDTO);
+        FactorySensor factorySensor = new ImplFactorySensor();
 
-        GA100K sensor = new GA100K(new DeviceId("d1"), new SensorModelID("GA100K"), new SensorID("s1"));
-        TSY01 sensor2 = new TSY01(new DeviceId("d1"), new SensorModelID("TSY01"), new SensorID("s2"));
+        Sensor sensor = factorySensor.createSensor(new DeviceId("d1"), new SensorModelID("GA100K"), new SensorID("s1"));
+        Sensor sensor2 = factorySensor.createSensor(new DeviceId("d1"), new SensorModelID("TSY01"), new SensorID("s2"));
 
         when(repositoryDevice.containsOfIdentity(device.identity())).thenReturn(true);
         when(repositorySensor.getSensorsByDeviceID(device.identity())).thenReturn(List.of(sensor, sensor2));
@@ -757,11 +756,12 @@ class DeviceControllerWebTest {
         // Arrange
         FactorySensorType factorySensorType = new ImplFactorySensorType();
         FactorySensorModel factorySensorModel = new ImplFactorySensorModel();
+        FactorySensor factorySensor = new ImplFactorySensor();
         DeviceEntryWebDTO deviceEntryWebDTO = new DeviceEntryWebDTO( "r1", "lamp", "siemens", true);
         when(generateRandomId.generateID()).thenReturn("d1");
         Device device = setupDevice(deviceEntryWebDTO);
 
-        GA100K sensor1 = new GA100K(new DeviceId("d1"), new SensorModelID("GA100K"), new SensorID("s1"));
+        Sensor sensor1 = factorySensor.createSensor(new DeviceId("d1"), new SensorModelID("GA100K"), new SensorID("s1"));
 
         //Mock getDevicesByType
         when(repositorySensor.findAll()).thenReturn(List.of(sensor1));

@@ -55,7 +55,7 @@ public class WS8600 implements SensorValue, AggregateRoot<SensorID> {
      * @param sensorModelID The model of the sensor.
      * @param sensorID      The unique identifier of the sensor.
      */
-    public WS8600(DeviceId deviceID, SensorModelID sensorModelID, SensorID sensorID) {
+    protected WS8600(DeviceId deviceID, SensorModelID sensorModelID, SensorID sensorID) {
 
         this._sensorID = sensorID;
         this._deviceID = deviceID;

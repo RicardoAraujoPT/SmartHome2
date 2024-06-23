@@ -49,7 +49,7 @@ public class TSY01 implements SensorValue, AggregateRoot<SensorID> {
      * @param deviceID      The unique identifier of the device which the sensor belongs to.
      * @param sensorModelID The model of the sensor.
      */
-    public TSY01(DeviceId deviceID, SensorModelID sensorModelID, SensorID sensorID) {
+    protected TSY01(DeviceId deviceID, SensorModelID sensorModelID, SensorID sensorID) {
 
         this._sensorID = sensorID;
         this._deviceID = deviceID;

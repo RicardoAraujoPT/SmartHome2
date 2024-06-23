@@ -53,7 +53,7 @@ public class CAP200 implements SensorValue, AggregateRoot<SensorID> {
      * @param sensorModelID The model of the sensor.
      * @param sensorID      The unique identifier of the sensor.
      */
-    public CAP200(DeviceId deviceID,
+    protected CAP200(DeviceId deviceID,
                   SensorModelID sensorModelID,
                   SensorID sensorID) {
 

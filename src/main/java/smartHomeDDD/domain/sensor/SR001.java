@@ -54,7 +54,7 @@ public class SR001 implements SensorValue, AggregateRoot<SensorID> {
      *                      which the sensor belongs to.
      * @param sensorModelID The model of the sensor.
      */
-    public SR001(DeviceId deviceID,
+    protected SR001(DeviceId deviceID,
                  SensorModelID sensorModelID,
                  SensorID sensorID) {
 

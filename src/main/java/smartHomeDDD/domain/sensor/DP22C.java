@@ -42,7 +42,7 @@ public class DP22C implements SensorValue, AggregateRoot<SensorID> {
     private final Map<Integer, Double> _sensorData;
 
 
-    public DP22C(DeviceId deviceID,
+    protected DP22C(DeviceId deviceID,
                  SensorModelID sensorModelID,
                  SensorID sensorID) {
 

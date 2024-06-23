@@ -5,6 +5,8 @@ import smartHomeDDD.domain.actuator.OPNCL0100;
 import smartHomeDDD.domain.actuatorModel.ActuatorModel;
 import smartHomeDDD.domain.actuatorModel.FactoryActuatorModel;
 import smartHomeDDD.domain.actuatorModel.ImplFactoryActuatorModel;
+import smartHomeDDD.domain.sensor.FactorySensor;
+import smartHomeDDD.domain.sensor.ImplFactorySensor;
 import smartHomeDDD.domain.sensorType.FactorySensorType;
 import smartHomeDDD.domain.actuatorType.FactoryActuatorType;
 import smartHomeDDD.domain.device.FactoryDevice;
@@ -88,6 +90,7 @@ class GetDevicesByFunctionalityControllerTest {
         FactoryActuatorModel factoryActuatorModel = new ImplFactoryActuatorModel();
         FactorySensorType factorySensorType = new ImplFactorySensorType();
         FactorySensorModel factorySensorModel = new ImplFactorySensorModel();
+        FactorySensor factorySensor = new ImplFactorySensor();
 
         Unit actuatorUnit = new Unit("unitOfMeasure");
         ActuatorTypeID actuatorTypeID = new ActuatorTypeID("AType01");
@@ -110,8 +113,8 @@ class GetDevicesByFunctionalityControllerTest {
         repositorySensorType.save(sensorType2);
         repositorySensorModel.save(sensorModel);
         repositorySensorModel.save(sensorModel2);
-        repositorySensor.save(new PC500W(secondDeviceID, sensorModelID2, sensorID2));
-        repositorySensor.save(new PC500W(deviceID, sensorModelID, sensorID));
+        repositorySensor.save(factorySensor.createSensor(secondDeviceID, sensorModelID2, sensorID2));
+        repositorySensor.save(factorySensor.createSensor(deviceID, sensorModelID, sensorID));
         repositoryActuatorMem.save(factoryActuator.createActuator(actuatorID, deviceID, actuatorModelID));
 
         ServiceDeviceByType serviceDeviceByType = new ServiceDeviceByType(repositorySensor, repositorySensorType,
@@ -205,6 +208,7 @@ class GetDevicesByFunctionalityControllerTest {
         IRepositoryActuatorType RepositoryActuatorTypeMem = new RepositoryActuatorTypeMem();
         IRepositoryActuatorModel repositoryActuatorModel = new RepositoryActuatorModelMem();
         IRepositoryDevice repositoryDevice = new RepositoryDeviceMem();
+        FactorySensor factorySensor = new ImplFactorySensor();
 
         DeviceName deviceName = new DeviceName("Device");
         DeviceId deviceID = new DeviceId("Device1");
@@ -250,8 +254,8 @@ class GetDevicesByFunctionalityControllerTest {
         repositorySensorType.save(sensorType2);
         repositorySensorModel.save(sensorModel);
         repositorySensorModel.save(sensorModel2);
-        repositorySensor.save(new PC500W(secondDeviceID, sensorModelID2, sensorID2));
-        repositorySensor.save(new PC500W(deviceID, sensorModelID, sensorID));
+        repositorySensor.save(factorySensor.createSensor(secondDeviceID, sensorModelID2, sensorID2));
+        repositorySensor.save(factorySensor.createSensor(deviceID, sensorModelID, sensorID));
 
         ServiceDeviceByType serviceDeviceByType = new ServiceDeviceByType(repositorySensor, repositorySensorType,
                 repositoryActuatorMem, RepositoryActuatorTypeMem, repositoryDevice, repositoryActuatorModel, repositorySensorModel);
