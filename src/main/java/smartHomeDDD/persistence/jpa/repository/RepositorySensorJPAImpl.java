@@ -5,7 +5,7 @@ import smartHomeDDD.domain.sensor.Sensor;
 import smartHomeDDD.domain.repository.IRepositorySensor;
 import smartHomeDDD.domain.valueobject.DeviceId;
 import smartHomeDDD.domain.valueobject.SensorID;
-import smartHomeDDD.persistence.jpa.datamodel.SensorDataModel;
+import smartHomeDDD.persistence.datamodel.SensorDataModel;
 import jakarta.persistence.*;
 
 import java.util.List;

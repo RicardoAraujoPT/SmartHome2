@@ -1,6 +1,6 @@
 package smartHomeDDD.services;
 import org.springframework.stereotype.Service;
-import smartHomeDDD.persistence.gateway.ImplWeatherServiceGateway;
+import smartHomeDDD.gateway.ImplWeatherServiceGateway;
 
 
 /**

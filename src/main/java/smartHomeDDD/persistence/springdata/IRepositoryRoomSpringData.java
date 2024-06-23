@@ -1,6 +1,6 @@
 package smartHomeDDD.persistence.springdata;
 
-import smartHomeDDD.persistence.jpa.datamodel.RoomDataModel;
+import smartHomeDDD.persistence.datamodel.RoomDataModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

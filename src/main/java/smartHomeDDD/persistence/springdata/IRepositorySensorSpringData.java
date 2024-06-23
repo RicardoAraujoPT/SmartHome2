@@ -1,7 +1,7 @@
 package smartHomeDDD.persistence.springdata;
 
 import org.springframework.stereotype.Repository;
-import smartHomeDDD.persistence.jpa.datamodel.SensorDataModel;
+import smartHomeDDD.persistence.datamodel.SensorDataModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

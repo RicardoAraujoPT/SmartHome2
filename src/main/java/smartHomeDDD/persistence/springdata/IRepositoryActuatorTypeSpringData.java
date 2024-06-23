@@ -1,7 +1,7 @@
 package smartHomeDDD.persistence.springdata;
 
 
-import smartHomeDDD.persistence.jpa.datamodel.ActuatorTypeDataModel;
+import smartHomeDDD.persistence.datamodel.ActuatorTypeDataModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

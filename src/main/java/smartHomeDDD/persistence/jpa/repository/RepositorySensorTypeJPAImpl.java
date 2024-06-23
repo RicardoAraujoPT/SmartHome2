@@ -3,7 +3,7 @@ package smartHomeDDD.persistence.jpa.repository;
 import smartHomeDDD.domain.sensorType.FactorySensorType;
 import smartHomeDDD.domain.sensorType.SensorType;
 import smartHomeDDD.domain.valueobject.SensorTypeID;
-import smartHomeDDD.persistence.jpa.datamodel.SensorTypeDataModel;
+import smartHomeDDD.persistence.datamodel.SensorTypeDataModel;
 
 import jakarta.persistence.*;
 

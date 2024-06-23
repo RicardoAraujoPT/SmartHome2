@@ -1,4 +1,4 @@
-package smartHomeDDD.persistence.gateway;
+package smartHomeDDD.gateway;
 import reactor.core.publisher.Mono;
 import smartHomeDDD.ddd.Gateway;
 

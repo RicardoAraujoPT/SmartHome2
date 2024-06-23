@@ -1,6 +1,6 @@
 package smartHomeDDD.persistence.springdata;
 
-import smartHomeDDD.persistence.jpa.datamodel.SensorModelDataModel;
+import smartHomeDDD.persistence.datamodel.SensorModelDataModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

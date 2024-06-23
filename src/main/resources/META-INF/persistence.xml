@@ -7,16 +7,16 @@
 
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <class>smartHomeDDD.persistence.jpa.datamodel.SensorDataModel</class>
-        <class>smartHomeDDD.persistence.jpa.datamodel.SensorTypeDataModel</class>
-        <class>smartHomeDDD.persistence.jpa.datamodel.SensorModelDataModel</class>
-        <class>smartHomeDDD.persistence.jpa.datamodel.DeviceDataModel</class>
-        <class>smartHomeDDD.persistence.jpa.datamodel.HouseDataModel</class>
-        <class>smartHomeDDD.persistence.jpa.datamodel.RoomDataModel</class>
-        <class>smartHomeDDD.persistence.jpa.datamodel.ActuatorModelDataModel</class>
-        <class>smartHomeDDD.persistence.jpa.datamodel.ActuatorDataModel</class>
-        <class>smartHomeDDD.persistence.jpa.datamodel.ActuatorTypeDataModel</class>
-        <class>smartHomeDDD.persistence.jpa.datamodel.SensorReadingDataModel</class>
+        <class>smartHomeDDD.persistence.datamodel.SensorDataModel</class>
+        <class>smartHomeDDD.persistence.datamodel.SensorTypeDataModel</class>
+        <class>smartHomeDDD.persistence.datamodel.SensorModelDataModel</class>
+        <class>smartHomeDDD.persistence.datamodel.DeviceDataModel</class>
+        <class>smartHomeDDD.persistence.datamodel.HouseDataModel</class>
+        <class>smartHomeDDD.persistence.datamodel.RoomDataModel</class>
+        <class>smartHomeDDD.persistence.datamodel.ActuatorModelDataModel</class>
+        <class>smartHomeDDD.persistence.datamodel.ActuatorDataModel</class>
+        <class>smartHomeDDD.persistence.datamodel.ActuatorTypeDataModel</class>
+        <class>smartHomeDDD.persistence.datamodel.SensorReadingDataModel</class>
 
 
         <properties>

@@ -5,7 +5,7 @@ import smartHomeDDD.domain.room.FactoryRoom;
 import smartHomeDDD.domain.room.Room;
 import smartHomeDDD.domain.valueobject.HouseId;
 import smartHomeDDD.domain.valueobject.RoomID;
-import smartHomeDDD.persistence.jpa.datamodel.RoomDataModel;
+import smartHomeDDD.persistence.datamodel.RoomDataModel;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 

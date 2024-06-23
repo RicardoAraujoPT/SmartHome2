@@ -5,7 +5,7 @@ import smartHomeDDD.domain.actuator.FactoryActuator;
 import smartHomeDDD.domain.repository.IRepositoryActuator;
 import smartHomeDDD.domain.valueobject.ActuatorID;
 import smartHomeDDD.domain.valueobject.DeviceId;
-import smartHomeDDD.persistence.jpa.datamodel.ActuatorDataModel;
+import smartHomeDDD.persistence.datamodel.ActuatorDataModel;
 import jakarta.persistence.*;
 
 import java.util.List;

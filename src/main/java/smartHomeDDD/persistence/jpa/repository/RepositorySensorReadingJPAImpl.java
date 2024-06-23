@@ -7,7 +7,7 @@ import smartHomeDDD.domain.sensorReading.SensorReading;
 import smartHomeDDD.domain.valueobject.DeviceId;
 import smartHomeDDD.domain.valueobject.SensorID;
 import smartHomeDDD.domain.valueobject.SensorReadingID;
-import smartHomeDDD.persistence.jpa.datamodel.SensorReadingDataModel;
+import smartHomeDDD.persistence.datamodel.SensorReadingDataModel;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;

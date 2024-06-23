@@ -5,7 +5,7 @@ import smartHomeDDD.domain.device.FactoryDevice;
 import smartHomeDDD.domain.repository.IRepositoryDevice;
 import smartHomeDDD.domain.valueobject.DeviceId;
 import smartHomeDDD.domain.valueobject.RoomID;
-import smartHomeDDD.persistence.jpa.datamodel.DeviceDataModel;
+import smartHomeDDD.persistence.datamodel.DeviceDataModel;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;

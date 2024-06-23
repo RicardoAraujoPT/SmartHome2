@@ -5,7 +5,7 @@ import smartHomeDDD.domain.house.FactoryHouse;
 import smartHomeDDD.domain.house.House;
 import smartHomeDDD.domain.repository.IRepositoryHouse;
 import smartHomeDDD.domain.valueobject.HouseId;
-import smartHomeDDD.persistence.jpa.datamodel.HouseDataModel;
+import smartHomeDDD.persistence.datamodel.HouseDataModel;
 import jakarta.persistence.*;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package smartHomeDDD.persistence.springdata;
 
-import smartHomeDDD.persistence.jpa.datamodel.SensorReadingDataModel;
+import smartHomeDDD.persistence.datamodel.SensorReadingDataModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.sql.Timestamp;

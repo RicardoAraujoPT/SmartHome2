@@ -6,7 +6,7 @@ import smartHomeDDD.domain.sensorType.SensorType;
 import smartHomeDDD.domain.valueobject.Description;
 import smartHomeDDD.domain.valueobject.SensorTypeID;
 import smartHomeDDD.domain.valueobject.Unit;
-import smartHomeDDD.persistence.jpa.datamodel.SensorTypeDataModel;
+import smartHomeDDD.persistence.datamodel.SensorTypeDataModel;
 import smartHomeDDD.persistence.jpa.repository.RepositorySensorTypeJPAImpl;
 import jakarta.persistence.*;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package smartHomeDDD.persistence.jpa.datamodel;
+package smartHomeDDD.persistence.datamodel;
 import smartHomeDDD.domain.house.FactoryHouse;
 import smartHomeDDD.domain.house.House;
 import smartHomeDDD.domain.valueobject.*;

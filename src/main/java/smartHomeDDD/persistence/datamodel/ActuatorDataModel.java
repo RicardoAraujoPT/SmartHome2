@@ -1,4 +1,4 @@
-package smartHomeDDD.persistence.jpa.datamodel;
+package smartHomeDDD.persistence.datamodel;
 
 import smartHomeDDD.domain.actuator.Actuator;
 import smartHomeDDD.domain.actuator.FactoryActuator;

@@ -3,7 +3,7 @@ package smartHomeDDD.persistence.jpa.repository;
 import smartHomeDDD.domain.actuatorType.FactoryActuatorType;
 import smartHomeDDD.domain.actuatorType.ActuatorType;
 import smartHomeDDD.domain.valueobject.ActuatorTypeID;
-import smartHomeDDD.persistence.jpa.datamodel.ActuatorTypeDataModel;
+import smartHomeDDD.persistence.datamodel.ActuatorTypeDataModel;
 import jakarta.persistence.*;
 
 import smartHomeDDD.domain.repository.IRepositoryActuatorType;

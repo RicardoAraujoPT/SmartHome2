@@ -8,7 +8,7 @@ import smartHomeDDD.domain.actuatorType.ActuatorType;
 import smartHomeDDD.domain.actuatorType.FactoryActuatorType;
 import smartHomeDDD.domain.repository.IRepositoryActuatorType;
 import smartHomeDDD.domain.valueobject.ActuatorTypeID;
-import smartHomeDDD.persistence.jpa.datamodel.ActuatorTypeDataModel;
+import smartHomeDDD.persistence.datamodel.ActuatorTypeDataModel;
 
 import java.util.List;
 import java.util.Optional;

@@ -2,7 +2,7 @@ package smartHomeDDD.services;
 
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Mono;
-import smartHomeDDD.persistence.gateway.WeatherServiceGateway;
+import smartHomeDDD.gateway.WeatherServiceGateway;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
