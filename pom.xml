@@ -24,7 +24,6 @@
         <!-- Maven Version Configuration -->
         <maven-compiler-plugin>3.13.0</maven-compiler-plugin>
 
-
         <!-- Project Encoding Configuration -->
         <project.sourceEncoding>UTF-8</project.sourceEncoding>
         <project.build.sourceEncoding>${project.sourceEncoding}</project.build.sourceEncoding>
@@ -158,7 +157,6 @@
 
     </dependencies>
 
-
     <build>
         <plugins>
             <!-- Required for running unit tests -->
@@ -258,6 +256,18 @@
                         WEB-INF/classes/application.properties,
                         WEB-INF/classes/META-INF/**
                     </packagingExcludes>
+                </configuration>
+            </plugin>
+
+            <!-- Added plugin configuration -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin}</version>
+                <configuration>
+                    <compilerArgs>
+                        <arg>-parameters</arg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
 
