@@ -140,3 +140,20 @@ body {
 .login-button:hover {
     background-color: #555; /* Darker background on hover */
 }
+
+/* Login button styling */
+.login-button2 {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1.25rem;
+    color: white;
+    background-color: #333;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Transition effect for hover */
+}
+
+.login-button2:hover {
+    background-color: #555; /* Darker background on hover */
+}

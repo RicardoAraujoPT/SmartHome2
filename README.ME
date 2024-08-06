@@ -1,0 +1,60 @@
+# SmartHome configuration
+
+## Environment Variables
+
+Before running the application, each developer needs to set up their own OAuth2 credentials for both Google and GitHub. Follow these steps:
+
+### Google OAuth2 Setup
+
+1. **Go to the Google Cloud Console**: [Google Cloud Console](https://console.cloud.google.com/).
+2. **Create a New Project** (or select an existing one).
+3. **Enable the OAuth2 APIs**:
+   - Go to **APIs & Services** > **Library**.
+   - Enable the **Google+ API** and **Google OAuth2 API**.
+4. **Create OAuth2 Credentials**:
+   - Go to **APIs & Services** > **Credentials**.
+   - Click **Create Credentials** and select **OAuth 2.0 Client ID**.
+   - Set the application type to **Web application**.
+   - Add the following **Authorized redirect URI**:
+     ```
+     http://localhost:8080/login/oauth2/code/google
+     ```
+   - Click **Create** and note the **Client ID** and **Client Secret**.
+
+5. **Set Environment Variables**:
+   - On your local machine, set the following environment variables:
+
+   #### On Windows (Command Prompt)
+   ```cmd
+   setx GOOGLE_CLIENT_ID "your-google-client-id"
+   setx GOOGLE_CLIENT_SECRET "your-google-client-secret"
+
+
+### Github
+
+1- Go to GitHub Developer Settings: GitHub Developer Settings. [https://github.com/settings/developers]
+
+2. Create a New OAuth App:
+
+    - Click New OAuth App.
+    - Application name: Enter a name for your application.
+    - Homepage URL: http://localhost:5173
+    - Authorization callback URL: http://localhost:8080/login/oauth2/code/github
+    - Click Register application and note the Client ID and Client Secret.
+
+3- Set Environment Variables:
+
+       On your local machine, set the following environment variables:
+
+       #### On Windows (Command Prompt)
+        ```cmd
+        setx GITHUB_CLIENT_ID "your-github-client-id"
+        setx GITHUB_CLIENT_SECRET "your-github-client-secret"
+
+
+### Additional Notes
+
+Make sure that the environment variables are set correctly and that the backend is running on
+http://localhost:8080 and the frontend on http://localhost:5173.
+If you encounter any issues, check the environment variables and ensure they match the values configured
+in the respective OAuth providers.

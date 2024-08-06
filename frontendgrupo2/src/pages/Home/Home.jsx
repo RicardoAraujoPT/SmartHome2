@@ -40,12 +40,10 @@ const Home = () => {
                     const data = await getSunTimes(lat, lng);
                     setSunrise(new Date(data.sunrise).toLocaleTimeString([], {
                         hour: '2-digit',
-                        minute: '2-digit'
-                    }));
+                        minute: '2-digit'}));
                     setSunset(new Date(data.sunset).toLocaleTimeString([], {
                         hour: '2-digit',
-                        minute: '2-digit'
-                    }));
+                        minute: '2-digit'}));
                 } catch (error) {
                     console.error('Error fetching sun times:', error);
                 }
@@ -113,6 +111,9 @@ const Home = () => {
                     {/* Add the login button here */}
                     <a href="http://localhost:8080/oauth2/authorization/github">
                         <button className="login-button">Login with GitHub</button>
+                    </a>
+                    <a href="http://localhost:8080/oauth2/authorization/google">
+                        <button className="login-button2">Login with Google</button>
                     </a>
                 </div>
                 {sunrise && sunset ? (
