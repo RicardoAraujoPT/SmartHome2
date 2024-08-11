@@ -5,6 +5,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import smartHomeDDD.domain.actuator.Actuator;
 import smartHomeDDD.domain.device.Device;
@@ -81,6 +82,7 @@ public class DeviceControllerWeb {
      * @throws EntityNotFoundException         if a referenced entity was not found.
      */
     @PostMapping("")
+   // @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> addDevice(@RequestBody DeviceEntryWebDTO deviceEntryWebDTO) {
         try {
             DeviceName deviceName = DeviceMapper.DTOToDeviceName(deviceEntryWebDTO.getDeviceName());
@@ -115,6 +117,7 @@ public class DeviceControllerWeb {
      * @throws EntityNotFoundException if the device with the provided ID was not found.
      */
     @GetMapping("/{deviceID}")
+    //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getDevice(@PathVariable(value = "deviceID") String id) {
         try {
             DeviceId deviceId = DeviceMapper.DTOToDeviceId(id);

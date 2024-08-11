@@ -1,10 +1,12 @@
 package smartHomeDDD.services;
 
+import org.springframework.stereotype.Service;
 import smartHomeDDD.domain.repository.IRepositoryRole;
 import smartHomeDDD.domain.role.FactoryRole;
 import smartHomeDDD.domain.role.Role;
 import smartHomeDDD.domain.valueobject.RoleName;
 
+@Service
 public class ServiceRole {
 
     final FactoryRole _factoryRole;

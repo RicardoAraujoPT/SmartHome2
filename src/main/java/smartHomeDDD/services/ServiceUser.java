@@ -1,6 +1,7 @@
 package smartHomeDDD.services;
 
 
+import org.springframework.stereotype.Service;
 import smartHomeDDD.domain.repository.IRepositoryUser;
 import smartHomeDDD.domain.role.Role;
 import smartHomeDDD.domain.user.FactoryUser;
@@ -9,7 +10,9 @@ import smartHomeDDD.domain.valueobject.RoleName;
 import smartHomeDDD.domain.valueobject.UserEmail;
 import smartHomeDDD.domain.valueobject.UserName;
 
+import java.util.Optional;
 
+@Service
 public class ServiceUser {
 
     final FactoryUser _factoryUser;
@@ -39,13 +42,27 @@ public class ServiceUser {
     }
 
     public User updateUserRole (UserName userName, RoleName roleName) {
-        User user = _repositoryUser.getUserByName(userName);
-        if (user.identity().toString().equals(roleName.toString())) {
+        Optional<User> user = _repositoryUser.getUserByName(userName);
+        if (user.isEmpty()) {
+            throw new IllegalArgumentException("User not found");
+        }
+        if (user.get().identity().toString().equals(roleName.toString())) {
             throw new IllegalArgumentException("Role Name cannot be similar");
         }
         Role role = _serviceRole.createRole(roleName);
 
-        user.setRole(role);
-        return user;
+        user.get().setRoleName(userName);
+        return user.get();
     }
+
+    public Optional<User> findByName (String userName) {
+        UserName userName1 = new UserName(userName);
+        return _repositoryUser.getUserByName(userName1);
+    }
+
+    public Iterable<User> findAll() {
+        return _repositoryUser.findAll();
+    }
+
+
 }

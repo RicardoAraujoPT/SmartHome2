@@ -6,6 +6,7 @@ import smartHomeDDD.domain.valueobject.RoleName;
 
 import java.util.List;
 
+
 public interface IRepositoryRole extends Repository<RoleName, Role> {
 
 
