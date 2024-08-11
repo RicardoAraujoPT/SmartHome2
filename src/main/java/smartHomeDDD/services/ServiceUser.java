@@ -40,7 +40,7 @@ public class ServiceUser {
 
     public User updateUserRole (UserName userName, RoleName roleName) {
         User user = _repositoryUser.getUserByName(userName);
-        if (user.getRoleName().toString().equals(roleName.toString())) {
+        if (user.identity().toString().equals(roleName.toString())) {
             throw new IllegalArgumentException("Role Name cannot be similar");
         }
         Role role = _serviceRole.createRole(roleName);

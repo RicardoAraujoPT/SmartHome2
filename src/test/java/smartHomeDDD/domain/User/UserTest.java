@@ -21,7 +21,7 @@ class UserTest {
         User user = new User(userName,userEmail,role);
 
         // Assert
-        assertEquals(user.getRoleName().toString(),userName.toString());
+        assertEquals(user.identity().toString(),userName.toString());
     }
 
     @Test
@@ -38,7 +38,7 @@ class UserTest {
         user.setRole(newRole);
 
         // Assert
-        assertEquals(user.getRoleName().toString(),userName.toString());
+        assertEquals(user.identity().toString(),userName.toString());
     }
 
 

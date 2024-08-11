@@ -19,7 +19,8 @@ public class User implements AggregateRoot<UserName> {
         this._role = userRole;
     }
 
-    public UserName getRoleName() {
+    @Override
+    public UserName identity() {
         return _userName;
     }
 
@@ -43,10 +44,6 @@ public class User implements AggregateRoot<UserName> {
         this._role = role;
     }
 
-    @Override
-    public UserName identity() {
-        return _userName;
-    }
 
     @Override
     public boolean sameAs(Object object) {

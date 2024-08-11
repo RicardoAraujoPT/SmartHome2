@@ -31,7 +31,7 @@ import static org.mockito.Mockito.when;
                     UserName name = (UserName) context.arguments().get(0);
                     UserEmail userEmail1 = (UserEmail) context.arguments().get(1);
                     Role role1 = (Role) context.arguments().get(2);
-                    when(mock.getRoleName()).thenReturn(name);
+                    when(mock.identity()).thenReturn(name);
                     when(mock.getUserEmail()).thenReturn(userEmail1);
                     when(mock.getRole()).thenReturn(role1);
                 })) {
@@ -43,7 +43,7 @@ import static org.mockito.Mockito.when;
             User mockedUser = mockedUsers.get(0);
 
             assertEquals(1, mockedUsers.size());
-            assertEquals(userName, mockedUser.getRoleName());
+            assertEquals(userName, mockedUser.identity());
 
         }
     }
