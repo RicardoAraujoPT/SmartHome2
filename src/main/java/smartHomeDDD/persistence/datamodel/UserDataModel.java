@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "USER")
+@Table(name = "USERS")
 public class UserDataModel {
 
     @Id

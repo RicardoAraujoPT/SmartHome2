@@ -1,6 +1,7 @@
 package smartHomeDDD.controllersWeb;
 
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,11 +23,11 @@ public class UserControllerWeb {
     }
 
 
-    @GetMapping
-    public List<User> getUsers() {
+    @GetMapping("")
+    public ResponseEntity<?>  getUsers() {
         List<User> users = (List<User>) _userService.findAll();
         System.out.println(users);
-        return users;
+        return new ResponseEntity<>(users, HttpStatus.OK);
 
     }
 
